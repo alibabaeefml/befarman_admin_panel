@@ -1,0 +1,28 @@
+@import url("../fontello/css/animation.css");
+@import url("../fontello/css/fontello-codes.css");
+@import url("../fontello/css/fontello-embedded.css");
+@import url("../fontello/css/fontello-ie7-codes.css");
+@import url("../fontello/css/fontello-ie7.css");
+@import url("../fontello/css/fontello.css");
+
+@font-face {
+  font-family: yekan_medium;
+  src: url(../Fonts/iranyekanwebmedium.woff);
+}
+@font-face {
+  font-family: yekan_light;
+  src: url(../Fonts/iranyekanweblightfanum.woff);
+}
+@font-face {
+  font-family: monserat_bold;
+  src: url(../Fonts/Montserrat-ExtraBold.ttf);
+}
+@font-face {
+  font-family: monserat_medium;
+  src: url(../Fonts/Montserrat-Medium.ttf);
+}
+
+@import url(./Modify.css);
+
+
+
