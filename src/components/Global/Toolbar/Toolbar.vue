@@ -1,21 +1,22 @@
 <script setup>
 import { computed, ref } from '@vue/runtime-core';
 import { useDisplay } from 'vuetify/lib/framework.mjs';
-import BreadCrumbs from './BreadCrumbs.vue';
-
+import bg from '@/assets/Images/Header.jpg'
 const mobile = computed(() => useDisplay().width.value < 820);
 const height = computed(() => useDisplay().height.value)
 const drawer = ref(true);
 const rail = ref(true);
 const loggedIn = ref(false);
 const isAdmin = ref(false);
-const props = defineProps(['currentroute']);
-const home = ref(props.currentroute === 'main-home');
+const user = ref('')
+const props = defineProps(['currentPath']);
+
 </script>
 
 <template>
-    <div v-if="!mobile" class="toolbar">
-        <v-toolbar color="rgba(0,0,0,.6)" :style="{ color: 'white', fontFamily: 'ym' }">
+    <div v-if="!mobile" class="toolbar"
+        :style="currentPath !== '/' && currentPath !== '/login' ? { background: `url(${bg})`, backgroundSize: 'cover', backgroundPosition: 'center' } : ''">
+        <v-toolbar color="rgba(0,0,0,.6)" :style="{ color: 'white', fontFamily: 'ym', padding: '20px' }">
             <v-toolbar-title>
                 <h2 :style="{ letterSpacing: '1.5px', fontFamily: 'mm' }">BEFARMAN APP</h2>
             </v-toolbar-title>
@@ -32,8 +33,8 @@ const home = ref(props.currentroute === 'main-home');
                 خروج
                 <v-icon>mdi-logout</v-icon>
             </v-btn>
-            <router-link to="/login" class="login-link">
-                <v-btn @click="toggleModal">
+            <router-link to="/login" class="link">
+                <v-btn>
                     {{ loggedIn ? 'پروفایل' : 'ورود' }}
                     <v-icon>mdi-account</v-icon>
                 </v-btn>
@@ -42,17 +43,22 @@ const home = ref(props.currentroute === 'main-home');
             <v-btn v-if="isAdmin">
                 پنل ادمین
             </v-btn>
+            <div>{{ user ? user : 'کاربر' }} عزیز، خوش آمدی</div>
             <v-btn>
                 دانلود اپلیکیشن اندروید
             </v-btn>
-            <router-link to="/" class="login-link">
+            <router-link to="/" class="link">
                 <v-btn icon>
                     <v-icon>mdi-home</v-icon>
                 </v-btn>
             </router-link>
         </v-toolbar>
+        <div class="adminHeader" v-if="currentPath.includes('admin')">
+            <div style="font-family:mm;font-size: 20px;letter-spacing: 10px;">MANAGEMENT</div>
+            <div style="font-family:yr;font-size: 20px;">مدیریت</div>
+        </div>
     </div>
-    <v-card v-else :style="{zIndex:999999}">
+    <v-card v-else :style="{ zIndex: 999999 }">
         <v-navigation-drawer v-model="drawer" @mouseenter="rail = false" @mouseleave="rail = true" :rail="rail"
             permanent location="right">
             <v-list-item :style="{ letterSpacing: '1.5px', fontFamily: 'mm' }" prepend-avatar="/favicon.ico"
@@ -67,7 +73,7 @@ const home = ref(props.currentroute === 'main-home');
                 <v-list-item prepend-icon="mdi-information" title="درباره ما" value="aboutus"></v-list-item>
                 <v-list-item prepend-icon="mdi-account-key" title="پنل ادمین" value="logout" v-if="isAdmin">
                 </v-list-item>
-                <router-link to="/login" class="login-link">
+                <router-link to="/login" class="link">
                     <v-list-item prepend-icon="mdi-account" :title="loggedIn ? 'پروفایل' : 'ورود'" value="login">
                     </v-list-item>
                 </router-link>
@@ -84,11 +90,21 @@ const home = ref(props.currentroute === 'main-home');
     position: fixed;
     top: 0;
     width: 100%;
+    z-index: 99999999;
 }
 
-.login-link {
-    color: inherit;
-    text-decoration: none;
+.adminHeader {
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    margin: 20px 0;
+    padding: 10px 30px;
+    color: white;
+    background: rgba(0, 0, 0, .6);
+}
+
+.adminHeader * {
+    text-shadow: 0 0 4px black;
 }
 
 .right-nav {

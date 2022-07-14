@@ -1,78 +1,119 @@
+<script setup>
+import { computed, onMounted } from '@vue/runtime-core'
+import { useDisplay } from 'vuetify/lib/framework.mjs'
+const carsCount = 10000
+const requestsCount = 1000
+const rantablesCount = 100000
+const transCount = 1000
+const usersCount = 100
+const smsCounts = 100
+const sm = computed(() => useDisplay().width.value < 800)
+</script>
+
 <template>
-    <v-container>
-        <v-row>
-            <v-col class="pa-0 ma-0" cols="12" lg="4" xl="4">
-                <router-link to="/admin/Cars">
-                    <icon-tiles TitleFa="خـــــودرو ها" TitleEn="AUTOMOBILES" GradientDirection="to right"
-                        GradientBegin="fef5f6" GradientEnd="fef5f6" QuantityColor="ee3552" Iconcolor="#ee3552"
-                        icon=" WMi-Vehicle" height="330px" border="1px solid #fbd7dc" Fa_title_color="#ee3552" />
-                </router-link>
-            </v-col>
+    <v-container :style="{ margin: sm ? '0' : '230px auto 0 auto', width: sm ? '88%' : auto, direction: 'rtl' }">
+        <v-row no-gutters>
+            <v-col class="pa-1" cols="12" lg="5" xl="4">
 
-            <v-col class="pa-0 ma-0" cols="12" lg="8" xl="8">
-                <router-link to="/admin/Car-List">
-                    <icon-tiles TitleFa="خـــــودرو های اجاره ای" TitleEn="RENTABLES" GradientDirection="to right"
-                        GradientBegin="eeeeee" GradientEnd="dadada" icon=" WMi-clock-1" height="330px"
-                        border="1px solid #d7d7d7" :numberic="this.carsCount" DES="خودرو ثبت شده"
-                        Fa_title_color="#686868" />
+                <router-link class="link" to="/admin/Cars">
+                    <v-btn class="adminbtn" color="pink lighten" variant="outlined">
+                        <v-icon>mdi-car</v-icon>
+                        <div>
+                            <div>خـــــودرو ها</div>
+                            <div class="sub">AUTOMOBILE</div>
+                            <div class="badge">{{ carsCount }} خودرو</div>
+                        </div>
+                    </v-btn>
                 </router-link>
             </v-col>
-
-        </v-row>
-        <v-row>
-            <v-col cols="12" lg="8" class="pa-0 ma-0" xl="8">
-                <router-link to="/admin/Requests">
-                    <icon-tiles TitleFa="درخواست ها" TitleEn="REQUESTS" GradientDirection="to right"
-                        GradientBegin="fff0e8" GradientEnd="fff0e8" icon=" WMi-clock-1" height="330px"
-                        border="1px solid #ffceb5" :numberic="this.requestCount" DES="درخواست برای امروز"
-                        QuantityColor="ee3552" Iconcolor="#fe6a1e" Fa_title_color="#fe6a1e" />
-                </router-link>
-            </v-col>
-            <v-col class="pa-0 ma-0" cols="12" lg="4" xl="4">
-                <router-link to="/admin/Users">
-                    <icon-tiles TitleFa="کاربران" TitleEn="USERS" GradientDirection="to right" GradientBegin="eafafb"
-                        GradientEnd="eafafb" QuantityColor="ee3552" Iconcolor="#32cad5" icon=" WMi-user" height="330px"
-                        border="1px solid #b6ecf0" Fa_title_color="#32cad5" />
+            <v-col class="pa-1" cols="12" lg="7" xl="8">
+                <router-link class="link" to="/admin/Cars">
+                    <v-btn class="adminbtn" color="grey lighten" variant="outlined">
+                        <v-icon>mdi-clock</v-icon>
+                        <div>
+                            <div>خـــــودرو های اجاره ای</div>
+                            <div class="sub">RENTABLES</div>
+                            <div class="badge">{{ rantablesCount }} خودرو</div>
+                        </div>
+                    </v-btn>
                 </router-link>
             </v-col>
         </v-row>
-        <v-row>
-            <v-col class="pa-0 ma-0" cols="12" lg="8" xl="8">
-                <router-link to="/admin/Transaction">
-                    <icon-tiles TitleFa="پنل تراکنش ها" TitleEn="TRANSACTION" GradientDirection="to right"
-                        GradientBegin="b0dfff" GradientEnd="b0dfff" icon=" WMi-cash" height="330px"
-                        border="1px solid #5ab2ed" QuantityColor="white" Iconcolor="#5ab2ed" Fa_title_color="#5ab2ed" />
+        <v-row no-gutters>
+            <v-col class="pa-1" cols="12" lg="7" xl="8">
+                <router-link class="link" to="/admin/Cars">
+                    <v-btn class="adminbtn" color="orange lighten" variant="outlined">
+                        <v-icon>mdi-account-question</v-icon>
+                        <div>
+                            <div>درخواست ها</div>
+                            <div class="sub">REQUESTS</div>
+                            <div class="badge">{{ requestsCount }} درخواست</div>
+                        </div>
+                    </v-btn>
                 </router-link>
             </v-col>
-            <v-col class="pa-0 ma-0" cols="12" lg="4" xl="4">
-                <router-link to="/admin/sms-management">
-                    <icon-tiles TitleFa="مدیریت پیامک ها" TitleEn="SMS " GradientDirection="to right"
-                        GradientBegin="fff9f8" GradientEnd="fff9f8" icon=" WMi-chat-alt" height="330px"
-                        border="1px solid #FF6B57" QuantityColor="white" Iconcolor="#FF6B57" Fa_title_color="#FF6B57" />
+            <v-col class="pa-1" cols="12" lg="5" xl="4">
+                <router-link class="link" to="/admin/Cars">
+                    <v-btn class="adminbtn" color="cyan lighten" variant="outlined">
+                        <v-icon>mdi-account-group</v-icon>
+                        <div>
+                            <div>کاربران</div>
+                            <div class="sub">USERS</div>
+                            <div class="badge">{{ usersCount }} کاربر</div>
+                        </div>
+                    </v-btn>
+                </router-link>
+            </v-col>
+        </v-row>
+        <v-row no-gutters>
+            <v-col class="pa-1" cols="12" lg="7" xl="8">
+                <router-link class="link" to="/admin/Cars">
+                    <v-btn class="adminbtn" color="blue lighten" variant="outlined">
+                        <v-icon>mdi-cash</v-icon>
+                        <div>
+                            <div>پنل تراکنش ها</div>
+                            <div class="sub">TRANSACTIONS</div>
+                            <div class="badge">{{ transCount }} تراکنش</div>
+                        </div>
+                    </v-btn>
+                </router-link>
+            </v-col>
+            <v-col class="pa-1" cols="12" lg="5" xl="4">
+                <router-link class="link" to="/admin/Cars">
+                    <v-btn class="adminbtn" color="red lighten" variant="outlined">
+                        <v-icon>mdi-message-text</v-icon>
+                        <div>
+                            <div>مدیریت پیامک ها</div>
+                            <div class="sub">SMS</div>
+                            <div class="badge">{{ smsCounts }} پیامک</div>
+                        </div>
+                    </v-btn>
                 </router-link>
             </v-col>
         </v-row>
     </v-container>
 </template>
-<script>
-import IconTiles from '@components/Global/Tiles/IconTiles.vue'
-export default {
-    name: 'Home',
-    components: {
-        IconTiles
-    },
-    methods: {
-        ...mapActions("Dashboard", ["loadCarsCount"]),
-        ...mapActions("Dashboard", ["loadRequestsCount"]),
-    },
-    mounted() {
-        this.loadCarsCount();
-        this.loadRequestsCount();
-    },
-    computed: {
-        ...mapGetters("Dashboard", ["carsCount"]),
-        ...mapGetters("Dashboard", ["requestCount"]),
-    },
+<style scoped>
+button {
+    font-family: ym;
+    font-size: 20px;
 }
-import { mapActions, mapGetters } from "vuex"
-</script>
+
+.adminbtn {
+    width: 100%;
+    height: 150px;
+}
+
+.sub {
+    font-family: mm;
+    font-size: 15px;
+    letter-spacing: 10px;
+}
+.badge{
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+    color: black;
+    font-size: 10px;
+}
+</style>
