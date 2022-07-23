@@ -2,6 +2,7 @@
 import { computed, ref } from '@vue/runtime-core';
 import { useDisplay } from 'vuetify/lib/framework.mjs';
 import bg from '@/assets/Images/Header.jpg'
+import { useRoute } from 'vue-router';
 const mobile = computed(() => useDisplay().width.value < 820);
 const height = computed(() => useDisplay().height.value)
 const drawer = ref(true);
@@ -10,7 +11,7 @@ const loggedIn = ref(false);
 const isAdmin = ref(false);
 const user = ref('')
 const props = defineProps(['currentPath']);
-
+const routeName = computed(() => useRoute().meta.title)
 </script>
 
 <template>
@@ -55,7 +56,12 @@ const props = defineProps(['currentPath']);
         </v-toolbar>
         <div class="adminHeader" v-if="currentPath.includes('admin')">
             <div style="font-family:mm;font-size: 20px;letter-spacing: 10px;">MANAGEMENT</div>
-            <div style="font-family:yr;font-size: 20px;">مدیریت</div>
+            <div style="font-family:yr;font-size: 20px;">
+                <router-link class="link" to="/admin/home">مدیریت</router-link>
+                <span style="font-size:15px;margin-right:10px">
+                    {{ currentPath !== '/admin/home' ? ' > ' + routeName : '' }}
+                </span>
+            </div>
         </div>
     </div>
     <v-card v-else :style="{ zIndex: 999999 }">
@@ -67,7 +73,9 @@ const props = defineProps(['currentPath']);
             <v-divider></v-divider>
 
             <v-list density="compact" nav right :style="{ fontFamily: 'ym' }">
-                <v-list-item prepend-icon="mdi-home" title="صفحه اصلی" value="home"></v-list-item>
+                <router-link to="/" class="link">
+                    <v-list-item prepend-icon="mdi-home" title="صفحه اصلی" value="home"></v-list-item>
+                </router-link>
                 <v-list-item prepend-icon="mdi-android" title="دانلود اپلیکیشن اندروید" value="android">
                 </v-list-item>
                 <v-list-item prepend-icon="mdi-information" title="درباره ما" value="aboutus"></v-list-item>
@@ -90,7 +98,7 @@ const props = defineProps(['currentPath']);
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 99999999;
+    z-index: 1;
 }
 
 .adminHeader {

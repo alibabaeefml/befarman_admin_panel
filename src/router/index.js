@@ -1,7 +1,6 @@
 import { createRouter,createWebHistory } from "vue-router";
 import paths from "./path";
 import { TokenService } from "@/services/storage.services.js";
-import Login from "../views/Login.vue";
 
 function route(options) {
   let path = options.path;

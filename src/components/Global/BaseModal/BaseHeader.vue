@@ -3,12 +3,13 @@ const props = defineProps(["icon", "title", "subtitle"])
 </script>
 <template>
     <div class="headlogin">
-        <v-icon color="white">{{ icon }}</v-icon>
+        <v-btn class="close-btn" color="black" @click="$emit('toggleModal')" icon="mdi-close"></v-btn>
+        <v-icon color="white" size="x-large">{{ icon }}</v-icon>
         <div class="filterInfo">
             <h1 class="filter_pr">{{ title }}</h1>
             <h1 class="filter_en">{{ subtitle }}</h1>
         </div>
-        <v-btn class="close-btn" color="black" @click="$emit('toggleModal')" icon="mdi-close"></v-btn>
+        
     </div>
 </template>
 
@@ -42,7 +43,8 @@ const props = defineProps(["icon", "title", "subtitle"])
 .filter_en {
     font-family: mm;
     font-size: 16px;
-    letter-spacing: 15px;
+    font-weight: 100;
+    letter-spacing: 10px;
     margin-right: -15px;
 }
 .close-btn{

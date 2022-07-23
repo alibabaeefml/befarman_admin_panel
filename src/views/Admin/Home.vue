@@ -11,24 +11,24 @@ const sm = computed(() => useDisplay().width.value < 800)
 </script>
 
 <template>
-    <v-container :style="{ margin: sm ? '0' : '230px auto 0 auto', width: sm ? '88%' : auto, direction: 'rtl' }">
+    <v-container :style="{ direction: 'rtl' }">
         <v-row no-gutters>
             <v-col class="pa-1" cols="12" lg="5" xl="4">
 
                 <router-link class="link" to="/admin/Cars">
-                    <v-btn class="adminbtn" color="pink lighten" variant="outlined">
+                    <v-btn class="admin-btn"  color="pink lighten" variant="outlined" block>
                         <v-icon>mdi-car</v-icon>
                         <div>
                             <div>خـــــودرو ها</div>
-                            <div class="sub">AUTOMOBILE</div>
+                            <div class="sub">ALl CARS</div>
                             <div class="badge">{{ carsCount }} خودرو</div>
                         </div>
                     </v-btn>
                 </router-link>
             </v-col>
             <v-col class="pa-1" cols="12" lg="7" xl="8">
-                <router-link class="link" to="/admin/Cars">
-                    <v-btn class="adminbtn" color="grey lighten" variant="outlined">
+                <router-link class="link" to="/admin/Car-List">
+                    <v-btn class="admin-btn" color="grey lighten" variant="outlined" block>
                         <v-icon>mdi-clock</v-icon>
                         <div>
                             <div>خـــــودرو های اجاره ای</div>
@@ -42,7 +42,7 @@ const sm = computed(() => useDisplay().width.value < 800)
         <v-row no-gutters>
             <v-col class="pa-1" cols="12" lg="7" xl="8">
                 <router-link class="link" to="/admin/Cars">
-                    <v-btn class="adminbtn" color="orange lighten" variant="outlined">
+                    <v-btn class="admin-btn" color="orange lighten" variant="outlined" block>
                         <v-icon>mdi-account-question</v-icon>
                         <div>
                             <div>درخواست ها</div>
@@ -54,7 +54,7 @@ const sm = computed(() => useDisplay().width.value < 800)
             </v-col>
             <v-col class="pa-1" cols="12" lg="5" xl="4">
                 <router-link class="link" to="/admin/Cars">
-                    <v-btn class="adminbtn" color="cyan lighten" variant="outlined">
+                    <v-btn class="admin-btn" color="cyan lighten" variant="outlined" block>
                         <v-icon>mdi-account-group</v-icon>
                         <div>
                             <div>کاربران</div>
@@ -68,7 +68,7 @@ const sm = computed(() => useDisplay().width.value < 800)
         <v-row no-gutters>
             <v-col class="pa-1" cols="12" lg="7" xl="8">
                 <router-link class="link" to="/admin/Cars">
-                    <v-btn class="adminbtn" color="blue lighten" variant="outlined">
+                    <v-btn class="admin-btn" color="blue lighten" variant="outlined" block>
                         <v-icon>mdi-cash</v-icon>
                         <div>
                             <div>پنل تراکنش ها</div>
@@ -80,7 +80,7 @@ const sm = computed(() => useDisplay().width.value < 800)
             </v-col>
             <v-col class="pa-1" cols="12" lg="5" xl="4">
                 <router-link class="link" to="/admin/Cars">
-                    <v-btn class="adminbtn" color="red lighten" variant="outlined">
+                    <v-btn class="admin-btn" color="red lighten" variant="outlined" block>
                         <v-icon>mdi-message-text</v-icon>
                         <div>
                             <div>مدیریت پیامک ها</div>
@@ -99,8 +99,7 @@ button {
     font-size: 20px;
 }
 
-.adminbtn {
-    width: 100%;
+.admin-btn {
     height: 150px;
 }
 

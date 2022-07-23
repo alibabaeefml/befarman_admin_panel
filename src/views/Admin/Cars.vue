@@ -1,55 +1,135 @@
-<template>
-    <div class="rtlDirection">
-        <add-car/>
-        <edit-car/>
-        <v-btn
-            fab
-            fixed
-            bottom
-            left
-            x-large
-            Icon
-            color="#32cad5"
-            @click="$_toggleModal('add-car')"
-        >
-            <v-icon color="white">WMi-plus</v-icon>
-        </v-btn>
-    <car-filter/>
-        <v-row class="rowClass">
-        <Automobile v-for="automobile in getAutomobile" :key="automobile.id" :data="automobile"/>
-        </v-row>
-    </div>
-</template>
-<script>
-import {mapActions,mapGetters} from "vuex"
-import CarFilter from "../../components/Car/CarFilter"
-import Automobile from "../../components/Car/Automobile"
-import AddCar from "../../components/Car/AddCar"
-import editCar from "../../components/Car/editCar";
-export default {
-    name:"Cars",
-    components:{
-        editCar,
-        CarFilter,
-        Automobile,
-        AddCar
+<script setup>
+import Car from "../../components/Car/Car.vue"
+import { computed, onMounted, ref } from "@vue/runtime-core";
+import AddBtn from "@/components/Global/Buttons/addBtn.vue";
+import AddCar from "../../components/Car/AddCar.vue";
+import EditCar from "../../components/Car/EditCar.vue";
+import Filters from "../../components/Global/Filters/Filters.vue";
+
+// onMounted(() => useStore().dispatch("loadAutomobile"))
+// const getAutomobile = computed(() => useStore().getters.getAutomobile)
+const getCars = ref([
+    {
+        id: 'jldv554',
+        pName: 'پراید',
+        eName: 'Pride',
+        thumb: '',
+        brand: 'kia'
+
     },
-    methods:{
-      ...mapActions("Cars",["loadAutomobile"])
+    {
+        id: 'dkdvmdv5',
+        pName: 'سمند',
+        eName: 'Samand',
+        thumb: '',
+        brand: 'kia'
     },
-    mounted() {
-    this.loadAutomobile()
+    {
+        id: 'jldv554',
+        pName: 'پراید',
+        eName: 'Pride',
+        thumb: '',
+        brand: 'kia'
     },
-    computed:{
-    ...mapGetters("Cars",["getAutomobile"])
-    }
-}
+    {
+        id: 'dkdvmdv5',
+        pName: 'سمند',
+        eName: 'Samand',
+        thumb: '',
+        brand: 'kia'
+    },
+    {
+        id: 'jldv554',
+        pName: 'پراید',
+        eName: 'Pride',
+        thumb: '',
+        brand: 'kia'
+    },
+    {
+        id: 'dkdvmdv5',
+        pName: 'سمند',
+        eName: 'Samand',
+        thumb: '',
+        brand: 'kia'
+    },
+    {
+        id: 'jldv554',
+        pName: 'پراید',
+        eName: 'Pride',
+        thumb: '',
+        brand: 'kia'
+    },
+    {
+        id: 'dkdvmdv5',
+        pName: 'سمند',
+        eName: 'Samand',
+        thumb: '',
+        brand: 'kia'
+    },
+    {
+        id: 'jldv554',
+        pName: 'پراید',
+        eName: 'Pride',
+        thumb: '',
+        brand: 'bmw'
+    },
+    {
+        id: 'dkdvmdv5',
+        pName: 'سمند',
+        eName: 'Samand',
+        thumb: '',
+        brand: 'kia'
+    },
+    {
+        id: 'jldv554',
+        pName: 'پراید',
+        eName: 'Pride',
+        thumb: '',
+        brand: 'bmw'
+    },
+    {
+        id: 'dkdvmdv5',
+        pName: 'سمند',
+        eName: 'Samand',
+        thumb: '',
+        brand: 'kia'
+    },
+])
+const addModal = ref(false);
+const editModal = ref(false);
+
+const nameFilter = ref('');
+const brandFilter = ref('');
 </script>
+<template>
+    <div class="cars">
+        <filters style="margin-top:20px">
+            <v-card-text>
+                <v-row>
+                    <v-col>
+                        <v-text-field v-model="nameFilter" prepend-icon="mdi-car" label="نام خوردرو" variant="underlined"></v-text-field>
+                    </v-col>
+                    <v-col>
+                        <v-text-field v-model="brandFilter" prepend-icon="mdi-alpha-b-circle" label="نام برند" variant="underlined"></v-text-field>
+                    </v-col>
+                </v-row>
+            </v-card-text>
+        </filters>
+        <add-car :dialog="addModal" @toggleModal="addModal = false"></add-car>
+        <edit-car :dialog="editModal" @toggleModal="editModal = false"></edit-car>
+        <!-- <edit-car /> -->
+        <!-- <car-filter /> -->
+        <v-row style="padding:20px">
+            <car v-for="car in getCars" :key="car.id" :data="car" @toggleModal="editModal = true"/>
+        </v-row>
+        <add-btn @click="addModal = true"></add-btn>
+    </div>
+
+
+</template>
+
 <style scoped>
-.rtlDirection{
-    direction: rtl
-}
-.rowClass{
-    margin: 0px .7%
+.cars {
+    direction: rtl;
 }
 </style>

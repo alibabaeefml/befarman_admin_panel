@@ -13,5 +13,9 @@ export default defineConfig({
         new URL("./src/components", import.meta.url)
       ),
     },
-  }
+  },
+  server: {
+    host: "192.168.1.3",
+    port: 3000,
+  },
 });

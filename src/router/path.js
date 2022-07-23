@@ -34,7 +34,7 @@ export default [
             },
             {
                 path: "Car-List",
-                name: "CarList",
+                name: "Car-List",
                 view: "Car-List",
                 meta: {
                     auth: true,

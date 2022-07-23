@@ -9,7 +9,7 @@ defineEmits(['toggleModal'])
 
 const width = computed(() => useDisplay().width.value)
 const height = computed(() => useDisplay().height.value)
-const sm = computed(() => width.value < 800);
+const sm = computed(() => useDisplay().smAndDown.value);
 
 // form ruels
 const valid = ref(false);
@@ -20,11 +20,12 @@ const numberRules = ref([
     v => (v[0] == 0 && v[1] == 9) || 'فرمت صحیح 09000000000 می باشد',
     v => v.length == 11 || 'شماره همراه باید 11 رقم باشد',
 ]);
+
 const codeSent = ref(false)
 </script>
 <template>
     <div class="container" :style="{ width: width + 'px', height: height + 'px' }">
-        <v-card class="login-card" :style="{ width: sm ? '60%' : '30%', left: sm ? '20%' : null }">
+        <v-card class="login-card" :style="{ width: sm ? '85%' : '30%', left: sm ? '0' : null }">
             <div v-if="!codeSent">
                 <v-card-title class="login-title">
                     <v-icon>mdi-account</v-icon>ورود
@@ -33,8 +34,7 @@ const codeSent = ref(false)
                 <v-card-text class="login-body">
                     <v-text-field v-model="phoneNumber" variant="underlined" label="شماره همراه خود را وارد نمایید"
                         prepend-icon="mdi-phone" :rules="numberRules"></v-text-field>
-                    <v-btn class="send-code-btn" color="black">
-                        <v-icon>mdi-send-clock</v-icon> ارسال کد احراز هویت
+                    <v-btn class="send-code-btn" color="primary" append-icon="mdi-send-clock">ارسال کد احراز هویت
                     </v-btn>
                 </v-card-text>
             </div>
@@ -46,9 +46,7 @@ const codeSent = ref(false)
                 <v-card-text class="login-body">
                     <v-text-field v-model="phoneNumber" variant="underlined" label="کد ارسالی را وارد نمایید"
                         prepend-icon="mdi-barcode" :rules="numberRules"></v-text-field>
-                    <v-btn class="send-code-btn" color="black">
-                        <v-icon>mdi-account-check</v-icon> بررسی
-                    </v-btn>
+                    <v-btn class="send-code-btn" color="secondary" append-icon="mdi-account-check">بررسی</v-btn>
                 </v-card-text>
             </div>
         </v-card>
@@ -68,7 +66,7 @@ const codeSent = ref(false)
     top: 30%;
     font-family: ym;
     direction: rtl;
-    padding: 1rem 2rem;
+    padding: 1rem 1.5rem;
 }
 
 .login-title {
