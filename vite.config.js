@@ -13,6 +13,7 @@ export default defineConfig({
         new URL("./src/components", import.meta.url)
       ),
     },
+    mainFields: ["browser", "module", "main", "jsnext:main", "jsnext"],
   },
   server: {
     host: "192.168.1.3",

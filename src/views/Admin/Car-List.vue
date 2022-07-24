@@ -1,11 +1,9 @@
 
 <script setup>
 import Filters from '@components/Global/Filters/Filters.vue';
-import AddCar from "@components/CarRent/AddRentCar.vue";
 import AddBtn from '@components/Global/Buttons/AddBtn.vue';
 import { ref } from '@vue/reactivity';
 
-const addCarModal = ref(false);
     // import Items from "@Components/CarRent/Items";
     // import CarFilter from "@Components/Global/CarFilter/CarFilter";
     // import CommentList from "@Components/Comment/CommentListModal";
@@ -99,8 +97,10 @@ const addCarModal = ref(false);
             </v-tab-item>
         </v-tabs-items> -->
 
-        <AddBtn @click="addCarModal = true"></AddBtn>
-        <add-car :dialog=addCarModal @toggleModal="addCarModal=false"/>
+        
+        <router-link to="/admin/AddRentCar" class="link">
+            <AddBtn @click="addCarModal = true"></AddBtn>
+        </router-link>
         <!-- <CommentList v-if="$_isOpen('commentList')" />
         <carDetails v-if="$_isOpen('rentCarDetails')" />
         <change-time />

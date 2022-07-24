@@ -64,7 +64,14 @@ button {
   text-decoration: none;
 }
 
-* {
-  text-decoration: none !important;
+.v-list{
+font-family: yl;
+direction: rtl;
+}
+.vpd-input-group input{
+  flex-grow: unset;
+}
+.vpd-container{
+  top:60%!important;
 }
 </style>

@@ -7,8 +7,8 @@ const mobile = computed(() => useDisplay().width.value < 820);
 const height = computed(() => useDisplay().height.value)
 const drawer = ref(true);
 const rail = ref(true);
-const loggedIn = ref(false);
-const isAdmin = ref(false);
+const loggedIn = ref(true);
+const isAdmin = ref(true);
 const user = ref('')
 const props = defineProps(['currentPath']);
 const routeName = computed(() => useRoute().meta.title)
@@ -40,10 +40,11 @@ const routeName = computed(() => useRoute().meta.title)
                     <v-icon>mdi-account</v-icon>
                 </v-btn>
             </router-link>
-
-            <v-btn v-if="isAdmin">
-                پنل ادمین
-            </v-btn>
+            <router-link class="link" to="/admin/home">
+                <v-btn v-if="isAdmin">
+                    پنل ادمین
+                </v-btn>
+            </router-link>
             <div>{{ user ? user : 'کاربر' }} عزیز، خوش آمدی</div>
             <v-btn>
                 دانلود اپلیکیشن اندروید
@@ -64,14 +65,14 @@ const routeName = computed(() => useRoute().meta.title)
             </div>
         </div>
     </div>
-    <v-card v-else :style="{ zIndex: 999999 }">
-        <v-navigation-drawer v-model="drawer" @mouseenter="rail = false" @mouseleave="rail = true" :rail="rail"
-            permanent location="right">
+    <v-card v-else :style="{ zIndex: 999999, cursor: rail?'cell':'default' }">
+
+        <v-navigation-drawer v-model="drawer" @click="rail = false" :rail="rail" permanent location="right">
+
             <v-list-item :style="{ letterSpacing: '1.5px', fontFamily: 'mm' }" prepend-avatar="/favicon.ico"
                 title="BEFARMAN APP">
             </v-list-item>
             <v-divider></v-divider>
-
             <v-list density="compact" nav right :style="{ fontFamily: 'ym' }">
                 <router-link to="/" class="link">
                     <v-list-item prepend-icon="mdi-home" title="صفحه اصلی" value="home"></v-list-item>
@@ -79,8 +80,11 @@ const routeName = computed(() => useRoute().meta.title)
                 <v-list-item prepend-icon="mdi-android" title="دانلود اپلیکیشن اندروید" value="android">
                 </v-list-item>
                 <v-list-item prepend-icon="mdi-information" title="درباره ما" value="aboutus"></v-list-item>
-                <v-list-item prepend-icon="mdi-account-key" title="پنل ادمین" value="logout" v-if="isAdmin">
-                </v-list-item>
+                <router-link class="link" to="/admin/home">
+                    <v-list-item prepend-icon="mdi-account-key" title="پنل ادمین" value="adminpanel" v-if="isAdmin">
+                    </v-list-item>
+                </router-link>
+
                 <router-link to="/login" class="link">
                     <v-list-item prepend-icon="mdi-account" :title="loggedIn ? 'پروفایل' : 'ورود'" value="login">
                     </v-list-item>
@@ -90,6 +94,7 @@ const routeName = computed(() => useRoute().meta.title)
                 <v-list-item prepend-icon="mdi-twitter" title="twitter" value="twitter"></v-list-item>
                 <v-list-item prepend-icon="mdi-instagram" title="instagram" value="instagram"></v-list-item>
             </v-list>
+            <v-btn v-if="!rail" variant="text" icon="mdi-chevron-right" @click.stop="rail = !rail"></v-btn>
         </v-navigation-drawer>
     </v-card>
 </template>
@@ -113,9 +118,5 @@ const routeName = computed(() => useRoute().meta.title)
 
 .adminHeader * {
     text-shadow: 0 0 4px black;
-}
-
-.right-nav {
-    height: 100vh;
 }
 </style>
