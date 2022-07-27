@@ -43,7 +43,6 @@ const NewCarImage = ref('selectedCarImage');
 const dropzoneActive = ref(false);
 const fuels = ref(["بنزین", 'گاز', "دوگانه سوز", "هیبریدی",]);
 const years = ref([]);
-
 // update years array each year
 const lastYear = new Date().getFullYear() - 622;
 for (let i = lastYear - 20; i <= lastYear; i++) {
@@ -54,7 +53,6 @@ const colors = ref([
 ])
 </script>
 <template>
-    {{ car.insurance }}
     <v-card style="direction:rtl;font-family:ym;">
         <v-card-title>
             <v-icon size="x-large">mdi-car-side</v-icon> افزودن خودرو

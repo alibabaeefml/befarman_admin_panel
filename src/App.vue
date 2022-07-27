@@ -1,6 +1,6 @@
 <script setup>
 import Toolbar from "@components/Global/Toolbar/Toolbar.vue";
-import { computed, watch } from "@vue/runtime-core";
+import { computed, ref, watch } from "@vue/runtime-core";
 import { useRoute as route } from "vue-router";
 import bg from '@/assets/Images/Header.jpg'
 import Login from "./views/Login.vue";
@@ -13,13 +13,33 @@ const currentPath = computed(() => route().path);
 // )
 const width = computed(() => useDisplay().width.value);
 const sm = computed(() => useDisplay().width.value < 800);
+const xs = computed(() => useDisplay().xs.value);
+const links = ref([
+  'Home',
+  'About Us',
+  'Team',
+  'Services',
+  'Blog',
+  'Contact Us',
+]);
+
 </script>
 <template>
   <v-app
     :style="currentPath === '/' ? { background: `url(${bg})`, backgroundSize: 'cover', backgroundPosition: 'center' } : ''">
     <Toolbar :currentPath="currentPath" />
     <router-view
-      :style="{ marginTop: !sm && currentPath.includes('admin') ? '200px' : 'unset', width: width < 800 ? width - 75 + 'px' : null }" />
+      :style="{ marginTop: !sm && currentPath.includes('admin') ? '200px' : 'unset', width: width < 800 ? width - 60 + 'px' : null }" />
+    <v-footer class="bg-grey-lighten-1">
+      <v-row justify="center" no-gutters>
+        <v-btn v-for="link in links" :key="link" color="white" variant="text" class="mx-2" rounded="xl">
+          {{ link }}
+        </v-btn>
+        <v-col class="text-center text-white mt-4" cols="12">
+          {{ new Date().getFullYear() }} — <strong>BEFARMAN</strong>
+        </v-col>
+      </v-row>
+    </v-footer>
   </v-app>
 </template>
 <style>
@@ -54,9 +74,42 @@ const sm = computed(() => useDisplay().width.value < 800);
   src: url(./assets/Fonts/Montserrat-Bold.ttf);
 }
 
+.mxb {
+  font-family: mxb;
+}
+
+.yl {
+  font-family: yl;
+}
+
+.ym {
+  font-family: ym;
+}
+
+.mb {
+  font-family: mb;
+}
+
+.mm {
+  font-family: mm;
+}
 
 button {
   letter-spacing: 0 !important;
+  font-family: ym !important;
+}
+
+.peTitle {
+  font-family: yr;
+  font-size: 20px;
+  color: black;
+}
+
+.enSub {
+  font-family: mb;
+  letter-spacing: 5px;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.3);
 }
 
 .link {
@@ -64,14 +117,38 @@ button {
   text-decoration: none;
 }
 
-.v-list{
-font-family: yl;
-direction: rtl;
+.v-list {
+  font-family: yl;
+  direction: rtl;
 }
-.vpd-input-group input{
+
+.vpd-input-group input {
   flex-grow: unset;
 }
-.vpd-container{
-  top:60%!important;
+
+.vpd-container {
+  top: 60% !important;
+}
+
+.v-tabs {
+  height: auto !important;
+}
+
+.v-select,
+.v-field__input {
+  font-family: ym;
+}
+
+.v-card-title {
+  font-size: 20px;
+}
+
+.v-card-subtitle {
+  font-family: mm;
+  letter-spacing: 5px;
+}
+
+.v-tooltip {
+  font-family: ym;
 }
 </style>
