@@ -25,11 +25,12 @@ const links = ref([
 
 </script>
 <template>
+
   <v-app
     :style="currentPath === '/' ? { background: `url(${bg})`, backgroundSize: 'cover', backgroundPosition: 'center' } : ''">
     <Toolbar :currentPath="currentPath" />
     <router-view
-      :style="{ marginTop: !sm && currentPath.includes('admin') ? '200px' : 'unset', width: width < 800 ? width - 60 + 'px' : null }" />
+      :style="{ marginTop: !sm && currentPath.includes('Admin') ? '200px' : 'unset' }" />
     <v-footer class="bg-grey-lighten-1">
       <v-row justify="center" no-gutters>
         <v-btn v-for="link in links" :key="link" color="white" variant="text" class="mx-2" rounded="xl">
@@ -97,6 +98,12 @@ const links = ref([
 button {
   letter-spacing: 0 !important;
   font-family: ym !important;
+}
+
+.add-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
 }
 
 .peTitle {

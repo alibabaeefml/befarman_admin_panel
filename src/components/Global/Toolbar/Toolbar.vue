@@ -12,11 +12,14 @@ const isAdmin = ref(true);
 const user = ref('')
 const props = defineProps(['currentPath']);
 const routeName = computed(() => useRoute().meta.title)
+
+// to made an array for the app bar data
 </script>
 
 <template>
-    <div v-if="!mobile" class="toolbar"
-        :style="currentPath !== '/' && currentPath !== '/login' ? { background: `url(${bg})`, backgroundSize: 'cover', backgroundPosition: 'center' } : ''">
+   
+    <div v-if="!mobile" class="toolbar" :style="currentPath !== '/' && currentPath !== '/Login' ?
+    { background: `url(${bg})`, backgroundSize: 'cover', backgroundPosition: 'center' } : ''">
         <v-toolbar color="rgba(0,0,0,.6)" :style="{ color: 'white', fontFamily: 'ym', padding: '20px' }">
             <v-toolbar-title>
                 <h2 :style="{ letterSpacing: '1.5px', fontFamily: 'mm' }">BEFARMAN APP</h2>
@@ -34,13 +37,13 @@ const routeName = computed(() => useRoute().meta.title)
                 خروج
                 <v-icon>mdi-logout</v-icon>
             </v-btn>
-            <router-link to="/login" class="link">
+            <router-link to="/Login" class="link">
                 <v-btn>
                     {{ loggedIn ? 'پروفایل' : 'ورود' }}
                     <v-icon>mdi-account</v-icon>
                 </v-btn>
             </router-link>
-            <router-link class="link" to="/admin/home">
+            <router-link class="link" to="/Admin/Home">
                 <v-btn v-if="isAdmin">
                     پنل ادمین
                 </v-btn>
@@ -55,17 +58,17 @@ const routeName = computed(() => useRoute().meta.title)
                 </v-btn>
             </router-link>
         </v-toolbar>
-        <div class="adminHeader" v-if="currentPath.includes('admin')">
+        <div class="AdminHeader" v-if="currentPath.includes('Admin')">
             <div style="font-family:mm;font-size: 20px;letter-spacing: 10px;">MANAGEMENT</div>
             <div style="font-family:yr;font-size: 20px;">
-                <router-link class="link" to="/admin/home">مدیریت</router-link>
+                <router-link class="link" to="/Admin/Home">مدیریت</router-link>
                 <span style="font-size:15px;margin-right:10px">
-                    {{ currentPath !== '/admin/home' ? ' > ' + routeName : '' }}
+                    {{ currentPath !== '/Admin/Home' ? ' > ' + routeName : '' }}
                 </span>
             </div>
         </div>
     </div>
-    <v-card v-else :style="{ zIndex: 999999, cursor: rail?'cell':'default' }">
+    <v-card v-else :style="{ zIndex: 999999, cursor: rail ? 'cell' : 'default' }">
 
         <v-navigation-drawer v-model="drawer" @click="rail = false" :rail="rail" permanent location="right">
 
@@ -80,13 +83,13 @@ const routeName = computed(() => useRoute().meta.title)
                 <v-list-item prepend-icon="mdi-android" title="دانلود اپلیکیشن اندروید" value="android">
                 </v-list-item>
                 <v-list-item prepend-icon="mdi-information" title="درباره ما" value="aboutus"></v-list-item>
-                <router-link class="link" to="/admin/home">
-                    <v-list-item prepend-icon="mdi-account-key" title="پنل ادمین" value="adminpanel" v-if="isAdmin">
+                <router-link class="link" to="/Admin/Home">
+                    <v-list-item prepend-icon="mdi-account-key" title="پنل ادمین" value="Adminpanel" v-if="isAdmin">
                     </v-list-item>
                 </router-link>
 
-                <router-link to="/login" class="link">
-                    <v-list-item prepend-icon="mdi-account" :title="loggedIn ? 'پروفایل' : 'ورود'" value="login">
+                <router-link to="/Login" class="link">
+                    <v-list-item prepend-icon="mdi-account" :title="loggedIn ? 'پروفایل' : 'ورود'" value="Login">
                     </v-list-item>
                 </router-link>
 
@@ -104,9 +107,10 @@ const routeName = computed(() => useRoute().meta.title)
     top: 0;
     width: 100%;
     z-index: 1;
+    font-size: 15px;
 }
 
-.adminHeader {
+.AdminHeader {
     display: flex;
     align-content: center;
     justify-content: space-between;
@@ -116,7 +120,10 @@ const routeName = computed(() => useRoute().meta.title)
     background: rgba(0, 0, 0, .6);
 }
 
-.adminHeader * {
+.AdminHeader * {
     text-shadow: 0 0 4px black;
+}
+button{
+    font-size: 15px;
 }
 </style>

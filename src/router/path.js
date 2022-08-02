@@ -1,12 +1,12 @@
 export default [
   {
-    path: "/admin",
-    name: "Admin",
+    path: "/Admin",
+    name: "admin",
     view: "Admin",
     redirect: "admin/home",
     children: [
       {
-        path: "home",
+        path: "Home",
         name: "Home",
         view: "Home",
         meta: {
@@ -15,8 +15,8 @@ export default [
         },
       },
       {
-        path: "transaction",
-        name: "transaction",
+        path: "Transaction",
+        name: "Transaction",
         view: "Transaction",
         meta: {
           auth: true,
@@ -24,9 +24,9 @@ export default [
         },
       },
       {
-        path: "sms-management",
-        name: "SMSManagement",
-        view: "SMSManagement",
+        path: "Sms-Management",
+        name: "Sms-Management",
+        view: "Sms-Management",
         meta: {
           auth: true,
           title: "مدیریت پیامک ها",
@@ -42,12 +42,21 @@ export default [
         },
       },
       {
-        path: "AddRentCar",
-        name: "AddRentCar",
-        view: "AddRentCar",
+        path: "Add-Rent-Car",
+        name: "Add-Rent-Car",
+        view: "Add-Rent-Car",
         meta: {
           auth: false,
           title: "افزودن خودرو اجاره ای",
+        },
+      },
+      {
+        path: "Edit-Rent-Car",
+        name: "Edit-Rent-Car",
+        view: "Add-Rent-Car",
+        meta: {
+          auth: false,
+          title: "ویرایش خودرو اجاره ای",
         },
       },
       {
@@ -81,8 +90,8 @@ export default [
   },
   {
     path: "",
-    name: "main-home",
-    view: "main-home",
+    name: "Main-Home",
+    view: "Main-Home",
     meta: {
       auth: true,
       title: "صفحه اصلی",
@@ -90,7 +99,7 @@ export default [
     },
   },
   {
-    path: "/profile",
+    path: "/Profile",
     name: "Profile",
     view: "Profile",
     meta: {
@@ -99,7 +108,7 @@ export default [
     },
   },
   {
-    path: "/login",
+    path: "/Login",
     name: "Login",
     view: "Login",
     meta: {
@@ -108,9 +117,9 @@ export default [
     },
   },
   {
-    path: "/AllCars",
-    name: "AllCars",
-    view: "AllCars",
+    path: "/All-Cars",
+    name: "All-Cars",
+    view: "All-Cars",
     meta: {
       public: true,
       auth: true,
@@ -118,9 +127,9 @@ export default [
     },
   },
   {
-    path: "/AboutUs",
-    name: "aboutUs",
-    view: "aboutUs",
+    path: "/About-Us",
+    name: "About-Us",
+    view: "About-Us",
     meta: {
       public: true,
       auth: true,

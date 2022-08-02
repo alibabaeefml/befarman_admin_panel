@@ -1,13 +1,9 @@
 <script setup>
-import Car from "../../components/Car/Car.vue"
+import Car from "../../components/Car/Car-Item.vue"
 import { computed, onMounted, ref } from "@vue/runtime-core";
-import AddBtn from "@/components/Global/Buttons/addBtn.vue";
-import AddCar from "../../components/Car/AddCar.vue";
-import EditCar from "../../components/Car/EditCar.vue";
+import AddCar from "../../components/Car/Add-Car.vue";
 import Filters from "../../components/Global/Filters/Filters.vue";
 
-// onMounted(() => useStore().dispatch("loadAutomobile"))
-// const getAutomobile = computed(() => useStore().getters.getAutomobile)
 const getCars = ref([
     {
         id: 'jldv554',
@@ -96,8 +92,7 @@ const getCars = ref([
     },
 ])
 const addModal = ref(false);
-const editModal = ref(false);
-
+const isAdd = ref('')
 const nameFilter = ref('');
 const brandFilter = ref('');
 </script>
@@ -107,22 +102,23 @@ const brandFilter = ref('');
             <v-card-text>
                 <v-row>
                     <v-col>
-                        <v-text-field v-model="nameFilter" prepend-icon="mdi-car" label="نام خوردرو" variant="underlined"></v-text-field>
+                        <v-text-field v-model="nameFilter" prepend-icon="mdi-car" label="نام خوردرو"
+                            variant="underlined"></v-text-field>
                     </v-col>
                     <v-col>
-                        <v-text-field v-model="brandFilter" prepend-icon="mdi-alpha-b-circle" label="نام برند" variant="underlined"></v-text-field>
+                        <v-text-field v-model="brandFilter" prepend-icon="mdi-alpha-b-circle" label="نام برند"
+                            variant="underlined"></v-text-field>
                     </v-col>
                 </v-row>
             </v-card-text>
         </filters>
-        <add-car :dialog="addModal" @toggleModal="addModal = false"></add-car>
-        <edit-car :dialog="editModal" @toggleModal="editModal = false"></edit-car>
-        <!-- <edit-car /> -->
-        <!-- <car-filter /> -->
+        <add-car :dialog="addModal" @toggleModal="addModal = false" :add="isAdd"></add-car>
         <v-row style="padding:20px">
-            <car v-for="car in getCars" :key="car.id" :data="car" @toggleModal="editModal = true"/>
+            <car v-for="car in getCars" :key="car.id" :data="car" @toggleModal="addModal = true; isAdd = false" />
         </v-row>
-        <add-btn @click="addModal = true"></add-btn>
+        <v-btn size="x-large" class="add-btn" icon color="secondary" @click="addModal = true; isAdd = true">
+            <v-icon color="white">mdi-plus</v-icon>
+        </v-btn>
     </div>
 
 

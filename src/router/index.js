@@ -1,4 +1,4 @@
-import { createRouter,createWebHistory } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 import paths from "./path";
 import { TokenService } from "@/services/storage.services.js";
 
@@ -33,8 +33,7 @@ const router = createRouter({
   history: createWebHistory(),
   routes: paths
     .map((path) => route(path))
-    .concat([{ path: "/:pathMatch(.*)", redirect: "admin/home" }]),
-
+    .concat([{ path: "/:pathMatch(.*)", redirect: "/home" }]),
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition;

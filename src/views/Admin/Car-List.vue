@@ -1,11 +1,10 @@
 
 <script setup>
 import Filters from '@components/Global/Filters/Filters.vue';
-import AddBtn from '@components/Global/Buttons/AddBtn.vue';
 import { ref } from '@vue/reactivity';
-import RentalCars from '@components/CarRent/RentalCar.vue';
+import RentalCars from '@components/Car-Rent/Rental-Car-Item.vue';
 import { useDisplay } from 'vuetify/lib/framework.mjs';
-import AcceptCarArchive from '@components/CarRent/AcceptCarArchive.vue';
+import AcceptCarArchive from '@components/Car-Rent/Accept-Car-Archive.vue';
 import { computed } from '@vue/runtime-core';
 const years = ref([]);
 // update years array each year
@@ -128,13 +127,14 @@ const xs = computed(() => useDisplay().xs.value)
                 </v-window>
             </v-card-text>
         </v-card>
-        <router-link to="/admin/AddRentCar" class="link">
-            <AddBtn></AddBtn>
+        <router-link to="/Admin/Add-Rent-Car" class="link">
+            <v-btn size="x-large" class="add-btn" icon color="secondary" @click="addModal = true; isAdd = true">
+                <v-icon color="white">mdi-plus</v-icon>
+            </v-btn>
         </router-link>
         <AcceptCarArchive :dialog="DeleteConfirm" @toggleModal="DeleteConfirm = false"></AcceptCarArchive>
         <!-- <CommentList v-if="$_isOpen('commentList')" />
         <carDetails v-if="$_isOpen('rentCarDetails')" />
-        <change-time />
-        <accept-car-delete /> -->
+        <change-time /> -->
     </div>
 </template>

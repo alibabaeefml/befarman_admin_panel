@@ -1,12 +1,9 @@
 <script setup>
 // import Dropzone from "@Components/Global/Dropzone.vue";
-// import PersianDate from "../Global/PersianDate.vue";
 // import CropperImage from "../Global/CropperImage.vue";
 import DatePicker from 'vue3-persian-datetime-picker'
 import { ref } from '@vue/reactivity';
 import BaseModal from '../../components/Global/BaseModal/BaseModal.vue';
-defineEmits(['toggleModal']);
-defineProps(['dialog'])
 const getBrands = ref(['سمند', 'ال نود', 'پراید']);
 const crop_data = ref(null);
 const url = ref(null);
@@ -55,7 +52,7 @@ const colors = ref([
 <template>
     <v-card style="direction:rtl;font-family:ym;">
         <v-card-title>
-            <v-icon size="x-large">mdi-car-side</v-icon> افزودن خودرو
+            <v-icon size="x-large">mdi-car-side</v-icon> {{ add ? 'افزودن خودرو' : 'ویرایش خودرو' }}
         </v-card-title>
         <v-card-subtitle class="sub">ADD NEW CAR</v-card-subtitle>
         <v-card-text style="padding: 20px;">
@@ -178,7 +175,7 @@ const colors = ref([
             </v-row>
         </v-card-text>
         <v-card-actions style="background-color: #ededed;" class="justify-center">
-            <router-link to="/admin/Car-List" class="link">
+            <router-link to="/Admin/Car-List" class="link">
                 <v-btn variant="elevated" color="pink" icon @click="$emit('toggleModal')" class="ma-1">
                     <v-icon color="white">mdi-close</v-icon>
                 </v-btn>

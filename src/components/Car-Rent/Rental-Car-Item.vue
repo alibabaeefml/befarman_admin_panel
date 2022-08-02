@@ -1,8 +1,6 @@
 <script setup>
 import defaultThumb from '@/assets/Images/avatars/car-avatar.jpg'
 import { ref } from '@vue/reactivity';
-import DeleteBtn from '@components/Global/Buttons/DeleteBtn.vue';
-import EditBtn from '@components/Global/Buttons/EditBtn.vue';
 defineEmits(['showDeleteModal'])
 const props = defineProps(['car', 'statuses', 'archived']);
 const { id, pName, eName, user, cost, thumb } = props.car;
@@ -31,6 +29,8 @@ const rentCarActions = ref(false);
                                     :disabled="archived" label="وضعیت" :items="statuses" item-title="name"
                                     variant="underlined"></v-select>
                             </div>
+                            <v-btn prepend-icon="mdi-information" color="secondary" variant="outlined">جزئیات خودرو
+                            </v-btn>
                         </div>
                     </v-col>
                     <v-col cols="12" md="3" sm="12">
@@ -59,16 +59,27 @@ const rentCarActions = ref(false);
                 </v-row>
             </v-card-text>
             <v-card-actions style="position:absolute;bottom:0">
-                <v-btn :color="archived?'orange':'primary'" icon @click="archived ? restoreCar : rentCarActions = !rentCarActions">
-                    <v-icon>{{ archived ? 'mdi-restore' : !rentCarActions ? 'mdi-dots-vertical' : 'mdi-menu-down'}}</v-icon>
+                <v-btn v-if="!archived" color="primary" icon @click="rentCarActions = !rentCarActions">
+                    <v-icon>{{ !rentCarActions ? 'mdi-dots-vertical' : 'mdi-menu-down' }}</v-icon>
+                </v-btn>
+                <v-btn v-else color="orange" icon @click="restoreCar">
+                    <v-icon>mdi-restore</v-icon>
                     <v-tooltip v-if="archived" activator="parent" location="right">بازگشت خودرو</v-tooltip>
                 </v-btn>
                 <div class="rentcaractions" v-if="rentCarActions">
-                    <delete-btn @click="$emit('showDeleteModal')"></delete-btn>
-                    <edit-btn></edit-btn>
-                    <v-btn color="secondary" variant="elevated" icon>
+                    <v-btn icon color="primary" variant="elevated" @click="$emit('showDeleteModal')">
+                        <v-icon>mdi-delete</v-icon>
+                        <v-tooltip activator="parent" location="right">حذف خودرو</v-tooltip>
+                    </v-btn>
+                    <router-link class="link" to="/Admin/Edit-Rent-Car">
+                        <v-btn icon color="black" variant="elevated">
+                            <v-icon>mdi-pencil</v-icon>
+                            <v-tooltip activator="parent" location="left">ویرایش خودرو</v-tooltip>
+                        </v-btn>
+                    </router-link>
+                    <v-btn icon color="secondary" variant="elevated">
                         <v-icon color="white">mdi-comment</v-icon>
-                        <v-tooltip activator="parent" location="bottom">نظرات</v-tooltip>
+                        <v-tooltip activator="parent" location="right">نظرات</v-tooltip>
                     </v-btn>
                 </div>
             </v-card-actions>
@@ -81,6 +92,6 @@ const rentCarActions = ref(false);
 }
 
 .rentcaractions>* {
-    margin: 5px;
+    margin: 10px 0;
 }
 </style>
