@@ -39,12 +39,12 @@ const car = ref({
 const NewCarImage = ref('selectedCarImage');
 const dropzoneActive = ref(false);
 const fuels = ref(["بنزین", 'گاز', "دوگانه سوز", "هیبریدی",]);
-const years = ref([]);
 // update years array each year
-const lastYear = new Date().getFullYear() - 622;
-for (let i = lastYear - 20; i <= lastYear; i++) {
+const years = ref([]);
+const year = new Date().getFullYear() - 621;
+for (let i = 1380; i <= year; i++) {
     years.value.push(i)
-}
+};
 const colors = ref([
     'قرمز', 'قهوه ای', 'خاکستری', 'مشکی', 'سفید', 'بژ', 'مسی', 'زیتونی', 'نوک مدادی', 'اطلسی', 'آبی', 'بنفش', 'آلبالویی', 'نقره آبی', 'سبز', 'نارنجی'
 ])

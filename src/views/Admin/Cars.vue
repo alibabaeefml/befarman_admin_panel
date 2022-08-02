@@ -1,9 +1,8 @@
 <script setup>
-import Car from "../../components/Car/Car-Item.vue"
-import { computed, onMounted, ref } from "@vue/runtime-core";
-import AddCar from "../../components/Car/Add-Car.vue";
-import Filters from "../../components/Global/Filters/Filters.vue";
-
+import Car from "@components/Car/Car-Item.vue"
+import { ref } from "@vue/runtime-core";
+import AddCar from "@components/Car/Add-Car.vue";
+import CarsFilter from "@components/Car/Cars-Filter.vue";
 const getCars = ref([
     {
         id: 'jldv554',
@@ -97,21 +96,8 @@ const nameFilter = ref('');
 const brandFilter = ref('');
 </script>
 <template>
-    <div class="cars">
-        <filters style="margin-top:20px">
-            <v-card-text>
-                <v-row>
-                    <v-col>
-                        <v-text-field v-model="nameFilter" prepend-icon="mdi-car" label="نام خوردرو"
-                            variant="underlined"></v-text-field>
-                    </v-col>
-                    <v-col>
-                        <v-text-field v-model="brandFilter" prepend-icon="mdi-alpha-b-circle" label="نام برند"
-                            variant="underlined"></v-text-field>
-                    </v-col>
-                </v-row>
-            </v-card-text>
-        </filters>
+    <div dir="rtl">
+        <cars-filter></cars-filter>
         <add-car :dialog="addModal" @toggleModal="addModal = false" :add="isAdd"></add-car>
         <v-row style="padding:20px">
             <car v-for="car in getCars" :key="car.id" :data="car" @toggleModal="addModal = true; isAdd = false" />
@@ -120,12 +106,4 @@ const brandFilter = ref('');
             <v-icon color="white">mdi-plus</v-icon>
         </v-btn>
     </div>
-
-
 </template>
-
-<style scoped>
-.cars {
-    direction: rtl;
-}
-</style>

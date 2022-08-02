@@ -1,17 +1,11 @@
 
 <script setup>
-import Filters from '@components/Global/Filters/Filters.vue';
-import { ref } from '@vue/reactivity';
 import RentalCars from '@components/Car-Rent/Rental-Car-Item.vue';
 import { useDisplay } from 'vuetify/lib/framework.mjs';
 import AcceptCarArchive from '@components/Car-Rent/Accept-Car-Archive.vue';
-import { computed } from '@vue/runtime-core';
-const years = ref([]);
-// update years array each year
-const lastYear = new Date().getFullYear() - 622;
-for (let i = lastYear - 20; i <= lastYear; i++) {
-    years.value.push(i)
-};
+import { computed, ref } from '@vue/runtime-core';
+import RentalCarsFilter from '@components/Car-Rent/Rental-Cars-Filter.vue';
+
 const statuses = [
     { name: 'در دسترس', color: 'green' },
     { name: 'نا مشخص', color: 'orange' },
@@ -87,25 +81,7 @@ const xs = computed(() => useDisplay().xs.value)
 
 <template>
     <div>
-        <Filters>
-            <v-row class="pa-4">
-                <v-col cols="12" md="3">
-                    <v-text-field prepend-icon="mdi-car" label="نام خوردرو" variant="underlined">
-                    </v-text-field>
-                </v-col>
-                <v-col cols="12" md="3">
-                    <v-text-field prepend-icon="mdi-account" label="نام مالک" variant="underlined"></v-text-field>
-                </v-col>
-                <v-col cols="12" md="3">
-                    <v-select :items="years" prepend-icon="mdi-calendar" label="سال تولید" variant="underlined">
-                    </v-select>
-                </v-col>
-                <v-col cols="12" md="3">
-                    <v-select :disabled="tab !== 'one'" :items="statuses" item-title="name" prepend-icon="mdi-check"
-                        label="وضعیت" variant="underlined"></v-select>
-                </v-col>
-            </v-row>
-        </Filters>
+        <rental-cars-filter :tab="tab" :statuses="statuses"></rental-cars-filter>
         <v-card :class="{ 'ma-4': !!xs }">
             <v-tabs v-model="tab" color="secondary" fixed-tabs>
                 <v-tab value="two">خودرو های حذف شده</v-tab>

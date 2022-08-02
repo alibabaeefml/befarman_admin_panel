@@ -26,28 +26,26 @@ const codeSent = ref(false)
 <template>
     <div class="container" :style="{ width: width + 'px', height: height + 'px' }">
         <v-card class="login-card" :style="{ width: sm ? '85%' : '30%', left: sm ? '0' : null }">
-            <div v-if="!codeSent">
+            <div>
                 <v-card-title class="login-title">
                     <v-icon>mdi-account</v-icon>ورود
                 </v-card-title>
                 <v-card-subtitle class="login-sub">LOGIN</v-card-subtitle>
-                <v-card-text class="login-body">
-                    <v-text-field v-model="phoneNumber" variant="underlined" label="شماره همراه خود را وارد نمایید"
-                        prepend-icon="mdi-phone" :rules="numberRules"></v-text-field>
-                    <v-btn class="send-code-btn" color="primary" append-icon="mdi-send-clock">ارسال کد احراز هویت
-                    </v-btn>
-                </v-card-text>
-            </div>
-            <div v-else>
-                <v-card-title class="login-title">
-                    <v-icon>mdi-account</v-icon>ورود
-                </v-card-title>
-                <v-card-subtitle class="login-sub">LOGIN</v-card-subtitle>
-                <v-card-text class="login-body">
-                    <v-text-field v-model="phoneNumber" variant="underlined" label="کد ارسالی را وارد نمایید"
-                        prepend-icon="mdi-barcode" :rules="numberRules"></v-text-field>
-                    <v-btn class="send-code-btn" color="secondary" append-icon="mdi-account-check">بررسی</v-btn>
-                </v-card-text>
+                <div v-if="!codeSent">
+                    <v-card-text class="login-body">
+                        <v-text-field v-model="phoneNumber" variant="underlined" label="شماره همراه خود را وارد نمایید"
+                            prepend-icon="mdi-phone" :rules="numberRules"></v-text-field>
+                        <v-btn block dir="rtl" color="primary" append-icon="mdi-send-clock">ارسال کد احراز هویت
+                        </v-btn>
+                    </v-card-text>
+                </div>
+                <div v-else>
+                    <v-card-text class="login-body">
+                        <v-text-field v-model="phoneNumber" variant="underlined" label="کد ارسالی را وارد نمایید"
+                            prepend-icon="mdi-barcode" :rules="numberRules"></v-text-field>
+                        <v-btn block dir="rtl" color="secondary" append-icon="mdi-account-check">بررسی</v-btn>
+                    </v-card-text>
+                </div>
             </div>
         </v-card>
     </div>
@@ -83,10 +81,5 @@ const codeSent = ref(false)
 
 .login-body {
     margin: 10px 0 0 0;
-}
-
-.send-code-btn {
-    width: 100%;
-    direction: ltr;
 }
 </style>

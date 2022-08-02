@@ -5,6 +5,7 @@ import { useRoute as route } from "vue-router";
 import bg from '@/assets/Images/Header.jpg'
 import Login from "./views/Login.vue";
 import { useDisplay } from "vuetify/lib/framework.mjs";
+import BasicModal from "./components/Global/BaseModal/BasicModal.vue";
 // import { useStore as store } from "vuex";
 const currentPath = computed(() => route().path);
 // const isLoggedIn = store().dispatch("checkIfIsLoggedIn");
@@ -22,7 +23,7 @@ const links = ref([
   'Blog',
   'Contact Us',
 ]);
-
+const isOpen = ref(true)
 </script>
 <template>
 
@@ -31,6 +32,7 @@ const links = ref([
     <Toolbar :currentPath="currentPath" />
     <router-view
       :style="{ marginTop: !sm && currentPath.includes('Admin') ? '200px' : 'unset' }" />
+      <!-- <v-btn></v-btn> -->
     <v-footer class="bg-grey-lighten-1">
       <v-row justify="center" no-gutters>
         <v-btn v-for="link in links" :key="link" color="white" variant="text" class="mx-2" rounded="xl">
