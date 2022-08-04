@@ -130,6 +130,12 @@ a {
   border-radius: 8px;
 }
 
+
+.actionsGroup>* {
+    margin: 10px 0;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, .5)!important;
+}
+
 /* vuetify classes */
 .v-list {
   font-family: yl;

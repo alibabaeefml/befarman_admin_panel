@@ -1,7 +1,8 @@
 <script setup>
-import defaultThumb from '@/assets/Images/avatars/car-avatar.jpg'
+import DatePicker from 'vue3-persian-datetime-picker';
+import defaultThumb from '@/assets/Images/avatars/car-avatar.jpg';
 import { ref } from '@vue/reactivity';
-defineEmits(['showDeleteModal'])
+defineEmits(['showDeleteModal', 'showCommentsModal','showDateChangeModal']);
 const props = defineProps(['car', 'statuses', 'archived']);
 const { id, pName, eName, user, cost, thumb } = props.car;
 const rentCarActions = ref(false);
@@ -30,7 +31,8 @@ const rentCarActions = ref(false);
                                     variant="underlined"></v-select>
                             </div>
                             <router-link to="/Admin/Car-Details">
-                                <v-btn block prepend-icon="mdi-information" color="secondary" variant="outlined">جزئیات خودرو
+                                <v-btn block prepend-icon="mdi-information" color="secondary" variant="outlined">جزئیات
+                                    خودرو
                                 </v-btn>
                             </router-link>
 
@@ -69,7 +71,7 @@ const rentCarActions = ref(false);
                     <v-icon>mdi-restore</v-icon>
                     <v-tooltip v-if="archived" activator="parent" location="right">بازگشت خودرو</v-tooltip>
                 </v-btn>
-                <div class="rentcaractions" v-if="rentCarActions">
+                <div class="actionsGroup" v-if="rentCarActions">
                     <v-btn icon color="primary" variant="elevated" @click="$emit('showDeleteModal')">
                         <v-icon>mdi-delete</v-icon>
                         <v-tooltip activator="parent" location="right">حذف خودرو</v-tooltip>
@@ -80,9 +82,14 @@ const rentCarActions = ref(false);
                             <v-tooltip activator="parent" location="left">ویرایش خودرو</v-tooltip>
                         </v-btn>
                     </router-link>
-                    <v-btn icon color="secondary" variant="elevated">
+                    <v-btn icon color="secondary" variant="elevated" @click="$emit('showCommentsModal')">
                         <v-icon color="white">mdi-comment</v-icon>
                         <v-tooltip activator="parent" location="right">نظرات</v-tooltip>
+                    </v-btn>
+                        <v-btn icon color="orange" variant="elevated" @click="$emit('showDateChangeModal')">
+                    
+                        <v-icon color="white">mdi-calendar</v-icon>
+                        <v-tooltip activator="parent" location="right">تاریخ رزرو</v-tooltip>
                     </v-btn>
                 </div>
             </v-card-actions>
@@ -92,9 +99,5 @@ const rentCarActions = ref(false);
 <style scoped>
 .v-card:hover {
     box-shadow: 0px 3px 10px -1px rgb(0 0 0 / 20%);
-}
-
-.rentcaractions>* {
-    margin: 10px 0;
 }
 </style>

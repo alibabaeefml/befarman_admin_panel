@@ -185,6 +185,12 @@ const colors = ref([
             </v-btn>
         </v-card-actions>
     </v-card>
+        <router-link to="/Admin/Car-List">
+        <v-btn class="add-btn" icon color="primary" size="large">
+            <v-icon>mdi-arrow-left</v-icon>
+            <v-tooltip activator="parent">بازگشت</v-tooltip>
+        </v-btn>
+    </router-link>
 </template>
 <style scoped>
 .sub {

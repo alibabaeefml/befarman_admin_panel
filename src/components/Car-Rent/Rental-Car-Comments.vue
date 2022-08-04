@@ -1,0 +1,13 @@
+<script setup>
+import BaseModal from '../Global/BaseModal/BaseModal.vue';
+defineProps(['dialog'])
+defineEmits(['toggle-modal'])
+</script>
+
+<template>
+<div>
+    <BaseModal :dialog="dialog" @toggle-modal="$emit('toggle-modal')" title="نظرات" subtitle="COMMENTS" icon="mdi-comment">
+    <h4 class="text-center">نظری وجود ندارد.</h4>
+    </BaseModal>
+</div>
+</template>

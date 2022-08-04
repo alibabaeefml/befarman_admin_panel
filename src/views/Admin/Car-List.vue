@@ -1,10 +1,11 @@
 
 <script setup>
-import RentalCars from '@components/Car-Rent/Rental-Car-Item.vue';
+import RentalCarItem from '@components/Car-Rent/Rental-Car-Item.vue';
 import { useDisplay } from 'vuetify/lib/framework.mjs';
 import AcceptCarArchive from '@components/Car-Rent/Accept-Car-Archive.vue';
-import { computed, ref } from '@vue/runtime-core';
+import { ref } from '@vue/runtime-core';
 import RentalCarsFilter from '@components/Car-Rent/Rental-Cars-Filter.vue';
+import RentalCarComments from '../../components/Car-Rent/Rental-Car-Comments.vue';
 
 const statuses = [
     { name: 'در دسترس', color: 'green' },
@@ -74,43 +75,41 @@ const getRentCars = ref([
         },
         cost: 1500000,
     },
-])
-const DeleteConfirm = ref(false)
-const xs = computed(() => useDisplay().xs.value)
+]);
+const deleteConfirm = ref(false);
+const commentsModal = ref(false);
 </script>
 
 <template>
     <div>
         <rental-cars-filter :tab="tab" :statuses="statuses"></rental-cars-filter>
-        <v-card :class="{ 'ma-4': !!xs }">
+        <v-card>
             <v-tabs v-model="tab" color="secondary" fixed-tabs>
                 <v-tab value="two">خودرو های حذف شده</v-tab>
-                <v-tab value="one">خودرو های های فعال</v-tab>
+                <v-tab value="one">خودرو های فعال</v-tab>
             </v-tabs>
             <v-card-text>
                 <v-window v-model="tab">
                     <v-window-item value="two">
-                        <RentalCars v-for="car of getRentCars" :key="car.id" :car="car" :statuses="statuses"
+                        <RentalCarItem v-for="car of getRentCars" :key="car.id" :car="car" :statuses="statuses"
                             :archived="true">
-                        </RentalCars>
+                        </RentalCarItem>
                     </v-window-item>
                     <v-window-item value="one">
-                        <RentalCars v-for="car of getRentCars" :key="car.id" :car="car" :statuses="statuses"
-                            @showDeleteModal="DeleteConfirm = !DeleteConfirm">
-                        </RentalCars>
+                        <RentalCarItem v-for="car of getRentCars" :key="car.id" :car="car" :statuses="statuses"
+                            @showDeleteModal="deleteConfirm = true" @showCommentsModal="commentsModal = true">
+                        </RentalCarItem>
                     </v-window-item>
 
                 </v-window>
             </v-card-text>
         </v-card>
         <router-link to="/Admin/Add-Rent-Car" class="link">
-            <v-btn size="x-large" class="add-btn" icon color="secondary" @click="addModal = true; isAdd = true">
+            <v-btn size="x-large" class="add-btn" icon color="secondary">
                 <v-icon color="white">mdi-plus</v-icon>
             </v-btn>
         </router-link>
-        <AcceptCarArchive :dialog="DeleteConfirm" @toggleModal="DeleteConfirm = false"></AcceptCarArchive>
-        <!-- <CommentList v-if="$_isOpen('commentList')" />
-        <carDetails v-if="$_isOpen('rentCarDetails')" />
-        <change-time /> -->
+        <AcceptCarArchive :dialog="deleteConfirm" @toggleModal="deleteConfirm = false"></AcceptCarArchive>
+        <RentalCarComments :dialog="commentsModal" @toggle-modal="commentsModal = false"></RentalCarComments>
     </div>
 </template>

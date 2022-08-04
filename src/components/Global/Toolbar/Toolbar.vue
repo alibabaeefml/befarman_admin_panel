@@ -68,7 +68,7 @@ const routeName = computed(() => useRoute().meta.title)
         </div>
     </div>
     <div v-else>
-        <v-btn style="position:fixed;top:5px;right:5px;z-index: 3;" size="large" icon="mdi-dots-vertical" color="primary" @click="drawer=true"/>
+        <v-btn style="position:fixed;top:10px;right:10px;z-index: 3;" size="large" icon="mdi-dots-vertical" color="primary" @click="drawer=true"/>
     </div>
     <div>
         <v-card :style="{ zIndex: 999999 }">
