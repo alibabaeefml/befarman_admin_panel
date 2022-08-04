@@ -51,6 +51,15 @@ export default [
         },
       },
       {
+        path: "Car-Details",
+        name: "Car-Details",
+        view: "Car-Details",
+        meta: {
+          auth: false,
+          title: "جزئیات خودرو اجاره ای",
+        },
+      },
+      {
         path: "Edit-Rent-Car",
         name: "Edit-Rent-Car",
         view: "Add-Rent-Car",

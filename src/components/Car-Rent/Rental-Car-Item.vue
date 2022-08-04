@@ -29,8 +29,11 @@ const rentCarActions = ref(false);
                                     :disabled="archived" label="وضعیت" :items="statuses" item-title="name"
                                     variant="underlined"></v-select>
                             </div>
-                            <v-btn prepend-icon="mdi-information" color="secondary" variant="outlined">جزئیات خودرو
-                            </v-btn>
+                            <router-link to="/Admin/Car-Details">
+                                <v-btn block prepend-icon="mdi-information" color="secondary" variant="outlined">جزئیات خودرو
+                                </v-btn>
+                            </router-link>
+
                         </div>
                     </v-col>
                     <v-col cols="12" md="3" sm="12">

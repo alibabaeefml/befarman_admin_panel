@@ -30,9 +30,7 @@ const isOpen = ref(true)
   <v-app
     :style="currentPath === '/' ? { background: `url(${bg})`, backgroundSize: 'cover', backgroundPosition: 'center' } : ''">
     <Toolbar :currentPath="currentPath" />
-    <router-view
-      :style="{ marginTop: !sm && currentPath.includes('Admin') ? '200px' : 'unset' }" />
-      <!-- <v-btn></v-btn> -->
+    <router-view :style="{ marginTop: !sm && currentPath.includes('Admin') ? '200px' : 'unset' }" />
     <v-footer class="bg-grey-lighten-1">
       <v-row justify="center" no-gutters>
         <v-btn v-for="link in links" :key="link" color="white" variant="text" class="mx-2" rounded="xl">
@@ -46,6 +44,7 @@ const isOpen = ref(true)
   </v-app>
 </template>
 <style>
+/* fonts */
 @font-face {
   font-family: yl;
   src: url(./assets/Fonts/iranyekanweblightfanum.woff);
@@ -77,6 +76,7 @@ const isOpen = ref(true)
   src: url(./assets/Fonts/Montserrat-Bold.ttf);
 }
 
+/* css classes */
 .mxb {
   font-family: mxb;
 }
@@ -103,9 +103,9 @@ button {
 }
 
 .add-btn {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
 }
 
 .peTitle {
@@ -121,11 +121,16 @@ button {
   color: rgba(0, 0, 0, 0.3);
 }
 
-.link {
+a {
   color: inherit;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
+.curved {
+  border-radius: 8px;
+}
+
+/* vuetify classes */
 .v-list {
   font-family: yl;
   direction: rtl;

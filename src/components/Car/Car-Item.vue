@@ -3,7 +3,6 @@ import defThumb from '@/assets/Images/avatars/car-avatar.jpg'
 const props = defineProps(['data']);
 defineEmits(['toggleModal'])
 const { id, pName, eName, thumb, brand } = props.data;
-// const removeAutomobile = useStore().dispatch('removeAutomobile');
 </script>
 <template>
     <v-col cols="12" md="3" sm="6">
