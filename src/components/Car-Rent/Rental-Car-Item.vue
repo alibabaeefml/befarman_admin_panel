@@ -21,7 +21,7 @@ const rentCarActions = ref(false);
                             <div class="peTitle">
                                 {{ pName }}
                             </div>
-                            <div class="enSub mt-2">
+                            <div class="enSub">
                                 {{ eName }}
                             </div>
 
@@ -43,10 +43,10 @@ const rentCarActions = ref(false);
                             <div>
                                 مالک خودرو
                             </div>
-                            <div class="peTitle mt-1">
+                            <div class="peTitle">
                                 {{ user.name }}
                             </div>
-                            <div class="enSub mt-1">
+                            <div class="enSub">
                                 {{ user.number }}
                             </div>
                         </div>
@@ -56,7 +56,7 @@ const rentCarActions = ref(false);
                             <div class="mxb">
                                 <h2>{{ cost }}</h2>
                             </div>
-                            <div class="yl mt-2">
+                            <div class="yl">
                                 هزینه روزانه - تومان
                             </div>
                         </div>

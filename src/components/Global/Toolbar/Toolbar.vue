@@ -3,7 +3,7 @@ import { computed, ref } from '@vue/runtime-core';
 import { useDisplay } from 'vuetify/lib/framework.mjs';
 import bg from '@/assets/Images/Header.jpg'
 import { useRoute } from 'vue-router';
-const mobile = computed(() => useDisplay().width.value < 820);
+const mobile = computed(() => useDisplay().width.value < 1080);
 const height = computed(() => useDisplay().height.value)
 const drawer = ref(false);
 const loggedIn = ref(true);
@@ -11,8 +11,6 @@ const isAdmin = ref(true);
 const user = ref('')
 const props = defineProps(['currentPath']);
 const routeName = computed(() => useRoute().meta.title)
-
-// to make an array for the app bar data
 </script>
 
 <template>
@@ -21,7 +19,7 @@ const routeName = computed(() => useRoute().meta.title)
     { background: `url(${bg})`, backgroundSize: 'cover', backgroundPosition: 'center' } : ''">
         <v-toolbar color="rgba(0,0,0,.6)" :style="{ color: 'white', fontFamily: 'ym', padding: '20px' }">
             <v-toolbar-title>
-                <h2 :style="{ letterSpacing: '1.5px', fontFamily: 'mm' }">BEFARMAN APP</h2>
+                <h2 class="app-bar-title mm">BEFARMAN APP</h2>
             </v-toolbar-title>
             <v-btn icon>
                 <v-icon>mdi-twitter</v-icon>
@@ -68,15 +66,20 @@ const routeName = computed(() => useRoute().meta.title)
         </div>
     </div>
     <div v-else>
-        <v-btn style="position:fixed;top:10px;right:10px;z-index: 3;" size="large" icon="mdi-dots-vertical" color="primary" @click="drawer=true"/>
+        <v-app-bar color="black">
+            <v-toolbar-title > 
+                <h4 class="app-bar-title mm">BEFARMAN APP</h4>
+            </v-toolbar-title>
+            <v-btn class="menu-btn" size="large" icon="mdi-dots-vertical" @click="drawer = !drawer" />
+        </v-app-bar>
     </div>
     <div>
-        <v-card :style="{ zIndex: 999999 }">
-            <v-navigation-drawer v-model="drawer" :rail="false" permanent location="right">
-                <v-list-item :style="{ letterSpacing: '1.5px', fontFamily: 'mm' }" prepend-avatar="/favicon.ico"
+        <v-card style="z-index:3">
+            <v-navigation-drawer v-model="drawer" @click:outside="drawer=false" :rail="false" permanent location="right">
+                <!-- <v-list-item :style="{ letterSpacing: '1.5px', fontFamily: 'mm' }" prepend-avatar="/favicon.ico"
                     title="BEFARMAN APP">
                 </v-list-item>
-                <v-divider></v-divider>
+                <v-divider></v-divider> -->
                 <v-list density="compact" nav right :style="{ fontFamily: 'ym' }">
                     <router-link to="/" class="link">
                         <v-list-item prepend-icon="mdi-home" title="صفحه اصلی" value="home"></v-list-item>
@@ -96,7 +99,7 @@ const routeName = computed(() => useRoute().meta.title)
                     <v-list-item prepend-icon="mdi-twitter" title="twitter" value="twitter"></v-list-item>
                     <v-list-item prepend-icon="mdi-instagram" title="instagram" value="instagram"></v-list-item>
                 </v-list>
-                <v-btn variant="text" icon="mdi-chevron-right" @click="drawer=false"></v-btn>
+                <v-btn variant="text" icon="mdi-chevron-right" @click="drawer = false"></v-btn>
             </v-navigation-drawer>
         </v-card>
     </div>
@@ -122,6 +125,10 @@ const routeName = computed(() => useRoute().meta.title)
 
 .AdminHeader * {
     text-shadow: 0 0 4px black;
+}
+
+.app-bar-title {
+    letter-spacing: 1.5px;
 }
 
 button {

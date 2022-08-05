@@ -33,9 +33,9 @@ export default [
         },
       },
       {
-        path: "Car-List",
-        name: "Car-List",
-        view: "Car-List",
+        path: "Rental-Cars",
+        name: "Rental-Cars",
+        view: "Rental-Cars",
         meta: {
           auth: true,
           title: "لیست خودرو های اجاره ای",
@@ -93,6 +93,15 @@ export default [
         meta: {
           auth: true,
           title: "لیست درخواست ها",
+        },
+      },
+      {
+        path: "Request-Details",
+        name: "Request-Details",
+        view: "Request-Details",
+        meta: {
+          auth: false,
+          title: "جزئیات درخواست",
         },
       },
     ],

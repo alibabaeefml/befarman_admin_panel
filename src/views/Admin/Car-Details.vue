@@ -105,7 +105,7 @@ const docModal = ref(false);
             </v-col>
             <documents :doc-modal="docModal" @toggle-modal="docModal = false"></documents>
         </v-row>
-        <router-link to="/Admin/Car-List">
+        <router-link to="/Admin/Rental-Cars">
             <v-btn class="add-btn" icon color="primary" size="large">
                 <v-icon>mdi-arrow-left</v-icon>
                 <v-tooltip activator="parent">بازگشت</v-tooltip>

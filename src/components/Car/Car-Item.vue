@@ -12,7 +12,7 @@ const { id, pName, eName, thumb, brand } = props.data;
             <v-card-text>
                 <div>
                     <h1 style="font-family:ym">{{ pName }}</h1>
-                    <h3 style="font-family:mm;letter-spacing: 5px;" class="mt-2 text-disabled">{{ eName }}</h3>
+                    <h3 style="font-family:mm;letter-spacing: 5px;" class="text-disabled">{{ eName }}</h3>
                     <span style="position: absolute;left:5px;bottom: 5px;">{{ brand }}</span>
                 </div>
             </v-card-text>

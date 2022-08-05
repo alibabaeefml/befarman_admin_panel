@@ -3,8 +3,10 @@ import { ref } from 'vue';
 import RequestItem from '../../components/Requests/Request-Item.vue';
 import RequestsFilter from '../../components/Requests/Requests-Filter.vue';
 import AddEditRequest from '../../components/Requests/Add-Edit-Request.vue';
+import AcceptReqDelete from '../../components/Requests/Accept-Req-Delete.vue';
 const tab = ref('one');
 const addModal = ref(false);
+const deleteConfirm = ref(false)
 </script>
 <template>
     <requests-filter></requests-filter>
@@ -20,8 +22,8 @@ const addModal = ref(false);
                     </RequestItem>
                 </v-window-item>
                 <v-window-item value="one">
-                    <RequestItem v-for="requests of 5" :key="requests.id" :request="request"
-                        @editModal="addModal = true" @showDeleteModal="deleteConfirm = true">
+                    <RequestItem v-for="request of 5" :key="request.id" :request="request"
+                        @editModal="addModal = true" @deleteModal="deleteConfirm = true">
                     </RequestItem>
                 </v-window-item>
             </v-window>
@@ -31,4 +33,5 @@ const addModal = ref(false);
         <v-icon color="white">mdi-plus</v-icon>
     </v-btn>
     <add-edit-request :dialog="addModal" @toggle-modal="addModal = false"></add-edit-request>
+    <accept-req-delete :dialog="deleteConfirm" @toggle-modal="deleteConfirm=false"></accept-req-delete>
 </template>

@@ -30,7 +30,7 @@ const isOpen = ref(true)
   <v-app
     :style="currentPath === '/' ? { background: `url(${bg})`, backgroundSize: 'cover', backgroundPosition: 'center' } : ''">
     <Toolbar :currentPath="currentPath" />
-    <router-view :style="{ marginTop: !sm && currentPath.includes('Admin') ? '200px' : 'unset' }" />
+    <router-view :style="{ marginTop: !sm && currentPath.includes('Admin') ? '200px' : '70px' }" />
     <v-footer class="bg-grey-lighten-1">
       <v-row justify="center" no-gutters>
         <v-btn v-for="link in links" :key="link" color="white" variant="text" class="mx-2" rounded="xl">
@@ -76,25 +76,21 @@ const isOpen = ref(true)
   src: url(./assets/Fonts/Montserrat-Bold.ttf);
 }
 
-/* css classes */
-.mxb {
-  font-family: mxb;
+/* global elements */
+
+* {
+    line-height: normal;
+      -webkit-user-select: none;
+  /* Safari */
+  -ms-user-select: none;
+  /* IE 10 and IE 11 */
+  user-select: none;
+  /* Standard syntax */
 }
 
-.yl {
-  font-family: yl;
-}
-
-.ym {
-  font-family: ym;
-}
-
-.mb {
-  font-family: mb;
-}
-
-.mm {
-  font-family: mm;
+a {
+  color: inherit;
+  text-decoration: none !important;
 }
 
 button {
@@ -102,10 +98,65 @@ button {
   font-family: ym !important;
 }
 
+hr {
+  margin-left: 5%;
+  width: 90%;
+  opacity: .8;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: black;
+  border-radius: 50px;
+}
+
+
+
+/* css classes */
+.mxb {
+  font-family: mxb !important;
+}
+
+.yl {
+  font-family: yl !important;
+}
+
+.ym {
+  font-family: ym !important;
+}
+
+.mb {
+  font-family: mb !important;
+}
+
+.mm {
+  font-family: mm !important;
+}
+
+.lg-txt {
+  font-size: 80px;
+}
+
+.md-txt {
+  font-size: 50px;
+}
+
+.sm-txt {
+  font-size: 20px;
+}
+
+.xs-txt {
+  font-size: 10px;
+}
+
 .add-btn {
   position: fixed;
   bottom: 20px;
   left: 20px;
+  z-index: 3;
 }
 
 .peTitle {
@@ -121,10 +172,7 @@ button {
   color: rgba(0, 0, 0, 0.3);
 }
 
-a {
-  color: inherit;
-  text-decoration: none !important;
-}
+
 
 .curved {
   border-radius: 8px;
@@ -132,8 +180,8 @@ a {
 
 
 .actionsGroup>* {
-    margin: 10px 0;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, .5)!important;
+  margin: 10px 0;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, .5) !important;
 }
 
 /* vuetify classes */

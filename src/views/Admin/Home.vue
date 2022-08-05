@@ -23,7 +23,7 @@ const sm = computed(() => useDisplay().width.value < 800)
                 </router-link>
             </v-col>
             <v-col class="pa-1" cols="12" lg="7" xl="8">
-                <router-link class="link" to="/Admin/Car-List">
+                <router-link class="link" to="/Admin/Rental-Cars">
                     <tile-item color="grey lighten" icon="clock" txt="خـــــودرو های اجاره ای" sub="RENTABLES"
                         :badge-txt="rantablesCount + 'خودرو'"></tile-item>
                 </router-link>
