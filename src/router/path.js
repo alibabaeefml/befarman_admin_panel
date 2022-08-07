@@ -1,13 +1,13 @@
 export default [
   {
     path: "/Admin",
-    name: "admin",
+    name: "ADMIN",
     view: "Admin",
     redirect: "admin/home",
     children: [
       {
         path: "Home",
-        name: "Home",
+        name: "HOME",
         view: "Home",
         meta: {
           auth: true,
@@ -16,7 +16,7 @@ export default [
       },
       {
         path: "Transaction",
-        name: "Transaction",
+        name: "TRANSACTION",
         view: "Transaction",
         meta: {
           auth: true,
@@ -25,7 +25,7 @@ export default [
       },
       {
         path: "Sms-Management",
-        name: "Sms-Management",
+        name: "SMS MANAGEMENT",
         view: "Sms-Management",
         meta: {
           auth: true,
@@ -34,7 +34,7 @@ export default [
       },
       {
         path: "Rental-Cars",
-        name: "Rental-Cars",
+        name: "RENTAL CARS",
         view: "Rental-Cars",
         meta: {
           auth: true,
@@ -43,7 +43,7 @@ export default [
       },
       {
         path: "Add-Rent-Car",
-        name: "Add-Rent-Car",
+        name: "ADD RENT CAR",
         view: "Add-Rent-Car",
         meta: {
           auth: false,
@@ -52,7 +52,7 @@ export default [
       },
       {
         path: "Car-Details",
-        name: "Car-Details",
+        name: "CAR DETAILS",
         view: "Car-Details",
         meta: {
           auth: false,
@@ -61,7 +61,7 @@ export default [
       },
       {
         path: "Edit-Rent-Car",
-        name: "Edit-Rent-Car",
+        name: "EDIT RENT CAR",
         view: "Add-Rent-Car",
         meta: {
           auth: false,
@@ -70,7 +70,7 @@ export default [
       },
       {
         path: "Users",
-        name: "Users",
+        name: "USERS",
         view: "Users",
         meta: {
           auth: true,
@@ -78,8 +78,35 @@ export default [
         },
       },
       {
+        path: "User-Info",
+        name: "USER INFO",
+        view: "User-Info",
+        meta: {
+          auth: true,
+          title: "اطلاعات کاربر",
+        },
+      },
+      {
+        path: "Add-User",
+        name: "ADD USER",
+        view: "Add-Edit-User",
+        meta: {
+          auth: true,
+          title: "افزودن کاربر",
+        },
+      },
+      {
+        path: "Edit-User",
+        name: "EDIT USER",
+        view: "Add-Edit-User",
+        meta: {
+          auth: true,
+          title: "ویرایش کاربر",
+        },
+      },
+      {
         path: "Cars",
-        name: "Cars",
+        name: "CARS",
         view: "Cars",
         meta: {
           auth: true,
@@ -88,7 +115,7 @@ export default [
       },
       {
         path: "Requests",
-        name: "Requests",
+        name: "REQUESTS",
         view: "Requests",
         meta: {
           auth: true,
@@ -97,18 +124,58 @@ export default [
       },
       {
         path: "Request-Details",
-        name: "Request-Details",
+        name: "REQUEST DETAILS",
         view: "Request-Details",
         meta: {
           auth: false,
           title: "جزئیات درخواست",
         },
       },
+      {
+        path: "Transactions",
+        name: "TRANSACTIONS",
+        view: "Transactions",
+        meta: {
+          auth: true,
+          title: "تراکنش ها",
+          public: true,
+        },
+      },
+      {
+        path: "Add-Transaction",
+        name: "ADD TRANSACTION",
+        view: "Add-Edit-Transaction",
+        meta: {
+          auth: true,
+          title: "افزودن تراکنش",
+          public: true,
+        },
+      },
+      {
+        path: "Edit-Transaction",
+        name: "EDIT TRANSACTION",
+        view: "Add-Edit-Transaction",
+        meta: {
+          auth: true,
+          title: "ویرایش تراکنش",
+          public: true,
+        },
+      },
+      {
+        path: "Sms-Management",
+        name: "SMS MANAGEMENT",
+        view: "Sms-Management",
+        meta: {
+          auth: true,
+          title: "پیامک ها",
+          public: true,
+        },
+      },
     ],
   },
   {
     path: "",
-    name: "Main-Home",
+    name: "MAIN HOME",
     view: "Main-Home",
     meta: {
       auth: true,
@@ -118,7 +185,7 @@ export default [
   },
   {
     path: "/Profile",
-    name: "Profile",
+    name: "PROFILE",
     view: "Profile",
     meta: {
       auth: true,
@@ -127,7 +194,7 @@ export default [
   },
   {
     path: "/Login",
-    name: "Login",
+    name: "LOGIN",
     view: "Login",
     meta: {
       auth: true,
@@ -136,7 +203,7 @@ export default [
   },
   {
     path: "/All-Cars",
-    name: "All-Cars",
+    name: "ALL CARS",
     view: "All-Cars",
     meta: {
       public: true,
@@ -146,7 +213,7 @@ export default [
   },
   {
     path: "/About-Us",
-    name: "About-Us",
+    name: "ABOUT US",
     view: "About-Us",
     meta: {
       public: true,

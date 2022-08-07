@@ -102,10 +102,10 @@ const md = computed(() => useDisplay().smAndUp.value)
                         <div v-if="md" style="background:white;height:1px;width: 50%;"></div>
                         <div>تاریخ: 0000/00/00</div>
                     </div>
-                    <div  class="mt-2 pa-2 curved d-flex align-center justify-space-between"
+                    <div  class="mt-2 pa-2 curved d-flex align-center justify-space-between rtl-icon"
                         :style="{ background: 'rgb(238, 53, 82)', color: 'white' }">
                         <div>
-                            <v-icon style="transform: rotateY(180deg);" size="large">mdi-account-remove</v-icon>
+                            <v-icon size="large">mdi-account-remove</v-icon>
                             رد شده توسط ادمین
                         </div>
                         <div v-if="md" style="background:white;height:1px;width: 50%;"></div>

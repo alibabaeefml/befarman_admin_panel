@@ -9,7 +9,7 @@ const sm = computed(() => useDisplay().width.value < 900);
 </script>
 <template>
     <div>
-        <v-card class="border mt-3 text-center d-flex align-center" min-height="200">
+        <v-card class="border mt-3 text-center" min-height="200">
             <v-card-text dir="rtl" class="ym">
                 <v-row class="align-center">
                     <v-col cols="12" md="3" xs="12">
@@ -62,7 +62,7 @@ const sm = computed(() => useDisplay().width.value < 900);
                     <v-col cols="12" md="4" sm="12">
                         <v-row class="align-center">
                             <v-col cols="12" md="6" class="d-flex justify-center align-center">
-                                <div class="d-flex" style="font-size:20px">
+                                <div class="d-flex align-center" style="font-size:20px">
                                     <div class="ml-2 mb">
                                         <h1 :style="{ fontSize: !sm ? '100px' : '50px' }">5</h1>
                                     </div>
@@ -71,7 +71,6 @@ const sm = computed(() => useDisplay().width.value < 900);
                                     </div>
                                 </div>
                             </v-col>
-
                             <v-col cols="12" md="6">
                                 <div class="d-flex flex-column" style="font-size:20px">
                                     <h2 class="mxb">150000</h2>
@@ -95,12 +94,10 @@ const sm = computed(() => useDisplay().width.value < 900);
                         <v-icon>mdi-pencil</v-icon>
                         <v-tooltip activator="parent" location="left">ویرایش درخواست</v-tooltip>
                     </v-btn>
-                    <router-link to="/Admin/Request-Details">
-                        <v-btn icon color="orange" variant="elevated">
-                            <v-icon color="white">mdi-information</v-icon>
-                            <v-tooltip activator="parent" location="right">جزئیات درخواست</v-tooltip>
-                        </v-btn>
-                    </router-link>
+                    <v-btn to="/Admin/Request-Details" icon color="orange" variant="elevated">
+                        <v-icon color="white">mdi-information</v-icon>
+                        <v-tooltip activator="parent" location="right">جزئیات درخواست</v-tooltip>
+                    </v-btn>
                 </div>
             </v-card-actions>
         </v-card>

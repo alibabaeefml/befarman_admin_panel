@@ -35,7 +35,7 @@ const codeSent = ref(false)
                     <v-card-text class="login-body">
                         <v-text-field v-model="phoneNumber" variant="underlined" label="شماره همراه خود را وارد نمایید"
                             prepend-icon="mdi-phone" :rules="numberRules"></v-text-field>
-                        <v-btn block dir="rtl" color="primary" append-icon="mdi-send-clock">ارسال کد احراز هویت
+                        <v-btn block class="rtl-icon" color="primary" append-icon="mdi-send-clock">ارسال کد احراز هویت
                         </v-btn>
                     </v-card-text>
                 </div>
@@ -43,7 +43,7 @@ const codeSent = ref(false)
                     <v-card-text class="login-body">
                         <v-text-field v-model="phoneNumber" variant="underlined" label="کد ارسالی را وارد نمایید"
                             prepend-icon="mdi-barcode" :rules="numberRules"></v-text-field>
-                        <v-btn block dir="rtl" color="secondary" append-icon="mdi-account-check">بررسی</v-btn>
+                        <v-btn block color="secondary" append-icon="mdi-account-check">بررسی</v-btn>
                     </v-card-text>
                 </div>
             </div>

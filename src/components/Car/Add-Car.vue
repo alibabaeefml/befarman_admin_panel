@@ -42,6 +42,16 @@ const car = ref({
                         prepend-icon="mdi-text">
                     </v-text-field>
                 </v-col>
+                <v-col cols="12" md="6" sm="12">
+                    <v-select variant="underlined" type="text" label="نوع بدنه"
+                        prepend-icon="mdi-car-door">
+                    </v-select>
+                </v-col>
+                <v-col cols="12" md="6" sm="12">
+                    <v-text-field variant="underlined" type="number" label="ظرفیت سرنشین" 
+                        prepend-icon="mdi-car-child-seat">
+                    </v-text-field>
+                </v-col>
             </v-row>
 
         </v-card-text>

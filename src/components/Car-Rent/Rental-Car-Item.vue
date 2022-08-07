@@ -2,7 +2,7 @@
 import DatePicker from 'vue3-persian-datetime-picker';
 import defaultThumb from '@/assets/Images/avatars/car-avatar.jpg';
 import { ref } from '@vue/reactivity';
-defineEmits(['showDeleteModal', 'showCommentsModal','showDateChangeModal']);
+defineEmits(['showDeleteModal', 'showCommentsModal', 'showDateChangeModal']);
 const props = defineProps(['car', 'statuses', 'archived']);
 const { id, pName, eName, user, cost, thumb } = props.car;
 const rentCarActions = ref(false);
@@ -30,11 +30,10 @@ const rentCarActions = ref(false);
                                     :disabled="archived" label="وضعیت" :items="statuses" item-title="name"
                                     variant="underlined"></v-select>
                             </div>
-                            <router-link to="/Admin/Car-Details">
-                                <v-btn block prepend-icon="mdi-information" color="secondary" variant="outlined">جزئیات
-                                    خودرو
-                                </v-btn>
-                            </router-link>
+                            <v-btn to="/Admin/Car-Details" block prepend-icon="mdi-information" color="secondary"
+                                variant="outlined">جزئیات
+                                خودرو
+                            </v-btn>
 
                         </div>
                     </v-col>
@@ -76,18 +75,16 @@ const rentCarActions = ref(false);
                         <v-icon>mdi-delete</v-icon>
                         <v-tooltip activator="parent" location="right">حذف خودرو</v-tooltip>
                     </v-btn>
-                    <router-link class="link" to="/Admin/Edit-Rent-Car">
-                        <v-btn icon color="black" variant="elevated">
-                            <v-icon>mdi-pencil</v-icon>
-                            <v-tooltip activator="parent" location="left">ویرایش خودرو</v-tooltip>
-                        </v-btn>
-                    </router-link>
+                    <v-btn icon color="black" variant="elevated" to="/Admin/Edit-Rent-Car">
+                        <v-icon>mdi-pencil</v-icon>
+                        <v-tooltip activator="parent" location="left">ویرایش خودرو</v-tooltip>
+                    </v-btn>
                     <v-btn icon color="secondary" variant="elevated" @click="$emit('showCommentsModal')">
                         <v-icon color="white">mdi-comment</v-icon>
                         <v-tooltip activator="parent" location="right">نظرات</v-tooltip>
                     </v-btn>
-                        <v-btn icon color="orange" variant="elevated" @click="$emit('showDateChangeModal')">
-                    
+                    <v-btn icon color="orange" variant="elevated" @click="$emit('showDateChangeModal')">
+
                         <v-icon color="white">mdi-calendar</v-icon>
                         <v-tooltip activator="parent" location="right">تاریخ رزرو</v-tooltip>
                     </v-btn>

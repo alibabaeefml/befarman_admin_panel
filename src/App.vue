@@ -3,18 +3,10 @@ import Toolbar from "@components/Global/Toolbar/Toolbar.vue";
 import { computed, ref, watch } from "@vue/runtime-core";
 import { useRoute as route } from "vue-router";
 import bg from '@/assets/Images/Header.jpg'
-import Login from "./views/Login.vue";
 import { useDisplay } from "vuetify/lib/framework.mjs";
-import BasicModal from "./components/Global/BaseModal/BasicModal.vue";
-// import { useStore as store } from "vuex";
+const title = computed(() => route().meta.title)
 const currentPath = computed(() => route().path);
-// const isLoggedIn = store().dispatch("checkIfIsLoggedIn");
-// watch(
-//   function () { document.title = route().meta.title }
-// )
-const width = computed(() => useDisplay().width.value);
-const sm = computed(() => useDisplay().width.value < 800);
-const xs = computed(() => useDisplay().xs.value);
+const sm = computed(() => useDisplay().width.value < 1070);
 const links = ref([
   'Home',
   'About Us',
@@ -23,14 +15,14 @@ const links = ref([
   'Blog',
   'Contact Us',
 ]);
-const isOpen = ref(true)
+const isAdmin = computed(() => currentPath.value.includes('Admin'))
 </script>
 <template>
 
   <v-app
-    :style="currentPath === '/' ? { background: `url(${bg})`, backgroundSize: 'cover', backgroundPosition: 'center' } : ''">
+    :style="currentPath === '/' ? { background: `url(${bg})`, backgroundSize: 'cover', backgroundPosition: 'center' } : 'https://www.nicepng.com/png/full/24-247272_background-pattern-s-white-background-pattern-png.png'">
     <Toolbar :currentPath="currentPath" />
-    <router-view :style="{ marginTop: !sm && currentPath.includes('Admin') ? '200px' : '70px' }" />
+    <router-view :style="{ marginTop: !sm && isAdmin ? '200px' : sm ? '60px' : '' }" />
     <v-footer class="bg-grey-lighten-1">
       <v-row justify="center" no-gutters>
         <v-btn v-for="link in links" :key="link" color="white" variant="text" class="mx-2" rounded="xl">
@@ -76,11 +68,23 @@ const isOpen = ref(true)
   src: url(./assets/Fonts/Montserrat-Bold.ttf);
 }
 
-/* global elements */
+/* animations */
+@keyframes slide-x {
+  from {
+    opacity: 0;
+    margin-left: -20px;
+  }
 
+  to {
+    opacity: 1;
+    margin-left: 8px;
+  }
+}
+
+/* global elements */
 * {
-    line-height: normal;
-      -webkit-user-select: none;
+  line-height: normal;
+  -webkit-user-select: none;
   /* Safari */
   -ms-user-select: none;
   /* IE 10 and IE 11 */
@@ -136,12 +140,16 @@ hr {
   font-family: mm !important;
 }
 
-.lg-txt {
+.xlg-txt {
   font-size: 80px;
 }
 
-.md-txt {
+.lg-txt {
   font-size: 50px;
+}
+
+.md-txt {
+  font-size: 30px;
 }
 
 .sm-txt {
@@ -172,16 +180,21 @@ hr {
   color: rgba(0, 0, 0, 0.3);
 }
 
-
-
 .curved {
   border-radius: 8px;
 }
 
+.actionsGroup {
+  display: flex !important;
+}
 
 .actionsGroup>* {
-  margin: 10px 0;
+  animation: slide-x .2s;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, .5) !important;
+}
+
+.rtl-icon i {
+  transform: rotateY(180deg);
 }
 
 /* vuetify classes */

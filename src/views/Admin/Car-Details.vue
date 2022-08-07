@@ -6,7 +6,7 @@ const more = ref(false);
 const docModal = ref(false);
 </script>
 <template>
-    <div>
+    <v-card dir="rtl" class="ma-4 ym" title="جزئیات خودرو" subtitle="CAR DETAILS" prepend-icon="mdi-car-side">
         <v-row dir="rtl" class="pa-5">
             <v-col cols="12" md="6" sm="12">
                 <v-carousel dir="ltr" interval="5000" color="white" cycle hide-delimiter-background show-arrows="hover">
@@ -105,11 +105,10 @@ const docModal = ref(false);
             </v-col>
             <documents :doc-modal="docModal" @toggle-modal="docModal = false"></documents>
         </v-row>
-        <router-link to="/Admin/Rental-Cars">
-            <v-btn class="add-btn" icon color="primary" size="large">
-                <v-icon>mdi-arrow-left</v-icon>
-                <v-tooltip activator="parent">بازگشت</v-tooltip>
-            </v-btn>
-        </router-link>
-    </div>
+    </v-card>
+
+    <v-btn to="/Admin/Rental-Cars" class="add-btn" icon size="large">
+        <v-icon>mdi-arrow-left</v-icon>
+        <v-tooltip activator="parent">بازگشت</v-tooltip>
+    </v-btn>
 </template>

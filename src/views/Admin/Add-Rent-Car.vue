@@ -46,13 +46,15 @@ for (let i = 1380; i <= year; i++) {
     years.value.push(i)
 };
 const colors = ref([
-    'قرمز', 'قهوه ای', 'خاکستری', 'مشکی', 'سفید', 'بژ', 'مسی', 'زیتونی', 'نوک مدادی', 'اطلسی', 'آبی', 'بنفش', 'آلبالویی', 'نقره آبی', 'سبز', 'نارنجی'
+    'قرمز', 'قهوه ای', 'خاکستری', 'مشکی', 'سفید', 'بژ', 'مسی',
+    'زیتونی', 'نوک مدادی', 'اطلسی', 'آبی', 'بنفش', 'آلبالویی', 'نقره آبی', 'سبز', 'نارنجی'
 ])
+defineProps(['title'])
 </script>
 <template>
-    <v-card style="direction:rtl;font-family:ym;">
+    <v-card dir="rtl" class="ym">
         <v-card-title>
-            <v-icon size="x-large">mdi-car-side</v-icon> {{ add ? 'افزودن خودرو' : 'ویرایش خودرو' }}
+            <v-icon size="x-large">mdi-car-side</v-icon>{{title}}
         </v-card-title>
         <v-card-subtitle class="sub">ADD NEW CAR</v-card-subtitle>
         <v-card-text style="padding: 20px;">
@@ -175,7 +177,7 @@ const colors = ref([
             </v-row>
         </v-card-text>
         <v-card-actions style="background-color: #ededed;" class="justify-center">
-            <router-link to="/Admin/Car-List" class="link">
+            <router-link to="/Admin/Rental-Cars" class="link">
                 <v-btn variant="elevated" color="pink" icon @click="$emit('toggleModal')" class="ma-1">
                     <v-icon color="white">mdi-close</v-icon>
                 </v-btn>
@@ -185,12 +187,10 @@ const colors = ref([
             </v-btn>
         </v-card-actions>
     </v-card>
-        <router-link to="/Admin/Rental-Cars">
-        <v-btn class="add-btn" icon color="primary" size="large">
+        <v-btn to="/Admin/Rental-Cars" class="add-btn" icon color="primary" size="large">
             <v-icon>mdi-arrow-left</v-icon>
             <v-tooltip activator="parent">بازگشت</v-tooltip>
         </v-btn>
-    </router-link>
 </template>
 <style scoped>
 .sub {
