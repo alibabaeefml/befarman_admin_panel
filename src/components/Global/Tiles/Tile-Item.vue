@@ -2,12 +2,12 @@
 defineProps(['color', 'icon', 'txt', 'sub', 'badgeTxt'])
 </script>
 <template>
-    <v-btn :color="color" variant="outlined" block height="150">
+    <v-btn :color="color" variant="tonal" block height="150">
         <v-icon style="font-size:60px">mdi-{{ icon }}</v-icon>
         <div>
             <div>{{ txt }}</div>
             <div class="sub">{{ sub }}</div>
-            <div class="badge">{{ badgeTxt }}</div>
+            <div :style="{color:color}" class="badge">{{ badgeTxt }}</div>
         </div>
     </v-btn>
 </template>
@@ -28,7 +28,7 @@ button {
     position: absolute;
     left: 5px;
     bottom: 5px;
-    color: black;
     font-size: 15px;
+    font-family: ym;
 }
 </style>

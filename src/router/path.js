@@ -43,7 +43,7 @@ export default [
       },
       {
         path: "Add-Rent-Car",
-        name: "ADD RENT CAR",
+        name: "ADD NEW RENT CAR",
         view: "Add-Rent-Car",
         meta: {
           auth: false,
@@ -88,7 +88,7 @@ export default [
       },
       {
         path: "Add-User",
-        name: "ADD USER",
+        name: "ADD NEW USER",
         view: "Add-Edit-User",
         meta: {
           auth: true,
@@ -143,7 +143,7 @@ export default [
       },
       {
         path: "Add-Transaction",
-        name: "ADD TRANSACTION",
+        name: "ADD NEW TRANSACTION",
         view: "Add-Edit-Transaction",
         meta: {
           auth: true,

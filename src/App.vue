@@ -20,7 +20,7 @@ const isAdmin = computed(() => currentPath.value.includes('Admin'))
 <template>
 
   <v-app
-    :style="currentPath === '/' ? { background: `url(${bg})`, backgroundSize: 'cover', backgroundPosition: 'center' } : 'https://www.nicepng.com/png/full/24-247272_background-pattern-s-white-background-pattern-png.png'">
+    :style="currentPath === '/' ? { background: `url(${bg})`, backgroundSize: 'cover', backgroundPosition: 'center' } : ''">
     <Toolbar :currentPath="currentPath" />
     <router-view :style="{ marginTop: !sm && isAdmin ? '200px' : sm ? '60px' : '' }" />
     <v-footer class="bg-grey-lighten-1">
@@ -80,7 +80,24 @@ const isAdmin = computed(() => currentPath.value.includes('Admin'))
     margin-left: 8px;
   }
 }
+@keyframes rotate {
+  from {
+    
+  }
 
+  to {
+    transform: rotate(-360deg);
+  }
+}
+@keyframes rotateX {
+  from {
+    
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
 /* global elements */
 * {
   line-height: normal;
@@ -197,6 +214,12 @@ hr {
   transform: rotateY(180deg);
 }
 
+.mdi-chevron-down{
+  animation: rotate .2s;
+}
+.mdi-chevron-up{
+  animation: rotateX .2s;
+}
 /* vuetify classes */
 .v-list {
   font-family: yl;

@@ -5,7 +5,7 @@ import { ref } from '@vue/reactivity';
 
 <template>
     <Filters>
-        <div class="pa-4">
+        <div class="pa-4 w-25">
             <v-text-field prepend-icon="mdi-account" label="گیرنده پیام" variant="underlined">
         </v-text-field>
         </div>

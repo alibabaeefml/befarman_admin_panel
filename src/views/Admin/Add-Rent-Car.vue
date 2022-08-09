@@ -49,14 +49,9 @@ const colors = ref([
     'قرمز', 'قهوه ای', 'خاکستری', 'مشکی', 'سفید', 'بژ', 'مسی',
     'زیتونی', 'نوک مدادی', 'اطلسی', 'آبی', 'بنفش', 'آلبالویی', 'نقره آبی', 'سبز', 'نارنجی'
 ])
-defineProps(['title'])
 </script>
 <template>
-    <v-card dir="rtl" class="ym">
-        <v-card-title>
-            <v-icon size="x-large">mdi-car-side</v-icon>{{title}}
-        </v-card-title>
-        <v-card-subtitle class="sub">ADD NEW CAR</v-card-subtitle>
+    <v-card dir="rtl" class="ma-4 ym" :title="$route.meta.title" :subtitle="$route.name" prepend-icon="mdi-car-side">
         <v-card-text style="padding: 20px;">
             <v-row>
                 <v-col cols="12" lg="3" md="4">

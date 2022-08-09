@@ -8,7 +8,6 @@ const bankNames = ['ملی', 'سپه', 'ملت', 'کشاورزی', 'مسکن', '
 
 <template>
     <v-card dir="rtl" class="ym" :title="$route.meta.title" :subtitle="$route.name" prepend-icon="mdi-account-plus">
-    
         <v-card-text>
             <v-card class="pa-4" title="اطلاعات شخصی" subtitle="PERSONAL INFO" prepend-icon="mdi-information">
                 <v-row>

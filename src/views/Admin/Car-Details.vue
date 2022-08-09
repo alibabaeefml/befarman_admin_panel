@@ -107,7 +107,7 @@ const docModal = ref(false);
         </v-row>
     </v-card>
 
-    <v-btn to="/Admin/Rental-Cars" class="add-btn" icon size="large">
+    <v-btn to="/Admin/Rental-Cars" class="add-btn" icon size="large" color="primary">
         <v-icon>mdi-arrow-left</v-icon>
         <v-tooltip activator="parent">بازگشت</v-tooltip>
     </v-btn>

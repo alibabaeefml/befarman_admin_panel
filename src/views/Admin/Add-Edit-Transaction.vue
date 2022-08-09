@@ -6,11 +6,7 @@ const title = computed(() => route().meta.title)
 
 <template>
 
-    <v-card dir="rtl" class="ma-4 ym">
-        <v-card-title class="mr-4">
-            <v-icon size="x-large">mdi-cash-plus</v-icon> {{ title }}
-        </v-card-title>
-        <v-card-subtitle class="sub mr-4">{{route().name}}</v-card-subtitle>
+    <v-card dir="rtl" class="ma-4 ym" :title="$route.meta.title" :subtitle="$route.name" prepend-icon="mdi-cash-plus">
         <v-card-text>
             <v-row>
                 <v-col cols="12" md="3">
