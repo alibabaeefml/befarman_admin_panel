@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
-import Documents from '../../components/Car-Rent/Documents.vue';
-import MoreDetails from '../../components/Car-Rent/MoreDetails.vue';
+import Documents from '@components/ClientCar/Documents.vue';
+import MoreDetails from '@components/ClientCar/MoreDetails.vue';
 const more = ref(false);
 const docModal = ref(false);
 </script>

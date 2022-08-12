@@ -4,7 +4,6 @@ import { useDisplay } from 'vuetify/lib/framework.mjs';
 import bg from '@/assets/Images/Header.jpg'
 import { useRoute } from 'vue-router';
 const mobile = computed(() => useDisplay().width.value < 1080);
-const height = computed(() => useDisplay().height.value)
 const drawer = ref(false);
 const loggedIn = ref(true);
 const isAdmin = ref(true);
@@ -27,9 +26,6 @@ const routeName = computed(() => useRoute().meta.title)
             <v-btn icon>
                 <v-icon>mdi-instagram</v-icon>
             </v-btn>
-            <v-btn>
-                درباره ما
-            </v-btn>
             <v-btn v-if="loggedIn">
                 خروج
                 <v-icon>mdi-logout</v-icon>
@@ -40,15 +36,7 @@ const routeName = computed(() => useRoute().meta.title)
                     <v-icon>mdi-account</v-icon>
                 </v-btn>
             </router-link>
-            <router-link class="link" to="/Admin/Home">
-                <v-btn v-if="isAdmin">
-                    پنل ادمین
-                </v-btn>
-            </router-link>
             <div>{{ user ? user : 'کاربر' }} عزیز، خوش آمدی</div>
-            <v-btn>
-                دانلود اپلیکیشن اندروید
-            </v-btn>
             <router-link to="/" class="link">
                 <v-btn icon>
                     <v-icon>mdi-home</v-icon>
@@ -83,13 +71,6 @@ const routeName = computed(() => useRoute().meta.title)
                 <v-list density="compact" nav right :style="{ fontFamily: 'ym' }">
                     <router-link to="/" class="link">
                         <v-list-item prepend-icon="mdi-home" title="صفحه اصلی" value="home"></v-list-item>
-                    </router-link>
-                    <v-list-item prepend-icon="mdi-android" title="دانلود اپلیکیشن اندروید" value="android">
-                    </v-list-item>
-                    <v-list-item prepend-icon="mdi-information" title="درباره ما" value="aboutus"></v-list-item>
-                    <router-link class="link" to="/Admin/Home">
-                        <v-list-item prepend-icon="mdi-account-key" title="پنل ادمین" value="Adminpanel" v-if="isAdmin">
-                        </v-list-item>
                     </router-link>
                     <router-link to="/Login" class="link">
                         <v-list-item prepend-icon="mdi-account" :title="loggedIn ? 'پروفایل' : 'ورود'" value="Login">
