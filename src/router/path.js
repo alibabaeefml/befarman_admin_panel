@@ -176,12 +176,13 @@ export default [
   {
     path: "",
     name: "MAIN HOME",
-    view: "Main-Home",
+    view: "Login",
     meta: {
       auth: true,
       title: "صفحه اصلی",
       public: true,
     },
+    redirect:"/Login"
   },
   {
     path: "/Profile",

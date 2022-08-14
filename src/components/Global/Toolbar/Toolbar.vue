@@ -3,7 +3,7 @@ import { computed, ref } from '@vue/runtime-core';
 import { useDisplay } from 'vuetify/lib/framework.mjs';
 import bg from '@/assets/Images/Header.jpg'
 import { useRoute } from 'vue-router';
-const mobile = computed(() => useDisplay().width.value < 1080);
+const mobile = computed(() => useDisplay().width.value < 1100);
 const height = computed(() => useDisplay().height.value)
 const drawer = ref(false);
 const loggedIn = ref(true);
