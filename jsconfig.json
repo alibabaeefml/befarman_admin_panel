@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "module": "es6",
+        "target": "es2017",
+        "allowSyntheticDefaultImports": true,
+        "baseUrl": "./",
+        "paths": {
+            "@components/*": ["./src/components/*"]
+        }
+        ,"jsx": "preserve"
+    },
+    "exclude": ["node_modules"],
+   
+}

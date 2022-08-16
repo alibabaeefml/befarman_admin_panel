@@ -1,12 +1,9 @@
 <script setup>
-import { ref,computed } from 'vue';
-import { useRoute as route } from "vue-router";
-const title = computed(() => route().meta.title)
+
 </script>
 
 <template>
-
-    <v-card dir="rtl" class="ma-4 ym" :title="$route.meta.title" :subtitle="$route.name" prepend-icon="mdi-cash-plus">
+    <v-card dir="rtl" class="ma-4 ym"  prepend-icon="mdi-cash-plus">
         <v-card-text>
             <v-row>
                 <v-col cols="12" md="3">

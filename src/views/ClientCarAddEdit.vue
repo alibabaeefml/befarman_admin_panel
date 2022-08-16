@@ -1,9 +1,7 @@
 <script setup>
-// import Dropzone from "@Components/Global/Dropzone.vue";
-// import CropperImage from "../Global/CropperImage.vue";
+
 import DatePicker from 'vue3-persian-datetime-picker'
 import { ref } from '@vue/reactivity';
-import BaseModal from '../../components/Global/BaseModal/BaseModal.vue';
 const getBrands = ref(['سمند', 'ال نود', 'پراید']);
 const crop_data = ref(null);
 const url = ref(null);

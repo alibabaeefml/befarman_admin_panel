@@ -1,11 +1,10 @@
 
 <script setup>
-import RentalCarItem from '@components/Car-Rent/Rental-Car-Item.vue';
-import { useDisplay } from 'vuetify/lib/framework.mjs';
-import AcceptCarArchive from '@components/Car-Rent/Accept-Car-Archive.vue';
+import ClientCarItem from '@components/ClientCar/ClientCarItem.vue';
+import AcceptCarArchive from '@components/ClientCar/AcceptCarArchive.vue';
 import { ref } from '@vue/runtime-core';
-import RentalCarsFilter from '@components/Car-Rent/Rental-Cars-Filter.vue';
-import RentalCarComments from '../../components/Car-Rent/Rental-Car-Comments.vue';
+import ClientCarFilter from '@components/ClientCar/ClientCarFilter.vue';
+import ClientCarComments from '@components/ClientCar/ClientCarComments.vue';
 
 const statuses = [
     { name: 'در دسترس', color: 'green' },
@@ -82,7 +81,7 @@ const commentsModal = ref(false);
 
 <template>
     <div>
-        <rental-cars-filter :tab="tab" :statuses="statuses"></rental-cars-filter>
+        <ClientCarFilter :tab="tab" :statuses="statuses" />
         <v-card>
             <v-tabs v-model="tab" color="secondary" fixed-tabs>
                 <v-tab value="two">خودرو های حذف شده</v-tab>
@@ -91,14 +90,14 @@ const commentsModal = ref(false);
             <v-card-text>
                 <v-window v-model="tab">
                     <v-window-item value="two">
-                        <RentalCarItem v-for="car of getRentCars" :key="car.id" :car="car" :statuses="statuses"
+                        <client-car-item v-for="car of getRentCars" :key="car.id" :car="car" :statuses="statuses"
                             :archived="true">
-                        </RentalCarItem>
+                        </client-car-item>
                     </v-window-item>
                     <v-window-item value="one">
-                        <RentalCarItem v-for="car of getRentCars" :key="car.id" :car="car" :statuses="statuses"
+                        <client-car-item v-for="car of getRentCars" :key="car.id" :car="car" :statuses="statuses"
                             @showDeleteModal="deleteConfirm = true" @showCommentsModal="commentsModal = true">
-                        </RentalCarItem>
+                        </client-car-item>
                     </v-window-item>
 
                 </v-window>
@@ -109,7 +108,7 @@ const commentsModal = ref(false);
                 <v-icon color="white">mdi-plus</v-icon>
             </v-btn>
         </router-link>
-        <AcceptCarArchive :dialog="deleteConfirm" @toggleModal="deleteConfirm = false"></AcceptCarArchive>
-        <RentalCarComments :dialog="commentsModal" @toggle-modal="commentsModal = false"></RentalCarComments>
+        <AcceptCarArchive :dialog="deleteConfirm" @toggleModal="deleteConfirm = false" />
+        <ClientCarComments :dialog="commentsModal" @toggle-modal="commentsModal = false" />
     </div>
 </template>

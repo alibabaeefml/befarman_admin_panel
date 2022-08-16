@@ -1,10 +1,8 @@
 <script setup>
-import Toolbar from "@components/Global/Toolbar/Toolbar.vue";
-import { computed, ref, watch } from "@vue/runtime-core";
+import TheToolbar from "@components/Global/Toolbar/TheToolbar.vue";
+import { computed, ref } from "@vue/runtime-core";
 import { useRoute as route } from "vue-router";
-import bg from '@/assets/Images/Header.jpg'
 import { useDisplay } from "vuetify/lib/framework.mjs";
-const title = computed(() => route().meta.title)
 const currentPath = computed(() => route().path);
 const sm = computed(() => useDisplay().width.value < 1070);
 const links = ref([
@@ -15,14 +13,12 @@ const links = ref([
   'Blog',
   'Contact Us',
 ]);
-const isAdmin = computed(() => currentPath.value.includes('Admin'))
 </script>
 <template>
 
-  <v-app
-    :style="currentPath === '/' ? { background: `url(${bg})`, backgroundSize: 'cover', backgroundPosition: 'center' } : ''">
-    <Toolbar :currentPath="currentPath" />
-    <router-view :style="{ marginTop: !sm && isAdmin ? '200px' : sm ? '60px' : '' }" />
+  <v-app>
+    <TheToolbar :currentPath="currentPath" />
+    <RouterView style="position:strict;top:0" />
     <v-footer class="bg-grey-lighten-1">
       <v-row justify="center" no-gutters>
         <v-btn v-for="link in links" :key="link" color="white" variant="text" class="mx-2" rounded="xl">

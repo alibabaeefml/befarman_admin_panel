@@ -13,5 +13,5 @@ defineEmits(['toggleModal']);
             <v-btn color="primary" variant="elevated" @click="$emit('toggleModal')">خیر</v-btn>
             <v-btn color="secondary" variant="elevated">بله</v-btn>
         </v-card-actions>
-        </BaseModal>
+    </BaseModal>
 </template>

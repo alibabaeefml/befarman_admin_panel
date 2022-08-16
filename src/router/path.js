@@ -1,225 +1,165 @@
-export default [
-  {
-    path: "/Admin",
-    name: "ADMIN",
-    view: "Admin",
-    redirect: "admin/home",
-    children: [
-      {
-        path: "Home",
-        name: "HOME",
-        view: "Home",
+export default [{
+        path: "/",
+        name: "main",
+        view: "main",
+        redirect: "dashboard",
         meta: {
-          auth: true,
-          title: "داشبورد",
-        },
-      },
-      {
-        path: "Transaction",
-        name: "TRANSACTION",
-        view: "Transaction",
+            auth: true,
+            title: "صفحه اصلی",
+            public: true
+        }
+    },
+    {
+        path: "/login",
+        name: "LOGIN",
+        view: "Login",
         meta: {
-          auth: true,
-          title: "تراکنش ها",
-        },
-      },
-      {
-        path: "Sms-Management",
-        name: "SMS MANAGEMENT",
-        view: "Sms-Management",
+            auth: true,
+            title: "ورود"
+        }
+    },
+    {
+        path: "/dashboard",
+        name: "dashboard",
+        view: "Dashboard",
         meta: {
-          auth: true,
-          title: "مدیریت پیامک ها",
-        },
-      },
-      {
-        path: "Rental-Cars",
-        name: "RENTAL CARS",
-        view: "Rental-Cars",
+            auth: true,
+            title: "داشبورد"
+        }
+    },
+    {
+        path: "/client-cars",
+        name: "clientCars",
+        view: "ClientCars",
         meta: {
-          auth: true,
-          title: "لیست خودرو های اجاره ای",
-        },
-      },
-      {
-        path: "Add-Rent-Car",
-        name: "ADD NEW RENT CAR",
-        view: "Add-Rent-Car",
+            auth: true,
+            title: "لیست خودرو های اجاره ای"
+        }
+    },
+    {
+        path: "/client-cars/add",
+        name: "addClientCar",
+        view: "ClientCarAddEdit",
         meta: {
-          auth: false,
-          title: "افزودن خودرو اجاره ای",
-        },
-      },
-      {
-        path: "Car-Details",
-        name: "CAR DETAILS",
-        view: "Car-Details",
+            auth: false,
+            title: "افزودن خودرو اجاره ای"
+        }
+    },
+    {
+        path: "/client-cars/:id/edit",
+        name: "editClientCars",
+        view: "ClientCarAddEdit",
         meta: {
-          auth: false,
-          title: "جزئیات خودرو اجاره ای",
-        },
-      },
-      {
-        path: "Edit-Rent-Car",
-        name: "EDIT RENT CAR",
-        view: "Add-Rent-Car",
+            auth: false,
+            title: "افزودن خودرو اجاره ای"
+        }
+    },
+    {
+        path: "/client-cars/:id",
+        name: "clientCarDetails",
+        view: "ClientCarDetail",
         meta: {
-          auth: false,
-          title: "ویرایش خودرو اجاره ای",
-        },
-      },
-      {
-        path: "Users",
-        name: "USERS",
+            auth: false,
+            title: "جزئیات خودرو اجاره ای"
+        }
+    },
+    {
+        path: "/users",
+        name: "users",
         view: "Users",
         meta: {
-          auth: true,
-          title: "لیست کاربران",
-        },
-      },
-      {
-        path: "User-Info",
-        name: "USER INFO",
-        view: "User-Info",
+            auth: true,
+            title: "لیست کاربران"
+        }
+    },
+    {
+        path: "/users/:id",
+        name: "userDetails",
+        view: "UserInfo",
         meta: {
-          auth: true,
-          title: "اطلاعات کاربر",
-        },
-      },
-      {
-        path: "Add-User",
-        name: "ADD NEW USER",
-        view: "Add-Edit-User",
+            auth: true,
+            title: "اطلاعات کاربر"
+        }
+    },
+    {
+        path: "/users/add",
+        name: "addUser",
+        view: "UserAddEdit",
         meta: {
-          auth: true,
-          title: "افزودن کاربر",
-        },
-      },
-      {
-        path: "Edit-User",
-        name: "EDIT USER",
-        view: "Add-Edit-User",
+            auth: true,
+            title: "افزودن کاربر"
+        }
+    },
+    {
+        path: "/users/:id/edit",
+        name: "editUser",
+        view: "UserAddEdit",
         meta: {
-          auth: true,
-          title: "ویرایش کاربر",
-        },
-      },
-      {
-        path: "Cars",
-        name: "CARS",
+            auth: true,
+            title: "ویرایش کاربر"
+        }
+    },
+    {
+        path: "/cars",
+        name: "cars",
         view: "Cars",
         meta: {
-          auth: true,
-          title: "لیست خودرو ها",
-        },
-      },
-      {
-        path: "Requests",
-        name: "REQUESTS",
+            auth: true,
+            title: "لیست خودرو ها"
+        }
+    },
+    {
+        path: "/requests",
+        name: "requests",
         view: "Requests",
         meta: {
-          auth: true,
-          title: "لیست درخواست ها",
-        },
-      },
-      {
-        path: "Request-Details",
-        name: "REQUEST DETAILS",
-        view: "Request-Details",
-        meta: {
-          auth: false,
-          title: "جزئیات درخواست",
-        },
-      },
-      {
-        path: "Transactions",
-        name: "TRANSACTIONS",
-        view: "Transactions",
-        meta: {
-          auth: true,
-          title: "تراکنش ها",
-          public: true,
-        },
-      },
-      {
-        path: "Add-Transaction",
-        name: "ADD NEW TRANSACTION",
-        view: "Add-Edit-Transaction",
-        meta: {
-          auth: true,
-          title: "افزودن تراکنش",
-          public: true,
-        },
-      },
-      {
-        path: "Edit-Transaction",
-        name: "EDIT TRANSACTION",
-        view: "Add-Edit-Transaction",
-        meta: {
-          auth: true,
-          title: "ویرایش تراکنش",
-          public: true,
-        },
-      },
-      {
-        path: "Sms-Management",
-        name: "SMS MANAGEMENT",
-        view: "Sms-Management",
-        meta: {
-          auth: true,
-          title: "پیامک ها",
-          public: true,
-        },
-      },
-    ],
-  },
-  {
-    path: "",
-    name: "MAIN HOME",
-    view: "Login",
-    meta: {
-      auth: true,
-      title: "صفحه اصلی",
-      public: true,
+            auth: true,
+            title: "لیست درخواست ها"
+        }
     },
-    redirect:"/Login"
-  },
-  {
-    path: "/Profile",
-    name: "PROFILE",
-    view: "Profile",
-    meta: {
-      auth: true,
-      title: "پروفایل من",
+    {
+        path: "/requests/:id",
+        name: "requestDetails",
+        view: "RequestDetails",
+        meta: {
+            auth: false,
+            title: "جزئیات درخواست"
+        }
     },
-  },
-  {
-    path: "/Login",
-    name: "LOGIN",
-    view: "Login",
-    meta: {
-      auth: true,
-      title: "ورود",
+    {
+        path: "/transactions",
+        name: "transactions",
+        view: "Transaction",
+        meta: {
+            auth: true,
+            title: "تراکنش ها"
+        }
     },
-  },
-  {
-    path: "/All-Cars",
-    name: "ALL CARS",
-    view: "All-Cars",
-    meta: {
-      public: true,
-      auth: true,
-      title: "لیست تمام خودرو ها",
+    {
+        path: "/transactions/add",
+        name: "addTransaction",
+        view: "TransactionAddEdit",
+        meta: {
+            auth: true,
+            title: "افزودن تراکنش"
+        }
     },
-  },
-  {
-    path: "/About-Us",
-    name: "ABOUT US",
-    view: "About-Us",
-    meta: {
-      public: true,
-      auth: true,
-      title: "درباره ما",
+    {
+        path: "/transactions/:id/edit",
+        name: "editTransaction",
+        view: "TransactionAddEdit",
+        meta: {
+            auth: true,
+            title: "ویرایش تراکنش"
+        }
     },
-  },
+    {
+        path: "/sms-management",
+        name: "smsManagement",
+        view: "SmsManagement",
+        meta: {
+            auth: true,
+            title: "مدیریت پیامک ها"
+        }
+    }
 ];
