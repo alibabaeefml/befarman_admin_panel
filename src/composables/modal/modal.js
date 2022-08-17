@@ -1,10 +1,10 @@
 import { useModalStore } from "@/store/modal";
-import { getCurrentInstance, ref } from 'vue'
+import { getCurrentInstance } from 'vue'
 
 export function useModal() {
     const app = getCurrentInstance()
     const modalStore = useModalStore();
-    const { openModal, closeModal, getActiveModal } = modalStore;
+    const { openModal, closeModal } = modalStore;
 
     app.appContext.config.globalProperties.$_openModal = (name, data = {}) => {
         openModal(name, data)
