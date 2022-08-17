@@ -51,7 +51,7 @@ export default [{
         view: "ClientCarAddEdit",
         meta: {
             auth: false,
-            title: "افزودن خودرو اجاره ای"
+            title: "ویرایش خودرو اجاره ای"
         }
     },
     {
