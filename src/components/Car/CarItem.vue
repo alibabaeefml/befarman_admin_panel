@@ -1,13 +1,12 @@
 <script setup>
-import defThumb from '@/assets/Images/avatars/car-avatar.jpg'
+import defultThumb from '@/assets/Images/avatars/car-avatar.jpg'
 const props = defineProps(['data']);
-defineEmits(['toggleModal'])
 const { id, pName, eName, thumb, brand } = props.data;
 </script>
 <template>
     <v-col cols="12" md="3" sm="6">
         <v-card>
-            <v-img :src="thumb ? thumb : defThumb">
+            <v-img :src="thumb ? thumb : defultThumb">
             </v-img>
             <v-card-text>
                 <div>
@@ -21,7 +20,7 @@ const { id, pName, eName, thumb, brand } = props.data;
                     <v-icon>mdi-delete</v-icon>
                     <v-tooltip activator="parent" location="right">حذف خودرو</v-tooltip>
                 </v-btn>
-                <v-btn icon color="black" variant="elevated" @click="$emit('toggleModal')">
+                <v-btn icon color="black" variant="elevated">
                     <v-icon>mdi-pencil</v-icon>
                     <v-tooltip activator="parent" location="left">ویرایش خودرو</v-tooltip>
                 </v-btn>
