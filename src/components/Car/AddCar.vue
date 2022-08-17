@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from '@vue/reactivity';
-import BaseModal from '../Global/BaseModal/BaseModal.vue';
+import BaseModal from '../Global/Dialog/BaseModal.vue';
 defineEmits(['toggleModal']);
 defineProps(['dialog', 'add'])
 const getBrands = ref(['سمند', 'ال نود', 'پراید']);
@@ -15,8 +15,7 @@ const car = ref({
 })
 </script>
 <template>
-    <BaseModal :dialog="dialog" :title="add ? 'اضافه کردن خودرو' : 'ویرایش خودرو'" :subtitle="add ? 'ADD NEW CAR' : 'EDIT CAR'"
-        icon="mdi-car-side" @toggleModal="$emit('toggleModal')">
+    <base-modal name="add-car" >
         <v-card-text>
             <v-row>
                 <v-col cols="12">
@@ -56,12 +55,12 @@ const car = ref({
 
         </v-card-text>
         <v-card-actions style="background-color: #ededed;" class="justify-center">
-            <v-btn variant="elevated" color="pink" icon @click="$emit('toggleModal')">
+            <v-btn variant="elevated" color="pink" icon @click="$_closeModal()">
                 <v-icon color="white">mdi-close</v-icon>
             </v-btn>
             <v-btn variant="elevated" color="cyan" icon>
                 <v-icon color="white">mdi-check</v-icon>
             </v-btn>
         </v-card-actions>
-    </BaseModal>
+    </base-modal>
 </template>

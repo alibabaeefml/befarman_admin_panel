@@ -1,6 +1,6 @@
 <script setup>
-import CarItem from "@components/Car/CarItem.vue"
 import { ref } from "@vue/runtime-core";
+import CarItem from "@components/Car/CarItem.vue"
 import AddCar from "@components/Car/AddCar.vue";
 import CarsFilter from "@components/Car/CarFilter.vue";
 const getCars = ref([
@@ -10,7 +10,6 @@ const getCars = ref([
         eName: 'Pride',
         thumb: '',
         brand: 'kia'
-
     },
     {
         id: 'dkdvmdv5',
@@ -90,20 +89,16 @@ const getCars = ref([
         brand: 'kia'
     },
 ])
-const addModal = ref(false);
-const isAdd = ref('')
-const nameFilter = ref('');
-const brandFilter = ref('');
 </script>
 <template>
     <div dir="rtl">
-        <cars-filter></cars-filter>
-        <AddCar :dialog="addModal" @toggleModal="addModal = false" :add="isAdd" />
+        <CarsFilter />
         <v-row style="padding:20px">
-            <CarItem v-for="car in getCars" :key="car.id" :data="car" @toggleModal="addModal = true; isAdd = false" />
+            <CarItem v-for="car in getCars" :key="car.id" :data="car" />
         </v-row>
-        <v-btn size="x-large" class="add-btn" icon color="secondary" @click="addModal = true; isAdd = true">
+        <v-btn size="x-large" class="add-btn" @click="$_openModal('add-car', {name_en: 'saeid'})" icon color="secondary">
             <v-icon color="white">mdi-plus</v-icon>
         </v-btn>
+        <AddCar />
     </div>
 </template>

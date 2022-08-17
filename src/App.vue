@@ -1,8 +1,17 @@
+<script>
+export default {
+  name: 'saeid'
+}
+</script>
 <script setup>
 import TheToolbar from "@components/Global/Toolbar/TheToolbar.vue";
 import { computed, ref } from "@vue/runtime-core";
 import { useRoute as route } from "vue-router";
 import { useDisplay } from "vuetify/lib/framework.mjs";
+import { useModal } from "@/composables/modal/modal.js";
+
+useModal();
+
 const currentPath = computed(() => route().path);
 const sm = computed(() => useDisplay().width.value < 1070);
 const links = ref([
@@ -15,7 +24,6 @@ const links = ref([
 ]);
 </script>
 <template>
-
   <v-app>
     <TheToolbar :currentPath="currentPath" />
     <RouterView style="position:strict;top:0" />
