@@ -11,7 +11,7 @@ export default [{
     },
     {
         path: "/login",
-        name: "login",
+        name: "LOGIN",
         view: "Login",
         meta: {
             auth: true,
@@ -51,7 +51,7 @@ export default [{
         view: "ClientCarAddEdit",
         meta: {
             auth: false,
-            title: "افزودن خودرو اجاره ای"
+            title: "ویرایش خودرو اجاره ای"
         }
     },
     {

@@ -43,7 +43,7 @@ const routeName = computed(() => useRoute().meta.title)
                 </v-btn>
             </router-link>
         </v-toolbar>
-        <div class="AdminHeader" v-if="currentPath.includes('Admin')">
+        <div class="AdminHeader" v-if="!currentPath.includes('Login')">
             <div style="font-family:mm;font-size: 20px;letter-spacing: 10px;">MANAGEMENT</div>
             <div style="font-family:yr;font-size: 20px;">
                 <router-link class="link" to="/Admin/Home">مدیریت</router-link>
@@ -64,10 +64,6 @@ const routeName = computed(() => useRoute().meta.title)
     <div>
         <v-card style="z-index:3">
             <v-navigation-drawer v-model="drawer" @click:outside="drawer=false" :rail="false" permanent location="right">
-                <!-- <v-list-item :style="{ letterSpacing: '1.5px', fontFamily: 'mm' }" prepend-avatar="/favicon.ico"
-                    title="BEFARMAN APP">
-                </v-list-item>
-                <v-divider></v-divider> -->
                 <v-list density="compact" nav right :style="{ fontFamily: 'ym' }">
                     <router-link to="/" class="link">
                         <v-list-item prepend-icon="mdi-home" title="صفحه اصلی" value="home"></v-list-item>
@@ -87,8 +83,6 @@ const routeName = computed(() => useRoute().meta.title)
 </template>
 <style scoped>
 .toolbar {
-    position: fixed;
-    top: 0;
     width: 100%;
     z-index: 1;
     font-size: 15px;
@@ -98,7 +92,6 @@ const routeName = computed(() => useRoute().meta.title)
     display: flex;
     align-content: center;
     justify-content: space-between;
-    margin: 20px 0;
     padding: 10px 30px;
     color: white;
     background: rgba(0, 0, 0, .6);

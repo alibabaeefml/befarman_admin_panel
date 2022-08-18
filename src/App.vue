@@ -22,12 +22,11 @@ const links = ref([
   'Blog',
   'Contact Us',
 ]);
-const isAdmin = computed(() => currentPath.value.includes('Admin'))
 </script>
 <template>
   <v-app>
     <TheToolbar :currentPath="currentPath" />
-    <RouterView :style="{ marginTop: !sm && isAdmin ? '200px' : sm ? '60px' : '' }" />
+    <RouterView style="position:strict;top:0" />
     <v-footer class="bg-grey-lighten-1">
       <v-row justify="center" no-gutters>
         <v-btn v-for="link in links" :key="link" color="white" variant="text" class="mx-2" rounded="xl">
