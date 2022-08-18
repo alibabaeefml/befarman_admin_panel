@@ -52,6 +52,14 @@ onBeforeUnmount(() => emitModal(false))
 
 <template>
     <v-dialog :fullscreen="fullscreen" v-model="modal" :max-width="maxWidth" v-if="modal" :width="width" :transition="transition">
-        <slot :modal="modal" :data="data.data" ></slot>
+        <v-card class="v-card">
+            <slot :modal="modal" :data="data.data" ></slot>
+        </v-card>
     </v-dialog>
 </template>
+<style scoped>
+.v-card {
+    border-radius: 30px !important;
+    font-family: yl;
+}
+</style>>
