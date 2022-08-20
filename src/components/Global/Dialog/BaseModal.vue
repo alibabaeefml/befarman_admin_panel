@@ -1,7 +1,7 @@
 <script setup>
-
 import { ref, onBeforeUnmount, computed, getCurrentInstance } from 'vue'
 import { useModalStore } from "@/store/modal";
+import BaseHeader from '../BaseModal/BaseHeader.vue';
 
 const modalStore = useModalStore();
 const { getModal, isModal, closeModal } = modalStore;
@@ -14,9 +14,9 @@ const props = defineProps({
     width: { default: null },
     maxWidth: { default: null },
     name: { default: null },
-    transition: { default: 'slide-x-transition' },
+    test:{},
+    transition: { default: 'slide-x-transition' }
 });
-
 const isOpenModal = ref(false);
 
 const modalName = computed(() => props.name ? props.name : instance.parent.appContext.app._component.name);
@@ -51,7 +51,13 @@ onBeforeUnmount(() => emitModal(false))
 </script>
 
 <template>
-    <v-dialog :fullscreen="fullscreen" v-model="modal" :max-width="maxWidth" v-if="modal" :width="width" :transition="transition">
-        <slot :modal="modal" :data="data.data" ></slot>
+    <v-dialog :fullscreen="fullscreen" v-model="modal" :max-width="maxWidth" v-if="modal" :width="width"
+        :transition="transition" class="ym">
+        <v-card dir="rtl" style="border-radius: 30px !important;">
+            <v-card-title class="bg-black">
+                <base-header :icon="data.data.icon" :title="data.data.title" :subtitle="data.data.subtitle" />
+            </v-card-title>
+            <slot :modal="modal" :data="data.data"></slot>
+        </v-card>
     </v-dialog>
 </template>

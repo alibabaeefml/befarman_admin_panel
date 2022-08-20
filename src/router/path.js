@@ -57,7 +57,7 @@ export default [{
     {
         path: "/client-cars/:id",
         name: "clientCarDetails",
-        view: "ClientCarDetail",
+        view: "ClientCarDetails",
         meta: {
             auth: false,
             title: "جزئیات خودرو اجاره ای"

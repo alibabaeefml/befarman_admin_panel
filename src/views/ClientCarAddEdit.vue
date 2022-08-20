@@ -1,5 +1,4 @@
 <script setup>
-
 import DatePicker from 'vue3-persian-datetime-picker'
 import { ref } from '@vue/reactivity';
 const getBrands = ref(['سمند', 'ال نود', 'پراید']);
@@ -180,10 +179,10 @@ const colors = ref([
             </v-btn>
         </v-card-actions>
     </v-card>
-        <v-btn to="/Admin/Rental-Cars" class="add-btn" icon color="primary" size="large">
-            <v-icon>mdi-arrow-left</v-icon>
-            <v-tooltip activator="parent">بازگشت</v-tooltip>
-        </v-btn>
+    <v-btn :to="{ name: 'clientCars' }" class="add-btn" icon color="primary" size="large">
+        <v-icon>mdi-arrow-left</v-icon>
+        <v-tooltip activator="parent">بازگشت</v-tooltip>
+    </v-btn>
 </template>
 <style scoped>
 .sub {

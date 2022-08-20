@@ -163,7 +163,7 @@ const md = computed(() => useDisplay().smAndUp.value)
             </v-row>
 
         </v-row>
-        <router-link to="/Admin/Requests">
+        <router-link :to="{name:'requests'}">
             <v-btn class="add-btn" icon color="primary" size="large">
                 <v-icon>mdi-arrow-left</v-icon>
                 <v-tooltip activator="parent">بازگشت</v-tooltip>

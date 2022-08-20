@@ -13,10 +13,8 @@ const routeName = computed(() => useRoute().meta.title)
 </script>
 
 <template>
-
-    <div v-if="!mobile" class="toolbar" :style="currentPath !== '/' && currentPath !== '/Login' ?
-    { background: `url(${bg})`, backgroundSize: 'cover', backgroundPosition: 'center' } : ''">
-        <v-toolbar color="rgba(0,0,0,.6)" :style="{ color: 'white', fontFamily: 'ym', padding: '20px' }">
+    <div v-if="!mobile" class="toolbar" :style="{background: `url(${bg})`, backgroundSize: 'cover', backgroundPosition: 'center'}">
+        <v-toolbar color="rgba(0,0,0,.6)" class="text-white pa-6 ym">
             <v-toolbar-title>
                 <h2 class="app-bar-title mm">BEFARMAN APP</h2>
             </v-toolbar-title>
@@ -46,7 +44,7 @@ const routeName = computed(() => useRoute().meta.title)
         <div class="AdminHeader" v-if="!currentPath.includes('Login')">
             <div style="font-family:mm;font-size: 20px;letter-spacing: 10px;">MANAGEMENT</div>
             <div style="font-family:yr;font-size: 20px;">
-                <router-link class="link" to="/Admin/Home">مدیریت</router-link>
+                <router-link class="link" :to="{name:'dashboard'}">مدیریت</router-link>
                 <span style="font-size:15px;margin-right:10px">
                     {{ currentPath !== '/Admin/Home' ? ' > ' + routeName : '' }}
                 </span>
@@ -83,6 +81,8 @@ const routeName = computed(() => useRoute().meta.title)
 </template>
 <style scoped>
 .toolbar {
+    position: sticky;
+    top: 0;
     width: 100%;
     z-index: 1;
     font-size: 15px;

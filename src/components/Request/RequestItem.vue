@@ -6,6 +6,7 @@ defineProps(['request', 'archived']);
 defineEmits(['editModal', 'deleteModal']);
 const reqActions = ref(false);
 const sm = computed(() => useDisplay().width.value < 900);
+const id = ref(':id')
 </script>
 <template>
     <div>
@@ -94,7 +95,7 @@ const sm = computed(() => useDisplay().width.value < 900);
                         <v-icon>mdi-pencil</v-icon>
                         <v-tooltip activator="parent" location="left">ویرایش درخواست</v-tooltip>
                     </v-btn>
-                    <v-btn to="/Admin/Request-Details" icon color="orange" variant="elevated">
+                    <v-btn :to="{ name: 'requestDetails', params:{id}}" icon color="orange" variant="elevated">
                         <v-icon color="white">mdi-information</v-icon>
                         <v-tooltip activator="parent" location="right">جزئیات درخواست</v-tooltip>
                     </v-btn>

@@ -1,8 +1,6 @@
 <script setup>
-import { ref } from '@vue/reactivity';
+import { ref, computed } from '@vue/reactivity';
 import BaseModal from '../Global/Dialog/BaseModal.vue';
-defineEmits(['toggleModal']);
-defineProps(['dialog', 'add'])
 const getBrands = ref(['سمند', 'ال نود', 'پراید']);
 const crop_data = ref();
 const url = ref();
@@ -13,17 +11,20 @@ const car = ref({
     name_fa: null,
     image: [],
 })
+const test = data=> data ;
+
 </script>
 <template>
-    <base-modal name="add-car" >
+    <base-modal name="add-car" @open="test">
         <v-card-text>
+            {{ test }}
             <v-row>
                 <v-col cols="12">
                     <div v-if="image" style="width:100%">
-                        <img :src="image" width="100%">
+                        <v-img :src="image" block />
                     </div>
-                    <v-file-input v-model="car.image" label="تصویر خودرو را بارگذاری کنید"
-                        variant="outlined" prepend-icon="mdi-camera"></v-file-input>
+                    <v-file-input v-model="car.image" label="تصویر خودرو را بارگذاری کنید" variant="outlined"
+                        prepend-icon="mdi-camera"></v-file-input>
                 </v-col>
             </v-row>
             <v-row>
@@ -42,17 +43,15 @@ const car = ref({
                     </v-text-field>
                 </v-col>
                 <v-col cols="12" md="6" sm="12">
-                    <v-select variant="underlined" type="text" label="نوع بدنه"
-                        prepend-icon="mdi-car-door">
+                    <v-select variant="underlined" type="text" label="نوع بدنه" prepend-icon="mdi-car-door">
                     </v-select>
                 </v-col>
                 <v-col cols="12" md="6" sm="12">
-                    <v-text-field variant="underlined" type="number" label="ظرفیت سرنشین" 
+                    <v-text-field variant="underlined" type="number" label="ظرفیت سرنشین"
                         prepend-icon="mdi-car-child-seat">
                     </v-text-field>
                 </v-col>
             </v-row>
-
         </v-card-text>
         <v-card-actions style="background-color: #ededed;" class="justify-center">
             <v-btn variant="elevated" color="pink" icon @click="$_closeModal()">

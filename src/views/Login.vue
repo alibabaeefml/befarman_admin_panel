@@ -53,27 +53,4 @@ const codeSent = ref(false)
 
         </v-row>
     </div>
-    <!-- <div class="container" :style="{ width: width + 'px', height: height + 'px' }">
-        <v-card class="login-card" :style="{ width: sm ? '85%' : '30%', left: sm ? '0' : null }">
-            <div>
-                <v-card-title class="login-title">
-                    <v-icon>mdi-account</v-icon>
-                </v-card-title>
-                <v-card-subtitle class="login-sub">LOGIN</v-card-subtitle>
-                <div v-if="!codeSent">
-                    <v-card-text class="login-body">
-                        <v-text-field v-model="phoneNumber" variant="underlined" label="شماره همراه خود را وارد نمایید"
-                            prepend-icon="mdi-phone" :rules="numberRules"></v-text-field>
-                        <v-btn block class="rtl-icon" color="primary" append-icon="mdi-send-clock">ارسال کد احراز هویت
-                        </v-btn>
-                    </v-card-text>
-                </div>
-                <div v-else>
-                    <v-card-text class="login-body">
-                        
-                    </v-card-text>
-                </div>
-            </div>
-        </v-card>
-    </div> -->
 </template>

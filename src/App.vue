@@ -7,13 +7,11 @@ export default {
 import TheToolbar from "@components/Global/Toolbar/TheToolbar.vue";
 import { computed, ref } from "@vue/runtime-core";
 import { useRoute as route } from "vue-router";
-import { useDisplay } from "vuetify/lib/framework.mjs";
 import { useModal } from "@/composables/modal/modal.js";
 
 useModal();
 
 const currentPath = computed(() => route().path);
-const sm = computed(() => useDisplay().width.value < 1070);
 const links = ref([
   'Home',
   'About Us',
@@ -25,8 +23,8 @@ const links = ref([
 </script>
 <template>
   <v-app>
-    <TheToolbar :currentPath="currentPath" />
-    <RouterView style="position:strict;top:0" />
+    <TheToolbar :currentPath="currentPath"/>
+    <RouterView  />
     <v-footer class="bg-grey-lighten-1">
       <v-row justify="center" no-gutters>
         <v-btn v-for="link in links" :key="link" color="white" variant="text" class="mx-2" rounded="xl">
