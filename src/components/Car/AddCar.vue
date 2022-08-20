@@ -1,43 +1,59 @@
 <script setup>
-import { ref } from '@vue/reactivity';
+import { ref, computed } from '@vue/reactivity';
 import BaseModal from '../Global/Dialog/BaseModal.vue';
+// import CropperImage from '@components/Global/Input/CropperImage.vue';
 defineEmits(['toggleModal']);
 defineProps(['dialog', 'add'])
 const getBrands = ref(['سمند', 'ال نود', 'پراید']);
-const crop_data = ref();
-const url = ref();
 const image = ref();
-const car = ref({
-    brand_id: null,
-    name_en: null,
-    name_fa: null,
-    image: [],
+const form = ref({});
+const pageType = ref('add');
+const staticNames = computed('staticNames', () => {
+    if(pageType.value == 'add') {
+        return {
+            name: 'افزودن خودرو',
+            name_en: 'add car'
+        }
+    } else {
+        return {
+            name: 'ویرایش خودرو',
+            name_en: 'edit car'
+        }
+    }
 })
+const openModal = (data) => {
+    if(data.id) {
+        form.value = data;
+        pageType.value = 'edit';
+    }
+}
 </script>
 <template>
-    <base-modal name="add-car" >
+    <base-modal name="add-car" @open="openModal" >
         <v-card-text>
             <v-row>
                 <v-col cols="12">
                     <div v-if="image" style="width:100%">
                         <img :src="image" width="100%">
                     </div>
-                    <v-file-input v-model="car.image" label="تصویر خودرو را بارگذاری کنید"
-                        variant="outlined" prepend-icon="mdi-camera"></v-file-input>
+                    <!-- <v-file-input v-model="car.image" label="تصویر خودرو را بارگذاری کنید"
+                        variant="outlined" prepend-icon="mdi-camera"></v-file-input> -->
+
+                        <!-- <CropperImage /> -->
                 </v-col>
             </v-row>
             <v-row>
                 <v-col cols="12" md="4" sm="12">
                     <v-select label="برند خودرو" name="brand" :items="getBrands" item-value="id" item-text="name_fa"
-                        prepend-icon="mdi-car-side" v-model="car.brand_id" variant="underlined"></v-select>
+                        prepend-icon="mdi-car-side" v-model="form.brand_id" variant="underlined"></v-select>
                 </v-col>
                 <v-col cols="12" md="4" sm="12">
-                    <v-text-field variant="underlined" type="text" label="نام فارسی" v-model="car.name_fa"
+                    <v-text-field variant="underlined" type="text" label="نام فارسی" v-model="form.name_fa"
                         prepend-icon="mdi-text">
                     </v-text-field>
                 </v-col>
                 <v-col cols="12" md="4" sm="12">
-                    <v-text-field variant="underlined" type="text" label="نام انگلیسی" v-model="car.name_en"
+                    <v-text-field variant="underlined" type="text" label="نام انگلیسی" v-model="form.name_en"
                         prepend-icon="mdi-text">
                     </v-text-field>
                 </v-col>
