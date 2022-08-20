@@ -14,7 +14,6 @@ const props = defineProps({
     width: { default: null },
     maxWidth: { default: null },
     name: { default: null },
-    test:{},
     transition: { default: 'slide-x-transition' }
 });
 const isOpenModal = ref(false);
@@ -51,7 +50,7 @@ onBeforeUnmount(() => emitModal(false))
 </script>
 
 <template>
-    <v-dialog :fullscreen="fullscreen" v-model="modal" :max-width="maxWidth" v-if="modal" :width="width"
+    <!-- <v-dialog :fullscreen="fullscreen" v-model="modal" :max-width="maxWidth" v-if="modal" :width="width"
         :transition="transition" class="ym">
         <v-card dir="rtl" style="border-radius: 30px !important;">
             <v-card-title class="bg-black">
@@ -59,5 +58,18 @@ onBeforeUnmount(() => emitModal(false))
             </v-card-title>
             <slot :modal="modal" :data="data.data"></slot>
         </v-card>
+    </v-dialog> -->
+    <v-dialog :fullscreen="fullscreen" v-model="modal" :max-width="maxWidth" v-if="modal" :width="width"
+        :transition="transition">
+        <v-card class="v-card">
+            <slot :modal="modal" :data="data.data"></slot>
+
+        </v-card>
     </v-dialog>
 </template>
+<style scoped>
+.v-card {
+    border-radius: 30px !important;
+    font-family: yl;
+}
+</style>>
