@@ -1,4 +1,3 @@
-import Vue from "vue";
 import Cookie from './cookie'
 import LocalStorage from './localStorage'
 export default {

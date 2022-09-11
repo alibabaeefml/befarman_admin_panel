@@ -7,6 +7,9 @@ const urls = {
     destroyCar: 'abstract-car/:car',
 
     indexBrand: 'brands',
+    sendCode: 'login',
+    logout: 'logout',
+    login: 'login/code',
 };
 
 export default urlGenerator(urls);
