@@ -30,7 +30,7 @@ const rentCarActions = ref(false);
                                     :disabled="archived" label="وضعیت" :items="statuses" item-title="name"
                                     variant="underlined"></v-select>
                             </div>
-                            <v-btn to="/Admin/Car-Details" block prepend-icon="mdi-information" color="secondary"
+                            <v-btn :to="{name:'CLIENT CAR DETAILS',params:{id:':id'}}" block prepend-icon="mdi-information" color="secondary"
                                 variant="outlined">جزئیات
                                 خودرو
                             </v-btn>
@@ -75,11 +75,11 @@ const rentCarActions = ref(false);
                         <v-icon>mdi-delete</v-icon>
                         <v-tooltip activator="parent" location="right">حذف خودرو</v-tooltip>
                     </v-btn>
-                    <v-btn icon color="black" variant="elevated" to="/Admin/Edit-Rent-Car">
+                    <v-btn icon color="black" variant="elevated" :to="{name:'EDIT CLIENT CAR',params:{id:':id'}}">
                         <v-icon>mdi-pencil</v-icon>
                         <v-tooltip activator="parent" location="left">ویرایش خودرو</v-tooltip>
                     </v-btn>
-                    <v-btn icon color="secondary" variant="elevated" @click="$emit('showCommentsModal')">
+                    <v-btn icon color="secondary" variant="elevated" @click="$_openModal('clientCarComments')">
                         <v-icon color="white">mdi-comment</v-icon>
                         <v-tooltip activator="parent" location="right">نظرات</v-tooltip>
                     </v-btn>

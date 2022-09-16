@@ -1,10 +1,10 @@
 <script setup>
 import { ref } from 'vue';
-import UserFilter from '@components/Users/UserFilter.vue';
-import UserItem from '@components/Users/UserItem.vue';
-import UserComments from '@components/Users/UserComments.vue';
-import AcceptUserDelete from '@components/Users/AcceptUserDelete.vue';
-import SendMessage from '@components/Users/SendMessage.vue';
+import UserFilter from '@components/User/UserFilter.vue';
+import UserItem from '@components/User/UserItem.vue';
+import UserComments from '@components/User/UserComments.vue';
+import AcceptUserDelete from '@components/User/AcceptUserDelete.vue';
+import SendMessage from '@components/User/SendMessage.vue';
 const tab = ref('one');
 const commentsModal = ref(false);
 const addModal = ref(false);
@@ -31,7 +31,7 @@ const smsModal = ref(false);
             </v-window>
         </v-card-text>
     </v-card>
-    <v-btn size="x-large" class="add-btn" icon color="secondary" to="/Admin/Add-User">
+    <v-btn size="x-large" class="add-btn" icon color="secondary" :to="{name:'ADD USER'}">
         <v-icon color="white">mdi-plus</v-icon>
     </v-btn>
     <AcceptUserDelete :dialog="deleteConfirm" @toggleModal="deleteConfirm = false" />

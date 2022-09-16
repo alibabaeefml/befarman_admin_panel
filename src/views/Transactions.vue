@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
-import TransactionFilter from '@components/Transactions/TransactionFilter.vue';
-import TransactionItem from '@components/Transactions/TransactionItem.vue'
+import TransactionFilter from '@components/Transaction/TransactionFilter.vue';
+import TransactionItem from '@components/Transaction/TransactionItem.vue'
 const tab = ref('one')
 </script>
 
@@ -24,8 +24,8 @@ const tab = ref('one')
             </v-window>
         </v-card-text>
     </v-card>
-        <v-btn  to="/Admin/Add-Transaction" size="x-large" class="add-btn" icon color="secondary">
-            <v-icon color="white">mdi-plus</v-icon>
-        </v-btn>
+    <v-btn :to="{name:'ADD TRANSACTION'}" size="x-large" class="add-btn" icon color="secondary">
+        <v-icon color="white">mdi-plus</v-icon>
+    </v-btn>
 </template>
 

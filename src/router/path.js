@@ -38,7 +38,7 @@ export default [{
     },
     {
         path: "/client-cars/add",
-        name: "addClientCar",
+        name: "ADD CLIENT CAR",
         view: "ClientCarAddEdit",
         meta: {
             auth: false,
@@ -47,7 +47,7 @@ export default [{
     },
     {
         path: "/client-cars/:id/edit",
-        name: "editClientCars",
+        name: "EDIT CLIENT CAR",
         view: "ClientCarAddEdit",
         meta: {
             auth: false,
@@ -56,7 +56,7 @@ export default [{
     },
     {
         path: "/client-cars/:id",
-        name: "clientCarDetails",
+        name: "CLIENT CAR DETAILS",
         view: "ClientCarDetails",
         meta: {
             auth: false,
@@ -74,7 +74,7 @@ export default [{
     },
     {
         path: "/users/:id",
-        name: "userDetails",
+        name: "USER DETAILS",
         view: "UserInfo",
         meta: {
             auth: true,
@@ -83,20 +83,22 @@ export default [{
     },
     {
         path: "/users/add",
-        name: "addUser",
+        name: "ADD USER",
         view: "UserAddEdit",
         meta: {
             auth: true,
-            title: "افزودن کاربر"
+            title: "افزودن کاربر",
+            icon:'mdi-account-plus'
         }
     },
     {
         path: "/users/:id/edit",
-        name: "editUser",
+        name: "EDIT USER",
         view: "UserAddEdit",
         meta: {
             auth: true,
-            title: "ویرایش کاربر"
+            title: "ویرایش کاربر",
+            icon:'mdi-account-edit'
         }
     },
     {
@@ -129,7 +131,7 @@ export default [{
     {
         path: "/transactions",
         name: "transactions",
-        view: "Transaction",
+        view: "Transactions",
         meta: {
             auth: true,
             title: "تراکنش ها"
@@ -137,20 +139,22 @@ export default [{
     },
     {
         path: "/transactions/add",
-        name: "addTransaction",
+        name: "ADD TRANSACTION",
         view: "TransactionAddEdit",
         meta: {
             auth: true,
-            title: "افزودن تراکنش"
+            title: "افزودن تراکنش",
+            icon:"mdi-cash-plus"
         }
     },
     {
         path: "/transactions/:id/edit",
-        name: "editTransaction",
+        name: "EDIT TRANSACTION",
         view: "TransactionAddEdit",
         meta: {
             auth: true,
-            title: "ویرایش تراکنش"
+            title: "ویرایش تراکنش",
+            icon:"mdi-cash"
         }
     },
     {

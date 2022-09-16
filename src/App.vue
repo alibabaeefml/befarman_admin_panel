@@ -257,4 +257,7 @@ hr {
 .v-tooltip {
   font-family: ym;
 }
+.v-overlay__content{
+    min-width: 200px!important;
+}
 </style>

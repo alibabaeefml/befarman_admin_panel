@@ -20,7 +20,7 @@ const { id, pName, eName, thumb, brand } = props.data;
                     <v-icon>mdi-delete</v-icon>
                     <v-tooltip activator="parent" location="right">حذف خودرو</v-tooltip>
                 </v-btn>
-                <v-btn icon color="black" variant="elevated" @click="$_openModal('add-car', { title: 'ویرایش خودرو', icon: 'mdi-car', subtitle: 'EDIT CAR' })">
+                <v-btn icon color="black" variant="elevated" @click="$_openModal('add-car', {id:1})">
                     <v-icon>mdi-pencil</v-icon>
                     <v-tooltip activator="parent" location="left">ویرایش خودرو</v-tooltip>
                 </v-btn>

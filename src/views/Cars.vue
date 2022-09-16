@@ -97,7 +97,7 @@ const getCars = ref([
             <CarItem v-for="car in getCars" :key="car.id" :data="car" />
         </v-row>
         <v-btn size="x-large" class="add-btn"
-            @click="$_openModal('add-car', { title: 'افـــزودن خودرو', icon: 'mdi-car', subtitle: 'ADD NEW CAR' })" icon
+            @click="$_openModal('add-car',{id:0})" icon
             color="secondary">
             <v-icon color="white">mdi-plus</v-icon>
         </v-btn>

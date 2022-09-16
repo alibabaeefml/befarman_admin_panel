@@ -132,7 +132,7 @@
         </v-col>
     </v-row>
 
-    <v-btn to="/Admin/Users" class="add-btn" icon color="primary" size="large">
+    <v-btn :to="{name:'users'}" class="add-btn" icon color="primary" size="large">
         <v-icon>mdi-arrow-left</v-icon>
         <v-tooltip activator="parent">بازگشت</v-tooltip>
     </v-btn>

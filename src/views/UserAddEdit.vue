@@ -7,7 +7,7 @@ const bankNames = ['ملی', 'سپه', 'ملت', 'کشاورزی', 'مسکن', '
 </script>
 
 <template>
-    <v-card dir="rtl" class="ym" :title="$route.meta.title" :subtitle="$route.name" prepend-icon="mdi-account-plus">
+    <v-card dir="rtl" class="ym" :title="$route.meta.title" :subtitle="$route.name" :prepend-icon="$route.meta.icon">
         <v-card-text>
             <v-card class="pa-4" title="اطلاعات شخصی" subtitle="PERSONAL INFO" prepend-icon="mdi-information">
                 <v-row>
@@ -152,7 +152,7 @@ const bankNames = ['ملی', 'سپه', 'ملت', 'کشاورزی', 'مسکن', '
             </v-card>
         </v-card-text>
         <v-card-actions style="background-color: #ededed;" class="justify-center">
-            <v-btn to="/Admin/Users" variant="elevated" color="pink" icon @click="$emit('toggleModal')" class="ma-1">
+            <v-btn :to="{name:'users'}" variant="elevated" color="pink" icon @click="$emit('toggleModal')" class="ma-1">
                 <v-icon color="white">mdi-close</v-icon>
             </v-btn>
             <v-btn variant="elevated" color="cyan" icon class="ma-1">
@@ -160,7 +160,7 @@ const bankNames = ['ملی', 'سپه', 'ملت', 'کشاورزی', 'مسکن', '
             </v-btn>
         </v-card-actions>
     </v-card>
-    <v-btn to="/Admin/Users" class="add-btn" icon color="primary" size="large">
+    <v-btn :to="{name:'users'}" class="add-btn" icon color="primary" size="large">
         <v-icon>mdi-arrow-left</v-icon>
         <v-tooltip activator="parent">بازگشت</v-tooltip>
     </v-btn>

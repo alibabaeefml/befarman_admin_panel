@@ -63,10 +63,10 @@ const routeName = computed(() => useRoute().meta.title)
         <v-card style="z-index:3">
             <v-navigation-drawer v-model="drawer" @click:outside="drawer=false" :rail="false" permanent location="right">
                 <v-list density="compact" nav right :style="{ fontFamily: 'ym' }">
-                    <router-link to="/" class="link">
+                    <router-link to="/">
                         <v-list-item prepend-icon="mdi-home" title="صفحه اصلی" value="home"></v-list-item>
                     </router-link>
-                    <router-link to="/Login" class="link">
+                    <router-link to="/Login">
                         <v-list-item prepend-icon="mdi-account" :title="loggedIn ? 'پروفایل' : 'ورود'" value="Login">
                         </v-list-item>
                     </router-link>

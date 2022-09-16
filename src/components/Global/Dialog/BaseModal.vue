@@ -14,6 +14,9 @@ const props = defineProps({
     width: { default: null },
     maxWidth: { default: null },
     name: { default: null },
+    title: {},
+    subtitle: {},
+    icon: {},
     transition: { default: 'slide-x-transition' }
 });
 const isOpenModal = ref(false);
@@ -50,20 +53,13 @@ onBeforeUnmount(() => emitModal(false))
 </script>
 
 <template>
-    <!-- <v-dialog :fullscreen="fullscreen" v-model="modal" :max-width="maxWidth" v-if="modal" :width="width"
+    <v-dialog :fullscreen="fullscreen" v-model="modal" :max-width="maxWidth" v-if="modal" :width="width"
         :transition="transition" class="ym">
-        <v-card dir="rtl" style="border-radius: 30px !important;">
+        <v-card dir="rtl">
             <v-card-title class="bg-black">
-                <base-header :icon="data.data.icon" :title="data.data.title" :subtitle="data.data.subtitle" />
+                <base-header :icon="icon" :title="title" :subtitle="subtitle" />
             </v-card-title>
             <slot :modal="modal" :data="data.data"></slot>
-        </v-card>
-    </v-dialog> -->
-    <v-dialog :fullscreen="fullscreen" v-model="modal" :max-width="maxWidth" v-if="modal" :width="width"
-        :transition="transition">
-        <v-card class="v-card">
-            <slot :modal="modal" :data="data.data"></slot>
-
         </v-card>
     </v-dialog>
 </template>
@@ -72,4 +68,5 @@ onBeforeUnmount(() => emitModal(false))
     border-radius: 30px !important;
     font-family: yl;
 }
+
 </style>>

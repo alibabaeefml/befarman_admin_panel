@@ -103,7 +103,7 @@ const commentsModal = ref(false);
                 </v-window>
             </v-card-text>
         </v-card>
-        <router-link to="/Admin/Add-Rent-Car" class="link">
+        <router-link :to="{name:'ADD CLIENT CAR'}" class="link">
             <v-btn size="x-large" class="add-btn" icon color="secondary">
                 <v-icon color="white">mdi-plus</v-icon>
             </v-btn>

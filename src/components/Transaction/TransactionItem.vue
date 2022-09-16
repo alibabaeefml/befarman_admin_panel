@@ -19,8 +19,8 @@ const outgoing = ref(true)
                         <h2>تومان</h2>
                     </v-col>
                     <v-col cols="12" md="6" xs="12">
-                        <h1 class="sm-txt">عنوان تراکنش</h1>
-                        <h2>توضیحات </h2>
+                        <h1>بازگشت وجه کاربر</h1>
+                        <h2>وجه به مقدار 000000 تاریخ 0000/00/00 به کاربر بازگردانده شد.</h2>
                     </v-col>
                     <v-col cols="12" md="2" xs="12">
                         <h1 class="sm-txt">کاربر مهمان</h1>
@@ -41,7 +41,8 @@ const outgoing = ref(true)
                         <v-icon>mdi-delete</v-icon>
                         <v-tooltip activator="parent" location="bottom">حذف تراکنش</v-tooltip>
                     </v-btn>
-                    <v-btn icon color="black" variant="elevated" to="/Admin/Edit-Transaction">
+                    <v-btn icon color="black" variant="elevated"
+                        :to="{ name: 'EDIT TRANSACTION', params: { id: ':id' } }">
                         <v-icon>mdi-pencil</v-icon>
                         <v-tooltip activator="parent" location="bottom">ویرایش تراکنش</v-tooltip>
                     </v-btn>

@@ -3,10 +3,9 @@ import { ref } from 'vue';
 import Documents from '@components/ClientCar/Documents.vue';
 import MoreDetails from '@components/ClientCar/MoreDetails.vue';
 const more = ref(false);
-const docModal = ref(false);
 </script>
 <template>
-    <v-card dir="rtl" class="ma-4 ym" title="جزئیات خودرو" subtitle="CAR DETAILS" prepend-icon="mdi-car-side">
+    <v-card dir="rtl" class="ma-4 ym" :title="$route.meta.title" :subtitle="$route.name" prepend-icon="mdi-car-side">
         <v-row dir="rtl" class="pa-5">
             <v-col cols="12" md="6" sm="12">
                 <v-carousel dir="ltr" interval="5000" color="white" cycle hide-delimiter-background show-arrows="hover">
@@ -96,18 +95,18 @@ const docModal = ref(false);
                         </v-btn>
                     </v-col>
                     <v-col cols="12" md="6">
-                        <v-btn @click="docModal = !docModal" block append-icon="mdi-file-document" color="black"
+                        <v-btn @click="$_openModal('carDocs')" block append-icon="mdi-file-document" color="black"
                             variant="outlined">مدارک
                         </v-btn>
                     </v-col>
                 </v-row>
                 <more-details v-if="more"></more-details>
             </v-col>
-            <documents :doc-modal="docModal" @toggle-modal="docModal = false"></documents>
+            <documents ></documents>
         </v-row>
     </v-card>
 
-    <v-btn :to="{name: 'client-cars'}" class="add-btn" icon size="large" color="primary">
+    <v-btn :to="{name: 'clientCars'}" class="add-btn" icon size="large" color="primary">
         <v-icon>mdi-arrow-left</v-icon>
         <v-tooltip activator="parent">بازگشت</v-tooltip>
     </v-btn>

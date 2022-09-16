@@ -7,42 +7,39 @@ const getBrands = ref(['سمند', 'ال نود', 'پراید']);
 const image = ref();
 const form = ref({});
 const pageType = ref('add');
-const staticNames = computed('staticNames', () => {
+const staticNames = computed( () => {
     if(pageType.value == 'add') {
         return {
             name: 'افزودن خودرو',
-            name_en: 'add car'
+            name_en: 'ADD CAR'
         }
     } else {
         return {
             name: 'ویرایش خودرو',
-            name_en: 'edit car'
+            name_en: 'EDIT CAR'
         }
     }
 })
 const openModal = (data) => {
-    if(data.id) {
+    if(data.id==1) {
         form.value = data;
-        pageType.value = 'edit';
+        pageType.value = 'edit'
     }
 }
 
 </script>
 
 <template>
-    <base-modal name="add-car" @open="openModal" >
+    <base-modal name="add-car" @open="openModal" :title="staticNames.name"
+     :subtitle="staticNames.name_en" icon="mdi-car">
         <v-card-text>
             <v-row>
                 <v-col cols="12">
-                    <div v-if="image" style="width:100%">
-                        <v-img :src="image" block />
+                    <div v-if="image">
+                        <v-img :src="image" />
                     </div>
-                    <v-file-input v-model="car.image" label="تصویر خودرو را بارگذاری کنید" variant="outlined"
+                    <v-file-input label="تصویر خودرو را بارگذاری کنید" variant="outlined"
                         prepend-icon="mdi-camera"></v-file-input>
-                    <!-- <v-file-input v-model="car.image" label="تصویر خودرو را بارگذاری کنید"
-                        variant="outlined" prepend-icon="mdi-camera"></v-file-input> -->
-
-                        <!-- <CropperImage /> -->
                 </v-col>
             </v-row>
             <v-row>

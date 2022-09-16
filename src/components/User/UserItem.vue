@@ -13,8 +13,8 @@ const actions = ref(false);
                     <v-col cols="12" md="3" sm="12">
                         <h1 class="md-txt">کاربر مهمان</h1>
                         <h2>09000000000</h2>
-                        <v-btn class="ym" to="/Admin/User-Info" block prepend-icon="mdi-account-details" color="secondary"
-                            variant="outlined">اطلاعات کاربر</v-btn>
+                        <v-btn class="ym" :to="{name:'USER DETAILS', params: { id: ':id' }}" block prepend-icon="mdi-account-details"
+                            color="secondary" variant="outlined">اطلاعات کاربر</v-btn>
                     </v-col>
                     <v-col class="d-flex align-center justify-center text-right" style="color:rgb(238, 53, 82)"
                         cols="12" md="3" sm="12">
@@ -52,7 +52,7 @@ const actions = ref(false);
                         <v-icon color="white">mdi-close</v-icon>
                         <v-tooltip activator="parent" location="bottom">لغو تایید</v-tooltip>
                     </v-btn>
-                    <v-btn icon color="black" variant="elevated" to="/Admin/Edit-User">
+                    <v-btn icon color="black" variant="elevated" :to="{ name: 'EDIT USER', params: { id: ':id' } }">
                         <v-icon>mdi-pencil</v-icon>
                         <v-tooltip activator="parent" location="bottom">ویرایش کاربر</v-tooltip>
                     </v-btn>
