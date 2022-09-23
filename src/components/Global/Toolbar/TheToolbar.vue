@@ -3,6 +3,8 @@ import { computed, ref } from '@vue/runtime-core';
 import { useDisplay } from 'vuetify/lib/framework.mjs';
 import bg from '@/assets/Images/Header.jpg'
 import { useRoute } from 'vue-router';
+import { useAuthStore } from '@/store/auth';
+
 const mobile = computed(() => useDisplay().width.value < 1080);
 const drawer = ref(false);
 const loggedIn = ref(true);
@@ -10,10 +12,15 @@ const isAdmin = ref(true);
 const user = ref('')
 const props = defineProps(['currentPath']);
 const routeName = computed(() => useRoute().meta.title)
+
+const logout = () => {
+    useAuthStore().logout()
+}
 </script>
 
 <template>
-    <div v-if="!mobile" class="toolbar" :style="{background: `url(${bg})`, backgroundSize: 'cover', backgroundPosition: 'center'}">
+    <div v-if="!mobile" class="toolbar"
+        :style="{background: `url(${bg})`, backgroundSize: 'cover', backgroundPosition: 'center'}">
         <v-toolbar color="rgba(0,0,0,.6)" class="text-white pa-6 ym">
             <v-toolbar-title>
                 <h2 class="app-bar-title mm">BEFARMAN APP</h2>
@@ -24,16 +31,11 @@ const routeName = computed(() => useRoute().meta.title)
             <v-btn icon>
                 <v-icon>mdi-instagram</v-icon>
             </v-btn>
-            <v-btn v-if="loggedIn">
-                خروج
-                <v-icon>mdi-logout</v-icon>
-            </v-btn>
-            <router-link to="/Login" class="link">
-                <v-btn>
-                    {{ loggedIn ? 'پروفایل' : 'ورود' }}
-                    <v-icon>mdi-account</v-icon>
+                <v-btn :to="{name:'LOGIN'}" @click="logout">خروج
+                    <v-icon>mdi-logout</v-icon>
                 </v-btn>
-            </router-link>
+                <v-btn>پروفایل<v-icon>mdi-account</v-icon>
+                </v-btn>
             <div>{{ user ? user : 'کاربر' }} عزیز، خوش آمدی</div>
             <router-link to="/" class="link">
                 <v-btn icon>
@@ -53,7 +55,7 @@ const routeName = computed(() => useRoute().meta.title)
     </div>
     <div v-else>
         <v-app-bar color="black">
-            <v-toolbar-title > 
+            <v-toolbar-title>
                 <h4 class="app-bar-title mm">BEFARMAN APP</h4>
             </v-toolbar-title>
             <v-btn class="menu-btn" size="large" icon="mdi-dots-vertical" @click="drawer = !drawer" />
@@ -61,16 +63,17 @@ const routeName = computed(() => useRoute().meta.title)
     </div>
     <div>
         <v-card style="z-index:3">
-            <v-navigation-drawer v-model="drawer" @click:outside="drawer=false" :rail="false" permanent location="right">
+            <v-navigation-drawer v-model="drawer" @click:outside="drawer=false" :rail="false" permanent
+                location="right">
                 <v-list density="compact" nav right :style="{ fontFamily: 'ym' }">
                     <router-link to="/">
                         <v-list-item prepend-icon="mdi-home" title="صفحه اصلی" value="home"></v-list-item>
                     </router-link>
-                    <router-link to="/Login">
-                        <v-list-item prepend-icon="mdi-account" :title="loggedIn ? 'پروفایل' : 'ورود'" value="Login">
+                        <v-list-item prepend-icon="mdi-account" title="پروفایل" value="Login">
                         </v-list-item>
-                    </router-link>
-                    <v-list-item prepend-icon="mdi-logout" title="خروج" value="logout" v-if="loggedIn"></v-list-item>
+                        <v-list-item :to="{name:'LOGIN'}" @click="logout"
+                         prepend-icon="mdi-logout" title="خروج" value="logout" v-if="loggedIn">
+                        </v-list-item>
                     <v-list-item prepend-icon="mdi-twitter" title="twitter" value="twitter"></v-list-item>
                     <v-list-item prepend-icon="mdi-instagram" title="instagram" value="instagram"></v-list-item>
                 </v-list>

@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import AuthRepository from '@/abstraction/repositories/authRepository';
-import StoreManagement from "@/utils/store-management"
-import ApiService from "@/services/api.services"
-import { UserAuth } from "@/types/user"
+import StoreManagement from "@/utils/store-management";
+import ApiService from "@/services/api.services";
+import { UserAuth } from "@/types/user";
 let repository = new AuthRepository();
 
 export const useAuthStore = defineStore('auth', () => {
@@ -30,6 +30,9 @@ export const useAuthStore = defineStore('auth', () => {
 
             // token 
             ApiService.setAuthHeader(data.user.token);
+
+            // redirect
+            window.location.href = '/dashboard'
         }
     }
 

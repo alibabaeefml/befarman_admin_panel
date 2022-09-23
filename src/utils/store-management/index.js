@@ -19,7 +19,7 @@ export default {
         if (typeOfStorage === 'cookie') {
             Cookie.remove(key);
         } else {
-            LocalStorage.remove(key);
+            LocalStorage.removeItem(key);
         }
     },
 }

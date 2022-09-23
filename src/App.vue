@@ -23,9 +23,9 @@ const links = ref([
 </script>
 <template>
   <v-app>
-    <TheToolbar :currentPath="currentPath" v-if="currentPath!='/Login'"/>
+    <TheToolbar :currentPath="currentPath" v-if="currentPath!='/login'"/>
     <RouterView  />
-    <v-footer class="bg-grey-lighten-1" v-if="currentPath!='/Login'">
+    <v-footer class="bg-grey-lighten-1" v-if="currentPath!='/login'">
       <v-row justify="center" no-gutters>
         <v-btn v-for="link in links" :key="link" color="white" variant="text" class="mx-2" rounded="xl">
           {{ link }}
