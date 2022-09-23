@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+      "target": "esnext",
+      "module": "es6",
+      "moduleResolution": "node",
+      "importHelpers": true,
+      "isolatedModules": true,
+      "noEmit": true,
+      "paths": {
+        "@components/*": ["./src/components/*"],
+        "@/*": ["./src/*"]
+      },
+      "jsx": "preserve"
+    }
+}
