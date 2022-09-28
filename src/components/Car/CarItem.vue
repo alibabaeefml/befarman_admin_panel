@@ -10,9 +10,9 @@ const car = props.car;
             </v-img>
             <v-card-text>
                 <div>
-                    <h1 style="font-family:ym">{{ car.name }}</h1>
+                    <h1 style="font-family:ym">{{ car.name_fa }}</h1>
                     <h3 style="font-family:mm;letter-spacing: 5px;" class="text-disabled">{{ car.name_en }}</h3>
-                    <span style="position: absolute;left:5px;bottom: 5px;">{{ car.brand.name }}</span>
+                    <span style="position: absolute;left:5px;bottom: 5px;">{{ car.brand.name_fa }}</span>
                 </div>
             </v-card-text>
             <v-card-actions style="border-top:.5px solid rgba(0,0,0,.1);" class="justify-center">

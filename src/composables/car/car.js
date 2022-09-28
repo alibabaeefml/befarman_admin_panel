@@ -4,6 +4,7 @@ import CarRepository from '@/abstraction/repositories/carRepository';
 
 export function useCar() {
 
+    let loadingData = false
     const store = useCarStore()
     const repository = new CarRepository();
 
@@ -22,14 +23,40 @@ export function useCar() {
         return car;
     }
 
-    const indexCar = (paginate) => {
-        const { data, pagination } = repository.index(paginate);
+    const indexCar = async (paginate) => {
+        const { data, pagination } = await repository.index(paginate)
+        console.log(data)
+        console.log(getCars.value)
         store.$patch((state) => {
             state.paginate = pagination
-            state.cars = data
+            state.cars = getCars.value.concat(data)
         })
-        return store.cars;
+
+        return data;
     }
 
-    return { updateCar, storeCar, indexCar, getCars, paginate }
+    const infiniteCar = async ($state) => {
+        if (loadingData || paginate.page >= paginate.pageCount) {
+            return false;
+        }
+        const data = {pagination: {}}
+        data['pagination'] = {...paginate.value}
+        data.pagination.page++
+        loadingData = true
+        try {
+            await indexCar(data)
+            if (paginate.page < paginate.pageCount) {
+                $state.loaded();
+            } else {
+                $state.complete();
+            }
+        } catch (e) {
+
+        } finally {
+            loadingData = false
+        }
+
+    }
+
+    return { updateCar, storeCar, indexCar, getCars, paginate, infiniteCar }
 }

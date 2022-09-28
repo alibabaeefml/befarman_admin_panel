@@ -8,9 +8,9 @@ export default interface Paginate {
 }
 
 export const defaultPaginate = {
-    page: 1,
-    pageStart: 1,
-    pageCount: 1,
+    page: 0,
+    pageStart: 0,
+    pageCount: 0,
     itemsPerPage: 12,
     pageStop: 1,
     itemsLength: 1

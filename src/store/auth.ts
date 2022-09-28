@@ -7,8 +7,8 @@ import { UserAuth } from "@/types/user";
 let repository = new AuthRepository();
 
 export const useAuthStore = defineStore('auth', () => {
-    const user = ref<UserAuth>(JSON.parse(StoreManagement.get('user')));
-    const token = ref<String>(JSON.parse(StoreManagement.get('token', 'cookie')));
+    const user = ref<UserAuth>(StoreManagement.get('user'));
+    const token = ref<String>(StoreManagement.get('token', 'cookie'));
 
 
     const sendCode = async (phone) => {
@@ -19,17 +19,17 @@ export const useAuthStore = defineStore('auth', () => {
     const login = async ({ phone, code }) => {
         const data = await repository.login({ phone, code });
         
+        
         if (data.user) {
             // update pinia state
             user.value = data.user;
-            token.value = data.user.token;
-
+            token.value = data.token;
             // store user details and jwt in local storage to keep user logged in between page refreshes
             StoreManagement.set('user', data.user);
-            StoreManagement.set('token', data.user.token, 'cookie');
+            StoreManagement.set('token', data.token, 'cookie');
 
             // token 
-            ApiService.setAuthHeader(data.user.token);
+            ApiService.setAuthHeader(data.token);
 
             // redirect
             window.location.href = '/dashboard'
