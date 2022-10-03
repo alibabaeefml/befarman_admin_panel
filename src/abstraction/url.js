@@ -7,6 +7,9 @@ const urls = {
     destroyCar: 'abstract-car/:car',
 
     indexBrand: 'brands',
+
+    indexBodyType: 'body-types',
+
     sendCode: 'login',
     logout: 'logout',
     login: 'login/code',

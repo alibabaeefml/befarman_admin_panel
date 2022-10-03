@@ -5,6 +5,6 @@ import url from '../url';
 export default class BrandRepository {
     async index() {
         const response = await axios.get(url('indexBrand'));
-        return getArray(response.data.data)
+        return getArray(response.data)
     }
 }

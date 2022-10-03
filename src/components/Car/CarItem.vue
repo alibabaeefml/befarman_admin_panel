@@ -21,7 +21,7 @@ const car = props.car;
                     <v-tooltip activator="parent" location="right">حذف خودرو</v-tooltip>
                 </v-btn>
 
-                <v-btn icon color="black" @click.native="$_openModal('add-car', {car})" variant="elevated">
+                <v-btn icon color="black" @click.native="$_openModal('add-car', car)" variant="elevated">
 
                     <v-icon>mdi-pencil</v-icon>
                     <v-tooltip activator="parent" location="left">ویرایش خودرو</v-tooltip>

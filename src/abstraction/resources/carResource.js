@@ -19,3 +19,12 @@ export const getJson = (data) => ({
     bodyType: getJsonBodyType(data.bodyType ? data.bodyType : {}),
     brand: getJsonBrand(data.brand ? data.brand : {}),
 })
+
+export const setData = (data) => ({
+    name_fa: data.name_fa,
+    name_en: data.name_en,
+    brand_id: data.brand_id,
+    body_type_id: data.body_type_id,
+    capacity: data.capacity,
+    file_batch_id: data.file_batch_id,
+})
