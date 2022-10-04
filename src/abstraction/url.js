@@ -10,6 +10,8 @@ const urls = {
 
     indexBodyType: 'body-types',
 
+    storeFiles: 'media',
+
     sendCode: 'login',
     logout: 'logout',
     login: 'login/code',
