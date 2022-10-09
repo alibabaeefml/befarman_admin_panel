@@ -192,7 +192,6 @@ export default defineComponent ({
       }
     },
     async upload() {
-      console.log(234);
       if (this.isAddMode) {
         if (this.fileForm.file) {
           return await repository.store(this.fileForm);

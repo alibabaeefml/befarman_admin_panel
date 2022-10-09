@@ -4,12 +4,12 @@ import { useDisplay } from 'vuetify/lib/framework.mjs';
 import bg from '@/assets/Images/Header.jpg'
 import { useRoute } from 'vue-router';
 import { useAuthStore } from '@/store/auth';
-
+import LocalStorage from '@/utils/store-management/localstorage'
 const mobile = computed(() => useDisplay().width.value < 1080);
 const drawer = ref(false);
 const loggedIn = ref(true);
 const isAdmin = ref(true);
-const user = ref('')
+const username = computed(() => LocalStorage.get('user') ? LocalStorage.get('user').first_name : 'کاربر');
 const props = defineProps(['currentPath']);
 const routeName = computed(() => useRoute().meta.title)
 
@@ -31,12 +31,12 @@ const logout = () => {
             <v-btn icon>
                 <v-icon>mdi-instagram</v-icon>
             </v-btn>
-                <v-btn :to="{name:'LOGIN'}" @click="logout">خروج
-                    <v-icon>mdi-logout</v-icon>
-                </v-btn>
-                <v-btn>پروفایل<v-icon>mdi-account</v-icon>
-                </v-btn>
-            <div>{{ user ? user : 'کاربر' }} عزیز، خوش آمدی</div>
+            <v-btn :to="{name:'LOGIN'}" @click="logout">خروج
+                <v-icon>mdi-logout</v-icon>
+            </v-btn>
+            <v-btn>پروفایل<v-icon>mdi-account</v-icon>
+            </v-btn>
+            <div>{{ username }} عزیز، خوش آمدی</div>
             <router-link to="/" class="link">
                 <v-btn icon>
                     <v-icon>mdi-home</v-icon>
@@ -69,11 +69,11 @@ const logout = () => {
                     <router-link to="/">
                         <v-list-item prepend-icon="mdi-home" title="صفحه اصلی" value="home"></v-list-item>
                     </router-link>
-                        <v-list-item prepend-icon="mdi-account" title="پروفایل" value="Login">
-                        </v-list-item>
-                        <v-list-item :to="{name:'LOGIN'}" @click="logout"
-                         prepend-icon="mdi-logout" title="خروج" value="logout" v-if="loggedIn">
-                        </v-list-item>
+                    <v-list-item prepend-icon="mdi-account" title="پروفایل" value="Login">
+                    </v-list-item>
+                    <v-list-item :to="{name:'LOGIN'}" @click="logout" prepend-icon="mdi-logout" title="خروج"
+                        value="logout" v-if="loggedIn">
+                    </v-list-item>
                     <v-list-item prepend-icon="mdi-twitter" title="twitter" value="twitter"></v-list-item>
                     <v-list-item prepend-icon="mdi-instagram" title="instagram" value="instagram"></v-list-item>
                 </v-list>

@@ -1,16 +1,18 @@
 <script setup>
-import defultThumb from '@/assets/Images/avatars/car-avatar.jpg'
+import { useCar } from "@/composables/car/car";
+const { deleteCar,defultThumb } = useCar();
 const props = defineProps(['car']);
 const car = props.car;
 </script>
 <template>
+    
     <v-col cols="12" md="3" sm="6">
         <v-card>
-            <v-img :src="car.thumbnail ? car.thumbnail : defultThumb">
+            <v-img :src="car.thumbnail ? car.thumbnail : defaultThumb">
             </v-img>
             <v-card-text>
                 <div>
-                    <h1 style="font-family:ym">{{ car.name_fa }}</h1>
+                    <h1 class="ym">{{ car.name_fa }}</h1>
                     <h3 style="font-family:mm;letter-spacing: 5px;" class="text-disabled">{{ car.name_en }}</h3>
                     <span style="position: absolute;left:5px;bottom: 5px;">{{ car.brand.name_fa }}</span>
                 </div>

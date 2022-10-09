@@ -6,6 +6,11 @@ const urls = {
     updateCar: 'abstract-car/:car',
     destroyCar: 'abstract-car/:car',
 
+    indexClientCar:'client-car',
+    storeClientCar:'client-car',
+    updateClientCar:'client-car/:car',
+    destroyClientCar:'client-car/:car',
+
     indexBrand: 'brands',
 
     indexBodyType: 'body-types',

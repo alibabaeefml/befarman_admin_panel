@@ -54,10 +54,11 @@ const login = () => {
 <template>
     <div>
         <v-row>
-            <v-col class="d-flex flex-column align-center justify-center" dir="rtl" :style="{ height: !md ? '100vh' : '' }" cols="12" sm="7">
-                <h3 class="ym mt-2" >BEFARMAN | بفرمان</h3>
-                <v-card class="ym pa-4" width="95%" dir="rtl" :title="$route.meta.title"
-                    :subtitle="$route.name" prepend-icon="mdi-account">
+            <v-col class="d-flex flex-column align-center justify-center" dir="rtl"
+                :style="{ height: !md ? '100vh' : '' }" cols="12" sm="7">
+                <h3 class="ym mt-2">BEFARMAN | بفرمان</h3>
+                <v-card class="ym pa-4" width="95%" dir="rtl" :title="$route.meta.title" :subtitle="$route.name"
+                    prepend-icon="mdi-account">
                     <v-card-text>
                         <div v-if="!codeSent">
                             <v-text-field v-model="user.phone" variant="underlined"
@@ -69,16 +70,34 @@ const login = () => {
                             </v-btn>
                         </div>
                         <div v-else>
-                            <v-text-field v-model="user.code" variant="underlined" label="کد ارسالی را وارد نمایید"
-                                prepend-icon="mdi-barcode" :rules="codeRules"></v-text-field>
-                            <v-btn :block="md" class="float-left" color="secondary" append-icon="mdi-account-check"
-                                @click="login" :loading="loading">
-                                بررسی</v-btn>
+                            <v-row>
+                                <v-text-field v-model="user.code" variant="underlined" label="کد ارسالی را وارد نمایید"
+                                    prepend-icon="mdi-barcode" :rules="codeRules"></v-text-field>
+                            </v-row>
+                            <v-row dir="ltr">
+                                <v-col>
+                                    <v-btn block class="float-left" color="secondary" append-icon="mdi-account-check"
+                                        @click="login" :loading="loading">
+                                        بررسی</v-btn>
+                                </v-col>
+                                <v-col>
+                                    <v-btn block class="float-left" color="primary" append-icon="mdi-account-check"
+                                        @click="sendCode">
+                                        ارسال مجدد کد</v-btn>
+                                </v-col>
+                                <v-col>
+                                    <v-btn block class="float-left" color="orange" append-icon="mdi-account-check"
+                                        @click="codeSent=false">
+                                        تغییر شماره</v-btn>
+                                </v-col>
+                            </v-row>
+
+
                         </div>
                     </v-card-text>
                 </v-card>
             </v-col>
-            <v-col cols="12" sm="5" v-if="width>600" 
+            <v-col cols="12" sm="5" v-if="width>600"
                 style="height:100vh;background:url('src/assets/images/loginBG.jpg');background-position: center;background-size: cover;">
             </v-col>
         </v-row>

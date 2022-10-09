@@ -28,7 +28,6 @@ const infiniteCar = async ($state) => {
   } finally {
     loadingData = false
   }
-
 }
 
 </script>

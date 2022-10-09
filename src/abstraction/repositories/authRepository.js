@@ -4,7 +4,6 @@ import { getJson } from "../resources/authResource"
 
 export default class AuthRepository {
     async sendCode(phone) {
-        console.log(phone);
         await axios.post(url("sendCode"), { phone });
         return true;
     }
