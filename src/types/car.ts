@@ -1,7 +1,7 @@
 import Brand from "@/types/brand";
 import BodyType from "@/types/bodyType";
 
-interface Car {
+export default interface Car {
     id: number,
     name_fa: string,
     name_en: string,
@@ -11,6 +11,4 @@ interface Car {
     capacity: number,
     brand: Brand,
     bodyType: BodyType
-}
-
-export default Car;
+};

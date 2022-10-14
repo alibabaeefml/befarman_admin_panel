@@ -113,8 +113,13 @@ const colors = ref([
                         v-model="car.color_status" variant="underlined"></v-select>
                 </v-col>
                 <v-col cols="12" lg="3" md="4">
-                    <v-select label="وضعیت جی پی اس" :items="['ندارد', 'دارد', 'توسط بفرمان نصب گردد']"
+                    <v-select label="وضعیت جی پی اس" :items="['ندارد', 'دارد']"
                         prepend-icon="mdi-crosshairs-gps" v-model="car.gps" variant="underlined"></v-select>
+                </v-col>
+                <v-col cols="12">
+                    <v-checkbox 
+                    label="آیا مایل هستید بفرمان روی ماشین شما GPS نصب کند ؟">
+                    </v-checkbox>
                 </v-col>
                 <v-col cols="12" lg="3" md="4">
                     <v-combobox prepend-icon="mdi-shield-car" v-model="car.insurance" :items="['شخص ثالث', 'بدنه']"

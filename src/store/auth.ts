@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import AuthRepository from '@/abstraction/repositories/authRepository';
 import StoreManagement from "@/utils/store-management";
 import ApiService from "@/services/api.services";
-import { UserAuth } from "@/types/user";
+import UserAuth from "@/types/userAuth";
 let repository = new AuthRepository();
 
 export const useAuthStore = defineStore('auth', () => {
