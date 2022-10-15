@@ -1,6 +1,9 @@
+import { getJson as getJsonCar } from "./carResource";
 import { setPagination } from "@/utils/createQueriesObject";
 import { getJson as getJsonCity } from "./cityResource";
-import {getJson as getJsonUser} from "./userResource"
+import { getJson as getJsonUser } from "./userResource";
+import getJsonColor from "./colorResource";
+
 export function getArray({ data, meta }) {
   const pagination = setPagination(meta);
   data = data.map((car) => getJson(car));
@@ -33,11 +36,11 @@ export const getJson = (data) => ({
   price: number,
   features: string,
   status: string,
-  // car: Car,
+  car: getJsonCar(data.car ? data.car : {}),
   // trim: Trim,
   // owner: Owner,
   city: getJsonCity(data.city ? data.city : {}),
-  // color: Color,
+  color: getJsonColor(data.color ? data.color : {}),
   color_id: number,
   thumbnail_300: string,
   thumbnail: string,
