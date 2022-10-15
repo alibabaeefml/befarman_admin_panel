@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from 'axios';
 import { getArray } from '../resources/statusResource';
 import url from '../url';
 

@@ -1,4 +1,4 @@
-export default getJsonBank = (data) => ({
+export default getJsonOwner = (data) => ({
   id: data.id,
   name: data.name,
   first_name: data.first_name,

@@ -2,7 +2,7 @@ import axios from 'axios'
 import url from '../url';
 import { getArray, getJson, setData } from '../resources/clientCarResource';
 import { setQueries } from '@/utils/createQueriesObject';
-export default class CarRepository {
+export default class ClientCarRepository {
     async index(data = {}) {
         const params = setQueries(data)
         const response = await axios.get(url('indexClientCar'), { params });
