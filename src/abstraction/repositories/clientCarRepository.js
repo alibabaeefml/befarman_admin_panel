@@ -1,6 +1,6 @@
 import axios from 'axios'
 import url from '../url';
-import { getArray, getJson, setData } from '../resources/carResource';
+import { getArray, getJson, setData } from '../resources/clientCarResource';
 import { setQueries } from '@/utils/createQueriesObject';
 export default class CarRepository {
     async index(data = {}) {

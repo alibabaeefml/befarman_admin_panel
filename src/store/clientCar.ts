@@ -1,13 +1,13 @@
-import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
-import Car from '@/types/clientCar'
-import Paginate, { defaultPaginate } from '@/types/paginate'
+import { defineStore } from "pinia";
+import { ref, computed } from "vue";
+import clientCar from "@/types/clientCar";
+import Paginate, { defaultPaginate } from "@/types/paginate";
 
-export const useCarStore = defineStore('car', () => {
-    const cars = ref < Car[] > ([])
-    const getCars = computed(() => cars.value)
+export const useClientCarStore = defineStore("clientCar", () => {
+  const clientCars = ref<clientCar[]>([]);
+  const getClientCars = computed(() => clientCars.value);
 
-    const paginate = ref < Paginate > (defaultPaginate)
+  const paginate = ref<Paginate>(defaultPaginate);
 
-    return { cars, getCars, paginate }
-})
+  return { clientCars, getClientCars, paginate };
+});

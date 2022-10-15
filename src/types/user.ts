@@ -1,5 +1,5 @@
 import Relative from "./relative";
-
+import Bank from "./bank";
 export default interface User {
   id: number;
   name: string;
@@ -28,7 +28,7 @@ export default interface User {
   location_type: string;
   work_phone: string;
   relatives: Relative;
-  bank: string;
+  bank: Bank;
   birthday: string;
   description: string;
   transactions_sum: number;
