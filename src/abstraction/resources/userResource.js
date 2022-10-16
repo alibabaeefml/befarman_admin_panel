@@ -1,7 +1,6 @@
-import getJsonBank from "./bankResource";
 import { getJsonRelatives } from "./relativeResource";
 
-export const getJson = (data) => ({
+export const getJsonUser = (data) => ({
   id: data.id,
   name: data.name,
   first_name: data.first_name,
@@ -28,7 +27,7 @@ export const getJson = (data) => ({
   location_type: data.location_type,
   work_phone: data.work_phone,
   relatives: getJsonRelatives(data.relatives ? data.relatives : {}),
-  bank: getJsonBank(data.bank ? data.bank : {}),
+  bank: data.bank,
   birthday: data.birthday,
   description: data.description,
   transactions_sum: data.transactions_sum,

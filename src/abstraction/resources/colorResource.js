@@ -1,5 +1,5 @@
 export function getArray(data) {
-  return data.map((color) => getJson(color));
+  return data.map((color) => getJsonColor(color));
 }
 
 export const getJsonColor = (data) => ({

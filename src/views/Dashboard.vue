@@ -1,5 +1,7 @@
 <script setup>
 import BaseTileItem from '@components/Global/Tiles/BaseTileItem.vue';
+import { useClientCar } from '@/composables/clientCar/clientCar';
+useClientCar().indexCar()
 </script>
 
 <template>

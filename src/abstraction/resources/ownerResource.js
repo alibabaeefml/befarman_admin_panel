@@ -1,4 +1,4 @@
-export default getJsonOwner = (data) => ({
+export const getJsonOwner = (data) => ({
   id: data.id,
   name: data.name,
   first_name: data.first_name,

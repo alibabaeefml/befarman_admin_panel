@@ -1,20 +1,20 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
-import Color from "@/types/color";
-import ColorRepository from "@/abstraction/repositories/colorRepository";
+import Province from "@/types/Province";
+import ProvinceRepository from "@/abstraction/repositories/provinceRepository";
 
-export const useColorStore = defineStore("color", () => {
-  const colors = ref<Color[]>([]);
-  const getColors = computed(() => colors.value);
+export const useProvinceStore = defineStore("province", () => {
+  const provinces = ref<Province[]>([]);
+  const getProvinces = computed(() => provinces.value);
 
-  const loadColors = async () => {
-    if (colors.value.length) {
-      return colors.value;
+  const loadProvinces = async () => {
+    if (provinces.value.length) {
+      return provinces.value;
     }
-    const repository = new ColorRepository();
-    colors.value = await repository.index();
-    return colors.value;
+    const repository = new ProvinceRepository();
+    provinces.value = await repository.index();
+    return provinces.value;
   };
   
-  return { colors, getColors, loadColors };
+  return { provinces, getProvinces, loadProvinces };
 });

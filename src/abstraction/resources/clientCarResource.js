@@ -1,10 +1,10 @@
 import { getJson as getJsonCar } from "./carResource";
 import { setPagination } from "@/utils/createQueriesObject";
 import { getJson as getJsonCity } from "./cityResource";
-import { getJson as getJsonUser } from "./userResource";
+import { getJsonUser } from "./userResource";
 import { getJsonColor } from "./colorResource";
 import { getJsonTrim } from "./trimResource";
-
+import {getJsonOwner} from "./ownerResource";
 export function getArray({ data, meta }) {
   const pagination = setPagination(meta);
   data = data.map((car) => getJson(car));
@@ -12,50 +12,50 @@ export function getArray({ data, meta }) {
 }
 
 export const getJson = (data) => ({
-  id: number,
+  id: data.id,
   user: getJsonUser(data.user ? data.user : {}),
-  user_id: number,
-  name: string,
-  painted: string,
-  car_number: string,
-  color_status: string,
-  made_at: number,
-  details: string,
-  car_usage: string,
-  status_id: number,
-  contract: string,
-  fuel: string,
-  changed_parts: string,
-  last_oil_change: number,
-  insurance_discount: number,
-  gps: string,
-  befarman_gps: number,
-  insurance: number,
-  body_insurance: number,
-  third_party_insurance: number,
-  original_price: number,
-  price: number,
-  features: string,
-  status: string,
+  user_id: data.user_id,
+  name: data.name,
+  painted: data.painted,
+  car_number: data.car_number,
+  color_status: data.color_status,
+  made_at: data.made_at,
+  details: data.details,
+  car_usage: data.car_usage,
+  status_id: data.status_id,
+  contract: data.contract,
+  fuel: data.fuel,
+  changed_parts: data.changed_parts,
+  last_oil_change: data.last_oil_change,
+  insurance_discount: data.insurance_discount,
+  gps: data.gps,
+  befarman_gps: data.befarman_gps,
+  insurance: data.insurance,
+  body_insurance: data.body_insurance,
+  third_party_insurance: data.third_party_insurance,
+  original_price: data.original_price,
+  price: data.price,
+  features: data.features,
+  status: data.status,
   car: getJsonCar(data.car ? data.car : {}),
   trim: getJsonTrim(data.trim ? data.trim : {}),
   owner: getJsonOwner(data.owner ? data.owner : {}),
   city: getJsonCity(data.city ? data.city : {}),
   color: getJsonColor(data.color ? data.color : {}),
-  color_id: number,
-  thumbnail_300: string,
-  thumbnail: string,
-  avg_vote: number,
-  is_rented: boolean,
-  car_delivery: boolean,
-  instant_booking: boolean,
-  fast_reserve: boolean,
-  gearbox: string,
-  city_id: number,
-  address: string,
-  car_price: number,
-  cost: number,
-  rent_cost: number,
+  color_id: data.color_id,
+  thumbnail_300: data.thumbnail_300,
+  thumbnail: data.thumbnail,
+  avg_vote: data.avg_vote,
+  is_rented: data.is_rented,
+  car_delivery: data.car_delivery,
+  instant_booking: data.instant_booking,
+  fast_reserve: data.fast_reserve,
+  gearbox: data.gearbox,
+  city_id: data.city_id,
+  address: data.address,
+  car_price: data.car_price,
+  cost: data.cost,
+  rent_cost: data.rent_cost,
 });
 
 export const setData = (data) => ({
