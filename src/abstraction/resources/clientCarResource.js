@@ -4,7 +4,7 @@ import { getJson as getJsonCity } from "./cityResource";
 import { getJsonUser } from "./userResource";
 import { getJsonColor } from "./colorResource";
 import { getJsonTrim } from "./trimResource";
-import {getJsonOwner} from "./ownerResource";
+import { getJsonStatusDetail } from "./statusDetailResource";
 export function getArray({ data, meta }) {
   const pagination = setPagination(meta);
   data = data.map((car) => getJson(car));
@@ -36,10 +36,11 @@ export const getJson = (data) => ({
   original_price: data.original_price,
   price: data.price,
   features: data.features,
-  status: data.status,
+  status_detail: getJsonStatusDetail(
+    data.status_detail ? data.status_detail : {}
+  ),
   car: getJsonCar(data.car ? data.car : {}),
   trim: getJsonTrim(data.trim ? data.trim : {}),
-  owner: getJsonOwner(data.owner ? data.owner : {}),
   city: getJsonCity(data.city ? data.city : {}),
   color: getJsonColor(data.color ? data.color : {}),
   color_id: data.color_id,

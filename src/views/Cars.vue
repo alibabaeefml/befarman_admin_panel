@@ -2,9 +2,10 @@
 import CarItem from "@components/Car/CarItem.vue"
 import AddCar from "@components/Car/AddCar.vue";
 import CarsFilter from "@components/Car/CarFilter.vue";
-import { useCar } from "@/composables/car/car"
+import { useCar } from "@/composables/car/car";
 import InfiniteScroll from "infinite-loading-vue3";
-const { indexCar, getCars, paginate } = useCar()
+
+const { indexCar, getCars, paginate } = useCar();
 indexCar()
 
 let loadingData = false

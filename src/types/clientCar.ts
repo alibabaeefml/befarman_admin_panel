@@ -2,9 +2,8 @@ import Trim from "./brand"; // both the same type
 import Car from "./car";
 import City from "./city";
 import Color from "./color";
-import Owner from "./owner";
 import User from "./user";
-import Status from "./status"
+import StatusDetail from "./statusDetail"
 
 export default interface clientCar {
   id: number,
@@ -31,10 +30,9 @@ export default interface clientCar {
   original_price: number,
   price: number,
   features: string,
-  status: Status,
+  status_detail: StatusDetail,
   car: Car,
   trim: Trim,
-  owner: Owner,
   city: City,
   color: Color,
   color_id: number,

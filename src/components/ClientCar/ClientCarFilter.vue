@@ -1,13 +1,16 @@
 <script setup>
 import Filters from '@components/Global/Filters/Filters.vue'
 import { ref } from '@vue/reactivity';
+import { getStatuses } from '@/composables/status/status';
 const years = ref([]);
 // update years array each year
 const year = new Date().getFullYear() - 621;
 for (let i = 1380; i <= year; i++) {
     years.value.push(i)
 };
-defineProps(['tab','statuses'])
+defineProps(['tab', 'statuses'])
+
+
 </script>
 
 <template>
@@ -25,7 +28,7 @@ defineProps(['tab','statuses'])
                 </v-select>
             </v-col>
             <v-col cols="12" md="3">
-                <v-select :disabled="tab !== 'one'" :items="statuses" item-title="name" prepend-icon="mdi-check"
+                <v-select :disabled="tab !== 'one'" :items="getStatuses" item-title="name" prepend-icon="mdi-check"
                     label="وضعیت" variant="underlined"></v-select>
             </v-col>
         </v-row>

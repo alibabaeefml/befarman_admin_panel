@@ -6,7 +6,6 @@ export default class ClientCarRepository {
     async index(data = {}) {
         const params = setQueries(data)
         const response = await axios.get(url('indexClientCar'), { params });
-        console.log(response)
         return getArray(response.data);
     }
 

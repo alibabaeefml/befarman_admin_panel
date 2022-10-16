@@ -1,7 +1,8 @@
 import { storeToRefs } from "pinia";
 import { useClientCarStore } from "@/store/clientCar";
 import ClientCarRepository from "@/abstraction/repositories/clientCarRepository";
-import defaultThumb from "@/assets/Images/avatars/car-avatar.jpg";
+
+
 export function useClientCar() {
   const store = useClientCarStore();
   const repository = new ClientCarRepository();
@@ -26,7 +27,6 @@ export function useClientCar() {
     store.$patch((state) => {
       state.paginate = pagination;
       state.clientCars = getClientCars.value.concat(data);
-      console.log(data);
     });
 
     return data;
@@ -44,6 +44,5 @@ export function useClientCar() {
     getClientCars,
     paginate,
     deleteCar,
-    defaultThumb,
   };
 }

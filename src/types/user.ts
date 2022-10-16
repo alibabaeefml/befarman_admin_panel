@@ -27,7 +27,7 @@ export default interface User {
   license_number: string;
   location_type: string;
   work_phone: string;
-  relatives: Relative;
+  relatives: Array<Relative>;
   bank: Bank;
   birthday: string;
   description: string;
