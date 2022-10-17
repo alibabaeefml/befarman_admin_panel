@@ -5,6 +5,8 @@ import { getJsonUser } from "./userResource";
 import { getJsonColor } from "./colorResource";
 import { getJsonTrim } from "./trimResource";
 import { getJsonStatusDetail } from "./statusDetailResource";
+import {getJson as getJsonBrand} from "./brandResource";
+
 export function getArray({ data, meta }) {
   const pagination = setPagination(meta);
   data = data.map((car) => getJson(car));
@@ -16,6 +18,7 @@ export const getJson = (data) => ({
   user: getJsonUser(data.user ? data.user : {}),
   user_id: data.user_id,
   name: data.name,
+  brand:getJsonBrand(data.brand?data.brand:{}),
   painted: data.painted,
   car_number: data.car_number,
   color_status: data.color_status,
@@ -60,10 +63,5 @@ export const getJson = (data) => ({
 });
 
 export const setData = (data) => ({
-  name_fa: data.name_fa,
-  name_en: data.name_en,
-  brand_id: data.brand_id,
-  body_type_id: data.body_type_id,
-  capacity: data.capacity,
-  file_batch_id: data.file_batch_id,
+
 });

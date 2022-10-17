@@ -11,10 +11,10 @@ const urls = {
   indexBodyType: "body-types",
 
   // client car
-  indexClientCar: "client-car",
-  storeClientCar: "client-car",
-  updateClientCar: "client-car/:car",
-  destroyClientCar: "client-car/:car",
+  indexClientCar: "admin/client-car",
+  storeClientCar: "admin/client-car",
+  updateClientCar: "admin/client-car/:car",
+  destroyClientCar: "admin/client-car/:car",
   indexStatus: "client-car-status",
   indexColor: "colors",
   indexProvince: "provinces",

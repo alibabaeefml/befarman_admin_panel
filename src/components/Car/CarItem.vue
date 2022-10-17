@@ -1,6 +1,6 @@
 <script setup>
 import { useCar } from "@/composables/car/car";
-const { deleteCar,defultThumb } = useCar();
+const { deleteCar,defaultThumb } = useCar();
 const props = defineProps(['car']);
 const car = props.car;
 </script>

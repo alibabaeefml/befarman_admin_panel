@@ -28,7 +28,7 @@ defineProps(['tab', 'statuses'])
                 </v-select>
             </v-col>
             <v-col cols="12" md="3">
-                <v-select :disabled="tab !== 'one'" :items="getStatuses" item-title="name" prepend-icon="mdi-check"
+                <v-select :disabled="tab !== 'one'" :items="getStatuses" item-title="name_fa" prepend-icon="mdi-check"
                     label="وضعیت" variant="underlined"></v-select>
             </v-col>
         </v-row>

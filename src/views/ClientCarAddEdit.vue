@@ -1,38 +1,23 @@
 <script setup>
 import DatePicker from 'vue3-persian-datetime-picker'
-import { ref } from '@vue/reactivity';
+import { ref, computed } from '@vue/reactivity';
+import { useRoute as route } from "vue-router";
+import { useClientCar } from '@/composables/clientCar/clientCar';
+import { storeToRefs } from "pinia/dist/pinia";
+const { getClientCars } = storeToRefs(useClientCar());
+
+const car = getClientCars.value.find(car => {
+    if (car.id == route().params.id) {
+        console.log(car)
+        return car
+    }
+});
+
 const getBrands = ref(['سمند', 'ال نود', 'پراید']);
 const crop_data = ref(null);
 const url = ref(null);
 const image = ref('');
-const car = ref({
-    gps: null,
-    insurance: [],
-    user_id: null,
-    brand_id: null,
-    car_id: null,
-    trim_id: null,
-    car_number: null,
-    color: null,
-    made_at: null,
-    car_usage: null,
-    color_status: null,
-    cost: null,
-    fuel: null,
-    last_oil_change: null,
-    insurance_discount: null,
-    details: null,
-    painted: null,
-    changed_parts: null,
-    status_id: 1,
-    depositTypes: [],
-    thumbnail: null,
-    images: [],
-    certificates: [],
-    cert_batch_id: null,
-    thumbnail_batch_id: null,
-    name: null,
-});
+
 const NewCarImage = ref('selectedCarImage');
 const dropzoneActive = ref(false);
 const fuels = ref(["بنزین", 'گاز', "دوگانه سوز", "هیبریدی",]);
@@ -55,16 +40,15 @@ const colors = ref([
                     <div v-if="image" style="width:100%">
                         <img :src="image" width="100%">
                     </div>
-                    <v-file-input @change="changeImage" v-model="car.image" label="آپلود کاور" variant="outlined"
-                        prepend-icon="mdi-image"></v-file-input>
+                    <v-file-input @change="changeImage" label="آپلود کاور" variant="outlined" prepend-icon="mdi-image">
+                    </v-file-input>
                 </v-col>
 
-
                 <v-col cols="12" lg="3" md="4">
-                    <v-select label="برند خودرو" :items="getBrands" item-value="id" prepend-icon="mdi-alpha-b-circle"
-                        v-model="car.brand_id" variant="underlined"></v-select>
+                    <v-select label="برند خودرو" :items="getBrands" v-model="car.brand.name_fa" item-value="id"
+                        prepend-icon="mdi-alpha-b-circle" variant="underlined"></v-select>
                 </v-col>
-                <v-col cols="12" lg="3" md="4">
+                <!-- <v-col cols="12" lg="3" md="4">
                     <v-select variant="underlined" :items="getBrands" type="text" label="مدل خودرو" v-model="car.car_id"
                         prepend-icon="mdi-car-info" :disabled="!car.brand_id">
                     </v-select>
@@ -78,7 +62,7 @@ const colors = ref([
 
                 <v-col cols="12" lg="3" md="4">
                     <v-autocomplete label="مالک خودرو" :items="getUsers" item-value="id" prepend-icon="mdi-account"
-                        v-model="car.user_id" variant="underlined" no-data-text=".مالک خودرو را جستجو کنید">
+                        v-model="car.user.name" variant="underlined" no-data-text=".مالک خودرو را جستجو کنید">
                     </v-autocomplete>
                 </v-col>
                 <v-col cols="12" lg="3" md="4">
@@ -113,12 +97,11 @@ const colors = ref([
                         v-model="car.color_status" variant="underlined"></v-select>
                 </v-col>
                 <v-col cols="12" lg="3" md="4">
-                    <v-select label="وضعیت جی پی اس" :items="['ندارد', 'دارد']"
-                        prepend-icon="mdi-crosshairs-gps" v-model="car.gps" variant="underlined"></v-select>
+                    <v-select label="وضعیت جی پی اس" :items="['ندارد', 'دارد']" prepend-icon="mdi-crosshairs-gps"
+                        v-model="car.gps" variant="underlined"></v-select>
                 </v-col>
                 <v-col cols="12">
-                    <v-checkbox 
-                    label="آیا مایل هستید بفرمان روی ماشین شما GPS نصب کند ؟">
+                    <v-checkbox label="آیا مایل هستید بفرمان روی ماشین شما GPS نصب کند ؟">
                     </v-checkbox>
                 </v-col>
                 <v-col cols="12" lg="3" md="4">
@@ -170,7 +153,7 @@ const colors = ref([
                 </v-col>
                 <v-col cols="12" md="6">
                     <date-picker label="آخرین تاریخ تعویض روغن" v-model="car.last_oil_change"></date-picker>
-                </v-col>
+                </v-col> -->
             </v-row>
         </v-card-text>
         <v-card-actions style="background-color: #ededed;" class="justify-center">

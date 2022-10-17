@@ -7,10 +7,11 @@ import ClientCarFilter from '@components/ClientCar/ClientCarFilter.vue';
 import ClientCarComments from '@components/ClientCar/ClientCarComments.vue';
 import { useClientCar } from '@/composables/clientCar/clientCar';
 import { storeToRefs } from "pinia/dist/pinia";
+import InfiniteScroll from "infinite-loading-vue3";
 
 
 useClientCar().indexCar();
-const { getClientCars } = storeToRefs(useClientCar());
+const { getClientCars,paginate } = storeToRefs(useClientCar());
 
 const tab = ref('one');
 const deleteConfirm = ref(false);
@@ -28,7 +29,7 @@ const infiniteCar = async ($state) => {
     data.pagination.page++
     loadingData = true
     try {
-        await indexCar(data)
+        await useClientCar().indexCar(data)
         if (paginate.page < paginate.pageCount) {
             $state.loaded();
         } else {
@@ -44,7 +45,7 @@ const infiniteCar = async ($state) => {
 
 <template>
     <div>
-        <ClientCarFilter :tab="tab" :statuses="statuses" />
+        <ClientCarFilter :tab="tab"/>
         <v-card>
             <v-tabs v-model="tab" color="secondary" fixed-tabs>
                 <v-tab value="two">خودرو های حذف شده</v-tab>
@@ -54,14 +55,14 @@ const infiniteCar = async ($state) => {
                 <v-window v-model="tab">
                     <v-window-item value="two">
                         <infinite-scroll @infinite-scroll="infiniteCar">
-                            <client-car-item v-for="car of getClientCars" :key="car.id" :car="car" :statuses="statuses"
+                            <client-car-item v-for="car of getClientCars" :key="car.id" :car="car" 
                                 :archived="true">
                             </client-car-item>
                         </infinite-scroll>
                     </v-window-item>
                     <v-window-item value="one">
                         <infinite-scroll @infinite-scroll="infiniteCar">
-                            <client-car-item v-for="car of getClientCars" :key="car.id" :car="car" :statuses="statuses"
+                            <client-car-item v-for="car of getClientCars" :key="car.id" :car="car" 
                                 @showDeleteModal="deleteConfirm = true" @showCommentsModal="commentsModal = true">
                             </client-car-item>
                         </infinite-scroll>

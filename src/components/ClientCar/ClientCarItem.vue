@@ -16,8 +16,8 @@ const rentCarActions = ref(false);
             <v-card-text style="direction:rtl;font-family: ym;">
                 <v-row class="align-center">
                     <v-col cols="12" md="3" xs="12" class="justify-center">
-                        <v-img :src="car.thumbnail ? car.thumbnail : defaultThumb"
-                         max-width="400" max-height="200" style="border-radius:10px" />
+                        <v-img :src="car.thumbnail ? car.thumbnail : defaultThumb" max-width="400" max-height="200"
+                            style="border-radius:10px" />
                     </v-col>
                     <v-col cols="12" md="3" sm="12">
                         <div class="d-flex flex-column">
@@ -30,12 +30,13 @@ const rentCarActions = ref(false);
 
                             <div class="mt-6">
                                 <v-select v-model="car.status_detail.name_fa"
-                                    :style="{ color: car.status_detail.color + '!important' }" :disabled="archived"
+                                    :style="{ color: car.status_detail.color + '!important' }"
+                                     :disabled="archived"
                                     label="وضعیت" :items="getStatuses" item-title="name_fa" variant="underlined">
                                 </v-select>
                             </div>
-                            <v-btn :to="{name:'CLIENT CAR DETAILS',params:{id:':id'}}" block
-                                prepend-icon="mdi-information" color="secondary" variant="outlined">جزئیات
+                            <v-btn :to="{name:'CLIENT CAR DETAILS',params:{id:':id'}}" block prepend-icon="mdi-unknown"
+                                color="secondary" variant="outlined">جزئیات
                                 خودرو
                             </v-btn>
 
@@ -79,7 +80,7 @@ const rentCarActions = ref(false);
                         <v-icon>mdi-delete</v-icon>
                         <v-tooltip activator="parent" location="right">حذف خودرو</v-tooltip>
                     </v-btn>
-                    <v-btn icon color="black" variant="elevated" :to="{name:'EDIT CLIENT CAR',params:{id:':id'}}">
+                    <v-btn icon color="black" variant="elevated" :to="{name:'EDIT CLIENT CAR',params:{id:car.id}}">
                         <v-icon>mdi-pencil</v-icon>
                         <v-tooltip activator="parent" location="left">ویرایش خودرو</v-tooltip>
                     </v-btn>
