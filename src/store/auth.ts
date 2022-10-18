@@ -15,7 +15,7 @@ export const useAuthStore = defineStore("auth", () => {
     return true;
   };
 
-  const login = async ({ phone, code }: {phone: string, code: string}) => {
+  const login = async ({ phone, code }: { phone: string; code: string }) => {
     const data = await repository.login({ phone, code });
 
     if (data.user) {

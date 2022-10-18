@@ -11,4 +11,4 @@ export declare interface Car {
   capacity: number | null;
   brand?: Brand;
   bodyType?: BodyType | null;
-};
+}

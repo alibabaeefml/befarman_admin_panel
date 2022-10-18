@@ -4,5 +4,5 @@ export declare interface StatusDetail {
   name_en: string;
   color: string;
   icon: string;
-  free:number;
+  free: number;
 }

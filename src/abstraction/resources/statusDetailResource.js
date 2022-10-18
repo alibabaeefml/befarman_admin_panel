@@ -1,5 +1,5 @@
 export function getArray(data) {
-  return data.map(status => getJsonStatusDetail(status));
+  return data.map((status) => getJsonStatusDetail(status));
 }
 
 export const getJsonStatusDetail = (data) => ({

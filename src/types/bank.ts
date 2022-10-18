@@ -3,4 +3,4 @@ export declare interface Bank {
   card_number: number;
   iban: string;
   name: string;
-};
+}

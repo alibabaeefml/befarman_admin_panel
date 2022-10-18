@@ -15,6 +15,6 @@ export const useColorStore = defineStore("color", () => {
     colors.value = await repository.index();
     return colors.value;
   };
-  
+
   return { colors, getColors, loadColors };
 });

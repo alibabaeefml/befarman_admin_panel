@@ -1,10 +1,10 @@
-import type {Trim} from "./trim"; // both the same type
-import type {Brand} from "./brand"; // both the same type
-import type {Car} from "./car";
-import type {City} from "./city";
-import type {Color} from "./color";
-import type {User} from "./user";
-import type {StatusDetail} from "./statusDetail"
+import type { Trim } from "./trim"; // both the same type
+import type { Brand } from "./brand"; // both the same type
+import type { Car } from "./car";
+import type { City } from "./city";
+import type { Color } from "./color";
+import type { User } from "./user";
+import type { StatusDetail } from "./statusDetail";
 
 export declare interface ClientCar {
   id: number;

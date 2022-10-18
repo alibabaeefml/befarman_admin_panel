@@ -1,57 +1,73 @@
 <script setup>
-import DatePicker from 'vue3-persian-datetime-picker'
-import { ref, computed } from '@vue/reactivity';
+import DatePicker from "vue3-persian-datetime-picker";
+import { ref, computed } from "vue";
 import { useRoute as route } from "vue-router";
-import { useClientCar } from '@/composables/clientCar/clientCar';
-import { useBrandStore } from '@/store/brand';
+import { useClientCar } from "@/composables/clientCar/clientCar";
+import { useBrandStore } from "@/store/brand";
 import { storeToRefs } from "pinia/dist/pinia";
-import { onBeforeMount } from 'vue';
-
+import { onBeforeMount } from "vue";
 
 const car = ref();
-onBeforeMount(useClientCar().showCar(route().params).then(data => car.value = data))
-
+onBeforeMount(
+  useClientCar()
+    .showCar(route().params)
+    .then((data) => (car.value = data))
+);
 
 useBrandStore().loadBrands();
 const { getBrands } = storeToRefs(useBrandStore());
 
-
-
 const crop_data = ref(null);
 const url = ref(null);
-const image = ref('');
+const image = ref("");
 
-const NewCarImage = ref('selectedCarImage');
+const NewCarImage = ref("selectedCarImage");
 const dropzoneActive = ref(false);
 
-const fuels = ref(["بنزین", 'گاز', "دوگانه سوز", "هیبریدی",]);
+const fuels = ref(["بنزین", "گاز", "دوگانه سوز", "هیبریدی"]);
 
 // update years array each year
 const years = ref([]);
 const year = new Date().getFullYear() - 621;
 for (let i = 1380; i <= year; i++) {
-    years.value.push(i)
-};
-
+  years.value.push(i);
+}
 </script>
 <template>
-    {{car}}
-    <v-card dir="rtl" class="ma-4 ym" :title="$route.meta.title" :subtitle="$route.name" prepend-icon="mdi-car-side">
-        <v-card-text style="padding: 20px;">
-            <v-row>
-                <v-col cols="12" lg="3" md="4">
-                    <div v-if="image" style="width:100%">
-                        <img :src="image" width="100%">
-                    </div>
-                    <v-file-input @change="changeImage" label="آپلود کاور" variant="outlined" prepend-icon="mdi-image">
-                    </v-file-input>
-                </v-col>
+  {{ car }}
+  <v-card
+    dir="rtl"
+    class="ma-4 ym"
+    :title="$route.meta.title"
+    :subtitle="$route.name"
+    prepend-icon="mdi-car-side"
+  >
+    <v-card-text style="padding: 20px">
+      <v-row>
+        <v-col cols="12" lg="3" md="4">
+          <div v-if="image" style="width: 100%">
+            <img :src="image" width="100%" />
+          </div>
+          <v-file-input
+            @change="changeImage"
+            label="آپلود کاور"
+            variant="outlined"
+            prepend-icon="mdi-image"
+          >
+          </v-file-input>
+        </v-col>
 
-                <v-col cols="12" lg="3" md="4">
-                    <v-select label="برند خودرو" :items="getBrands" item-title="name_fa" v-model="car.brand.name_fa"
-                        prepend-icon="mdi-alpha-b-circle" variant="underlined"></v-select>
-                </v-col>
-                <!-- <v-col cols="12" lg="3" md="4">
+        <v-col cols="12" lg="3" md="4">
+          <v-select
+            label="برند خودرو"
+            :items="getBrands"
+            item-title="name_fa"
+            v-model="car.brand.name_fa"
+            prepend-icon="mdi-alpha-b-circle"
+            variant="underlined"
+          ></v-select>
+        </v-col>
+        <!-- <v-col cols="12" lg="3" md="4">
                     <v-select variant="underlined" :items="getBrands" type="text" label="مدل خودرو" v-model="car.car_id"
                         prepend-icon="mdi-car-info" :disabled="!car.brand_id">
                     </v-select>
@@ -238,23 +254,35 @@ for (let i = 1380; i <= year; i++) {
                 <v-col cols="12" md="6">
                     <date-picker label="آخرین تاریخ تعویض روغن" v-model="car.last_oil_change"></date-picker>
                 </v-col> -->
-            </v-row>
-        </v-card-text>
-        <v-card-actions style="background-color: #ededed;" class="justify-center">
-            <router-link :to="{name:'clientCars'}" class="link">
-                <v-btn variant="elevated" color="pink" icon @click="$emit('toggleModal')" class="ma-1">
-                    <v-icon color="white">mdi-close</v-icon>
-                </v-btn>
-            </router-link>
-            <v-btn variant="elevated" color="cyan" icon class="ma-1">
-                <v-icon color="white">mdi-check</v-icon>
-            </v-btn>
-        </v-card-actions>
-    </v-card>
-    <v-btn :to="{ name: 'clientCars' }" class="add-btn" icon color="primary" size="large">
-        <v-icon>mdi-arrow-left</v-icon>
-        <v-tooltip activator="parent">بازگشت</v-tooltip>
-    </v-btn>
+      </v-row>
+    </v-card-text>
+    <v-card-actions style="background-color: #ededed" class="justify-center">
+      <router-link :to="{ name: 'clientCars' }" class="link">
+        <v-btn
+          variant="elevated"
+          color="pink"
+          icon
+          @click="$emit('toggleModal')"
+          class="ma-1"
+        >
+          <v-icon color="white">mdi-close</v-icon>
+        </v-btn>
+      </router-link>
+      <v-btn variant="elevated" color="cyan" icon class="ma-1">
+        <v-icon color="white">mdi-check</v-icon>
+      </v-btn>
+    </v-card-actions>
+  </v-card>
+  <v-btn
+    :to="{ name: 'clientCars' }"
+    class="add-btn"
+    icon
+    color="primary"
+    size="large"
+  >
+    <v-icon>mdi-arrow-left</v-icon>
+    <v-tooltip activator="parent">بازگشت</v-tooltip>
+  </v-btn>
 </template>
 <style scoped>
 .sub {

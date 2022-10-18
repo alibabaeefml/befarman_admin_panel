@@ -15,6 +15,6 @@ export const useProvinceStore = defineStore("province", () => {
     provinces.value = await repository.index();
     return provinces.value;
   };
-  
+
   return { provinces, getProvinces, loadProvinces };
 });
