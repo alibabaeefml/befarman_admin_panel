@@ -12,6 +12,7 @@ const urls = {
 
   // client car
   indexClientCar: "admin/client-car",
+  showClientCar: "admin/client-car/:car",
   storeClientCar: "admin/client-car",
   updateClientCar: "admin/client-car/:car",
   destroyClientCar: "admin/client-car/:car",

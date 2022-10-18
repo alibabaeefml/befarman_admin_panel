@@ -2,7 +2,6 @@ import { storeToRefs } from "pinia";
 import { useClientCarStore } from "@/store/clientCar";
 import ClientCarRepository from "@/abstraction/repositories/clientCarRepository";
 
-
 export function useClientCar() {
   const store = useClientCarStore();
   const repository = new ClientCarRepository();
@@ -11,8 +10,9 @@ export function useClientCar() {
 
   const updateCar = async (carId, carData) => {
     const car = await repository.update(carId, carData);
+
     const index = store.clientCars.findIndex((car) => car.id === carId);
-    store.clientCars[index] = car; 
+    store.clientCars[index] = car;
     return car;
   };
 
@@ -32,6 +32,10 @@ export function useClientCar() {
     return data;
   };
 
+  const showCar = async (data) => {
+    return await repository.show(data);
+  };
+
   const deleteCar = async (carId) => {
     let response = await repository.delete(carId);
     alert(response.status);
@@ -41,6 +45,7 @@ export function useClientCar() {
     updateCar,
     storeCar,
     indexCar,
+    showCar,
     getClientCars,
     paginate,
     deleteCar,

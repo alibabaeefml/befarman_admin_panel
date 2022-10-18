@@ -58,6 +58,7 @@ const submitForm = async () => {
 </script>
 
 <template>
+
     <base-modal name="add-car" max-width="600px" @open="openModal" :title="staticNames.name"
         :subtitle="staticNames.name_en" icon="mdi-car">
         <v-form @submit.prevent="submitForm">

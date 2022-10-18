@@ -30,6 +30,8 @@ export function useCar() {
     return data;
   };
 
+
+
   const deleteCar = async (carId) => {
     let response = await repository.delete(carId);
     alert(response.status);
