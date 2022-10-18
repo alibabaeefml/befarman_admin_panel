@@ -1,23 +1,24 @@
 import { storeToRefs } from "pinia";
-import { useCarStore } from "@/store/car";
-import CarRepository from "@/abstraction/repositories/carRepository";
-import defaultThumb from "@/assets/Images/avatars/car-avatar.jpg";
-export function useCar() {
-  const store = useCarStore();
-  const repository = new CarRepository();
+import { useClientCarStore } from "@/store/clientCar";
+import ClientCarRepository from "@/abstraction/repositories/clientCarRepository";
 
-  const { getCars, paginate } = storeToRefs(store);
+export function useClientCar() {
+  const store = useClientCarStore();
+  const repository = new ClientCarRepository();
+
+  const { getClientCars, paginate } = storeToRefs(store);
 
   const updateCar = async (carId, carData) => {
     const car = await repository.update(carId, carData);
-    const index = store.cars.findIndex((car) => car.id === carId);
-    store.cars[index] = car;
+
+    const index = store.clientCars.findIndex((car) => car.id === carId);
+    store.clientCars[index] = car;
     return car;
   };
 
   const storeCar = async (carData) => {
     const car = await repository.store(carData);
-    store.cars.push(car);
+    store.clientCars.push(car);
     return car;
   };
 
@@ -25,12 +26,15 @@ export function useCar() {
     const { data, pagination } = await repository.index(paginate);
     store.$patch((state) => {
       state.paginate = pagination;
-      state.cars = getCars.value.concat(data);
+      state.clientCars = getClientCars.value.concat(data);
     });
+
     return data;
   };
 
-
+  const showCar = async (data) => {
+    return await repository.show(data);
+  };
 
   const deleteCar = async (carId) => {
     let response = await repository.delete(carId);
@@ -41,9 +45,9 @@ export function useCar() {
     updateCar,
     storeCar,
     indexCar,
-    getCars,
+    showCar,
+    getClientCars,
     paginate,
     deleteCar,
-    defaultThumb,
   };
 }

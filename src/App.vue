@@ -192,7 +192,7 @@ hr {
 .enSub {
   font-family: mb;
   letter-spacing: 5px;
-  font-size: 16px;
+  font-size: 25px;
   color: rgba(0, 0, 0, 0.3);
 }
 

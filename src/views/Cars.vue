@@ -4,18 +4,19 @@ import AddCar from "@components/Car/AddCar.vue";
 import CarsFilter from "@components/Car/CarFilter.vue";
 import { useCar } from "@/composables/car/car";
 import InfiniteScroll from "infinite-loading-vue3";
+
 const { indexCar, getCars, paginate } = useCar();
-indexCar();
+indexCar()
 
 let loadingData = false;
 const infiniteCar = async ($state) => {
   if (loadingData || paginate.page >= paginate.pageCount) {
     return false;
   }
-  const data = { pagination: {} };
-  data["pagination"] = { ...paginate.value };
-  data.pagination.page++;
-  loadingData = true;
+  const data = { pagination: {} }
+  data['pagination'] = { ...paginate.value }
+  data.pagination.page++
+  loadingData = true
   try {
     await indexCar(data);
     if (paginate.page < paginate.pageCount) {

@@ -1,7 +1,7 @@
 <script setup>
 import { useCar } from "@/composables/car/car";
 const { deleteCar } = useCar();
-const props = defineProps({
+defineProps({
   car: Object,
 });
 </script>
