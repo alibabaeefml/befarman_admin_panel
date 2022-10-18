@@ -1,65 +1,64 @@
 <template>
-    <div class="upload-example width-full">
+  <div class="upload-example width-full">
+    <Cropper
+      :class="{ 'upload-example-cropper': true, cropper: true }"
+      :canvas="false"
+      :check-orientation="false"
+      :stencil-props="stencilProps"
+      @change="onChangeCropper"
+      :src="image"
+      ref="cropper"
+      v-if="editImage || isAddMode"
+    />
 
-      <Cropper 
-      :class="{ 'upload-example-cropper': true, 'cropper': true }"
-        :canvas="false"
-        :check-orientation="false"
-        :stencil-props="stencilProps"
-        @change="onChangeCropper"
-        :src="image"
-        ref="cropper"
-        v-if="editImage || isAddMode"
-      />
-
-      <div class="chosen__image" v-else>
-        <img :src="thumbnail" alt="thumbnail" />
-      </div>
-      <div class="button-wrapper">
-        <v-btn
-          depressed
-          @click.native="$refs.file.click()"
-          large
-          :color="color"
-          dark
-          v-if="isAddMode || editImage"
-        >
-          <input
-            type="file"
-            ref="file"
-            v-show="false"
-            @change="uploadImage($event)"
-            accept="image/*"
-          />
-          <v-icon dark size="28">{{ icon }}</v-icon>
-          <div class="text-right">
-            <div class="name">{{ name }}</div>
-            <div class="name_en">{{ name_en }}</div>
-          </div>
-        </v-btn>
-        <v-btn
-          @click.native="editImage = true"
-          large
-          :color="color"
-          dark
-          depressed
-          v-else
-        >
-          <input
-            type="file"
-            ref="file"
-            v-show="false"
-            @change="uploadImage($event)"
-            accept="image/*"
-          />
-          <v-icon dark size="28">{{ edit_icon }}</v-icon>
-          <div class="text-right">
-            <div class="name">{{ edit_name }}</div>
-            <div class="name_en">{{ edit_name_en }}</div>
-          </div>
-        </v-btn>
-      </div>
+    <div class="chosen__image" v-else>
+      <img :src="thumbnail" alt="thumbnail" />
     </div>
+    <div class="button-wrapper">
+      <v-btn
+        depressed
+        @click.native="$refs.file.click()"
+        large
+        :color="color"
+        dark
+        v-if="isAddMode || editImage"
+      >
+        <input
+          type="file"
+          ref="file"
+          v-show="false"
+          @change="uploadImage($event)"
+          accept="image/*"
+        />
+        <v-icon dark size="28">{{ icon }}</v-icon>
+        <div class="text-right">
+          <div class="name">{{ name }}</div>
+          <div class="name_en">{{ name_en }}</div>
+        </div>
+      </v-btn>
+      <v-btn
+        @click.native="editImage = true"
+        large
+        :color="color"
+        dark
+        depressed
+        v-else
+      >
+        <input
+          type="file"
+          ref="file"
+          v-show="false"
+          @change="uploadImage($event)"
+          accept="image/*"
+        />
+        <v-icon dark size="28">{{ edit_icon }}</v-icon>
+        <div class="text-right">
+          <div class="name">{{ edit_name }}</div>
+          <div class="name_en">{{ edit_name_en }}</div>
+        </div>
+      </v-btn>
+    </div>
+  </div>
 </template>
 <script>
 // Cropper
@@ -69,7 +68,7 @@ import "vue-advanced-cropper/dist/style.css";
 // File Repository
 import FileRepository from "@/abstraction/repositories/fileRepository";
 const repository = new FileRepository();
-export default defineComponent ({
+export default defineComponent({
   props: {
     name: {
       default: "آپلود عکس",
@@ -144,7 +143,7 @@ export default defineComponent ({
     },
     image() {
       if (this.mainImage && !this.changedImage) {
-          return this.mainImage;
+        return this.mainImage;
       }
       return this.thumbnail;
     },
@@ -247,8 +246,8 @@ export default defineComponent ({
   text-align: center;
 }
 .chosen__image img {
-    max-width: 100%;
-    max-height: 300px;
+  max-width: 100%;
+  max-height: 300px;
 }
 .button-wrapper {
   margin-top: 10px;
@@ -257,4 +256,3 @@ export default defineComponent ({
   text-align: center;
 }
 </style>
-

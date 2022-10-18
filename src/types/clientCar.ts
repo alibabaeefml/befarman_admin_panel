@@ -1,5 +1,1 @@
-interface clientCar {
-
-}
-
-export default clientCar;
+export declare interface ClientCar {}

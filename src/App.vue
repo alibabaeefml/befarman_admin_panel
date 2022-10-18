@@ -1,11 +1,6 @@
-<script>
-export default {
-  name: 'saeid'
-}
-</script>
 <script setup>
-import TheToolbar from "@components/Global/Toolbar/TheToolbar.vue";
-import { computed, ref } from "@vue/runtime-core";
+import TheToolbar from "@/components/Global/Toolbar/TheToolbar.vue";
+import { computed, ref } from "vue";
 import { useRoute as route } from "vue-router";
 import { useModal } from "@/composables/modal/modal.js";
 
@@ -13,21 +8,28 @@ useModal();
 
 const currentPath = computed(() => route().path);
 const links = ref([
-  'Home',
-  'About Us',
-  'Team',
-  'Services',
-  'Blog',
-  'Contact Us',
+  "Home",
+  "About Us",
+  "Team",
+  "Services",
+  "Blog",
+  "Contact Us",
 ]);
 </script>
 <template>
   <v-app>
-    <TheToolbar :currentPath="currentPath" v-if="currentPath!='/login'"/>
-    <RouterView  />
-    <v-footer class="bg-grey-lighten-1" v-if="currentPath!='/login'">
+    <TheToolbar :currentPath="currentPath" v-if="currentPath != '/login'" />
+    <RouterView />
+    <v-footer class="bg-grey-lighten-1" v-if="currentPath != '/login'">
       <v-row justify="center" no-gutters>
-        <v-btn v-for="link in links" :key="link" color="white" variant="text" class="mx-2" rounded="xl">
+        <v-btn
+          v-for="link in links"
+          :key="link"
+          color="white"
+          variant="text"
+          class="mx-2"
+          rounded="xl"
+        >
           {{ link }}
         </v-btn>
         <v-col class="text-center text-white mt-4" cols="12">
@@ -64,7 +66,6 @@ const links = ref([
   src: url(./assets/Fonts/Montserrat-Medium.ttf);
 }
 
-
 @font-face {
   font-family: mb;
   src: url(./assets/Fonts/Montserrat-Bold.ttf);
@@ -84,7 +85,6 @@ const links = ref([
 }
 @keyframes rotate {
   from {
-    
   }
 
   to {
@@ -93,7 +93,6 @@ const links = ref([
 }
 @keyframes rotateX {
   from {
-    
   }
 
   to {
@@ -124,7 +123,7 @@ button {
 hr {
   margin-left: 5%;
   width: 90%;
-  opacity: .8;
+  opacity: 0.8;
 }
 
 ::-webkit-scrollbar {
@@ -135,8 +134,6 @@ hr {
   background: black;
   border-radius: 50px;
 }
-
-
 
 /* css classes */
 .mxb {
@@ -207,20 +204,20 @@ hr {
   display: flex !important;
 }
 
-.actionsGroup>* {
-  animation: slide-x .2s;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, .5) !important;
+.actionsGroup > * {
+  animation: slide-x 0.2s;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5) !important;
 }
 
 .rtl-icon i {
   transform: rotateY(180deg);
 }
 
-.mdi-chevron-down{
-  animation: rotate .2s;
+.mdi-chevron-down {
+  animation: rotate 0.2s;
 }
-.mdi-chevron-up{
-  animation: rotateX .2s;
+.mdi-chevron-up {
+  animation: rotateX 0.2s;
 }
 /* vuetify classes */
 .v-list {
@@ -257,7 +254,7 @@ hr {
 .v-tooltip {
   font-family: ym;
 }
-.v-overlay__content{
-    min-width: 200px!important;
+.v-overlay__content {
+  min-width: 200px !important;
 }
 </style>

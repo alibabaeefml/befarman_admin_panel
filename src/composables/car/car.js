@@ -27,7 +27,7 @@ export function useCar() {
       state.paginate = pagination;
       state.cars = getCars.value.concat(data);
     });
-
+    console.log(getCars.value);
     return data;
   };
 
@@ -35,7 +35,6 @@ export function useCar() {
     let response = await repository.delete(carId);
     alert(response.status);
   };
-  
 
   return {
     updateCar,
