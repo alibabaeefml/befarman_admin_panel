@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from "vue";
 import defaultThumb from "@/assets/Images/avatars/car-avatar.jpg";
 import BaseModal from "../Global/BaseModal/BaseModal.vue";
 defineEmits(["toggleModal"]);

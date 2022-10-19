@@ -4,7 +4,7 @@ import type { Car } from "./car";
 import type { City } from "./city";
 import type { Color } from "./color";
 import type { User } from "./user";
-import type { StatusDetail } from "./statusDetail";
+import type { ClientCarStatus } from "./clientCarStatus";
 
 export declare interface ClientCar {
   id: number;
@@ -31,7 +31,8 @@ export declare interface ClientCar {
   original_price: number;
   price: number;
   features: string;
-  status_detail: StatusDetail;
+  clientCarStatus?: ClientCarStatus;
+  clientCarStatuses?: ClientCarStatus[];
   car: Car;
   trim: Trim;
   city: City;

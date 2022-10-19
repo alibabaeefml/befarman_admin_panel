@@ -18,7 +18,7 @@ const actions = ref(false);
             <h2>09000000000</h2>
             <v-btn
               class="ym"
-              :to="{ name: 'USER DETAILS', params: { id: ':id' } }"
+              :to="{ name: 'userDetails', params: { id: ':id' } }"
               block
               prepend-icon="mdi-account-details"
               color="secondary"
@@ -93,7 +93,7 @@ const actions = ref(false);
             icon
             color="black"
             variant="elevated"
-            :to="{ name: 'EDIT USER', params: { id: ':id' } }"
+            :to="{ name: 'editUser', params: { id: ':id' } }"
           >
             <v-icon>mdi-pencil</v-icon>
             <v-tooltip activator="parent" location="bottom"

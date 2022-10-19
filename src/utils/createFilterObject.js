@@ -1,7 +1,7 @@
 const createFilterObject = (filters) => {
   const filterObject = {};
   for (const key in filters) {
-    if (filters.hasOwnProperty(key)) {
+    if (Object.prototype.hasOwnProperty.call(filters, key)) {
       if (filters[key] && typeof filters[key]["type"] !== "undefined") {
         let filterValue = window[filters[key]["type"]](filters[key]);
         if (filterValue) {
@@ -14,24 +14,11 @@ const createFilterObject = (filters) => {
   }
   const filtersData = {};
   for (var filter in filterObject) {
-    if (filterObject.hasOwnProperty(filter)) {
+    if (Object.prototype.hasOwnProperty.call(filterObject, filter)) {
       filtersData[`filters[${filter}]`] = filterObject[filter];
     }
   }
   return filtersData;
-};
-window["between"] = function (filter) {
-  let value = null;
-  if (filter.val1 && filter.val2) {
-    value = `<${filter.val1},${filter.val2}>`;
-  } else if (filter.val1) {
-    filter.val = filter.val1;
-    value = greater(filter);
-  } else if (filter.val2) {
-    filter.val = filter.val2;
-    value = less(filter);
-  }
-  return value;
 };
 window["greater"] = function (filter) {
   let value = null;
@@ -47,7 +34,19 @@ window["less"] = function (filter) {
   }
   return value;
 };
-
+window["between"] = function (filter) {
+  let value = null;
+  if (filter.val1 && filter.val2) {
+    value = `<${filter.val1},${filter.val2}>`;
+  } else if (filter.val1) {
+    filter.val = filter.val1;
+    value = window.greater(filter);
+  } else if (filter.val2) {
+    filter.val = filter.val2;
+    value = window.less(filter);
+  }
+  return value;
+};
 window["like"] = function (filter) {
   let value = null;
   if (filter.val !== null) {

@@ -1,6 +1,5 @@
 <script setup>
 import Filters from "@components/Global/Filters/Filters.vue";
-import { ref } from "vue";
 </script>
 
 <template>

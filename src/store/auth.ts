@@ -3,8 +3,9 @@ import { ref } from "vue";
 import AuthRepository from "@/abstraction/repositories/authRepository";
 import StoreManagement from "@/utils/store-management";
 import ApiService from "@/services/api.services";
-import type { UserAuth } from "@/types/user";
+import type { UserAuth } from "@/types/userAuth";
 const repository = new AuthRepository();
+import router from "@/router";
 
 export const useAuthStore = defineStore("auth", () => {
   const user = ref<UserAuth | null>(StoreManagement.get("user"));
@@ -30,7 +31,7 @@ export const useAuthStore = defineStore("auth", () => {
       ApiService.setAuthHeader(data.token);
 
       // redirect
-      window.location.href = "/dashboard";
+      router.push({ name: "dashboard" });
     }
   };
 
@@ -40,6 +41,7 @@ export const useAuthStore = defineStore("auth", () => {
     token.value = null;
     StoreManagement.remove("user");
     StoreManagement.remove("token", "cookie");
+    router.push({ name: "login" });
   };
 
   return { sendCode, login, logout, user, token };

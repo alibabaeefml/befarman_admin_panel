@@ -4,7 +4,10 @@ import { getJson as getJsonCity } from "./cityResource";
 import { getJsonUser } from "./userResource";
 import { getJsonColor } from "./colorResource";
 import { getJsonTrim } from "./trimResource";
-import { getJsonStatusDetail } from "./statusDetailResource";
+import {
+  getJsonClientCarStatus,
+  getArrayClientCarStatus,
+} from "./clientCarStatusResource";
 import { getJson as getJsonBrand } from "./brandResource";
 
 export function getArray({ data, meta }) {
@@ -39,8 +42,11 @@ export const getJson = (data) => ({
   original_price: data.original_price,
   price: data.price,
   features: data.features,
-  status_detail: getJsonStatusDetail(
-    data.status_detail ? data.status_detail : {}
+  clientCarStatus: getJsonClientCarStatus(
+    data.clientCarStatus ? data.clientCarStatus : {}
+  ),
+  clientCarStatuses: getArrayClientCarStatus(
+    data.clientCarStatuses ? data.clientCarStatuses : []
   ),
   car: getJsonCar(data.car ? data.car : {}),
   trim: getJsonTrim(data.trim ? data.trim : {}),
@@ -62,4 +68,4 @@ export const getJson = (data) => ({
   rent_cost: data.rent_cost,
 });
 
-export const setData = (data) => ({});
+export const setData = () => ({});

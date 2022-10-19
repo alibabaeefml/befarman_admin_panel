@@ -1,6 +1,6 @@
 <script setup>
 import { useCar } from "@/composables/car/car";
-const { deleteCar } = useCar();
+const { deleteCar, defaultThumb } = useCar();
 defineProps({
   car: Object,
 });
@@ -8,7 +8,7 @@ defineProps({
 <template>
   <v-col cols="12" md="3" sm="6">
     <v-card>
-      <v-img :src="car.thumbnail"></v-img>
+      <v-img :lazy-src="defaultThumb" :src="car.thumbnail"></v-img>
       <v-card-text>
         <div>
           <h1 class="ym">{{ car.name_fa }}</h1>

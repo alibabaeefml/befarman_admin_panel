@@ -1,5 +1,4 @@
 <script setup>
-import defaultThumb from "@/assets/Images/avatars/car-avatar.jpg";
 import { computed, ref } from "vue";
 import { useDisplay } from "vuetify/lib/framework.mjs";
 defineProps(["request", "archived"]);

@@ -3,28 +3,31 @@ import CarItem from "@components/Car/CarItem.vue";
 import AddCar from "@components/Car/AddCar.vue";
 import CarsFilter from "@components/Car/CarFilter.vue";
 import { useCar } from "@/composables/car/car";
+import { ref } from "vue";
 import InfiniteScroll from "infinite-loading-vue3";
 
 const { indexCar, getCars, paginate } = useCar();
 indexCar();
 
+const noResult = ref(false);
 let loadingData = false;
-const infiniteCar = async ($state) => {
-  if (loadingData || paginate.page >= paginate.pageCount) {
-    return false;
+const infiniteCar = async () => {
+  if (loadingData || paginate.value.page >= paginate.value.pageCount) {
+    if (paginate.value.page >= paginate.value.pageCount) {
+      noResult.value = true;
+    }
+    return true;
   }
   const data = { pagination: {} };
   data["pagination"] = { ...paginate.value };
   data.pagination.page++;
   loadingData = true;
   try {
-    await indexCar(data);
-    if (paginate.page < paginate.pageCount) {
-      $state.loaded();
-    } else {
-      $state.complete();
+    if (paginate.value.page < paginate.value.pageCount) {
+      await indexCar(data);
     }
   } catch (e) {
+    console.log(e);
   } finally {
     loadingData = false;
   }
@@ -36,13 +39,14 @@ const infiniteCar = async ($state) => {
     <infinite-scroll
       class="v-row"
       style="padding: 20px"
+      :noResult="noResult"
       @infinite-scroll="infiniteCar"
     >
       <CarItem v-for="car in getCars" :key="car.id" :car="car" />
     </infinite-scroll>
     <v-btn
       size="x-large"
-      class="add-btn"
+      class="add-btn position-fixed"
       @click="$_openModal('add-car')"
       icon
       color="secondary"

@@ -8,8 +8,9 @@ import { useClientCar } from "@/composables/clientCar/clientCar";
 import { storeToRefs } from "pinia/dist/pinia";
 import InfiniteScroll from "infinite-loading-vue3";
 
-useClientCar().indexCar();
-const { getClientCars, paginate } = storeToRefs(useClientCar());
+const clientCar = useClientCar();
+const { getClientCars, paginate } = storeToRefs(clientCar);
+clientCar.indexCar();
 
 const tab = ref("one");
 const deleteConfirm = ref(false);
@@ -26,13 +27,14 @@ const infiniteCar = async ($state) => {
   data.pagination.page++;
   loadingData = true;
   try {
-    await useClientCar().indexCar(data);
+    await clientCar.indexCar(data);
     if (paginate.page < paginate.pageCount) {
       $state.loaded();
     } else {
       $state.complete();
     }
   } catch (e) {
+    console.log(e);
   } finally {
     loadingData = false;
   }
@@ -51,31 +53,29 @@ const infiniteCar = async ($state) => {
         <v-window v-model="tab">
           <v-window-item value="two">
             <infinite-scroll @infinite-scroll="infiniteCar">
-              <client-car-item
-                v-for="car of getClientCars"
-                :key="car.id"
-                :car="car"
+              <ClientCarItem
+                v-for="clientCar of getClientCars"
+                :key="clientCar.id"
+                :client-car="clientCar"
                 :archived="true"
-              >
-              </client-car-item>
+              />
             </infinite-scroll>
           </v-window-item>
           <v-window-item value="one">
             <infinite-scroll @infinite-scroll="infiniteCar">
-              <client-car-item
-                v-for="car of getClientCars"
-                :key="car.id"
-                :car="car"
+              <ClientCarItem
+                v-for="clientCar of getClientCars"
+                :key="clientCar.id"
+                :client-car="clientCar"
                 @showDeleteModal="deleteConfirm = true"
                 @showCommentsModal="commentsModal = true"
-              >
-              </client-car-item>
+              />
             </infinite-scroll>
           </v-window-item>
         </v-window>
       </v-card-text>
     </v-card>
-    <router-link :to="{ name: 'ADD CLIENT CAR' }" class="link">
+    <router-link :to="{ name: 'addClientCar' }" class="link">
       <v-btn size="x-large" class="add-btn" icon color="secondary">
         <v-icon color="white">mdi-plus</v-icon>
       </v-btn>

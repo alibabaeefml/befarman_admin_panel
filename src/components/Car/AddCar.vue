@@ -16,7 +16,7 @@ const { getBrands } = storeToRefs(brandStore);
 const { getBodyTypes } = storeToRefs(bodyTypeStore);
 const { loadBrands } = brandStore;
 const { loadBodyTypes } = bodyTypeStore;
-const { storeCar, updateCar, defaultThumb } = useCar();
+const { storeCar, updateCar } = useCar();
 
 loadBrands();
 loadBodyTypes();
@@ -48,9 +48,6 @@ const cropper = ref(null);
 
 const submitForm = async () => {
   await cropper.value.upload();
-  if (!form.value.thumbnail) {
-    form.value.thumbnail = defaultThumb;
-  }
   if (form.value.id) {
     await updateCar(form.value.id, form.value);
   } else {
@@ -141,13 +138,7 @@ const submitForm = async () => {
         <v-btn variant="elevated" color="pink" icon @click="$_closeModal()">
           <v-icon color="white">mdi-close</v-icon>
         </v-btn>
-        <v-btn
-          variant="elevated"
-          type="submit"
-          color="cyan"
-          icon
-          @click="submitForm"
-        >
+        <v-btn variant="elevated" type="submit" color="cyan" icon>
           <v-icon color="white">mdi-check</v-icon>
         </v-btn>
       </v-card-actions>

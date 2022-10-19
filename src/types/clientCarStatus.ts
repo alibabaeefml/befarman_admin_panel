@@ -1,4 +1,4 @@
-export declare interface StatusDetail {
+export declare interface ClientCarStatus {
   id: number;
   name: string;
   name_en: string;
