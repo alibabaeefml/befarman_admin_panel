@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref } from "vue";
 import { useDisplay } from "vuetify/lib/framework.mjs";
-import { isMobile } from "@/plugins/isMobile";
+import { isMobile } from "@/utils/isMobile";
 const props = defineProps(["icon", "title", "subtitle"]);
 const sm = computed(() => useDisplay().smAndDown.value);
 </script>

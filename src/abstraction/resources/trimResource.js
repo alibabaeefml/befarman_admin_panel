@@ -1,5 +1,5 @@
 export function getArray(data) {
-  return data.map((trim) => getJson(trim));
+  return data.map((trim) => getJsonTrim(trim));
 }
 
 export const getJsonTrim = (data) => ({

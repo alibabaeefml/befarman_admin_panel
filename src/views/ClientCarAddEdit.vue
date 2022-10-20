@@ -4,18 +4,38 @@ import { ref, computed } from "vue";
 import { useRoute as route } from "vue-router";
 import { useClientCar } from "@/composables/clientCar/clientCar";
 import { useBrandStore } from "@/store/brand";
+import { useTrimStore } from "@/store/trim";
 import { storeToRefs } from "pinia/dist/pinia";
-import { onBeforeMount } from "vue";
+import { onBeforeMount, onUpdated } from "vue";
 
 const car = ref();
-onBeforeMount(
+const carModels = ref([]);
+const { getBrands } = storeToRefs(useBrandStore());
+
+// filter car models based on selected brand
+
+onBeforeMount(() => {
+  // fetch car object by id
   useClientCar()
     .showCar(route().params)
-    .then((data) => (car.value = data))
-);
+    .then((data) => (car.value = data));
 
-useBrandStore().loadBrands();
-const { getBrands } = storeToRefs(useBrandStore());
+  // fetch all brands
+  useBrandStore().loadBrands();
+
+  // useClientCar()
+  //     .showCar({id: car.value.brand.id})
+  //     .then((data) => {
+
+  //       carModels.value = data.car.name_fa});
+});
+
+console.log(car.value);
+// onUpdated(updateModels);
+
+// fetch all trims
+useTrimStore().loadTrims();
+const { getTrims } = storeToRefs(useTrimStore());
 
 const crop_data = ref(null);
 const url = ref(null);
@@ -34,7 +54,7 @@ for (let i = 1380; i <= year; i++) {
 }
 </script>
 <template>
-  {{ car }}
+  <!-- {{car.brand.id}} -->
   <v-card
     dir="rtl"
     class="ma-4 ym"
@@ -44,6 +64,7 @@ for (let i = 1380; i <= year; i++) {
   >
     <v-card-text style="padding: 20px">
       <v-row>
+        <!-- 
         <v-col cols="12" lg="3" md="4">
           <div v-if="image" style="width: 100%">
             <img :src="image" width="100%" />
@@ -67,14 +88,17 @@ for (let i = 1380; i <= year; i++) {
             variant="underlined"
           ></v-select>
         </v-col>
-        <!-- <v-col cols="12" lg="3" md="4">
-                    <v-select variant="underlined" :items="getBrands" type="text" label="مدل خودرو" v-model="car.car_id"
-                        prepend-icon="mdi-car-info" :disabled="!car.brand_id">
+       <v-col cols="12" lg="3" md="4">
+                    <v-select variant="underlined" :items="carModels" item-title="name_fa"
+                     type="text" label="مدل خودرو"
+                     v-model="car.car.name_fa"
+                        prepend-icon="mdi-car-info" :disabled="!car.brand.name_fa">
                     </v-select>
                 </v-col>
                 <v-col cols="12" lg="3" md="4">
-                    <v-select variant="underlined" :items="getBrands" type="text" label="تریم" v-model="car.trim_id"
-                        prepend-icon="mdi-car-info" :disabled="!car.car_id">
+                    <v-select variant="underlined" :items="getTrims" item-title="name_fa" type="text" label="تریم"
+                     v-model="car.trim_id"
+                        prepend-icon="mdi-car-info" :disabled="!car.brand.name_fa">
                     </v-select>
                 </v-col>
 
