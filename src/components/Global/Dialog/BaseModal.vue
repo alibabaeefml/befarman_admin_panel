@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onBeforeUnmount, computed, getCurrentInstance } from "vue";
 import { useModalStore } from "@/store/modal";
-import BaseHeader from "../BaseModal/BaseHeader.vue";
+import BaseHeader from "./BaseHeader.vue";
 
 const modalStore = useModalStore();
 const { getModal, isModal, closeModal } = modalStore;
@@ -13,9 +13,9 @@ const props = defineProps({
   width: { default: null },
   maxWidth: { default: null },
   name: { default: null },
-  title: {},
-  subtitle: {},
-  icon: {},
+  title: {default: 'بفرمان'},
+  subtitle: {default: 'befarman'},
+  icon: {default: 'mdi-car'},
   transition: { default: "slide-x-transition" },
 });
 const isOpenModal = ref(false);

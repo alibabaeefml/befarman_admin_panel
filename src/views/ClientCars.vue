@@ -4,6 +4,7 @@ import AcceptCarArchive from "@components/ClientCar/AcceptCarArchive.vue";
 import { ref } from "vue";
 import ClientCarFilter from "@components/ClientCar/ClientCarFilter.vue";
 import ClientCarComments from "@components/ClientCar/ClientCarComments.vue";
+import EvaluationInfo from "@/components/ClientCar/EvaluationInfo.vue";
 import { useClientCar } from "@/composables/clientCar/clientCar";
 import { storeToRefs } from "pinia/dist/pinia";
 import InfiniteScroll from "infinite-loading-vue3";
@@ -88,5 +89,6 @@ const infiniteCar = async ($state) => {
       :dialog="commentsModal"
       @toggle-modal="commentsModal = false"
     />
+    <EvaluationInfo />
   </div>
 </template>

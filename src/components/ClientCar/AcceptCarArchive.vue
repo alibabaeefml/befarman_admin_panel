@@ -1,5 +1,5 @@
 <script setup>
-import BaseModal from "../Global/BaseModal/BaseModal.vue";
+import BaseModal from "@/components/Global/Dialog/BaseModal.vue";
 defineProps(["dialog"]);
 defineEmits(["toggleModal"]);
 </script>

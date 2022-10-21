@@ -30,14 +30,14 @@ const rentCarActions = ref(false);
               <div class="enSub">
                 {{ clientCar.car.name_en }}
               </div>
-              <!-- <div class="mt-6">
-                <div :style="{background:clientCar.clientCarStatus.color}">
+              <!-- <div class="mt-4">
+                <div class="status pa-2" :style="{background:clientCar.clientCarStatus.color}">
                   {{clientCar.clientCarStatus.name_fa}}
                   <v-icon>{{clientCar.clientCarStatus.icon}}</v-icon>
                 </div>
               </div> -->
               <div class="mt-4">
-                <div class="status pa-2" :style="{ background: '#39e75f' }">
+                <div class="status pa-2" :style="{ background: 'green' }">
                   در دسترس
                   <v-icon>mdi-check</v-icon>
                 </div>
@@ -137,7 +137,7 @@ const rentCarActions = ref(false);
             icon
             color="green"
             variant="elevated"
-            @click="$emit('showDateChangeModal')"
+            @click="$_openModal('EvaluationInfo', clientCar)"
           >
             <v-icon color="white">mdi-magnify-scan</v-icon>
             <v-tooltip activator="parent" location="right"
@@ -156,5 +156,6 @@ const rentCarActions = ref(false);
 .status {
   border-radius: 20px 0 20px 20px;
   font-weight: bold;
+  color: white;
 }
 </style>
