@@ -177,7 +177,7 @@ hr {
 }
 
 .add-btn {
-  position: fixed;
+  position: fixed!important;
   bottom: 20px;
   left: 20px;
   z-index: 3;

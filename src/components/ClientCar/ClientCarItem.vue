@@ -36,7 +36,7 @@ const rentCarActions = ref(false);
                   <v-icon>{{clientCar.clientCarStatus.icon}}</v-icon>
                 </div>
               </div> -->
-              <div class="mt-6 d-flex justify-center">
+              <div class="mt-4">
                 <div class="status pa-2" :style="{ background: '#39e75f' }">
                   در دسترس
                   <v-icon>mdi-check</v-icon>
@@ -156,6 +156,5 @@ const rentCarActions = ref(false);
 .status {
   border-radius: 20px 0 20px 20px;
   font-weight: bold;
-  width: fit-content;
 }
 </style>
