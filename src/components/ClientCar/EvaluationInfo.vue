@@ -1,17 +1,16 @@
 <script setup>
 import BaseModal from "@/components/Global/Dialog/BaseModal.vue";
 import {ref} from "vue";
-import {storeToRefs} from "pinia/dist/pinia";
-import { useEvaluationStore } from "@/store/evaluation";
-const {loadEvaluations} = useEvaluationStore();
-loadEvaluations();
-const {getEvaluations} = storeToRefs(useEvaluationStore());
-const evaluations = ref({});
+import { useEvaluationStore as store } from "@/store/evaluation";
+
+const evaluation = ref({});
 const openModal = (data) => {
   if (data.id) {
-   evaluations.value = data.evaluation;
+    evaluation.value = store().showEvaluation(data.id)
   }
 };
+
+
 </script>
 
 <template>
@@ -25,7 +24,7 @@ const openModal = (data) => {
   >
     <v-row>
       <v-col cols="12" md="3" color="white">
-      {{getEvaluations}}  
+      {{evaluation}}  
       </v-col>
     </v-row>
   </base-modal>

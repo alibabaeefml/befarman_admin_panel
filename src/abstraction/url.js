@@ -25,7 +25,7 @@ const urls = {
   indexStatus: "client-car-status",
   indexColor: "colors",
   indexProvince: "provinces",
-  indexEvaluation:"evaluations",
+  showEvaluation:"evaluations/:id",
   // save files
   storeFiles: "media",
 
