@@ -17,7 +17,7 @@
     <div class="button-wrapper">
       <v-btn
         depressed
-        @click.native="$refs.file.click()"
+        @click="$refs.file.click()"
         large
         :color="color"
         dark
@@ -37,7 +37,7 @@
         </div>
       </v-btn>
       <v-btn
-        @click.native="editImage = true"
+        @click="editImage = true"
         large
         :color="color"
         dark
@@ -167,8 +167,6 @@ export default defineComponent({
       if (input.files && input.files[0]) {
         //set v-model
         this.file = input.files[0];
-        this.fileForm.file = input.files[0];
-
         // create a new FileReader to read this image and convert to base64 format
         let reader = new FileReader();
         // Define a callback function to run, when FileReader finishes its job
@@ -192,12 +190,20 @@ export default defineComponent({
     },
     async upload() {
       if (this.isAddMode) {
-        if (this.fileForm.file) {
-          return await repository.store(this.fileForm);
+        if (this.file) {
+          const newFileForm = {
+            ...this.fileForm,
+            file: this.file,
+          };
+          return await repository.store(newFileForm);
         }
       } else if (this.editImage) {
-        if (this.fileForm.file) {
-          return await repository.store(this.fileForm);
+        if (this.file) {
+          const newFileForm = {
+            ...this.fileForm,
+            file: this.file,
+          };
+          return await repository.store(newFileForm);
         } else {
           const newFileForm = {
             ...this.fileForm,

@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from "vue";
+import { computed } from "vue";
 import { useDisplay } from "vuetify/lib/framework.mjs";
 import { isMobile } from "@/utils/isMobile";
 const props = defineProps(["icon", "title", "subtitle"]);

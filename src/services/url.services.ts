@@ -13,12 +13,17 @@ export const urlGenerator = (urls: Url) => {
     for (const iterator of urlPath) {
       if (iterator.startsWith(":")) {
         if (iterator.endsWith("?")) {
-          if (parameters.hasOwnProperty(iterator.slice(1, -1))) {
+          if (
+            Object.prototype.hasOwnProperty.call(
+              parameters,
+              iterator.slice(1, -1)
+            )
+          ) {
             newPath.push(parameters[iterator.slice(1, -1)]);
           }
         } else {
           console.assert(
-            parameters.hasOwnProperty(iterator.slice(1)),
+            Object.prototype.hasOwnProperty.call(parameters, iterator.slice(1)),
             'parameter "' + iterator.slice(1) + '" not specified in parameters.'
           );
           newPath.push(parameters[iterator.slice(1)]);

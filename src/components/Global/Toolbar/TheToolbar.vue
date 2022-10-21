@@ -8,15 +8,15 @@ import LocalStorage from "@/utils/store-management/localstorage";
 const mobile = computed(() => useDisplay().width.value < 1080);
 const drawer = ref(false);
 const loggedIn = ref(true);
-const isAdmin = ref(true);
 const username = computed(() =>
   LocalStorage.get("user") ? LocalStorage.get("user").first_name : "کاربر"
 );
-const props = defineProps(["currentPath"]);
+defineProps(["currentPath"]);
 const routeName = computed(() => useRoute().meta.title);
 
 const logout = () => {
-  useAuthStore().logout();
+  const { logout } = useAuthStore();
+  logout();
 };
 </script>
 
@@ -40,7 +40,7 @@ const logout = () => {
       <v-btn icon>
         <v-icon>mdi-instagram</v-icon>
       </v-btn>
-      <v-btn :to="{ name: 'LOGIN' }" @click="logout"
+      <v-btn @click="logout"
         >خروج
         <v-icon>mdi-logout</v-icon>
       </v-btn>
@@ -99,7 +99,6 @@ const logout = () => {
           <v-list-item prepend-icon="mdi-account" title="پروفایل" value="Login">
           </v-list-item>
           <v-list-item
-            :to="{ name: 'LOGIN' }"
             @click="logout"
             prepend-icon="mdi-logout"
             title="خروج"

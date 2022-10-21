@@ -2,7 +2,7 @@ import type { Path } from "./routeHandler";
 const paths: Path[] = [
   {
     path: "/login",
-    name: "LOGIN",
+    name: "login",
     view: "Login",
     meta: {
       auth: true,
@@ -29,7 +29,7 @@ const paths: Path[] = [
   },
   {
     path: "/client-cars/add",
-    name: "ADD CLIENT CAR",
+    name: "addClientCar",
     view: "ClientCarAddEdit",
     meta: {
       auth: false,
@@ -38,7 +38,7 @@ const paths: Path[] = [
   },
   {
     path: "/client-cars/:id/edit",
-    name: "EDIT CLIENT CAR",
+    name: "editClientCar",
     view: "ClientCarAddEdit",
     meta: {
       auth: false,
@@ -47,7 +47,7 @@ const paths: Path[] = [
   },
   {
     path: "/client-cars/:id",
-    name: "CLIENT CAR DETAILS",
+    name: "clientCarDetails",
     view: "ClientCarDetails",
     meta: {
       auth: false,
@@ -65,7 +65,7 @@ const paths: Path[] = [
   },
   {
     path: "/users/:id",
-    name: "USER DETAILS",
+    name: "userDetail",
     view: "UserInfo",
     meta: {
       auth: true,
@@ -74,7 +74,7 @@ const paths: Path[] = [
   },
   {
     path: "/users/add",
-    name: "ADD USER",
+    name: "addUser",
     view: "UserAddEdit",
     meta: {
       auth: true,
@@ -84,7 +84,7 @@ const paths: Path[] = [
   },
   {
     path: "/users/:id/edit",
-    name: "EDIT USER",
+    name: "editUser",
     view: "UserAddEdit",
     meta: {
       auth: true,
@@ -130,7 +130,7 @@ const paths: Path[] = [
   },
   {
     path: "/transactions/add",
-    name: "ADD TRANSACTION",
+    name: "addTransaction",
     view: "TransactionAddEdit",
     meta: {
       auth: true,
@@ -140,7 +140,7 @@ const paths: Path[] = [
   },
   {
     path: "/transactions/:id/edit",
-    name: "EDIT TRANSACTION",
+    name: "editTransaction",
     view: "TransactionAddEdit",
     meta: {
       auth: true,

@@ -10,7 +10,7 @@ loadFonts();
 
 ApiService.init("https://app.befarman.com");
 
-const app = createApp(App)
+createApp(App)
   .use(vuetify)
   .use(router)
   .use(pinia)

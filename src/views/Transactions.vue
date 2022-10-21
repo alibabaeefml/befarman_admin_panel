@@ -33,7 +33,7 @@ const tab = ref("one");
     </v-card-text>
   </v-card>
   <v-btn
-    :to="{ name: 'ADD TRANSACTION' }"
+    :to="{ name: 'addTransaction' }"
     size="x-large"
     class="add-btn"
     icon

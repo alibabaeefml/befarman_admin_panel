@@ -48,7 +48,7 @@ const smsModal = ref(false);
     class="add-btn"
     icon
     color="secondary"
-    :to="{ name: 'ADD USER' }"
+    :to="{ name: 'addUser' }"
   >
     <v-icon color="white">mdi-plus</v-icon>
   </v-btn>

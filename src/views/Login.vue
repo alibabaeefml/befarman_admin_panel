@@ -4,11 +4,9 @@ import { computed } from "vue";
 import { useDisplay } from "vuetify/lib/framework.mjs";
 import { useAuthStore } from "@/store/auth";
 
-const props = defineProps(["dialog"]);
-const numberInput = ref(true);
+defineProps(["dialog"]);
 
 const width = computed(() => useDisplay().width.value);
-const height = computed(() => useDisplay().height.value);
 const md = computed(() => useDisplay().width.value < 1070);
 
 //-----------------

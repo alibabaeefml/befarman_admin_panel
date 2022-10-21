@@ -26,7 +26,7 @@ export const getJsonUser = (data) => ({
   license_number: data.license_number,
   location_type: data.location_type,
   work_phone: data.work_phone,
-  relatives: getJsonRelatives(data.relatives ? data.relatives : []),
+  relatives: getJsonRelatives(data.relatives ?? []),
   bank: data.bank,
   birthday: data.birthday,
   description: data.description,

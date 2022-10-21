@@ -17,11 +17,11 @@ const urls = {
   indexBodyType: "body-types",
 
   // client car
-  indexClientCar: "admin/client-car",
-  showClientCar: "admin/client-car/:car",
-  storeClientCar: "admin/client-car",
-  updateClientCar: "admin/client-car/:car",
-  destroyClientCar: "admin/client-car/:car",
+  indexClientCar: "admin/client-cars",
+  showClientCar: "admin/client-cars/:car",
+  storeClientCar: "admin/client-cars",
+  updateClientCar: "admin/client-cars/:car",
+  destroyClientCar: "admin/client-cars/:car",
   indexStatus: "client-car-status",
   indexColor: "colors",
   indexProvince: "provinces",

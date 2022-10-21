@@ -1,6 +1,5 @@
 <script setup>
-import DatePicker from "vue3-persian-datetime-picker";
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import { useRoute as route } from "vue-router";
 import { useClientCar } from "@/composables/clientCar/clientCar";
 import { useBrandStore } from "@/store/brand";
@@ -37,12 +36,7 @@ console.log(car.value);
 useTrimStore().loadTrims();
 const { getTrims } = storeToRefs(useTrimStore());
 
-const crop_data = ref(null);
-const url = ref(null);
 const image = ref("");
-
-const NewCarImage = ref("selectedCarImage");
-const dropzoneActive = ref(false);
 
 const fuels = ref(["بنزین", "گاز", "دوگانه سوز", "هیبریدی"]);
 

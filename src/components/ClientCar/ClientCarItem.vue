@@ -1,11 +1,12 @@
 <script setup>
-import DatePicker from "vue3-persian-datetime-picker";
 import defaultThumb from "@/assets/Images/avatars/car-avatar.jpg";
 import { ref } from "vue";
-import { getStatuses } from "@/composables/status/status";
+import { useClientCarStatus } from "@/composables/clientCarStatus/clientCarStatus";
+const { loadStatuses } = useClientCarStatus();
 
+loadStatuses();
 defineEmits(["showDeleteModal", "showCommentsModal", "showDateChangeModal"]);
-const props = defineProps(["car", "archived"]);
+defineProps(["clientCar", "archived"]);
 const rentCarActions = ref(false);
 </script>
 
@@ -16,37 +17,36 @@ const rentCarActions = ref(false);
         <v-row class="align-center">
           <v-col cols="12" md="3" xs="12" class="justify-center">
             <v-img
-              :src="car.thumbnail ? car.thumbnail : defaultThumb"
-              max-width="400"
-              max-height="200"
+              :lazy-src="defaultThumb"
+              :src="clientCar.thumbnail ? clientCar.thumbnail : defaultThumb"
               style="border-radius: 10px"
             />
           </v-col>
           <v-col cols="12" md="3" sm="12">
             <div class="d-flex flex-column">
               <div class="peTitle">
-                {{ car.car.name_fa }}
+                {{ clientCar.car.name_fa }}
               </div>
               <div class="enSub">
-                {{ car.car.name_en }}
+                {{ clientCar.car.name_en }}
               </div>
-
-              <div class="mt-6">
-                <v-select
-                  v-model="car.status_detail.name_fa"
-                  :style="{ color: car.status_detail.color + '!important' }"
-                  :disabled="archived"
-                  label="وضعیت"
-                  :items="getStatuses"
-                  item-title="name_fa"
-                  variant="underlined"
-                >
-                </v-select>
+              <!-- <div class="mt-6">
+                <div :style="{background:clientCar.clientCarStatus.color}">
+                  {{clientCar.clientCarStatus.name_fa}}
+                  <v-icon>{{clientCar.clientCarStatus.icon}}</v-icon>
+                </div>
+              </div> -->
+              <div class="mt-6 d-flex justify-center">
+                <div class="status pa-2" :style="{ background: '#39e75f' }">
+                  در دسترس
+                  <v-icon>mdi-check</v-icon>
+                </div>
               </div>
               <v-btn
-                :to="{ name: 'CLIENT CAR DETAILS', params: { id: ':id' } }"
+                class="mt-1"
+                :to="{ name: 'clientCarDetails', params: { id: clientCar.id } }"
                 block
-                prepend-icon="mdi-unknown"
+                prepend-icon="mdi-information"
                 color="secondary"
                 variant="outlined"
                 >جزئیات خودرو
@@ -57,11 +57,9 @@ const rentCarActions = ref(false);
             <div class="d-flex justify-center flex-column mt-4 pr-2">
               <div>مالک خودرو</div>
               <div class="peTitle">
-                {{ car.user.name }}
+                {{ clientCar.user.name }}
               </div>
-              <div class="enSub" style="user-select: text">
-                {{ car.user.phone }}
-              </div>
+              <!-- {{ clientCar.user.phone }} -->
             </div>
           </v-col>
           <v-col cols="12" md="3" sm="12">
@@ -70,7 +68,7 @@ const rentCarActions = ref(false);
               style="font-size: 20px"
             >
               <div class="mxb">
-                <h2>{{ car.cost }}</h2>
+                <h2>{{ clientCar.price }}</h2>
               </div>
               <div class="yl">هزینه روزانه - تومان</div>
             </div>
@@ -108,7 +106,7 @@ const rentCarActions = ref(false);
             icon
             color="black"
             variant="elevated"
-            :to="{ name: 'EDIT CLIENT CAR', params: { id: car.id } }"
+            :to="{ name: 'editClientCar', params: { id: clientCar.id } }"
           >
             <v-icon>mdi-pencil</v-icon>
             <v-tooltip activator="parent" location="left"
@@ -135,6 +133,17 @@ const rentCarActions = ref(false);
               >تاریخ رزرو</v-tooltip
             >
           </v-btn>
+          <v-btn
+            icon
+            color="green"
+            variant="elevated"
+            @click="$emit('showDateChangeModal')"
+          >
+            <v-icon color="white">mdi-magnify-scan</v-icon>
+            <v-tooltip activator="parent" location="right"
+              >ارزیابی خودرو</v-tooltip
+            >
+          </v-btn>
         </div>
       </v-card-actions>
     </v-card>
@@ -143,5 +152,10 @@ const rentCarActions = ref(false);
 <style scoped>
 .v-card:hover {
   box-shadow: 0px 3px 10px -1px rgb(0 0 0 / 20%);
+}
+.status {
+  border-radius: 20px 0 20px 20px;
+  font-weight: bold;
+  width: fit-content;
 }
 </style>

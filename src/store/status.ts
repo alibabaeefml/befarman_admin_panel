@@ -1,10 +1,10 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
-import {Status} from "../types/status.ts";
+import {ClientCarStatus} from "../types/status";
 import StatusRepository from "@/abstraction/repositories/statusRepository";
 
 export const useStatusStore = defineStore("status", () => {
-  const statuses = ref<Status[]>([]);
+  const statuses = ref<ClientCarStatus[]>([]);
   const getStatuses = computed(() => statuses.value);
 
   const loadStatuses = async () => {

@@ -4,8 +4,15 @@ import { getJson as getJsonCity } from "./cityResource";
 import { getJsonUser } from "./userResource";
 import { getJsonColor } from "./colorResource";
 import { getJsonTrim } from "./trimResource";
-import { getJsonStatusDetail } from "./statusDetailResource";
+import {
+  getJsonClientCarStatus,
+  getArrayClientCarStatus,
+} from "./clientCarStatusResource";
 import { getJson as getJsonBrand } from "./brandResource";
+import { getJsonEvaluation } from "./evaluationResource";
+import { getArrayComment } from "./commentResource";
+import { getArrayClientCarRequest } from "./clientCarRequestResource";
+import { getArrayMedia } from "./mediaResource";
 
 export function getArray({ data, meta }) {
   const pagination = setPagination(meta);
@@ -15,10 +22,8 @@ export function getArray({ data, meta }) {
 
 export const getJson = (data) => ({
   id: data.id,
-  user: getJsonUser(data.user ? data.user : {}),
   user_id: data.user_id,
   name: data.name,
-  brand: getJsonBrand(data.brand ? data.brand : {}),
   painted: data.painted,
   car_number: data.car_number,
   color_status: data.color_status,
@@ -39,13 +44,6 @@ export const getJson = (data) => ({
   original_price: data.original_price,
   price: data.price,
   features: data.features,
-  status_detail: getJsonStatusDetail(
-    data.status_detail ? data.status_detail : {}
-  ),
-  car: getJsonCar(data.car ? data.car : {}),
-  trim: getJsonTrim(data.trim ? data.trim : {}),
-  city: getJsonCity(data.city ? data.city : {}),
-  color: getJsonColor(data.color ? data.color : {}),
   color_id: data.color_id,
   thumbnail_300: data.thumbnail_300,
   thumbnail: data.thumbnail,
@@ -56,10 +54,26 @@ export const getJson = (data) => ({
   fast_reserve: data.fast_reserve,
   gearbox: data.gearbox,
   city_id: data.city_id,
+  province_id: data.province_id,
   address: data.address,
   car_price: data.car_price,
-  cost: data.cost,
-  rent_cost: data.rent_cost,
+  lat: data.lat,
+  long: data.long,
+  organization: data.organization,
+  technical_status: data.technical_status,
+  brand: getJsonBrand(data.brand ? data.brand : {}),
+  user: getJsonUser(data.user ? data.user : {}),
+  car: getJsonCar(data.car ? data.car : {}),
+  trim: getJsonTrim(data.trim ? data.trim : {}),
+  city: getJsonCity(data.city ? data.city : {}),
+  color: getJsonColor(data.color ? data.color : {}),
+  evaluation: getJsonEvaluation(data.evaluation ? data.evaluation : {}),
+  comments: getArrayComment(data.comments ? data.comments : []),
+  requests: getArrayClientCarRequest(data.requests ? data.requests : []),
+  images: getArrayMedia(data.images),
+  certificates: getArrayMedia(data.certificates),
+  clientCarStatus: getJsonClientCarStatus(data.clientCarStatus ?? {}),
+  clientCarStatuses: getArrayClientCarStatus(data.clientCarStatuses ?? []),
 });
 
-export const setData = (data) => ({});
+export const setData = () => ({});

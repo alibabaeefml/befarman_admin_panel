@@ -1,7 +1,11 @@
 <script setup>
 import Filters from "@components/Global/Filters/Filters.vue";
 import { ref } from "vue";
-import { getStatuses } from "@/composables/status/status";
+import { useClientCarStatus } from "@/composables/clientCarStatus/clientCarStatus";
+const { loadStatuses } = useClientCarStatus();
+const { getClientCarStatuses } = useClientCarStatus();
+loadStatuses();
+
 const years = ref([]);
 // update years array each year
 const year = new Date().getFullYear() - 621;
@@ -41,7 +45,7 @@ defineProps(["tab", "statuses"]);
       <v-col cols="12" md="3">
         <v-select
           :disabled="tab !== 'one'"
-          :items="getStatuses"
+          :items="getClientCarStatuses"
           item-title="name_fa"
           prepend-icon="mdi-check"
           label="وضعیت"

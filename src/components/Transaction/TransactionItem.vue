@@ -1,11 +1,8 @@
 <script setup>
-import defaultThumb from "@/assets/Images/avatars/car-avatar.jpg";
-import { computed, ref } from "vue";
-import { useDisplay } from "vuetify/lib/framework.mjs";
+import { ref } from "vue";
 defineProps(["request", "archived"]);
 defineEmits(["editModal", "deleteModal"]);
 const actions = ref(false);
-const sm = computed(() => useDisplay().width.value < 900);
 const outgoing = ref(true);
 </script>
 <template>
@@ -77,7 +74,7 @@ const outgoing = ref(true);
             icon
             color="black"
             variant="elevated"
-            :to="{ name: 'EDIT TRANSACTION', params: { id: ':id' } }"
+            :to="{ name: 'editTransaction', params: { id: ':id' } }"
           >
             <v-icon>mdi-pencil</v-icon>
             <v-tooltip activator="parent" location="bottom"
