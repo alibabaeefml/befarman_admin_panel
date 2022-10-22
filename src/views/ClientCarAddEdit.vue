@@ -6,24 +6,25 @@ import { useBrandStore } from "@/store/brand";
 import { useTrimStore } from "@/store/trim";
 import { useUserStore } from "@/store/user";
 import { storeToRefs } from "pinia/dist/pinia";
-import { onBeforeMount, onUpdated, ref } from "vue";
+import { ref } from "vue";
 import createFilrterObject from "@/utils/createFilterObject";
 const { getClientCars } = storeToRefs(useClientCarStore());
 
-const car = ref();
+const car = ref({});
+const user = ref({});
 const carModels = ref([]);
 const { getBrands } = storeToRefs(useBrandStore());
 
-// fetch car object by id
-useClientCar()
-  .showCar(route().params)
-  .then((data) => {
-    car.value = data;
-  });
+if (route().name == "editClientCar") {
+  // fetch car object by id
+  useClientCar()
+    .showCar(route().params)
+    .then((data) => {
+      car.value = data;
+    });
+}
 // fetch all brands
 useBrandStore().loadBrands();
-
-const showModels = () => {};
 
 // fetch all trims
 useTrimStore().loadTrims();
@@ -32,9 +33,9 @@ const { getTrims } = storeToRefs(useTrimStore());
 // filter users
 const userFilters = ref({ first_name: "مهمان" });
 const showUser = () => {
-  console.log(useUserStore().showUser(userFilters.value));
+  // console.log(useUserStore().showUser(userFilters.value));
 };
-showUser();
+// showUser();
 const image = ref("");
 
 const fuels = ref(["بنزین", "گاز", "دوگانه سوز", "هیبریدی"]);
@@ -47,14 +48,13 @@ for (let i = 1380; i <= year; i++) {
 }
 </script>
 <template>
-  {{ carModels }}
   <v-card
     dir="rtl"
     class="ma-4 ym"
     :title="$route.meta.title"
     :subtitle="$route.name"
     prepend-icon="mdi-car-side"
-    v-if="car"
+    
   >
     <v-card-text style="padding: 20px">
       <v-row>
@@ -76,7 +76,7 @@ for (let i = 1380; i <= year; i++) {
             label="برند خودرو"
             :items="getBrands"
             item-title="name_fa"
-            v-model="car.brand.name_fa"
+            v-model="car.brand_id"
             prepend-icon="mdi-alpha-b-circle"
             variant="underlined"
           ></v-select>
@@ -89,9 +89,9 @@ for (let i = 1380; i <= year; i++) {
             item-title="name_fa"
             type="text"
             label="مدل خودرو"
-            v-model="car.car.name_fa"
+            v-model="car.name_fa"
             prepend-icon="mdi-car-info"
-            :disabled="!car.brand.name_fa"
+            :disabled="!car.brand_id"
           >
           </v-select>
         </v-col>
@@ -104,7 +104,7 @@ for (let i = 1380; i <= year; i++) {
             label="تریم"
             v-model="car.trim_id"
             prepend-icon="mdi-car-info"
-            :disabled="!car.brand.name_fa"
+            :disabled="!car.brand_id"
           >
           </v-select>
         </v-col>
@@ -115,7 +115,7 @@ for (let i = 1380; i <= year; i++) {
             :items="getUsers"
             item-value="id"
             prepend-icon="mdi-account"
-            v-model="car.user.name"
+            v-model="user.name"
             @input="showCar"
             variant="underlined"
             no-data-text=".مالک خودرو را جستجو کنید"
@@ -141,41 +141,6 @@ for (let i = 1380; i <= year; i++) {
             prepend-icon="mdi-speedometer"
           >
           </v-text-field>
-        </v-col>
-
-        <v-col cols="12" lg="3" md="4">
-          <v-select
-            label="برند خودرو"
-            :items="getBrands"
-            item-value="id"
-            prepend-icon="mdi-alpha-b-circle"
-            v-model="car.brand_id"
-            variant="underlined"
-          ></v-select>
-        </v-col>
-        <v-col cols="12" lg="3" md="4">
-          <v-select
-            variant="underlined"
-            :items="getBrands"
-            type="text"
-            label="مدل خودرو"
-            v-model="car.car_id"
-            prepend-icon="mdi-car-info"
-            :disabled="!car.brand_id"
-          >
-          </v-select>
-        </v-col>
-        <v-col cols="12" lg="3" md="4">
-          <v-select
-            variant="underlined"
-            :items="getBrands"
-            type="text"
-            label="تریم"
-            v-model="car.trim_id"
-            prepend-icon="mdi-car-info"
-            :disabled="!car.car_id"
-          >
-          </v-select>
         </v-col>
 
         <v-col cols="12" lg="3" md="4">
@@ -278,7 +243,7 @@ for (let i = 1380; i <= year; i++) {
             variant="underlined"
             type="text"
             label="تخفیف بیمه"
-            :disabled="!car.insurance.length"
+            :disabled="!car.insurance"
             v-model="car.insurance_discount"
             prepend-icon="mdi-percent"
           >
@@ -368,7 +333,6 @@ for (let i = 1380; i <= year; i++) {
             v-model="car.last_oil_change"
           ></date-picker>
         </v-col>
-        -->
       </v-row>
     </v-card-text>
     <v-card-actions style="background-color: #ededed" class="justify-center">
