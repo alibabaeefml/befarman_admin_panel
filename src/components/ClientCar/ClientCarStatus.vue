@@ -1,0 +1,38 @@
+<script setup>
+import BaseModal from "@/components/Global/Dialog/BaseModal.vue";
+import { ref } from "vue";
+
+const currentStatus = ref();
+const statuses = ref();
+const openModal = (data) => {
+  currentStatus.value = data.status;
+  statuses.value = data.getClientCarStatuses;
+};
+</script>
+
+<template>
+  <base-modal
+    name="clientCarStatus"
+    title="تغییر وضعیت خودرو"
+    subtitle="CLIENT CAR STATUS CHANGE"
+    @open="openModal"
+  >
+    <div
+      class="ma-4 pa-2 text-center"
+      :style="{
+        cursor:'pointer',
+        border: '2px solid' + status.color,
+        borderRadius: '10px',
+        background: status.id == currentStatus.id ? status.color : '',
+        color:
+          status.id == currentStatus.id ? 'white' : status.color + '!important',
+      }"
+      v-for="status in statuses"
+      :key="status.id"
+    >
+      <v-icon>{{ status.icon }}</v-icon>
+      <h1>{{ status.name_fa }}</h1>
+      <h3>{{ status.name_en }}</h3>
+    </div>
+  </base-modal>
+</template>

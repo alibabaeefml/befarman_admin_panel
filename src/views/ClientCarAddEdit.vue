@@ -48,13 +48,13 @@ for (let i = 1380; i <= year; i++) {
 }
 </script>
 <template>
+  <!-- {{car}} -->
   <v-card
     dir="rtl"
     class="ma-4 ym"
     :title="$route.meta.title"
     :subtitle="$route.name"
     prepend-icon="mdi-car-side"
-    
   >
     <v-card-text style="padding: 20px">
       <v-row>

@@ -5,6 +5,7 @@ import { ref } from "vue";
 import ClientCarFilter from "@components/ClientCar/ClientCarFilter.vue";
 import ClientCarComments from "@components/ClientCar/ClientCarComments.vue";
 import EvaluationInfo from "@/components/ClientCar/EvaluationInfo.vue";
+import ClientCarStatus from "@/components/ClientCar/ClientCarStatus.vue"; 
 import { useClientCar } from "@/composables/clientCar/clientCar";
 import { storeToRefs } from "pinia/dist/pinia";
 import InfiniteScroll from "infinite-loading-vue3";
@@ -81,6 +82,7 @@ const infiniteCar = async ($state) => {
         <v-icon color="white">mdi-plus</v-icon>
       </v-btn>
     </router-link>
+    <clientCarStatus />
     <AcceptCarArchive
       :dialog="deleteConfirm"
       @toggleModal="deleteConfirm = false"

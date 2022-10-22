@@ -253,6 +253,7 @@ hr {
 }
 
 .v-tooltip {
+  text-align:center;
   font-family: ym;
 }
 .v-overlay__content {

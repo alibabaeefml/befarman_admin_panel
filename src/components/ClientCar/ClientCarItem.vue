@@ -2,11 +2,13 @@
 import defaultThumb from "@/assets/Images/avatars/car-avatar.jpg";
 import { ref } from "vue";
 import { useClientCarStatus } from "@/composables/clientCarStatus/clientCarStatus";
-const { loadStatuses } = useClientCarStatus();
+const props = defineProps(["clientCar", "archived"]);
+const { loadStatuses, getClientCarStatuses } = useClientCarStatus();
 
 loadStatuses();
-defineEmits(["showDeleteModal", "showCommentsModal", "showDateChangeModal"]);
-defineProps(["clientCar", "archived"]);
+const status = getClientCarStatuses.value.find(
+  (e) => e.id == props.clientCar.status_id
+);
 const rentCarActions = ref(false);
 </script>
 
@@ -30,16 +32,14 @@ const rentCarActions = ref(false);
               <div class="enSub">
                 {{ clientCar.car.name_en }}
               </div>
-              <!-- <div class="mt-4">
-                <div class="status pa-2" :style="{background:clientCar.clientCarStatus.color}">
-                  {{clientCar.clientCarStatus.name_fa}}
-                  <v-icon>{{clientCar.clientCarStatus.icon}}</v-icon>
-                </div>
-              </div> -->
               <div class="mt-4">
-                <div class="status pa-2" :style="{ background: 'green' }">
-                  در دسترس
-                  <v-icon>mdi-check</v-icon>
+                <div class="status pa-2"
+                :style="{ background: status.color }"
+                @click="$_openModal('clientCarStatus', {status, getClientCarStatuses})"
+                >
+                  {{ status.name_fa }}
+                  <v-icon>{{ status.icon }}</v-icon>
+                  <v-tooltip activator="parent" location="bottom">تغییر وضعیت</v-tooltip>
                 </div>
               </div>
               <v-btn
@@ -59,7 +59,9 @@ const rentCarActions = ref(false);
               <div class="peTitle">
                 {{ clientCar.user.name }}
               </div>
-              <!-- {{ clientCar.user.phone }} -->
+              <div class="enSub">
+                {{ clientCar.user.phone }}
+              </div>
             </div>
           </v-col>
           <v-col cols="12" md="3" sm="12">
@@ -157,5 +159,6 @@ const rentCarActions = ref(false);
   border-radius: 20px 0 20px 20px;
   font-weight: bold;
   color: white;
+  cursor: pointer;
 }
 </style>
