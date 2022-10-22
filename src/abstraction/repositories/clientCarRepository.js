@@ -10,7 +10,7 @@ export default class ClientCarRepository {
   }
   async show(data = {}) {
     const response = await axios.get(url("showClientCar", { car: data.id }));
-    return getJson(response.data);
+    return response.data;
   }
   async store(carData) {
     const formData = setData(carData);

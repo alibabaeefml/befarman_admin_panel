@@ -33,7 +33,7 @@ export function useClientCar() {
   };
 
   const showCar = async (data) => {
-    return await repository.show(data);
+    return (await repository.show(data)).data;
   };
 
   const deleteCar = async (carId) => {

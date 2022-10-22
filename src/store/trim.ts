@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
-import Trim from "@/types/trim";
+import type Trim from "@/types/trim";
 import TrimRepository from "@/abstraction/repositories/trimRepository";
 
 export const useTrimStore = defineStore("trim", () => {

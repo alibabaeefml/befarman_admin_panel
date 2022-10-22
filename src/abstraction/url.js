@@ -29,6 +29,9 @@ const urls = {
   // save files
   storeFiles: "media",
 
+  // user
+  indexUser:"admin/users",
+  showUser:"admin/users/:user",
   // auth
   sendCode: "login",
   logout: "logout",

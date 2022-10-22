@@ -70,8 +70,8 @@ export const getJson = (data) => ({
   evaluation: getJsonEvaluation(data.evaluation ? data.evaluation : {}),
   comments: getArrayComment(data.comments ? data.comments : []),
   requests: getArrayClientCarRequest(data.requests ? data.requests : []),
-  images: getArrayMedia(data.images),
-  certificates: getArrayMedia(data.certificates),
+  images: getArrayMedia(data.images ?? []),
+  certificates: getArrayMedia(data.certificates ?? []),
   clientCarStatus: getJsonClientCarStatus(data.clientCarStatus ?? {}),
   clientCarStatuses: getArrayClientCarStatus(data.clientCarStatuses ?? []),
 });

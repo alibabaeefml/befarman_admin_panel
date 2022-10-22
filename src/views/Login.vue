@@ -106,6 +106,7 @@ const login = () => {
                     class="float-left"
                     color="secondary"
                     append-icon="mdi-account-check"
+                    :disabled="!user.code"
                     @click="login"
                     :loading="loading"
                   >
