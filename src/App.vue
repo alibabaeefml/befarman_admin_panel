@@ -221,6 +221,7 @@ hr {
   animation: rotateX 0.2s;
 }
 /* vuetify classes */
+
 .v-list {
   font-family: yl;
   direction: rtl;
@@ -245,11 +246,13 @@ hr {
 
 .v-card-title {
   font-size: 20px;
+  font-family:ym!important;
 }
 
 .v-card-subtitle {
-  font-family: mm;
-  letter-spacing: 5px;
+  font-size:13px!important;
+  font-family: mm!important;
+  letter-spacing: 5px!important;
 }
 
 .v-tooltip {

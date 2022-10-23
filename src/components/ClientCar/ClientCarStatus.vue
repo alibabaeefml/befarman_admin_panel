@@ -20,7 +20,7 @@ const openModal = (data) => {
     <div
       class="ma-4 pa-2 text-center"
       :style="{
-        cursor:'pointer',
+        cursor: 'pointer',
         border: '2px solid' + status.color,
         borderRadius: '10px',
         background: status.id == currentStatus.id ? status.color : '',
@@ -30,9 +30,11 @@ const openModal = (data) => {
       v-for="status in statuses"
       :key="status.id"
     >
-      <v-icon>{{ status.icon }}</v-icon>
-      <h1>{{ status.name_fa }}</h1>
-      <h3>{{ status.name_en }}</h3>
+      <div class="d-flex justify-center align-center">
+        <i :class="status.icon" style="font-size: 30px" />
+        <h1 class="mr-1">{{ status.name_fa }}</h1>
+      </div>
+      <h3 style="letter-spacing:10px">{{ status.name_en }}</h3>
     </div>
   </base-modal>
 </template>
