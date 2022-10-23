@@ -1,8 +1,12 @@
 <script setup>
 import { useRoute as route } from "vue-router";
+import UserSearch from "@/components/User/UserSearch.vue"
+import BrandSelected from "@/components/Brand/BrandSelected.vue"
+import TrimSelected from "@/components/Trim/TrimSelected.vue"
+import CarSelected from "@/components/Car/CarSelected.vue"
+import CropperImage from "@/components/Global/Input/CropperImage.vue";
 import { useClientCar } from "@/composables/clientCar/clientCar";
 import { useClientCarStore } from "@/store/clientCar";
-import { useBrandStore } from "@/store/brand";
 import { useTrimStore } from "@/store/trim";
 import { useUserStore } from "@/store/user";
 import { storeToRefs } from "pinia/dist/pinia";
@@ -12,8 +16,9 @@ const { getClientCars } = storeToRefs(useClientCarStore());
 
 const car = ref({});
 const user = ref({});
+const fileForm = ref({});
 const carModels = ref([]);
-const { getBrands } = storeToRefs(useBrandStore());
+const colors = ref([]);
 
 if (route().name == "editClientCar") {
   // fetch car object by id
@@ -23,8 +28,6 @@ if (route().name == "editClientCar") {
       car.value = data;
     });
 }
-// fetch all brands
-useBrandStore().loadBrands();
 
 // fetch all trims
 useTrimStore().loadTrims();
@@ -32,11 +35,6 @@ const { getTrims } = storeToRefs(useTrimStore());
 
 // filter users
 const userFilters = ref({ first_name: "مهمان" });
-const showUser = () => {
-  // console.log(useUserStore().showUser(userFilters.value));
-};
-// showUser();
-const image = ref("");
 
 const fuels = ref(["بنزین", "گاز", "دوگانه سوز", "هیبریدی"]);
 
@@ -58,69 +56,37 @@ for (let i = 1380; i <= year; i++) {
   >
     <v-card-text style="padding: 20px">
       <v-row>
+        <v-col cols="12"  lg="3" md="4">
+            <CropperImage
+              v-model:url="car.thumbnail"
+              ref="cropper"
+              :file-form="fileForm"
+            />
+          </v-col>
         <v-col cols="12" lg="3" md="4">
-          <div v-if="image" style="width: 100%">
-            <img :src="image" width="100%" />
-          </div>
-          <v-file-input
-            @change="changeImage"
-            label="آپلود کاور"
-            variant="outlined"
-            prepend-icon="mdi-image"
-          >
-          </v-file-input>
+          <BrandSelected  v-model="car.brand_id"/>
         </v-col>
 
         <v-col cols="12" lg="3" md="4">
-          <v-select
-            label="برند خودرو"
-            :items="getBrands"
-            item-title="name_fa"
-            v-model="car.brand_id"
-            prepend-icon="mdi-alpha-b-circle"
-            variant="underlined"
-          ></v-select>
+          <CarSelected 
+          :brand-id="car.brand_id"
+          v-model="car.car_id"
+          :disabled="!car.brand_id"
+          />
+        </v-col>
+        <v-col cols="12" lg="3" md="4">
+          <TrimSelected 
+          :car-id="car.car_id"
+          v-model="car.trim_id"
+          />
         </v-col>
 
         <v-col cols="12" lg="3" md="4">
-          <v-select
-            variant="underlined"
-            :items="carModels"
-            item-title="name_fa"
-            type="text"
-            label="مدل خودرو"
-            v-model="car.name_fa"
-            prepend-icon="mdi-car-info"
-            :disabled="!car.brand_id"
-          >
-          </v-select>
-        </v-col>
-        <v-col cols="12" lg="3" md="4">
-          <v-select
-            variant="underlined"
-            :items="getTrims"
-            item-title="name_fa"
-            type="text"
-            label="تریم"
-            v-model="car.trim_id"
-            prepend-icon="mdi-car-info"
-            :disabled="!car.brand_id"
-          >
-          </v-select>
-        </v-col>
-
-        <v-col cols="12" lg="3" md="4">
-          <v-autocomplete
+          <UserSearch 
             label="مالک خودرو"
-            :items="getUsers"
-            item-value="id"
-            prepend-icon="mdi-account"
-            v-model="user.name"
-            @input="showCar"
-            variant="underlined"
             no-data-text=".مالک خودرو را جستجو کنید"
-          >
-          </v-autocomplete>
+            v-model="car.user_id"
+          />
         </v-col>
         <v-col cols="12" lg="3" md="4">
           <v-text-field
@@ -139,29 +105,6 @@ for (let i = 1380; i <= year; i++) {
             label="کارکرد خودرو"
             v-model="car.car_usage"
             prepend-icon="mdi-speedometer"
-          >
-          </v-text-field>
-        </v-col>
-
-        <v-col cols="12" lg="3" md="4">
-          <v-autocomplete
-            label="مالک خودرو"
-            :items="getUsers"
-            item-value="id"
-            prepend-icon="mdi-account"
-            v-model="car.user_id"
-            variant="underlined"
-            no-data-text=".مالک خودرو را جستجو کنید"
-          >
-          </v-autocomplete>
-        </v-col>
-        <v-col cols="12" lg="3" md="4">
-          <v-text-field
-            variant="underlined"
-            type="text"
-            label="پلاک خودرو"
-            v-model="car.car_number"
-            prepend-icon="mdi-barcode"
           >
           </v-text-field>
         </v-col>
@@ -261,7 +204,7 @@ for (let i = 1380; i <= year; i++) {
           >
           </v-combobox>
         </v-col>
-        <v-col cols="12">
+        <!-- <v-col cols="12">
           <v-file-input
             @change="changeImage"
             v-model="car.images"
@@ -278,7 +221,7 @@ for (let i = 1380; i <= year; i++) {
             variant="outlined"
             prepend-icon="mdi-image"
           ></v-file-input>
-        </v-col>
+        </v-col> -->
         <v-col cols="12">
           <v-textarea
             name="input-5-1"
@@ -328,10 +271,10 @@ for (let i = 1380; i <= year; i++) {
           ></v-select>
         </v-col>
         <v-col cols="12" md="6">
-          <date-picker
+          <!-- <date-picker
             label="آخرین تاریخ تعویض روغن"
             v-model="car.last_oil_change"
-          ></date-picker>
+          ></date-picker> -->
         </v-col>
       </v-row>
     </v-card-text>
