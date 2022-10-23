@@ -1,23 +1,29 @@
 <script setup>
 import { useRoute as route } from "vue-router";
-import UserSearch from "@/components/User/UserSearch.vue"
-import BrandSelected from "@/components/Brand/BrandSelected.vue"
-import TrimSelected from "@/components/Trim/TrimSelected.vue"
-import CarSelected from "@/components/Car/CarSelected.vue"
+import UserSearch from "@/components/User/UserSearch.vue";
+import BrandSelected from "@/components/Brand/BrandSelected.vue";
+import TrimSelected from "@/components/Trim/TrimSelected.vue";
+import CarSelected from "@/components/Car/CarSelected.vue";
 import CropperImage from "@/components/Global/Input/CropperImage.vue";
 import { useClientCar } from "@/composables/clientCar/clientCar";
 import { useClientCarStore } from "@/store/clientCar";
 import { useTrimStore } from "@/store/trim";
 import { useUserStore } from "@/store/user";
+import { useColorStore } from "@/store/color";
 import { storeToRefs } from "pinia/dist/pinia";
 import { ref } from "vue";
 import createFilrterObject from "@/utils/createFilterObject";
 const { getClientCars } = storeToRefs(useClientCarStore());
+const { getColors } = storeToRefs(useColorStore());
+
+// index colors
+useColorStore().loadColors();
 
 const car = ref({});
+const color = ref();
+const gearboxType = ref();
 const user = ref({});
 const fileForm = ref({});
-const carModels = ref([]);
 const colors = ref([]);
 
 if (route().name == "editClientCar") {
@@ -26,6 +32,13 @@ if (route().name == "editClientCar") {
     .showCar(route().params)
     .then((data) => {
       car.value = data;
+      car.value.befarman_gps = data.befarman_gps == 1;
+      color.value = getColors.value.find((color) => color.id == data.color_id);
+      car.value.brand_id = data.brand.id;
+      car.value.car_id = data.car.id;
+      car.value.trim_id = data.trim.id;
+      car.value.user_id = data.user.id;
+      gearboxType.value = data.gearbox == "manual" ? "دستی" : "اتوماتیک";
     });
 }
 
@@ -36,8 +49,26 @@ const { getTrims } = storeToRefs(useTrimStore());
 // filter users
 const userFilters = ref({ first_name: "مهمان" });
 
-const fuels = ref(["بنزین", "گاز", "دوگانه سوز", "هیبریدی"]);
-
+const fuels = ref(["بنزین", "الکتریکی", "دوگانه سوز", "هیبریدی"]);
+const features = ref([
+  "سیستم صوتی",
+  "کیسه هوا",
+  "ورودی صدا",
+  "بلوتوث",
+  "معاینه فنی",
+  "سنسور دنده عقب",
+  "دوربین عقب",
+  "مانیتور",
+  "سیستم کروز",
+  "USB",
+  "AUX",
+  "نمایشگر لمسی",
+  "نمایشگر شیشه جلو",
+  "گرمایش و سرمایش صندلی ها",
+  "ماساژور صندلی",
+  "سقف متحرک",
+  "دوربین 360 درجه",
+]);
 // update years array each year
 const years = ref([]);
 const year = new Date().getFullYear() - 621;
@@ -46,47 +77,53 @@ for (let i = 1380; i <= year; i++) {
 }
 </script>
 <template>
-  <!-- {{car}} -->
   <v-card
     dir="rtl"
     class="ma-4 ym"
     :title="$route.meta.title"
-    :subtitle="$route.name"
+    :subtitle="$route.meta.title_en"
     prepend-icon="mdi-car-side"
   >
     <v-card-text style="padding: 20px">
       <v-row>
-        <v-col cols="12"  lg="3" md="4">
-            <CropperImage
-              v-model:url="car.thumbnail"
-              ref="cropper"
-              :file-form="fileForm"
-            />
-          </v-col>
         <v-col cols="12" lg="3" md="4">
-          <BrandSelected  v-model="car.brand_id"/>
-        </v-col>
-
-        <v-col cols="12" lg="3" md="4">
-          <CarSelected 
-          :brand-id="car.brand_id"
-          v-model="car.car_id"
-          :disabled="!car.brand_id"
+          <CropperImage
+            v-model:url="car.thumbnail"
+            ref="cropper"
+            :file-form="fileForm"
           />
         </v-col>
         <v-col cols="12" lg="3" md="4">
-          <TrimSelected 
-          :car-id="car.car_id"
-          v-model="car.trim_id"
-          />
+          <BrandSelected v-model="car.brand_id" />
         </v-col>
 
         <v-col cols="12" lg="3" md="4">
-          <UserSearch 
+          <CarSelected
+            :brand-id="car.brand_id"
+            v-model="car.car_id"
+            :disabled="!car.brand_id"
+          />
+        </v-col>
+        <v-col cols="12" lg="3" md="4">
+          <TrimSelected :car-id="car.car_id" v-model="car.trim_id" />
+        </v-col>
+
+        <v-col cols="12" lg="3" md="4">
+          <UserSearch
             label="مالک خودرو"
             no-data-text=".مالک خودرو را جستجو کنید"
             v-model="car.user_id"
           />
+        </v-col>
+        <v-col cols="12" lg="3" md="4">
+          <v-text-field
+            variant="underlined"
+            type="number"
+            label="خودرو از کدام اپلیکیشن است (جز بفرمان)"
+            v-model="car.car_usage"
+            prepend-icon="mdi-speedometer"
+          >
+          </v-text-field>
         </v-col>
         <v-col cols="12" lg="3" md="4">
           <v-text-field
@@ -112,19 +149,48 @@ for (let i = 1380; i <= year; i++) {
           <v-text-field
             variant="underlined"
             type="number"
+            label="کیلومتر آخرین تعویض روغن"
+            v-model="car.last_oil_change"
+            prepend-icon="mdi-speedometer"
+          >
+          </v-text-field>
+        </v-col>
+        <v-col cols="12" lg="3" md="4">
+          <v-text-field
+            variant="underlined"
+            type="number"
             label="کارکرد خودرو"
             v-model="car.car_usage"
             prepend-icon="mdi-speedometer"
           >
           </v-text-field>
         </v-col>
-
+        <v-col cols="12" lg="3" md="4">
+          <v-select
+            :items="['دستی', 'اتوماتیک']"
+            variant="underlined"
+            label="نوع گیربکس"
+            v-model="gearboxType"
+            prepend-icon="mdi-speedometer"
+          >
+          </v-select>
+        </v-col>
         <v-col cols="12" lg="3" md="4">
           <v-text-field
             variant="underlined"
             type="number"
-            label="هزینه روزانه"
-            v-model="car.cost"
+            label="ارزش خودرو (تومان)"
+            v-model="car.car_price"
+            prepend-icon="mdi-cash"
+          >
+          </v-text-field>
+        </v-col>
+        <v-col cols="12" lg="3" md="4">
+          <v-text-field
+            variant="underlined"
+            type="number"
+            label="قیمت اجاره (روزانه)"
+            v-model="car.price"
             prepend-icon="mdi-cash"
           >
           </v-text-field>
@@ -132,9 +198,10 @@ for (let i = 1380; i <= year; i++) {
         <v-col cols="12" lg="3" md="4">
           <v-select
             label="رنگ خودرو"
-            :items="colors"
+            :items="getColors"
+            item-title="name"
             prepend-icon="mdi-palette"
-            v-model="car.color"
+            v-model="color"
             variant="underlined"
           ></v-select>
         </v-col>
@@ -157,6 +224,17 @@ for (let i = 1380; i <= year; i++) {
             variant="underlined"
           ></v-select>
         </v-col>
+        <v-col cols="12">
+          <v-select
+            v-model="car.features"
+            :items="features"
+            chips
+            label="تجهیزات جانبی"
+            multiple
+            variant="underlined"
+            prepend-icon="mdi-star"
+          ></v-select>
+        </v-col>
         <v-col cols="12" lg="3" md="4">
           <v-select
             label="وضعیت جی پی اس"
@@ -167,7 +245,10 @@ for (let i = 1380; i <= year; i++) {
           ></v-select>
         </v-col>
         <v-col cols="12">
-          <v-checkbox label="آیا مایل هستید بفرمان روی ماشین شما GPS نصب کند ؟">
+          <v-checkbox
+            label="آیا مایل هستید بفرمان روی ماشین شما GPS نصب کند ؟"
+            v-model="car.befarman_gps"
+          >
           </v-checkbox>
         </v-col>
         <v-col cols="12" lg="3" md="4">
@@ -185,7 +266,7 @@ for (let i = 1380; i <= year; i++) {
           <v-text-field
             variant="underlined"
             type="text"
-            label="تخفیف بیمه"
+            label="تخفیف بیمه (سال)"
             :disabled="!car.insurance"
             v-model="car.insurance_discount"
             prepend-icon="mdi-percent"
@@ -229,6 +310,7 @@ for (let i = 1380; i <= year; i++) {
             prepend-icon="mdi-format-quote-close"
             variant="underlined"
             auto-grow
+            v-model="car.details"
           >
           </v-textarea>
         </v-col>

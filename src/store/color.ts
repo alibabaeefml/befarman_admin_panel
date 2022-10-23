@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
-import Color from "@/types/color";
+import type { Color } from "@/types/color";
 import ColorRepository from "@/abstraction/repositories/colorRepository";
 
 export const useColorStore = defineStore("color", () => {

@@ -23,7 +23,7 @@ const cars = ref([])
 
 const carId = computed({
     get() {
-        console.log(props.value);
+        
         return props.value
     },
     set(value) {

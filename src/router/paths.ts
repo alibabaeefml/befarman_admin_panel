@@ -7,6 +7,7 @@ const paths: Path[] = [
     meta: {
       auth: true,
       title: "ورود",
+      title_en:"Login"
     },
   },
   {
@@ -16,6 +17,7 @@ const paths: Path[] = [
     meta: {
       auth: true,
       title: "داشبورد",
+      title_en:"Dashboard"
     },
   },
   {
@@ -25,6 +27,7 @@ const paths: Path[] = [
     meta: {
       auth: true,
       title: "لیست خودرو های اجاره ای",
+      title_en:"Client Cars List"
     },
   },
   {
@@ -34,6 +37,7 @@ const paths: Path[] = [
     meta: {
       auth: false,
       title: "افزودن خودرو اجاره ای",
+      title_en:"Add Client Car"
     },
   },
   {
@@ -43,6 +47,7 @@ const paths: Path[] = [
     meta: {
       auth: false,
       title: "ویرایش خودرو اجاره ای",
+      title_en:"Edit Client Car"
     },
   },
   {
@@ -52,6 +57,7 @@ const paths: Path[] = [
     meta: {
       auth: false,
       title: "جزئیات خودرو اجاره ای",
+      title_en:"Client Car Details"
     },
   },
   {
@@ -61,6 +67,7 @@ const paths: Path[] = [
     meta: {
       auth: true,
       title: "لیست کاربران",
+      title_en:"Users List"
     },
   },
   {
@@ -70,6 +77,7 @@ const paths: Path[] = [
     meta: {
       auth: true,
       title: "اطلاعات کاربر",
+      title_en:"User Info"
     },
   },
   {
@@ -80,6 +88,7 @@ const paths: Path[] = [
       auth: true,
       title: "افزودن کاربر",
       icon: "mdi-account-plus",
+      title_en:"Add User"
     },
   },
   {
@@ -90,6 +99,7 @@ const paths: Path[] = [
       auth: true,
       title: "ویرایش کاربر",
       icon: "mdi-account-edit",
+      title_en:"Edit User"
     },
   },
   {
@@ -99,6 +109,7 @@ const paths: Path[] = [
     meta: {
       auth: true,
       title: "لیست خودرو ها",
+      title_en:"Cars List"
     },
   },
   {
@@ -108,6 +119,7 @@ const paths: Path[] = [
     meta: {
       auth: true,
       title: "لیست درخواست ها",
+      title_en:"Requests List"
     },
   },
   {
@@ -117,6 +129,7 @@ const paths: Path[] = [
     meta: {
       auth: false,
       title: "جزئیات درخواست",
+      title_en:"Requset Details"
     },
   },
   {
@@ -125,7 +138,8 @@ const paths: Path[] = [
     view: "Transactions",
     meta: {
       auth: true,
-      title: "تراکنش ها",
+      title: "لیست تراکنش ها",
+      title_en:"Transactions List"
     },
   },
   {
@@ -135,6 +149,7 @@ const paths: Path[] = [
     meta: {
       auth: true,
       title: "افزودن تراکنش",
+      title_en:"Add Transaction",
       icon: "mdi-cash-plus",
     },
   },
@@ -146,6 +161,7 @@ const paths: Path[] = [
       auth: true,
       title: "ویرایش تراکنش",
       icon: "mdi-cash",
+      title_en:"Edit Transaction"
     },
   },
   {
@@ -155,6 +171,7 @@ const paths: Path[] = [
     meta: {
       auth: true,
       title: "مدیریت پیامک ها",
+      title_en:"Sms Management"
     },
   },
 ];

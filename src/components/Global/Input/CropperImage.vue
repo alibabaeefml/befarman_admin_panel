@@ -16,11 +16,10 @@
     </div>
     <div class="button-wrapper">
       <v-btn
-        depressed
         @click="$refs.file.click()"
         large
         :color="color"
-        dark
+        block
         v-if="isAddMode || editImage"
       >
         <input
@@ -30,10 +29,10 @@
           @change="uploadImage($event)"
           accept="image/*"
         />
-        <v-icon dark size="28">{{ icon }}</v-icon>
+        <v-icon color="white" size="28">{{ icon }}</v-icon>
         <div class="text-right">
-          <div class="name">{{ name }}</div>
-          <div class="name_en">{{ name_en }}</div>
+          <div class="name ym">{{ name }}</div>
+          <div class="name_en mxb">{{ name_en }}</div>
         </div>
       </v-btn>
       <v-btn
@@ -85,7 +84,7 @@ export default defineComponent({
       default: "PHOTO EDIT",
     },
     icon: {
-      default: "WMi-upload",
+      default: "mdi-image",
     },
     edit_icon: {
       default: "WMi-pencil",
@@ -241,10 +240,8 @@ export default defineComponent({
 }
 .name {
   font-size: 13px;
-  font-family: "iranyekan-regular" !important;
 }
 .name_en {
-  font-family: "montserrat-regular";
   font-size: 7px;
   letter-spacing: 3px;
 }
