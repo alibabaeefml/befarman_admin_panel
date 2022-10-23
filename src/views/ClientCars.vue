@@ -46,10 +46,15 @@ const infiniteCar = async ($state) => {
 <template>
   <div>
     <ClientCarFilter :tab="tab" />
-    <v-card>
+    <v-card dir="rtl" 
+    :title="$route.meta.title"
+    :subtitle="$route.name"
+    prepend-icon="mdi-car"
+    >
       <v-tabs v-model="tab" color="secondary" fixed-tabs>
-        <v-tab value="two">خودرو های حذف شده</v-tab>
         <v-tab value="one">خودرو های فعال</v-tab>
+        <v-tab value="two">خودرو های حذف شده</v-tab>
+        
       </v-tabs>
       <v-card-text>
         <v-window v-model="tab">

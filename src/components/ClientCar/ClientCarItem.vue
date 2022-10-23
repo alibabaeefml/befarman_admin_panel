@@ -14,8 +14,8 @@ const rentCarActions = ref(false);
 
 <template>
   <div>
-    <v-card class="border mt-3 text-center">
-      <v-card-text style="direction: rtl; font-family: ym">
+    <v-card class="border mt-3 text-center" min-height="200">
+      <v-card-text class="ym">
         <v-row class="align-center">
           <v-col cols="12" md="3" xs="12" class="justify-center">
             <v-img
@@ -24,33 +24,33 @@ const rentCarActions = ref(false);
               style="border-radius: 10px"
             />
           </v-col>
+
           <v-col cols="12" md="3" sm="12">
             <div class="d-flex flex-column">
-              <div class="peTitle">
+              <div class="md-txt">
                 {{ clientCar.car.name_fa }}
               </div>
               <div class="enSub">
                 {{ clientCar.car.name_en }}
               </div>
               <div class="mt-4">
-                <div class="status pa-2"
-                :style="{ background: status.color }"
-                @click="$_openModal('clientCarStatus', {status, getClientCarStatuses})"
+                <div
+                  class="status pa-2 sm-txt"
+                  :style="{ background: status.color }"
+                  @click="
+                    $_openModal('clientCarStatus', {
+                      status,
+                      getClientCarStatuses,
+                    })
+                  "
                 >
                   {{ status.name_fa }}
-                  <v-icon>{{ status.icon }}</v-icon>
-                  <v-tooltip activator="parent" location="bottom">تغییر وضعیت</v-tooltip>
+                  <i :class="status.icon" />
+                  <v-tooltip activator="parent" location="bottom"
+                    >تغییر وضعیت</v-tooltip
+                  >
                 </div>
               </div>
-              <v-btn
-                class="mt-1"
-                :to="{ name: 'clientCarDetails', params: { id: clientCar.id } }"
-                block
-                prepend-icon="mdi-information"
-                color="secondary"
-                variant="outlined"
-                >جزئیات خودرو
-              </v-btn>
             </div>
           </v-col>
           <v-col cols="12" md="3" sm="12">
@@ -77,7 +77,7 @@ const rentCarActions = ref(false);
           </v-col>
         </v-row>
       </v-card-text>
-      <v-card-actions style="position: absolute; bottom: 0">
+      <v-card-actions style="position: absolute; bottom: 0;left:0" dir="ltr">
         <v-btn
           v-if="!archived"
           color="primary"
@@ -85,7 +85,7 @@ const rentCarActions = ref(false);
           @click="rentCarActions = !rentCarActions"
         >
           <v-icon>{{
-            !rentCarActions ? "mdi-dots-vertical" : "mdi-menu-down"
+            !rentCarActions ? "mdi-dots-vertical" : "mdi-menu-left"
           }}</v-icon>
         </v-btn>
         <v-btn v-else color="orange" icon @click="restoreCar">
@@ -95,6 +95,17 @@ const rentCarActions = ref(false);
           >
         </v-btn>
         <div class="actionsGroup" v-if="rentCarActions">
+          <v-btn
+            :to="{ name: 'clientCarDetails', params: { id: clientCar.id } }"
+            color="secondary"
+            icon
+            variant="elevated"
+          >
+            <v-icon color="white">mdi-information</v-icon>
+            <v-tooltip activator="parent" location="right"
+              >جزئیات خودرو</v-tooltip
+            >
+          </v-btn>
           <v-btn
             icon
             color="primary"
