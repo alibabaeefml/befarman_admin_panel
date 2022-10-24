@@ -7,9 +7,8 @@ export default class ProvinceRepository {
     const response = await axios.get(url("indexProvince"));
     return getArray(response.data.data);
   }
-  async show(data = {}) {
-    const params = setQueries(data);
-    const response = await axios.get(url("showCity"), { params });
+  async show(id) {
+    const response = await axios.get(url("showCity", { id: id }));
     return response.data.data;
   }
 }

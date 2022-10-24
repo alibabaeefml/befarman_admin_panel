@@ -127,6 +127,10 @@ hr {
   opacity: 0.8;
 }
 
+input,span,textarea{
+  font-size:18px!important
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }

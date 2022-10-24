@@ -10,22 +10,25 @@ import { useClientCarStore } from "@/store/clientCar";
 import { useTrimStore } from "@/store/trim";
 import { useUserStore } from "@/store/user";
 import { useColorStore } from "@/store/color";
+import { useProvinceStore } from "@/store/province";
 import { storeToRefs } from "pinia/dist/pinia";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import createFilrterObject from "@/utils/createFilterObject";
 const { getClientCars } = storeToRefs(useClientCarStore());
 const { getColors } = storeToRefs(useColorStore());
-
+const { getProvinces } = storeToRefs(useProvinceStore());
 // index colors
 useColorStore().loadColors();
-
 const car = ref({});
 const color = ref();
 const gearboxType = ref();
 const user = ref({});
 const fileForm = ref({});
 const colors = ref([]);
-
+const cities = ref([]);
+const thirdParty = ref();
+const bodyInsurance = ref();
+const technical = ref();
 if (route().name == "editClientCar") {
   // fetch car object by id
   useClientCar()
@@ -34,11 +37,11 @@ if (route().name == "editClientCar") {
       car.value = data;
       car.value.befarman_gps = data.befarman_gps == 1;
       color.value = getColors.value.find((color) => color.id == data.color_id);
-      car.value.brand_id = data.brand.id;
-      car.value.car_id = data.car.id;
-      car.value.trim_id = data.trim.id;
-      car.value.user_id = data.user.id;
       gearboxType.value = data.gearbox == "manual" ? "دستی" : "اتوماتیک";
+      thirdParty.value = data.third_party_insurance == 1;
+      thirdParty.value = data.third_party_insurance == 1;
+      bodyInsurance.value = data.body_insurance == 1;
+      technical.value = data.technical_status == 1;
     });
 }
 
@@ -48,6 +51,17 @@ const { getTrims } = storeToRefs(useTrimStore());
 
 // filter users
 const userFilters = ref({ first_name: "مهمان" });
+
+// fetch all provinces
+useProvinceStore().loadProvinces();
+
+const showCities = computed(() => {
+  useProvinceStore()
+    .showCity(car.value.province_id)
+    .then((data) => {
+      cities.value = data;
+    });
+});
 
 const fuels = ref(["بنزین", "الکتریکی", "دوگانه سوز", "هیبریدی"]);
 const features = ref([
@@ -75,6 +89,10 @@ const year = new Date().getFullYear() - 621;
 for (let i = 1380; i <= year; i++) {
   years.value.push(i);
 }
+
+function test() {
+  console.log("test");
+}
 </script>
 <template>
   <v-card
@@ -84,15 +102,8 @@ for (let i = 1380; i <= year; i++) {
     :subtitle="$route.meta.title_en"
     prepend-icon="mdi-car-side"
   >
-    <v-card-text style="padding: 20px">
+    <v-card-text class="pa-2">
       <v-row>
-        <v-col cols="12" lg="3" md="4">
-          <CropperImage
-            v-model:url="car.thumbnail"
-            ref="cropper"
-            :file-form="fileForm"
-          />
-        </v-col>
         <v-col cols="12" lg="3" md="4">
           <BrandSelected v-model="car.brand_id" />
         </v-col>
@@ -132,16 +143,6 @@ for (let i = 1380; i <= year; i++) {
             label="پلاک خودرو"
             v-model="car.car_number"
             prepend-icon="mdi-barcode"
-          >
-          </v-text-field>
-        </v-col>
-        <v-col cols="12" lg="3" md="4">
-          <v-text-field
-            variant="underlined"
-            type="number"
-            label="کارکرد خودرو"
-            v-model="car.car_usage"
-            prepend-icon="mdi-speedometer"
           >
           </v-text-field>
         </v-col>
@@ -195,6 +196,30 @@ for (let i = 1380; i <= year; i++) {
           >
           </v-text-field>
         </v-col>
+
+        <v-col cols="12" lg="3" md="4">
+          <v-select
+            label="استان"
+            :items="getProvinces"
+            item-title="name"
+            item-value="id"
+            prepend-icon="mdi-city"
+            v-model="car.province_id"
+            @change="showCities"
+            variant="underlined"
+          ></v-select>
+        </v-col>
+        <v-col cols="12" lg="3" md="4">
+          <v-select
+            label="شهر"
+            :items="cities"
+            item-title="name"
+            item-value="id"
+            prepend-icon="mdi-city"
+            v-model="car.city_id"
+            variant="underlined"
+          ></v-select>
+        </v-col>
         <v-col cols="12" lg="3" md="4">
           <v-select
             label="رنگ خودرو"
@@ -244,57 +269,44 @@ for (let i = 1380; i <= year; i++) {
             variant="underlined"
           ></v-select>
         </v-col>
-        <v-col cols="12">
+        <v-col cols="12" md="4">
           <v-checkbox
             label="آیا مایل هستید بفرمان روی ماشین شما GPS نصب کند ؟"
             v-model="car.befarman_gps"
           >
           </v-checkbox>
         </v-col>
-        <v-col cols="12" lg="3" md="4">
-          <v-combobox
-            prepend-icon="mdi-shield-car"
-            v-model="car.insurance"
-            :items="['شخص ثالث', 'بدنه']"
-            label="بیمه"
-            multiple
-            variant="underlined"
-          >
-          </v-combobox>
+        <v-col cols="12" md="2">
+          <v-checkbox label="بیمه شخص ثالث" v-model="thirdParty"> </v-checkbox>
+        </v-col>
+        <v-col cols="12" md="2">
+          <v-checkbox label="بیمه بدنه" v-model="car.bodyInsurance">
+          </v-checkbox>
         </v-col>
         <v-col cols="12" lg="3" md="4">
           <v-text-field
             variant="underlined"
-            type="text"
+            type="number"
             label="تخفیف بیمه (سال)"
-            :disabled="!car.insurance"
             v-model="car.insurance_discount"
             prepend-icon="mdi-percent"
           >
           </v-text-field>
         </v-col>
+        <v-col cols="12" md="2">
+          <v-checkbox label="وضعیت فنی ماشین" v-model="technical"> </v-checkbox>
+        </v-col>
 
-        <v-col cols="12" lg="3" md="4">
-          <v-combobox
-            label="نوع ضمانت"
-            :items="['ضمانت با وجه نقد', 'ضمانت با چک', 'ضمانت با سفته']"
-            prepend-icon="mdi-cash-refund"
-            v-model="car.depositTypes"
-            multiple
-            variant="underlined"
-          >
-          </v-combobox>
-        </v-col>
-        <!-- <v-col cols="12">
-          <v-file-input
-            @change="changeImage"
-            v-model="car.images"
-            label="عکس های خودرو"
-            variant="outlined"
-            prepend-icon="mdi-image"
-          ></v-file-input>
-        </v-col>
         <v-col cols="12">
+          <p>عکس های خودرو</p>
+          <CropperImage
+            v-model:url="car.thumbnail"
+            ref="cropper"
+            :file-form="fileForm"
+          />
+        </v-col>
+
+        <!-- <v-col cols="12">
           <v-file-input
             @change="changeImage"
             v-model="car.certificates"
@@ -351,12 +363,6 @@ for (let i = 1380; i <= year; i++) {
             v-model="car.fuel"
             variant="underlined"
           ></v-select>
-        </v-col>
-        <v-col cols="12" md="6">
-          <!-- <date-picker
-            label="آخرین تاریخ تعویض روغن"
-            v-model="car.last_oil_change"
-          ></date-picker> -->
         </v-col>
       </v-row>
     </v-card-text>
