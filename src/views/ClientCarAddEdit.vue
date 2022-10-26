@@ -5,6 +5,7 @@ import BrandSelected from "@/components/Brand/BrandSelected.vue";
 import TrimSelected from "@/components/Trim/TrimSelected.vue";
 import CarSelected from "@/components/Car/CarSelected.vue";
 import CropperImage from "@/components/Global/Input/CropperImage.vue";
+import DropZone from "@/components/Global/Input/DropZone.vue";
 import { useClientCar } from "@/composables/clientCar/clientCar";
 import { useClientCarStore } from "@/store/clientCar";
 import { useTrimStore } from "@/store/trim";
@@ -298,23 +299,19 @@ function test() {
         </v-col>
 
         <v-col cols="12">
-          <p>عکس های خودرو</p>
-          <CropperImage
-            v-model:url="car.thumbnail"
-            ref="cropper"
-            :file-form="fileForm"
+          <DropZone 
+          name_fa="عکس های خودرو"
+          name_en="Client Car Photos"
+          :images="car.images"
           />
         </v-col>
-
-        <!-- <v-col cols="12">
-          <v-file-input
-            @change="changeImage"
-            v-model="car.certificates"
-            label="عکس های مدارک"
-            variant="outlined"
-            prepend-icon="mdi-image"
-          ></v-file-input>
-        </v-col> -->
+        <v-col cols="12">
+          <DropZone 
+          name_fa="عکس های مدارک"
+          name_en="Documents Photos"
+          :images="car.certificates"
+          />
+        </v-col>
         <v-col cols="12">
           <v-textarea
             name="input-5-1"
