@@ -59,11 +59,10 @@ onBeforeUnmount(() => emitModal(false));
     v-model="modal"
     :max-width="maxWidth"
     v-if="modal"
-    :width="width"
     :transition="transition"
     class="ym"
   >
-    <v-card dir="rtl">
+    <v-card dir="rtl" :width="width">
       <v-card-title class="bg-black">
         <base-header :icon="icon" :title="title" :subtitle="subtitle" />
       </v-card-title>
@@ -77,4 +76,4 @@ onBeforeUnmount(() => emitModal(false));
   font-family: yl;
 }
 </style>
->
+

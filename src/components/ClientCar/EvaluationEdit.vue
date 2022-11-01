@@ -1,16 +1,17 @@
 <script setup>
-import BaseModal from "@/componentes/Global/Dialog/BaseModal.vue";
-
-
-
-
+import BaseModal from "@/components/Global/Dialog/BaseModal.vue";
+import { ref } from "vue";
 const form = ref({});
+
+const openModal = async (data) => {
+  if (data.id) {
+    form.value = data;
+  }
+};
 
 const submitForm = async () => {
   if (form.value.id) {
-    
   } else {
-   
   }
   closeModal();
 };
@@ -19,86 +20,138 @@ const submitForm = async () => {
 <template>
   <base-modal
     name="clientCarEvaluationEdit"
-    max-width="600px"
     @open="openModal"
     title="ویرایش ارزیابی خودرو"
     subtitle="Edit Car Evaluation"
     icon="mdi-magnify-scan"
   >
-  <v-form @submit.prevent="submitForm">
+    <v-form @submit.prevent="submitForm">
       <v-card-text>
-        <v-row>
-          <v-col cols="12">
-            <CropperImage
-              v-model:url="form.thumbnail"
-              ref="cropper"
-              :file-form="fileForm"
-            />
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="12" md="4" sm="12">
-            <v-autocomplete
-              variant="underlined"
-              label="برند خودرو"
-              :items="getBrands"
-              item-value="id"
-              item-title="name_fa"
-              prepend-icon="mdi-car-side"
-              v-model="form.brand_id"
-            ></v-autocomplete>
-          </v-col>
-          <v-col cols="12" md="4" sm="12">
-            <v-text-field
-              variant="underlined"
-              type="text"
-              label="نام فارسی"
-              v-model="form.name_fa"
-              prepend-icon="mdi-text"
-            >
-            </v-text-field>
-          </v-col>
-          <v-col cols="12" md="4" sm="12">
-            <v-text-field
-              variant="underlined"
-              type="text"
-              label="نام انگلیسی"
-              v-model="form.name_en"
-              prepend-icon="mdi-text"
-            >
-            </v-text-field>
-          </v-col>
-          <v-col cols="12" md="6" sm="12">
-            <v-autocomplete
-              variant="underlined"
-              :items="getBodyTypes"
-              item-value="id"
-              item-title="name"
-              type="text"
-              label="نوع بدنه"
-              v-model="form.body_type_id"
-              prepend-icon="mdi-car-door"
-            >
-            </v-autocomplete>
-          </v-col>
-          <v-col cols="12" md="6" sm="12">
-            <v-text-field
-              variant="underlined"
-              type="number"
-              label="ظرفیت سرنشین"
-              v-model="form.capacity"
-              prepend-icon="mdi-car-child-seat"
-            >
-            </v-text-field>
-          </v-col>
-        </v-row>
+        <v-text-field
+          variant="underlined"
+          type="text"
+          label="موتور"
+          v-model="form.engine"
+          prepend-icon="mdi-text"
+        >
+        </v-text-field>
+        <v-text-field
+          variant="underlined"
+          type="text"
+          label="باتری"
+          v-model="form.battery"
+          prepend-icon="mdi-text"
+        >
+        </v-text-field>
+        <v-text-field
+          variant="underlined"
+          type="text"
+          label="بدنه"
+          v-model="form.body"
+          prepend-icon="mdi-text"
+        >
+        </v-text-field>
+        <v-text-field
+          variant="underlined"
+          type="text"
+          label="شاسی"
+          v-model="form.chasis"
+          prepend-icon="mdi-text"
+        >
+        </v-text-field>
+        <v-text-field
+          variant="underlined"
+          type="text"
+          label="روغن موتور"
+          v-model="form.engine_oil"
+          prepend-icon="mdi-text"
+        >
+        </v-text-field>
+        <v-text-field
+          variant="underlined"
+          type="text"
+          label="تسمه تایم"
+          v-model="form.timing_belt"
+          prepend-icon="mdi-text"
+        >
+        </v-text-field>
+        <v-text-field
+          variant="underlined"
+          type="text"
+          label="تسمه دینام"
+          v-model="form.alternator_belt"
+          prepend-icon="mdi-text"
+        >
+        </v-text-field>
+        <v-text-field
+          variant="underlined"
+          type="text"
+          label="شمع و وایر"
+          v-model="form.wire_candle"
+          prepend-icon="mdi-text"
+        >
+        </v-text-field>
+        <v-text-field
+          variant="underlined"
+          type="text"
+          label="صافی بنزین"
+          v-model="form.gas_filter"
+          prepend-icon="mdi-text"
+        >
+        </v-text-field>
+        <v-text-field
+          variant="underlined"
+          type="text"
+          label="روغن گیربکس"
+          v-model="form.gearbox_oil"
+          prepend-icon="mdi-text"
+        >
+        </v-text-field>
+        <v-text-field
+          variant="underlined"
+          type="text"
+          label="روغن واسکازین"
+          v-model="form.vaskazin_oil"
+          prepend-icon="mdi-text"
+        >
+        </v-text-field>
+        <v-text-field
+          variant="underlined"
+          type="text"
+          label="کمک جلو"
+          v-model="form.front_pads"
+          prepend-icon="mdi-text"
+        >
+        </v-text-field>
+        <v-text-field
+          variant="underlined"
+          type="text"
+          label="کمک عقب"
+          v-model="form.rear_pad"
+          prepend-icon="mdi-text"
+        >
+        </v-text-field>
+        <v-text-field
+          variant="underlined"
+          type="text"
+          label="کمک فنر"
+          v-model="form.shock_absorber"
+          prepend-icon="mdi-text"
+        >
+        </v-text-field>
       </v-card-text>
       <v-card-actions style="background-color: #ededed" class="justify-center">
-        <v-btn variant="elevated" color="black" icon>
-          <v-icon color="white">mdi-pencil</v-icon>
+        <v-checkbox
+          color="green"
+          style="font-weight: bold"
+          label="تایید ادمین"
+          v-model="verified"
+        />
+
+        <v-btn class="mt-10" variant="elevated" color="primary" block>
+          ذخیره تغییرات
+          <v-icon color="white">mdi-check</v-icon>
         </v-btn>
-      <v-checkbox color="primary" label="مورد تأیید ادمین">
-      </v-checkbox>
       </v-card-actions>
     </v-form>
   </base-modal>

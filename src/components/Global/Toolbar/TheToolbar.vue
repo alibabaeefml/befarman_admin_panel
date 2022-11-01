@@ -92,7 +92,7 @@ const logout = () => {
           <router-link to="/">
             <v-list-item
               prepend-icon="mdi-home"
-              title="صفحه اصلی"
+              title="داشبورد"
               value="home"
             ></v-list-item>
           </router-link>

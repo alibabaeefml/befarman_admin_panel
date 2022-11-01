@@ -20,7 +20,7 @@ const links = ref([
 <template>
   <v-app>
     <TheToolbar :currentPath="currentPath" v-if="currentPath != '/login'" />
-    <RouterView />
+    <RouterView :style="{marginTop:$vuetify.display.width<1080?'60px':0}"/>
     <v-footer class="bg-grey-lighten-1" v-if="currentPath != '/login'">
       <v-row justify="center" no-gutters>
         <v-btn

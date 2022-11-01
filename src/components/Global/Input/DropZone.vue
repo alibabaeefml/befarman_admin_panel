@@ -1,8 +1,7 @@
 <script setup>
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted, watchEffect } from "vue";
 import { Dropzone } from "dropzone";
 let myDropzone;
-let crossOrigin = null;
 const props = defineProps({
   name_fa: { type: String },
   name_en: { type: String },
@@ -16,17 +15,17 @@ onMounted(() => {
     url: "/post",
     acceptedFiles: ".jpg,.jpeg",
     autoProcessQueue: false,
-    addRemoveLinks:true
+    addRemoveLinks: true,
+    withCredentials: true
   });
 });
 
-watch(() => {
+watchEffect(() => {
   if (props.images) {
     props.images.map((e) => {
       myDropzone.displayExistingFile(
-        { name: e.file_name, size: parseFloat(e.size) * 1000 },
-        e.image,
-        crossOrigin
+        { name: e.file_name, size: parseFloat(e.size) * 1000, crossOrigin:"Anonymous" },
+        e.image
       );
     });
   }

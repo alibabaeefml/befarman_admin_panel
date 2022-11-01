@@ -18,9 +18,10 @@ import createFilrterObject from "@/utils/createFilterObject";
 const { getClientCars } = storeToRefs(useClientCarStore());
 const { getColors } = storeToRefs(useColorStore());
 const { getProvinces } = storeToRefs(useProvinceStore());
+
 // index colors
 useColorStore().loadColors();
-const car = ref({});
+const clientCar = ref({});
 const color = ref();
 const gearboxType = ref();
 const user = ref({});
@@ -30,22 +31,22 @@ const cities = ref([]);
 const thirdParty = ref();
 const bodyInsurance = ref();
 const technical = ref();
-if (route().name == "editClientCar") {
-  // fetch car object by id
-  useClientCar()
-    .showCar(route().params)
-    .then((data) => {
-      car.value = data;
-      car.value.befarman_gps = data.befarman_gps == 1;
-      color.value = getColors.value.find((color) => color.id == data.color_id);
-      gearboxType.value = data.gearbox == "manual" ? "دستی" : "اتوماتیک";
-      thirdParty.value = data.third_party_insurance == 1;
-      thirdParty.value = data.third_party_insurance == 1;
-      bodyInsurance.value = data.body_insurance == 1;
-      technical.value = data.technical_status == 1;
-    });
-}
 
+const indexClientCar = async () => {
+  if (route().name == "editClientCar") {
+    // fetch car object by id
+    const data = await useClientCar().showCar(route().params);
+    clientCar.value = data;
+    clientCar.value.befarman_gps = data.befarman_gps == 1;
+    color.value = getColors.value.find((color) => color.id == data.color_id);
+    gearboxType.value = data.gearbox == "manual" ? "دستی" : "اتوماتیک";
+    thirdParty.value = data.third_party_insurance == 1;
+    thirdParty.value = data.third_party_insurance == 1;
+    bodyInsurance.value = data.body_insurance == 1;
+    technical.value = data.technical_status == 1;
+  }
+};
+indexClientCar();
 // fetch all trims
 useTrimStore().loadTrims();
 const { getTrims } = storeToRefs(useTrimStore());
@@ -57,11 +58,13 @@ const userFilters = ref({ first_name: "مهمان" });
 useProvinceStore().loadProvinces();
 
 const showCities = computed(() => {
-  useProvinceStore()
-    .showCity(car.value.province_id)
-    .then((data) => {
-      cities.value = data;
-    });
+  if (clientCar.value.province_id) {
+    useProvinceStore()
+      .showCity(clientCar.value.province_id)
+      .then((data) => {
+        cities.value = data;
+      });
+  }
 });
 
 const fuels = ref(["بنزین", "الکتریکی", "دوگانه سوز", "هیبریدی"]);
@@ -90,306 +93,301 @@ const year = new Date().getFullYear() - 621;
 for (let i = 1380; i <= year; i++) {
   years.value.push(i);
 }
-
-function test() {
-  console.log("test");
-}
 </script>
 <template>
-  <v-card
-    dir="rtl"
-    class="ma-4 ym"
-    :title="$route.meta.title"
-    :subtitle="$route.meta.title_en"
-    prepend-icon="mdi-car-side"
-  >
-    <v-card-text class="pa-2">
-      <v-row>
-        <v-col cols="12" lg="3" md="4">
-          <BrandSelected v-model="car.brand_id" />
-        </v-col>
+  <div>
+    <v-card
+      dir="rtl"
+      class="ma-4 ym"
+      :title="$route.meta.title"
+      :subtitle="$route.meta.title_en"
+      prepend-icon="mdi-car-side"
+    >
+      <v-card-text class="pa-2">
+        <v-row>
+          <v-col cols="12" lg="3" md="4">
+            <BrandSelected v-model="clientCar.brand_id" />
+          </v-col>
 
-        <v-col cols="12" lg="3" md="4">
-          <CarSelected
-            :brand-id="car.brand_id"
-            v-model="car.car_id"
-            :disabled="!car.brand_id"
-          />
-        </v-col>
-        <v-col cols="12" lg="3" md="4">
-          <TrimSelected :car-id="car.car_id" v-model="car.trim_id" />
-        </v-col>
+          <v-col cols="12" lg="3" md="4">
+            <CarSelected
+              :brand-id="clientCar.brand_id"
+              v-model="clientCar.car_id"
+              :disabled="!clientCar.brand_id"
+            />
+          </v-col>
+          <v-col cols="12" lg="3" md="4">
+            <TrimSelected :car-id="clientCar.car_id" v-model="clientCar.trim_id" />
+          </v-col>
 
-        <v-col cols="12" lg="3" md="4">
-          <UserSearch
-            label="مالک خودرو"
-            no-data-text=".مالک خودرو را جستجو کنید"
-            v-model="car.user_id"
-          />
-        </v-col>
-        <v-col cols="12" lg="3" md="4">
-          <v-text-field
-            variant="underlined"
-            type="number"
-            label="خودرو از کدام اپلیکیشن است (جز بفرمان)"
-            v-model="car.car_usage"
-            prepend-icon="mdi-speedometer"
-          >
-          </v-text-field>
-        </v-col>
-        <v-col cols="12" lg="3" md="4">
-          <v-text-field
-            variant="underlined"
-            type="text"
-            label="پلاک خودرو"
-            v-model="car.car_number"
-            prepend-icon="mdi-barcode"
-          >
-          </v-text-field>
-        </v-col>
-        <v-col cols="12" lg="3" md="4">
-          <v-text-field
-            variant="underlined"
-            type="number"
-            label="کیلومتر آخرین تعویض روغن"
-            v-model="car.last_oil_change"
-            prepend-icon="mdi-speedometer"
-          >
-          </v-text-field>
-        </v-col>
-        <v-col cols="12" lg="3" md="4">
-          <v-text-field
-            variant="underlined"
-            type="number"
-            label="کارکرد خودرو"
-            v-model="car.car_usage"
-            prepend-icon="mdi-speedometer"
-          >
-          </v-text-field>
-        </v-col>
-        <v-col cols="12" lg="3" md="4">
-          <v-select
-            :items="['دستی', 'اتوماتیک']"
-            variant="underlined"
-            label="نوع گیربکس"
-            v-model="gearboxType"
-            prepend-icon="mdi-speedometer"
-          >
-          </v-select>
-        </v-col>
-        <v-col cols="12" lg="3" md="4">
-          <v-text-field
-            variant="underlined"
-            type="number"
-            label="ارزش خودرو (تومان)"
-            v-model="car.car_price"
-            prepend-icon="mdi-cash"
-          >
-          </v-text-field>
-        </v-col>
-        <v-col cols="12" lg="3" md="4">
-          <v-text-field
-            variant="underlined"
-            type="number"
-            label="قیمت اجاره (روزانه)"
-            v-model="car.price"
-            prepend-icon="mdi-cash"
-          >
-          </v-text-field>
-        </v-col>
+          <v-col cols="12" lg="3" md="4">
+            <UserSearch
+              label="مالک خودرو"
+              no-data-text=".مالک خودرو را جستجو کنید"
+              v-model="clientCar.user_id"
+            />
+          </v-col>
+          <v-col cols="12" lg="3" md="4">
+            <v-text-field
+              variant="underlined"
+              type="number"
+              label="خودرو از کدام اپلیکیشن است (جز بفرمان)"
+              v-model="clientCar.car_usage"
+              prepend-icon="mdi-speedometer"
+            >
+            </v-text-field>
+          </v-col>
+          <v-col cols="12" lg="3" md="4">
+            <v-text-field
+              variant="underlined"
+              type="text"
+              label="پلاک خودرو"
+              v-model="clientCar.car_number"
+              prepend-icon="mdi-barcode"
+            >
+            </v-text-field>
+          </v-col>
+          <v-col cols="12" lg="3" md="4">
+            <v-text-field
+              variant="underlined"
+              type="number"
+              label="کیلومتر آخرین تعویض روغن"
+              v-model="clientCar.last_oil_change"
+              prepend-icon="mdi-speedometer"
+            >
+            </v-text-field>
+          </v-col>
+          <v-col cols="12" lg="3" md="4">
+            <v-text-field
+              variant="underlined"
+              type="number"
+              label="کارکرد خودرو"
+              v-model="clientCar.car_usage"
+              prepend-icon="mdi-speedometer"
+            >
+            </v-text-field>
+          </v-col>
+          <v-col cols="12" lg="3" md="4">
+            <v-select
+              :items="['دستی', 'اتوماتیک']"
+              variant="underlined"
+              label="نوع گیربکس"
+              v-model="gearboxType"
+              prepend-icon="mdi-speedometer"
+            >
+            </v-select>
+          </v-col>
+          <v-col cols="12" lg="3" md="4">
+            <v-text-field
+              variant="underlined"
+              type="number"
+              label="ارزش خودرو (تومان)"
+              v-model="clientCar.car_price"
+              prepend-icon="mdi-cash"
+            >
+            </v-text-field>
+          </v-col>
+          <v-col cols="12" lg="3" md="4">
+            <v-text-field
+              variant="underlined"
+              type="number"
+              label="قیمت اجاره (روزانه)"
+              v-model="clientCar.price"
+              prepend-icon="mdi-cash"
+            >
+            </v-text-field>
+          </v-col>
 
-        <v-col cols="12" lg="3" md="4">
-          <v-select
-            label="استان"
-            :items="getProvinces"
-            item-title="name"
-            item-value="id"
-            prepend-icon="mdi-city"
-            v-model="car.province_id"
-            @change="showCities"
-            variant="underlined"
-          ></v-select>
-        </v-col>
-        <v-col cols="12" lg="3" md="4">
-          <v-select
-            label="شهر"
-            :items="cities"
-            item-title="name"
-            item-value="id"
-            prepend-icon="mdi-city"
-            v-model="car.city_id"
-            variant="underlined"
-          ></v-select>
-        </v-col>
-        <v-col cols="12" lg="3" md="4">
-          <v-select
-            label="رنگ خودرو"
-            :items="getColors"
-            item-title="name"
-            prepend-icon="mdi-palette"
-            v-model="color"
-            variant="underlined"
-          ></v-select>
-        </v-col>
-        <v-col cols="12" lg="3" md="4">
-          <v-select
-            label="سال تولید خودرو"
-            :items="years"
-            prepend-icon="mdi-calendar-week"
-            v-model="car.made_at"
-            variant="underlined"
-          ></v-select>
-        </v-col>
+          <v-col cols="12" lg="3" md="4">
+            <v-select
+              label="استان"
+              :items="getProvinces"
+              item-title="name"
+              item-value="id"
+              prepend-icon="mdi-city"
+              v-model="clientCar.province_id"
+              @change="showCities"
+              variant="underlined"
+            ></v-select>
+          </v-col>
+          <v-col cols="12" lg="3" md="4">
+            <v-select
+              label="شهر"
+              :items="cities"
+              item-title="name"
+              item-value="id"
+              prepend-icon="mdi-city"
+              v-model="clientCar.city_id"
+              variant="underlined"
+            ></v-select>
+          </v-col>
+          <v-col cols="12" lg="3" md="4">
+            <v-select
+              label="رنگ خودرو"
+              :items="getColors"
+              item-title="name"
+              prepend-icon="mdi-palette"
+              v-model="color"
+              variant="underlined"
+            ></v-select>
+          </v-col>
+          <v-col cols="12" lg="3" md="4">
+            <v-select
+              label="سال تولید خودرو"
+              :items="years"
+              prepend-icon="mdi-calendar-week"
+              v-model="clientCar.made_at"
+              variant="underlined"
+            ></v-select>
+          </v-col>
 
-        <v-col cols="12" lg="3" md="4">
-          <v-select
-            label="وضعیت رنگ خودرو"
-            :items="['بی رنگ', 'رنگ شده']"
-            prepend-icon="mdi-brush"
-            v-model="car.color_status"
-            variant="underlined"
-          ></v-select>
-        </v-col>
-        <v-col cols="12">
-          <v-select
-            v-model="car.features"
-            :items="features"
-            chips
-            label="تجهیزات جانبی"
-            multiple
-            variant="underlined"
-            prepend-icon="mdi-star"
-          ></v-select>
-        </v-col>
-        <v-col cols="12" lg="3" md="4">
-          <v-select
-            label="وضعیت جی پی اس"
-            :items="['ندارد', 'دارد']"
-            prepend-icon="mdi-crosshairs-gps"
-            v-model="car.gps"
-            variant="underlined"
-          ></v-select>
-        </v-col>
-        <v-col cols="12" md="4">
-          <v-checkbox
-            label="آیا مایل هستید بفرمان روی ماشین شما GPS نصب کند ؟"
-            v-model="car.befarman_gps"
+          <v-col cols="12" lg="3" md="4">
+            <v-select
+              label="وضعیت رنگ خودرو"
+              :items="['بی رنگ', 'رنگ شده']"
+              prepend-icon="mdi-brush"
+              v-model="clientCar.color_status"
+              variant="underlined"
+            ></v-select>
+          </v-col>
+          <v-col cols="12">
+            <v-select
+              v-model="clientCar.features"
+              :items="features"
+              chips
+              label="تجهیزات جانبی"
+              multiple
+              variant="underlined"
+              prepend-icon="mdi-star"
+            ></v-select>
+          </v-col>
+          <v-col cols="12" lg="4" md="4">
+            <v-select
+              label="وضعیت جی پی اس"
+              :items="['ندارد', 'دارد']"
+              prepend-icon="mdi-crosshairs-gps"
+              v-model="clientCar.gps"
+              variant="underlined"
+            ></v-select>
+          </v-col>
+          <v-col cols="12" md="4">
+            <v-checkbox
+              label="آیا مایل هستید بفرمان روی ماشین شما GPS نصب کند ؟"
+              v-model="clientCar.befarman_gps"
+            >
+            </v-checkbox>
+          </v-col>
+          <v-col cols="12" md="2">
+            <v-checkbox label="بیمه شخص ثالث" v-model="thirdParty">
+            </v-checkbox>
+          </v-col>
+          <v-col cols="12" md="2">
+            <v-checkbox label="بیمه بدنه" v-model="clientCar.bodyInsurance">
+            </v-checkbox>
+          </v-col>
+          <v-col cols="12" md="3">
+            <v-text-field
+              variant="underlined"
+              type="number"
+              label="تخفیف بیمه (سال)"
+              v-model="clientCar.insurance_discount"
+              prepend-icon="mdi-percent"
+            >
+            </v-text-field>
+          </v-col>
+          <v-col cols="12" md="3">
+            <v-checkbox label="وضعیت فنی ماشین" v-model="technical">
+            </v-checkbox>
+          </v-col>
+          <v-col cols="12" md="3">
+            <v-select
+              label="سوخت"
+              :items="fuels"
+              item-value="id"
+              prepend-icon="mdi-fuel"
+              v-model="clientCar.fuel"
+              variant="underlined"
+            ></v-select>
+          </v-col>
+          <v-col cols="12" md="6">
+            <v-textarea
+              :disabled="clientCar.color_status !== 'رنگ شده'"
+              name="input-5-1"
+              v-model="clientCar.painted"
+              label="کدام قسمت ها رنگی شده اند؟"
+              prepend-icon="mdi-brush"
+              variant="underlined"
+              auto-grow
+            >
+            </v-textarea>
+          </v-col>
+          <v-col cols="12" md="6">
+            <v-textarea
+              :width="10"
+              name="input-5-1"
+              label="کدام قسمت ها تعویض شده اند؟"
+              v-model="clientCar.changed_parts"
+              prepend-icon="mdi-swap-horizontal"
+              variant="underlined"
+              auto-grow
+            >
+            </v-textarea>
+          </v-col>
+          <v-col cols="12">
+            <DropZone
+              name_fa="عکس های خودرو"
+              name_en="Client Car Photos"
+              :images="clientCar.images"
+            />
+          </v-col>
+          <v-col cols="12">
+            <DropZone
+              name_fa="عکس های مدارک"
+              name_en="Documents Photos"
+              :images="clientCar.certificates"
+            />
+          </v-col>
+          <v-col cols="12">
+            <v-textarea
+              name="input-5-1"
+              label="توضیحات"
+              prepend-icon="mdi-format-quote-close"
+              variant="underlined"
+              auto-grow
+              v-model="clientCar.details"
+            >
+            </v-textarea>
+          </v-col>
+        </v-row>
+      </v-card-text>
+      <v-card-actions style="background-color: #ededed" class="justify-center">
+        <router-link :to="{ name: 'clientCars' }" class="link">
+          <v-btn
+            variant="elevated"
+            color="pink"
+            icon
+            @click="$emit('toggleModal')"
+            class="ma-1"
           >
-          </v-checkbox>
-        </v-col>
-        <v-col cols="12" md="2">
-          <v-checkbox label="بیمه شخص ثالث" v-model="thirdParty"> </v-checkbox>
-        </v-col>
-        <v-col cols="12" md="2">
-          <v-checkbox label="بیمه بدنه" v-model="car.bodyInsurance">
-          </v-checkbox>
-        </v-col>
-        <v-col cols="12" lg="3" md="4">
-          <v-text-field
-            variant="underlined"
-            type="number"
-            label="تخفیف بیمه (سال)"
-            v-model="car.insurance_discount"
-            prepend-icon="mdi-percent"
-          >
-          </v-text-field>
-        </v-col>
-        <v-col cols="12" md="2">
-          <v-checkbox label="وضعیت فنی ماشین" v-model="technical"> </v-checkbox>
-        </v-col>
-
-        <v-col cols="12">
-          <DropZone 
-          name_fa="عکس های خودرو"
-          name_en="Client Car Photos"
-          :images="car.images"
-          />
-        </v-col>
-        <v-col cols="12">
-          <DropZone 
-          name_fa="عکس های مدارک"
-          name_en="Documents Photos"
-          :images="car.certificates"
-          />
-        </v-col>
-        <v-col cols="12">
-          <v-textarea
-            name="input-5-1"
-            label="توضیحات"
-            prepend-icon="mdi-format-quote-close"
-            variant="underlined"
-            auto-grow
-            v-model="car.details"
-          >
-          </v-textarea>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12" md="6">
-          <v-textarea
-            :disabled="car.color_status !== 'رنگ شده'"
-            name="input-5-1"
-            v-model="car.painted"
-            label="کدام قسمت ها رنگی شده اند؟"
-            prepend-icon="mdi-brush"
-            variant="underlined"
-            auto-grow
-          >
-          </v-textarea>
-        </v-col>
-        <v-col cols="12" md="6">
-          <v-textarea
-            :width="10"
-            name="input-5-1"
-            label="کدام قسمت ها تعویض شده اند؟"
-            v-model="car.changed_parts"
-            prepend-icon="mdi-swap-horizontal"
-            variant="underlined"
-            auto-grow
-          >
-          </v-textarea>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12" md="6">
-          <v-select
-            label="سوخت"
-            :items="fuels"
-            item-value="id"
-            prepend-icon="mdi-fuel"
-            v-model="car.fuel"
-            variant="underlined"
-          ></v-select>
-        </v-col>
-      </v-row>
-    </v-card-text>
-    <v-card-actions style="background-color: #ededed" class="justify-center">
-      <router-link :to="{ name: 'clientCars' }" class="link">
-        <v-btn
-          variant="elevated"
-          color="pink"
-          icon
-          @click="$emit('toggleModal')"
-          class="ma-1"
-        >
-          <v-icon color="white">mdi-close</v-icon>
+            <v-icon color="white">mdi-close</v-icon>
+          </v-btn>
+        </router-link>
+        <v-btn variant="elevated" color="cyan" icon class="ma-1">
+          <v-icon color="white">mdi-check</v-icon>
         </v-btn>
-      </router-link>
-      <v-btn variant="elevated" color="cyan" icon class="ma-1">
-        <v-icon color="white">mdi-check</v-icon>
-      </v-btn>
-    </v-card-actions>
-  </v-card>
-  <v-btn
-    :to="{ name: 'clientCars' }"
-    class="add-btn"
-    icon
-    color="primary"
-    size="large"
-  >
-    <v-icon>mdi-arrow-left</v-icon>
-    <v-tooltip activator="parent">بازگشت</v-tooltip>
-  </v-btn>
+      </v-card-actions>
+    </v-card>
+    <v-btn
+      :to="{ name: 'clientCars' }"
+      class="add-btn"
+      icon
+      color="primary"
+      size="large"
+    >
+      <v-icon>mdi-arrow-left</v-icon>
+      <v-tooltip activator="parent">بازگشت</v-tooltip>
+    </v-btn>
+  </div>
 </template>
 <style scoped>
 .sub {

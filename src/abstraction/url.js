@@ -26,7 +26,8 @@ const urls = {
   indexColor: "colors",
   indexProvince: "provinces",
   showCity: "cities/:id",
-  showEvaluation: "evaluations/:id",
+  storeEvaluation:"client-cars/:clientCar/evaluations",
+  showEvaluation: "evaluations/:evaluation",
 
   // save files
   storeFiles: "media",
