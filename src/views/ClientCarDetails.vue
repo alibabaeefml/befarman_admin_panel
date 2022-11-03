@@ -2,6 +2,33 @@
 import { ref } from "vue";
 import Documents from "@components/ClientCar/Documents.vue";
 import MoreDetails from "@components/ClientCar/MoreDetails.vue";
+import { useRoute as route } from "vue-router";
+import { useClientCar } from "@/composables/clientCar/clientCar";
+import { useProvinceStore } from "@/store/province";
+import {storeToRefs} from 'pinia/dist/pinia';
+
+const { getProvinces } = storeToRefs(useProvinceStore());
+const { loadProvinces, showCity } = useProvinceStore();
+
+const clientCar = ref({});
+const province = ref({});
+const city = ref({}); 
+
+loadProvinces();
+
+const indexClientCar = async () => {
+  clientCar.value = await useClientCar().showClientCar(route().params);
+
+  // show province and city
+  province.value = getProvinces.value.find(p => p.id == clientCar.value.province_id);
+  city.value = await showCity(clientCar.value.city_id);
+};
+indexClientCar();
+
+const openImg = (url) => {
+  window.open(url);
+};
+
 const more = ref(false);
 </script>
 <template>
@@ -9,10 +36,10 @@ const more = ref(false);
     dir="rtl"
     class="ma-4 ym"
     :title="$route.meta.title"
-    :subtitle="$route.name"
+    :subtitle="$route.meta.title_en"
     prepend-icon="mdi-car-side"
   >
-    <v-row dir="rtl" class="pa-5">
+    <v-row dir="rtl" class="pa-5" v-if="clientCar.id">
       <v-col cols="12" md="6" sm="12">
         <v-carousel
           dir="ltr"
@@ -23,9 +50,10 @@ const more = ref(false);
           show-arrows="hover"
         >
           <v-carousel-item
-            v-for="(item, i) in 5"
-            :key="i"
-            src="/src/assets/Images/bmw_x6.jpg"
+            v-for="img in clientCar.images"
+            :key="img"
+            :src="img.image"
+            @click="openImg(img.image)"
             cover
           >
           </v-carousel-item>
@@ -36,73 +64,126 @@ const more = ref(false);
           <v-col cols="12" md="3" sm="6" class="yl">
             <div>
               <h4>مالک خودرو</h4>
-              <h2>data</h2>
+              <h2>{{ clientCar.user.name }}</h2>
+              <h2>{{ clientCar.user.phone }}</h2>
             </div>
           </v-col>
           <v-col cols="12" md="3" sm="6" class="yl">
             <div>
               <h4>رنگ خودرو</h4>
-              <h2>data</h2>
+              <h2>{{ clientCar.color.name }}</h2>
+            </div>
+          </v-col>
+          <v-col cols="12" md="3" sm="6" class="yl">
+            <div>
+              <h4>کارکرد خودرو</h4>
+              <h2>{{ clientCar.car_usage }}</h2>
             </div>
           </v-col>
           <v-col cols="12" md="3" sm="6" class="yl">
             <div>
               <h4>وضعیت رنگ خودرو</h4>
-              <h2>data</h2>
+              <h2>{{ clientCar.color_status }}</h2>
             </div>
           </v-col>
           <v-col cols="12" md="3" sm="6" class="yl">
             <div>
               <h4>سوخت</h4>
-              <h2>data</h2>
+              <h2>{{ clientCar.fuel }}</h2>
             </div>
           </v-col>
           <v-col cols="12" md="3" sm="6" class="yl">
             <div>
               <h4>شماره پلاک خودرو</h4>
-              <h2>data</h2>
+              <h2>{{ clientCar.car_number }}</h2>
             </div>
           </v-col>
           <v-col cols="12" md="3" sm="6" class="yl">
             <div>
-              <h4>مالک خودرو</h4>
-              <h2>data</h2>
+              <h4>ویژگی های خودرو</h4>
+              <span v-for="feature in clientCar.features" :key="feature">{{
+                feature + "، "
+              }}</span>
+            </div>
+          </v-col>
+          <v-col cols="12" md="3" sm="6" class="yl">
+            <div>
+              <h4>گیربکس</h4>
+              <h2>{{ clientCar.gearbox == "manual" ? "دستی" : "اتوماتیک" }}</h2>
             </div>
           </v-col>
           <v-col cols="12" md="3" sm="6" class="yl">
             <div>
               <h4>سال تولید خودرو</h4>
-              <h2>data</h2>
+              <h2>{{ clientCar.made_at }}</h2>
             </div>
           </v-col>
           <v-col cols="12" md="3" sm="6" class="yl">
             <div>
-              <h4>آخرین تاریخ تعویض روغن</h4>
-              <h2>data</h2>
+              <h4>آخرین کیلومتر تعویض روغن</h4>
+              <h2>{{ clientCar.last_oil_change }}</h2>
             </div>
           </v-col>
           <v-col cols="12" md="3" sm="6" class="yl">
             <div>
               <h4>نصب GPS بفرمان روی ماشین</h4>
-              <h2>data</h2>
+              <h2>{{ clientCar.befarman_gps == 1 ? "بله" : "خیر" }}</h2>
             </div>
           </v-col>
           <v-col cols="12" md="3" sm="6" class="yl">
             <div>
               <h4>تخفیف بیمه</h4>
-              <h2>data</h2>
+              <h2>{{ clientCar.insurance_discount ?? 0 }}</h2>
             </div>
           </v-col>
           <v-col cols="12" md="3" sm="6" class="yl">
             <div>
               <h4>GPS</h4>
-              <h2>data</h2>
+              <h2>{{ clientCar.gps ?? "ندارد" }}</h2>
             </div>
           </v-col>
           <v-col cols="12" md="3" sm="6" class="yl">
             <div>
-              <h4>بیمه</h4>
-              <h2>data</h2>
+              <h4>بیمه شخص ثالث</h4>
+              <h2>
+                {{ clientCar.third_party_insurance == 1 ? "دارد" : "ندارد" }}
+              </h2>
+            </div>
+          </v-col>
+          <v-col cols="12" md="3" sm="6" class="yl">
+            <div>
+              <h4>بیمه بدنه</h4>
+              <h2>{{ clientCar.body_insurance == 1 ? "دارد" : "ندارد" }}</h2>
+            </div>
+          </v-col>
+          <v-col cols="12" md="3" sm="6" class="yl">
+            <div>
+              <h4>استان</h4>
+              <h2>{{ province.name }}</h2>
+            </div>
+          </v-col>
+          <v-col cols="12" md="3" sm="6" class="yl">
+            <div>
+              <h4>شهر</h4>
+              <h2>{{ clientCar.city.name }}</h2>
+            </div>
+          </v-col>
+          <v-col cols="12" md="3" sm="6" class="yl">
+            <div>
+              <h4>آدرس</h4>
+              <h2>{{ clientCar.address }}</h2>
+            </div>
+          </v-col>
+          <v-col cols="12" md="3" sm="6" class="yl">
+            <div>
+              <h4>ارزش خودرو (تومان)</h4>
+              <h2>{{ clientCar.car_price }}</h2>
+            </div>
+          </v-col>
+          <v-col cols="12" md="3" sm="6" class="yl">
+            <div>
+              <h4>هزینه روزانه (تومان)</h4>
+              <h2>{{ clientCar.price }}</h2>
             </div>
           </v-col>
         </v-row>
@@ -119,7 +200,8 @@ const more = ref(false);
           </v-col>
           <v-col cols="12" md="6">
             <v-btn
-              @click="$_openModal('carDocs')"
+              v-if="clientCar.certificates"
+              @click="$_openModal('carDocs', clientCar.certificates)"
               block
               append-icon="mdi-file-document"
               color="black"
@@ -128,7 +210,7 @@ const more = ref(false);
             </v-btn>
           </v-col>
         </v-row>
-        <more-details v-if="more"></more-details>
+        <more-details :clientCar="clientCar" v-if="more"></more-details>
       </v-col>
       <documents></documents>
     </v-row>

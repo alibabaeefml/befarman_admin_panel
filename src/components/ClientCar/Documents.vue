@@ -1,8 +1,11 @@
 <script setup>
 import BaseModal from "@components/Global/Dialog/BaseModal.vue";
 import { useDisplay } from "vuetify";
-import { computed } from "vue";
-defineProps(["docModal"]);
+import { computed, ref } from "vue";
+const certificates = ref();
+const openModal = async (data) => {
+    certificates.value = data;
+};
 const width = computed(() => useDisplay().width.value);
 </script>
 
@@ -10,8 +13,9 @@ const width = computed(() => useDisplay().width.value);
   <base-modal
     name="carDocs"
     title="مدارک خودرو"
-    subtitle="CAR DOCUMENTS"
+    subtitle="CAR certificates"
     icon="mdi-file-document"
+    @open="openModal"
   >
     <v-carousel
       dir="ltr"
@@ -22,9 +26,9 @@ const width = computed(() => useDisplay().width.value);
       show-arrows="hover"
     >
       <v-carousel-item
-        v-for="(item, i) in 5"
-        :key="i"
-        src="/src/assets/Images/avatars/certificate-avatar.jpg"
+        v-for="item in certificates"
+        :key="item.id"
+        :src="item.image"
         cover
         :width="width < 600 ? width - 24 : 600"
       />

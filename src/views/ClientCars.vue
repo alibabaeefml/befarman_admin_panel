@@ -10,9 +10,8 @@ import { useClientCar } from "@/composables/clientCar/clientCar";
 import { storeToRefs } from "pinia/dist/pinia";
 import InfiniteScroll from "infinite-loading-vue3";
 
-const clientCar = useClientCar();
-const { getClientCars, paginate } = storeToRefs(clientCar);
-clientCar.indexCar();
+const {indexClientCar, getClientCars, paginate } = useClientCar();
+indexClientCar();
 
 const tab = ref("one");
 const deleteConfirm = ref(false);
@@ -20,7 +19,7 @@ const commentsModal = ref(false);
 
 // infinite loading
 let loadingData = false;
-const infiniteCar = async ($state) => {
+const infiniteClientCar = async ($state) => {
   if (loadingData || paginate.page >= paginate.pageCount) {
     return false;
   }
@@ -29,7 +28,7 @@ const infiniteCar = async ($state) => {
   data.pagination.page++;
   loadingData = true;
   try {
-    await clientCar.indexCar(data);
+    await indexClientCar(data);
     if (paginate.page < paginate.pageCount) {
       $state.loaded();
     } else {
@@ -59,7 +58,7 @@ const infiniteCar = async ($state) => {
       <v-card-text>
         <v-window v-model="tab">
           <v-window-item value="two">
-            <infinite-scroll @infinite-scroll="infiniteCar">
+            <infinite-scroll @infinite-scroll="infiniteClientCar">
               <ClientCarItem
                 v-for="clientCar of getClientCars"
                 :key="clientCar.id"
@@ -69,7 +68,7 @@ const infiniteCar = async ($state) => {
             </infinite-scroll>
           </v-window-item>
           <v-window-item value="one">
-            <infinite-scroll @infinite-scroll="infiniteCar">
+            <infinite-scroll @infinite-scroll="infiniteClientCar">
               <ClientCarItem
                 v-for="clientCar of getClientCars"
                 :key="clientCar.id"

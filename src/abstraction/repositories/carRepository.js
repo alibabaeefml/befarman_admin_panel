@@ -12,6 +12,7 @@ export default class CarRepository {
   async store(carData) {
     const formData = setData(carData);
     const response = await axios.post(url("storeCar"), formData);
+    console.log(response)
     return getJson(response.data.data);
   }
 
@@ -21,6 +22,7 @@ export default class CarRepository {
       url("updateCar", { car: carId }),
       formData
     );
+    console.log(response)
     return getJson(response.data.data);
   }
 

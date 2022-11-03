@@ -14,6 +14,7 @@ export const useProvinceStore = defineStore("province", () => {
     provinces.value = await repository.index();
     return provinces.value;
   };
+  
   const showCity = async (provinceId) => {
     return await repository.show(provinceId)
   };

@@ -8,21 +8,22 @@ export function useClientCar() {
 
   const { getClientCars, paginate } = storeToRefs(store);
 
-  const updateCar = async (carId, carData) => {
-    const car = await repository.update(carId, carData);
+  const updateClientCar = async (clientCarId, clientCarData) => {
+    const clientCar = await repository.update(clientCarId, clientCarData);
 
-    const index = store.clientCars.findIndex((car) => car.id === carId);
-    store.clientCars[index] = car;
-    return car;
+    const index = store.clientCars.findIndex((clientCar) => clientCar.id === clientCarId);
+    store.clientCars[index] = clientCar;
+    
+    return clientCar;
   };
 
-  const storeCar = async (carData) => {
-    const car = await repository.store(carData);
-    store.clientCars.push(car);
-    return car;
+  const storeClientCar = async (clientCarData) => {
+    const clientCar = await repository.store(clientCarData);
+    store.clientCars.push(clientCar);
+    return clientCar;
   };
 
-  const indexCar = async (paginate) => {
+  const indexClientCar = async (paginate) => {
     const { data, pagination } = await repository.index(paginate);
     store.$patch((state) => {
       state.paginate = pagination;
@@ -32,22 +33,22 @@ export function useClientCar() {
     return data;
   };
 
-  const showCar = async (data) => {
+  const showClientCar = async (data) => {
     return await repository.show(data);
   };
 
-  const deleteCar = async (carId) => {
-    let response = await repository.delete(carId);
+  const deleteClientCar = async (clientCarId) => {
+    let response = await repository.delete(clientCarId);
     alert(response.status);
   };
 
   return {
-    updateCar,
-    storeCar,
-    indexCar,
-    showCar,
+    updateClientCar,
+    storeClientCar,
+    indexClientCar,
+    showClientCar,
     getClientCars,
     paginate,
-    deleteCar,
+    deleteClientCar,
   };
 }
