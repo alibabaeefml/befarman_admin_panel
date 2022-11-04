@@ -23,6 +23,7 @@ const urls = {
   updateClientCar: "admin/client-cars/:car",
   destroyClientCar: "admin/client-cars/:car",
   indexStatus: "client-car-status",
+  changeStatus:"admin/client-cars/:car/change-status",
   indexColor: "colors",
   indexProvince: "provinces",
   showCity: "cities/:id",

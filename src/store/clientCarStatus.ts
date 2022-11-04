@@ -3,18 +3,20 @@ import { ref, computed } from "vue";
 import type { ClientCarStatus } from "@/types/clientCarStatus";
 import ClientCarStatusRepository from "@/abstraction/repositories/clientCarStatusRepository";
 
-export const useClientCarstatusStore = defineStore("clientCarstatus", () => {
+export const useClientCarStatusStore = defineStore("clientCarstatus", () => {
   const statuses = ref<ClientCarStatus[]>([]);
   const getClientCarStatuses = computed(() => statuses.value);
-
+  const repository = new ClientCarStatusRepository();
   const loadStatuses = async () => {
     if (statuses.value.length) {
       return statuses.value;
     }
-    const repository = new ClientCarStatusRepository();
     statuses.value = await repository.index();
     return statuses.value;
   };
-
-  return { statuses, getClientCarStatuses, loadStatuses };
+  const changeStatus = async (carId, statusId) => {
+    await repository.change(carId, statusId);
+    return
+  };
+  return { statuses, getClientCarStatuses, loadStatuses, changeStatus };
 });

@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import Documents from "@components/ClientCar/Documents.vue";
+import Certificates from "@components/ClientCar/Certificates.vue";
 import MoreDetails from "@components/ClientCar/MoreDetails.vue";
 import { useRoute as route } from "vue-router";
 import { useClientCar } from "@/composables/clientCar/clientCar";
@@ -156,13 +156,13 @@ const more = ref(false);
               <h2>{{ clientCar.body_insurance == 1 ? "دارد" : "ندارد" }}</h2>
             </div>
           </v-col>
-          <v-col cols="12" md="3" sm="6" class="yl">
+          <v-col cols="12" md="3" sm="6" class="yl" v-if="province">
             <div>
               <h4>استان</h4>
               <h2>{{ province.name }}</h2>
             </div>
           </v-col>
-          <v-col cols="12" md="3" sm="6" class="yl">
+          <v-col cols="12" md="3" sm="6" class="yl" v-if="province">
             <div>
               <h4>شهر</h4>
               <h2>{{ clientCar.city.name }}</h2>
@@ -200,19 +200,19 @@ const more = ref(false);
           </v-col>
           <v-col cols="12" md="6">
             <v-btn
-              v-if="clientCar.certificates"
-              @click="$_openModal('carDocs', clientCar.certificates)"
+              @click="$_openModal('Certificates', clientCar.certificates)"
               block
               append-icon="mdi-file-document"
               color="black"
               variant="outlined"
               >مدارک
+              <v-tooltip activator="parent" v-if="!clientCar.certificates.length" location="bottom">مدرکی موجود نیست</v-tooltip>
             </v-btn>
           </v-col>
         </v-row>
         <more-details :clientCar="clientCar" v-if="more"></more-details>
       </v-col>
-      <documents></documents>
+      <Certificates></Certificates>
     </v-row>
   </v-card>
 

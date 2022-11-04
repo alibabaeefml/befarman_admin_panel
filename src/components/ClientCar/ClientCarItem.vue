@@ -1,14 +1,19 @@
 <script setup>
 import defaultThumb from "@/assets/Images/avatars/car-avatar.jpg";
-import { ref } from "vue";
+import { ref,watch } from "vue";
 import { useClientCarStatus } from "@/composables/clientCarStatus/clientCarStatus";
 const props = defineProps(["clientCar", "archived"]);
 const { loadStatuses, getClientCarStatuses } = useClientCarStatus();
 
 loadStatuses();
-const status = getClientCarStatuses.value.find(
-  (e) => e.id == props.clientCar.status_id
-);
+const status = ref({});
+
+watch(() => {
+  status.value = getClientCarStatuses.value.find(
+    (e) => e.id == props.clientCar.status_id
+  );
+});
+
 const rentCarActions = ref(false);
 </script>
 
@@ -41,6 +46,7 @@ const rentCarActions = ref(false);
                     $_openModal('clientCarStatus', {
                       status,
                       getClientCarStatuses,
+                      clientCar,
                     })
                   "
                 >
@@ -77,7 +83,7 @@ const rentCarActions = ref(false);
           </v-col>
         </v-row>
       </v-card-text>
-      <v-card-actions style="position: absolute; bottom: 0;left:0" dir="ltr">
+      <v-card-actions style="position: absolute; bottom: 0; left: 0" dir="ltr">
         <v-btn
           v-if="!archived"
           color="primary"

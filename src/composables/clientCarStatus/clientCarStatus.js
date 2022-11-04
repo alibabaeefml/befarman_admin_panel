@@ -1,8 +1,8 @@
-import { useClientCarstatusStore } from "@/store/clientCarStatus";
+import { useClientCarStatusStore } from "@/store/clientCarStatus";
 import { storeToRefs } from "pinia/dist/pinia";
 
 export function useClientCarStatus() {
-  const store = useClientCarstatusStore();
+  const store = useClientCarStatusStore();
 
   const { loadStatuses } = store;
   const { getClientCarStatuses } = storeToRefs(store);

@@ -2,16 +2,16 @@
 import BaseModal from "@components/Global/Dialog/BaseModal.vue";
 import { useDisplay } from "vuetify";
 import { computed, ref } from "vue";
-const certificates = ref();
-const openModal = async (data) => {
+const certificates = ref([]);
+const openModal = (data) => {
     certificates.value = data;
 };
-const width = computed(() => useDisplay().width.value);
+
 </script>
 
 <template>
   <base-modal
-    name="carDocs"
+    name="Certificates"
     title="مدارک خودرو"
     subtitle="CAR certificates"
     icon="mdi-file-document"
@@ -27,11 +27,11 @@ const width = computed(() => useDisplay().width.value);
     >
       <v-carousel-item
         v-for="item in certificates"
-        :key="item.id"
+        :key="item"
         :src="item.image"
         cover
-        :width="width < 600 ? width - 24 : 600"
-      />
+      >
+    </v-carousel-item>
     </v-carousel>
   </base-modal>
 </template>
