@@ -8,6 +8,12 @@ export default class ClientCarRepository {
     const response = await axios.get(url("indexClientCar"), { params });
     return getArray(response.data);
   }
+  async indexArchived(data = {}) {
+    const params = setQueries(data);
+    const response = await axios.get(url("indexArchivedClientCar"), { params });
+    return getArray(response.data);
+  }
+
   async show(data = {}) {
     const response = await axios.get(url("showClientCar", { car: data.id }));
     return response.data.data;
@@ -28,6 +34,12 @@ export default class ClientCarRepository {
   }
 
   async delete(carId) {
-    return await axios.delete(url("destroyClientCar", { car: carId }));
+    const response = await axios.delete(url("destroyClientCar",{car: carId}));
+    return response.data.data;
+  }
+
+  async restore(carId) {
+    const response = await axios.post(url("restoreClientCar", { car: carId }));
+    return response.data.data;
   }
 }

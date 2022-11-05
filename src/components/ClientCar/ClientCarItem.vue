@@ -1,6 +1,7 @@
 <script setup>
 import defaultThumb from "@/assets/Images/avatars/car-avatar.jpg";
-import { ref,watch } from "vue";
+import { ref, watchEffect } from "vue";
+import {useClientCar} from "@/composables/clientCar/clientCar";
 import { useClientCarStatus } from "@/composables/clientCarStatus/clientCarStatus";
 const props = defineProps(["clientCar", "archived"]);
 const { loadStatuses, getClientCarStatuses } = useClientCarStatus();
@@ -8,18 +9,22 @@ const { loadStatuses, getClientCarStatuses } = useClientCarStatus();
 loadStatuses();
 const status = ref({});
 
-watch(() => {
+watchEffect(() => {
   status.value = getClientCarStatuses.value.find(
     (e) => e.id == props.clientCar.status_id
   );
 });
+
+const restoreCar = async () => {
+  await useClientCar().restoreClientCar(props.clientCar.id)
+}
 
 const rentCarActions = ref(false);
 </script>
 
 <template>
   <div>
-    <v-card class="border mt-3 text-center" min-height="200">
+    <v-card class="border mt-3 text-center" min-height="200" v-if="status">
       <v-card-text class="ym">
         <v-row class="align-center">
           <v-col cols="12" md="3" xs="12" class="justify-center">
@@ -116,7 +121,7 @@ const rentCarActions = ref(false);
             icon
             color="primary"
             variant="elevated"
-            @click="$emit('showDeleteModal')"
+            @click="$_openModal('clientCarAcceptanceAcceptance',clientCar.id)"
           >
             <v-icon>mdi-delete</v-icon>
             <v-tooltip activator="parent" location="right">حذف خودرو</v-tooltip>
@@ -136,7 +141,7 @@ const rentCarActions = ref(false);
             icon
             color="secondary"
             variant="elevated"
-            @click="$_openModal('clientCarComments')"
+            @click="$_openModal('clientCarComments',clientCar)"
           >
             <v-icon color="white">mdi-comment</v-icon>
             <v-tooltip activator="parent" location="right">نظرات</v-tooltip>

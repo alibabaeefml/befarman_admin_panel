@@ -25,7 +25,7 @@ export const useAuthStore = defineStore("auth", () => {
       token.value = data.token;
       // store user details and jwt in local storage to keep user logged in between page refreshes
       StoreManagement.set("user", data.user);
-      StoreManagement.set("token", data.token, "cookie");
+      StoreManagement.set("token", data.token);
 
       // token
       ApiService.setAuthHeader(data.token);

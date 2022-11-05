@@ -5,22 +5,31 @@ import { ref } from "vue";
 import ClientCarFilter from "@components/ClientCar/ClientCarFilter.vue";
 import ClientCarComments from "@components/ClientCar/ClientCarComments.vue";
 import EvaluationInfo from "@/components/ClientCar/EvaluationInfo.vue";
-import ClientCarStatus from "@/components/ClientCar/ClientCarStatus.vue"; 
+import ClientCarStatus from "@/components/ClientCar/ClientCarStatus.vue";
 import { useClientCar } from "@/composables/clientCar/clientCar";
 import { storeToRefs } from "pinia/dist/pinia";
 import InfiniteScroll from "infinite-loading-vue3";
 
-const {indexClientCar, getClientCars, paginate } = useClientCar();
-indexClientCar();
+const {
+  indexClientCar,
+  indexArchivedClientCar,
+  getClientCars,
+  getArchivedClientCars,
+  paginate,
+} = useClientCar();
 
-const tab = ref("one");
-const deleteConfirm = ref(false);
-const commentsModal = ref(false);
+indexArchivedClientCar();
+const tab = ref("active");
 
+if (tab.value == "active") {
+  indexClientCar();
+} else {
+  indexArchivedClientCar();
+}
 // infinite loading
 let loadingData = false;
-const infiniteClientCar = async ($state) => {
-  if (loadingData || paginate.page >= paginate.pageCount) {
+const infiniteClientCar = async () => {
+  if (loadingData) {
     return false;
   }
   const data = { pagination: {} };
@@ -28,15 +37,21 @@ const infiniteClientCar = async ($state) => {
   data.pagination.page++;
   loadingData = true;
   try {
-    await indexClientCar(data);
-    if (paginate.page < paginate.pageCount) {
-      $state.loaded();
+    if (tab.value == "active") {
+      let res = await indexClientCar(data);
+      if(!res.length){
+        document.querySelector('.spinner').remove();
+      }
     } else {
-      $state.complete();
+      let res = await indexArchivedClientCar(data);
+      if(!res.length){
+        document.querySelector('.spinner').remove();
+      }
     }
   } catch (e) {
     console.log(e);
   } finally {
+
     loadingData = false;
   }
 };
@@ -44,37 +59,35 @@ const infiniteClientCar = async ($state) => {
 
 <template>
   <div>
-    <ClientCarFilter :tab="tab" />
-    <v-card dir="rtl" 
-    :title="$route.meta.title"
-    :subtitle="$route.name"
-    prepend-icon="mdi-car"
+    <ClientCarFilter :archived="tab" />
+    <v-card
+      dir="rtl"
+      :title="$route.meta.title"
+      :subtitle="$route.name"
+      prepend-icon="mdi-car"
     >
       <v-tabs v-model="tab" color="secondary" fixed-tabs>
-        <v-tab value="one">خودرو های فعال</v-tab>
-        <v-tab value="two">خودرو های حذف شده</v-tab>
-        
+        <v-tab value="active">خودرو های فعال</v-tab>
+        <v-tab value="archived">خودرو های حذف شده</v-tab>
       </v-tabs>
       <v-card-text>
         <v-window v-model="tab">
-          <v-window-item value="two">
+          <v-window-item value="archived">
             <infinite-scroll @infinite-scroll="infiniteClientCar">
               <ClientCarItem
-                v-for="clientCar of getClientCars"
-                :key="clientCar.id"
-                :client-car="clientCar"
+                v-for="archivedClientCar of getArchivedClientCars"
+                :key="archivedClientCar.id"
+                :client-car="archivedClientCar"
                 :archived="true"
               />
             </infinite-scroll>
           </v-window-item>
-          <v-window-item value="one">
+          <v-window-item value="active">
             <infinite-scroll @infinite-scroll="infiniteClientCar">
               <ClientCarItem
                 v-for="clientCar of getClientCars"
                 :key="clientCar.id"
                 :client-car="clientCar"
-                @showDeleteModal="deleteConfirm = true"
-                @showCommentsModal="commentsModal = true"
               />
             </infinite-scroll>
           </v-window-item>
@@ -87,14 +100,8 @@ const infiniteClientCar = async ($state) => {
       </v-btn>
     </router-link>
     <clientCarStatus />
-    <AcceptCarArchive
-      :dialog="deleteConfirm"
-      @toggleModal="deleteConfirm = false"
-    />
-    <ClientCarComments
-      :dialog="commentsModal"
-      @toggle-modal="commentsModal = false"
-    />
+    <AcceptCarArchive />
+    <ClientCarComments />
     <EvaluationInfo />
   </div>
 </template>

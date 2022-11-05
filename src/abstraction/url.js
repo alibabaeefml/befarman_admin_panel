@@ -18,10 +18,12 @@ const urls = {
 
   // client car
   indexClientCar: "admin/client-cars",
+  indexArchivedClientCar: "admin/client-cars/archive",
   showClientCar: "admin/client-cars/:car",
   storeClientCar: "admin/client-cars",
   updateClientCar: "admin/client-cars/:car",
   destroyClientCar: "admin/client-cars/:car",
+  restoreClientCar:"admin/client-cars/:car/restore",
   indexStatus: "client-car-status",
   changeStatus:"admin/client-cars/:car/change-status",
   indexColor: "colors",
