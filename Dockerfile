@@ -1,4 +1,4 @@
-FROM hub.lexoya.com/cache/library/node:16.18.1-alpine3.14 as build-stage
+FROM hub.lexoya.com/cache/library/node:16.18.1-alpine3.16 as build-stage
 WORKDIR /app
 COPY package*.json ./
 RUN rm -rf node_modules && npm install
