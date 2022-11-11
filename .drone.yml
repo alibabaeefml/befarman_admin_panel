@@ -1,0 +1,33 @@
+kind: pipeline
+type: docker
+name: default
+steps:
+  - name: dockerize and push to registry
+    image: plugins/docker:20.13.0-linux-amd64
+    settings:
+      auto_tag: true
+      dockerfile: Dockerfile
+      registry: hub.lexoya.com
+      repo: hub.lexoya.com/befarman/befarman-admin-panel
+      username:
+        from_secret: registry-username
+      password:
+        from_secret: registry-password
+    when:
+      branch:
+        - master
+  - name: staging dockerize and push to registry
+    image: plugins/docker:20.13.0-linux-amd64
+    settings:
+      dockerfile: Dockerfile
+      registry: hub.lexoya.com
+      repo: hub.lexoya.com/befarman/befarman-admin-panel-snapshot
+      username:
+        from_secret: registry-username
+      password:
+        from_secret: registry-password
+    when:
+      branch:
+        - staging
+node:
+  server: runner01
