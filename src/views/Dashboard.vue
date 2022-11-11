@@ -1,5 +1,6 @@
 <script setup>
 import BaseTileItem from "@/components/Global/Tiles/BaseTileItem.vue";
+
 </script>
 
 <template>
@@ -7,7 +8,7 @@ import BaseTileItem from "@/components/Global/Tiles/BaseTileItem.vue";
     <v-row no-gutters>
       <v-col class="pa-1" cols="12" lg="5" xl="4">
         <router-link class="link" :to="{ name: 'cars' }">
-          <BaseTileItem
+          <BaseTileItem   
             color="pink lighten"
             icon="car"
             txt="خـــــودرو ها"

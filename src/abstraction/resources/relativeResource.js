@@ -1,4 +1,4 @@
-export const getJsonRelatives = (data) =>
+export const getArrayRelatives = (data) =>
   data.map((relative) => ({
     name: relative.name,
     address: relative.address,

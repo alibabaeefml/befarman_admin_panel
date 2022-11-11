@@ -1,6 +1,7 @@
 <script setup>
 import ClientCarItem from "@components/ClientCar/ClientCarItem.vue";
 import AcceptCarArchive from "@components/ClientCar/AcceptCarArchive.vue";
+import Banner from "@/components/Global/Notification/Banner.vue";
 import { ref } from "vue";
 import ClientCarFilter from "@components/ClientCar/ClientCarFilter.vue";
 import ClientCarComments from "@components/ClientCar/ClientCarComments.vue";
@@ -18,19 +19,21 @@ const {
   paginate,
 } = useClientCar();
 
-indexArchivedClientCar();
+
 const tab = ref("active");
 
-if (tab.value == "active") {
-  indexClientCar();
-} else {
-  indexArchivedClientCar();
-}
+indexClientCar();
+indexArchivedClientCar();
+
 // infinite loading
+const noResult = ref(false);
 let loadingData = false;
 const infiniteClientCar = async () => {
-  if (loadingData) {
-    return false;
+  if (loadingData || paginate.value.page >= paginate.value.pageCount) {
+    if (paginate.value.page >= paginate.value.pageCount) {
+      noResult.value = true;
+    }
+    return true;
   }
   const data = { pagination: {} };
   data["pagination"] = { ...paginate.value };
@@ -38,26 +41,33 @@ const infiniteClientCar = async () => {
   loadingData = true;
   try {
     if (tab.value == "active") {
-      let res = await indexClientCar(data);
-      if(!res.length){
-        document.querySelector('.spinner').remove();
-      }
+      await indexClientCar(data);
     } else {
-      let res = await indexArchivedClientCar(data);
-      if(!res.length){
-        document.querySelector('.spinner').remove();
-      }
+      await indexArchivedClientCar(data);
     }
   } catch (e) {
     console.log(e);
   } finally {
-
     loadingData = false;
   }
 };
 </script>
 
 <template>
+  <!-- <Banner
+      v-if="banner == 'success'"
+      content="بازگردانی خودرو با موفقیت انحام شد."
+      icon="mdi-remove"
+      color="lightgreen"
+      @hide="banner = null"
+    />
+    <Banner
+      v-if="banner == 'fail'"
+      content="بازگردانی خودرو با خطا مواجه شد."
+      icon="mdi-alert-circle"
+      color="#f79898"
+      @hide="banner = null"
+    /> -->
   <div>
     <ClientCarFilter :archived="tab" />
     <v-card
@@ -73,21 +83,26 @@ const infiniteClientCar = async () => {
       <v-card-text>
         <v-window v-model="tab">
           <v-window-item value="archived">
-            <infinite-scroll @infinite-scroll="infiniteClientCar">
+            <infinite-scroll
+              @infinite-scroll="infiniteClientCar"
+              :noResult="noResult"
+            >
               <ClientCarItem
                 v-for="archivedClientCar of getArchivedClientCars"
                 :key="archivedClientCar.id"
                 :client-car="archivedClientCar"
                 :archived="true"
+                :banner="banner"
               />
             </infinite-scroll>
           </v-window-item>
           <v-window-item value="active">
-            <infinite-scroll @infinite-scroll="infiniteClientCar">
+            <infinite-scroll @infinite-scroll="infiniteClientCar" :noResult="noResult">
               <ClientCarItem
                 v-for="clientCar of getClientCars"
                 :key="clientCar.id"
                 :client-car="clientCar"
+                :banner="banner"
               />
             </infinite-scroll>
           </v-window-item>

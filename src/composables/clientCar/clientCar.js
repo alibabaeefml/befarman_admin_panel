@@ -45,21 +45,22 @@ export function useClientCar() {
     return await repository.show(data);
   };
 
-  const deleteClientCar = async (clientCarId) => {
+  const archiveClientCar = async (clientCarId) => {
     await repository.delete(clientCarId);
-    store.clientCars.map((e, i) => {
+    store.clientCars.map((e) => {
       if (e.id == clientCarId) {
-        store.clientCars.splice(i, 1);
+        store.clientCars.splice(store.clientCars.indexOf(e), 1);
         store.archivedClientCars.splice(0, 0, e);
       }
     });
   };
   const restoreClientCar = async (clientCarId) => {
-     await repository.restore(clientCarId);
-    store.archivedClientCars.map((e, i) => {
+    await repository.restore(clientCarId);
+    store.archivedClientCars.map((e) => {
       if (e.id == clientCarId ) {
-        store.archivedClientCars.splice(i, 1);
+        store.archivedClientCars.splice(store.archivedClientCars.indexOf(e), 1);
         store.clientCars.splice(0, 0, e);
+        return
       }
     });
   };
@@ -72,7 +73,7 @@ export function useClientCar() {
     getClientCars,
     getArchivedClientCars,
     paginate,
-    deleteClientCar,
+    archiveClientCar,
     restoreClientCar,
   };
 }

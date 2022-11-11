@@ -1,8 +1,18 @@
 <script setup>
+import { useUser } from "@/composables/user/user";
 import { ref } from "vue";
-defineProps(["archived"]);
-defineEmits(["smsModal", "deleteModal"]);
+const props = defineProps(["user", "archived"]);
 const actions = ref(false);
+
+const userVerification = async () => {
+  if (props.user.verified == 0) {
+    props.user.verified = 1;
+    await useUser().verifyUser(props.user.id);
+  } else {
+    props.user.verified = 0;
+    await useUser().unverifyUser(props.user.id);
+  }
+};
 </script>
 
 <template>
@@ -14,17 +24,8 @@ const actions = ref(false);
       <v-card-text dir="rtl" class="yl">
         <v-row class="align-center">
           <v-col cols="12" md="3" sm="12">
-            <h1 class="md-txt">کاربر مهمان</h1>
-            <h2>09000000000</h2>
-            <v-btn
-              class="ym"
-              :to="{ name: 'userDetails', params: { id: ':id' } }"
-              block
-              prepend-icon="mdi-account-details"
-              color="secondary"
-              variant="outlined"
-              >اطلاعات کاربر</v-btn
-            >
+            <h1 class="md-txt">{{ user.name }}</h1>
+            <h2>{{ user.phone }}</h2>
           </v-col>
           <v-col
             class="d-flex align-center justify-center text-right"
@@ -33,7 +34,7 @@ const actions = ref(false);
             md="3"
             sm="12"
           >
-            <h1 class="lg-txt mb">0</h1>
+            <h1 class="lg-txt mb">{{ user.cars_count }}</h1>
             <h3 class="sm-txt mr-2" style="width: 90px">خودرو قابل اجاره</h3>
           </v-col>
           <v-col
@@ -43,13 +44,13 @@ const actions = ref(false);
             md="3"
             sm="12"
           >
-            <h1 class="lg-txt mb">0</h1>
+            <h1 class="lg-txt mb">{{ user.requests_count }}</h1>
             <h3 class="sm-txt mr-2" style="width: 90px">درخواست خودرو</h3>
           </v-col>
           <v-col cols="12" md="3" sm="12">
             <div class="d-flex flex-column" style="font-size: 20px">
-              <h2 class="mxb">150000</h2>
-              <h4>هزینه روزانه - تومان</h4>
+              <h2 class="mxb">{{ user.transactions_sum }}</h2>
+              <h4>کل تراکنش ها - تومان</h4>
             </div>
           </v-col>
         </v-row>
@@ -74,26 +75,44 @@ const actions = ref(false);
         <div class="actionsGroup" v-if="actions">
           <v-btn
             icon
+            color="secondary"
+            variant="elevated"
+            :to="{ name: 'userDetail', params: { id: user.id } }"
+          >
+            <v-icon color="white">mdi-information</v-icon>
+            <v-tooltip activator="parent" location="bottom"
+              >اطلاعات کاربر</v-tooltip
+            >
+          </v-btn>
+          <v-btn
+            icon
             color="primary"
             variant="elevated"
-            @click="$emit('deleteModal')"
+            @click="$_openModal('userArchiveAcceptance',user.id)"
           >
             <v-icon>mdi-delete</v-icon>
             <v-tooltip activator="parent" location="bottom"
               >حذف کاربر</v-tooltip
             >
           </v-btn>
-          <v-btn icon color="red" variant="elevated">
-            <v-icon color="white">mdi-close</v-icon>
-            <v-tooltip activator="parent" location="bottom"
-              >لغو تایید</v-tooltip
-            >
+          <v-btn
+            icon
+            :color="user.verified == 0 ? 'green' : 'red'"
+            variant="elevated"
+            @click="userVerification"
+          >
+            <v-icon color="white">{{
+              user.verified == 0 ? "mdi-check" : "mdi-close"
+            }}</v-icon>
+            <v-tooltip activator="parent" location="bottom">{{
+              user.verified == 0 ? "تایید کاربر" : "لغو تایید"
+            }}</v-tooltip>
           </v-btn>
           <v-btn
             icon
             color="black"
             variant="elevated"
-            :to="{ name: 'editUser', params: { id: ':id' } }"
+            :to="{ name: 'editUser', params: { id: user.id } }"
           >
             <v-icon>mdi-pencil</v-icon>
             <v-tooltip activator="parent" location="bottom"
@@ -104,7 +123,7 @@ const actions = ref(false);
             icon
             color="orange"
             variant="elevated"
-            @click="$emit('smsModal')"
+            @click="$_openModal('sendMessage', user.id)"
           >
             <v-icon color="white">mdi-message-text</v-icon>
             <v-tooltip activator="parent" location="bottom"
@@ -115,7 +134,7 @@ const actions = ref(false);
             icon
             color="secondary"
             variant="elevated"
-            @click="$emit('showCommentsModal')"
+            @click="$_openModal('userComments', user.comments)"
           >
             <v-icon color="white">mdi-comment</v-icon>
             <v-tooltip activator="parent" location="bottom">نظرات</v-tooltip>

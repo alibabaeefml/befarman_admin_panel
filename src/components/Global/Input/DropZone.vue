@@ -31,8 +31,8 @@ watchEffect(() => {
   }
 });
 
-// make an emit to upload images when submit the form
-// myDropzone.processQueue().
+// to make an emit to upload images when submit the form
+// myDropzone.processQueue()
 </script>
 
 <template>

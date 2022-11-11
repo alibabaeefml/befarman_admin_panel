@@ -1,9 +1,9 @@
 <script setup>
-import BaseModal from "../Global/Dialog/BaseModal.vue";
+import BaseModal from "@/components/Global/Dialog/BaseModal.vue";
 import { ref } from "vue";
 const comments = ref([]);
 const openModal = async (data) => {
-  comments.value = data.comments;
+  comments.value = data;
 };
 </script>
 

@@ -1,4 +1,4 @@
-export declare interface Comment {
+export declare interface Media {
   id: number;
   collection_name: string;
   image: string;

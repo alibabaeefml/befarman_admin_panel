@@ -1,44 +1,85 @@
 <script setup>
-import { ref } from "vue";
+// ------------- imports
+
+// compomnents
 import UserFilter from "@components/User/UserFilter.vue";
 import UserItem from "@components/User/UserItem.vue";
 import UserComments from "@components/User/UserComments.vue";
-import AcceptUserDelete from "@components/User/AcceptUserDelete.vue";
+import AcceptUserArchive from "@components/User/AcceptUserArchive.vue";
 import SendMessage from "@components/User/SendMessage.vue";
-const tab = ref("one");
-const commentsModal = ref(false);
-const addModal = ref(false);
-const deleteConfirm = ref(false);
-const smsModal = ref(false);
+import InfiniteScroll from "infinite-loading-vue3";
+
+
+// modules
+import { ref } from "vue";
+import { useUser } from "@/composables/user/user";
+const {
+  indexUser,
+  indexArchivedUser,
+  updateUser,
+  storeUser,
+  showUser,
+  deleteUser,
+  restoreUser,
+  searchUser,
+  getUsers,
+  getArchivedUsers,
+  paginate,
+} = useUser();
+
+// ---------------
+
+//---------------- native code
+const tab = ref("active");
+
+indexUser();
+indexArchivedUser();
+
+// infinite loading
+const noResult = ref(false);
+let loadingData = false;
+const infiniteUser = async () => {
+  if (loadingData || paginate.value.page >= paginate.value.pageCount) {
+    if (paginate.value.page >= paginate.value.pageCount) {
+      noResult.value = true;
+    }
+    return true;
+  }
+  const data = { pagination: {} };
+  data["pagination"] = { ...paginate.value };
+  data.pagination.page++;
+  loadingData = true;
+  try {
+    await indexUser(data);
+  } catch (e) {
+    console.log(e);
+  } finally {
+    loadingData = false;
+  }
+};
+
 </script>
 
 <template>
   <UserFilter />
   <v-card>
     <v-tabs v-model="tab" color="secondary" fixed-tabs>
-      <v-tab value="two">کاربران حذف شده</v-tab>
-      <v-tab value="one">کاربران فعال</v-tab>
+      <v-tab value="archived">کاربران حذف شده</v-tab>
+      <v-tab value="active">کاربران فعال</v-tab>
     </v-tabs>
     <v-card-text>
       <v-window v-model="tab">
-        <v-window-item value="two">
+        <v-window-item value="archived">
           <UserItem
-            v-for="user of 5"
+            v-for="user of getArchivedUsers"
             :key="user.id"
             :user="user"
-            :archived="true"
           />
         </v-window-item>
-        <v-window-item value="one">
-          <UserItem
-            v-for="user of 5"
-            :key="user.id"
-            :user="user"
-            @showCommentsModal="commentsModal = true"
-            @editModal="addModal = true"
-            @deleteModal="deleteConfirm = true"
-            @smsModal="smsModal = true"
-          />
+        <v-window-item value="active">
+          <infinite-scroll @infinite-scroll="infiniteUser" :noResult="noResult">
+            <UserItem v-for="user of getUsers" :key="user.id" :user="user"/>
+          </infinite-scroll>
         </v-window-item>
       </v-window>
     </v-card-text>
@@ -52,10 +93,7 @@ const smsModal = ref(false);
   >
     <v-icon color="white">mdi-plus</v-icon>
   </v-btn>
-  <AcceptUserDelete
-    :dialog="deleteConfirm"
-    @toggleModal="deleteConfirm = false"
-  />
-  <UserComments :dialog="commentsModal" @toggle-modal="commentsModal = false" />
-  <SendMessage :dialog="smsModal" @toggle-modal="smsModal = false" />
+  <AcceptUserArchive />
+  <UserComments />
+  <SendMessage />
 </template>

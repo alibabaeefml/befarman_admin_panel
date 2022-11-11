@@ -5,7 +5,7 @@ import BrandSelected from "@/components/Brand/BrandSelected.vue";
 import TrimSelected from "@/components/Trim/TrimSelected.vue";
 import CarSelected from "@/components/Car/CarSelected.vue";
 import CropperImage from "@/components/Global/Input/CropperImage.vue";
-import DropZone from "@/components/Global/Input/DropZone.vue";
+import Dropzone from "@/components/Global/Input/Dropzone.vue";
 import { useClientCar } from "@/composables/clientCar/clientCar";
 import { useTrimStore } from "@/store/trim";
 import { useUserStore } from "@/store/user";
@@ -22,26 +22,13 @@ const { getProvinces } = storeToRefs(useProvinceStore());
 useColorStore().loadColors();
 const form = ref({});
 const color = ref();
-const gearboxType = ref();
 const user = ref({});
 const fileForm = ref({});
-const colors = ref([]);
 const cities = ref([]);
-const thirdParty = ref();
-const bodyInsurance = ref();
-const technical = ref();
 
 const indexClientCar = async () => {
   if (route().name == "editClientCar") {
-    // fetch car object by id
-    const data = await showClientCar(route().params);
-    form.value = data;
-    form.value.befarman_gps = data.befarman_gps == 1;
-    gearboxType.value = data.gearbox == "manual" ? "دستی" : "اتوماتیک";
-    thirdParty.value = data.third_party_insurance == 1;
-    thirdParty.value = data.third_party_insurance == 1;
-    bodyInsurance.value = data.body_insurance == 1;
-    technical.value = data.technical_status == 1;
+    form.value = await showClientCar(route().params);
   }
 };
 indexClientCar();
@@ -178,7 +165,7 @@ const submitForm = async () => {
               :items="['دستی', 'اتوماتیک']"
               variant="underlined"
               label="نوع گیربکس"
-              v-model="gearboxType"
+              v-model="form.gearbox"
               prepend-icon="mdi-speedometer"
             >
             </v-select>
@@ -285,11 +272,11 @@ const submitForm = async () => {
             </v-checkbox>
           </v-col>
           <v-col cols="12" md="2">
-            <v-checkbox label="بیمه شخص ثالث" v-model="thirdParty">
+            <v-checkbox label="بیمه شخص ثالث" v-model="form.third_party_insurance">
             </v-checkbox>
           </v-col>
           <v-col cols="12" md="2">
-            <v-checkbox label="بیمه بدنه" v-model="form.bodyInsurance">
+            <v-checkbox label="بیمه بدنه" v-model="form.body_insurance">
             </v-checkbox>
           </v-col>
           <v-col cols="12" md="3">
@@ -303,7 +290,7 @@ const submitForm = async () => {
             </v-text-field>
           </v-col>
           <v-col cols="12" md="3">
-            <v-checkbox label="وضعیت فنی ماشین" v-model="technical">
+            <v-checkbox label="وضعیت فنی ماشین" v-model="form.technical_status">
             </v-checkbox>
           </v-col>
           <v-col cols="12" md="3">
@@ -341,14 +328,14 @@ const submitForm = async () => {
             </v-textarea>
           </v-col>
           <v-col cols="12">
-            <DropZone
+            <Dropzone
               name_fa="عکس های خودرو"
               name_en="Client Car Photos"
               :images="form.images"
             />
           </v-col>
           <v-col cols="12">
-            <DropZone
+            <Dropzone
               name_fa="عکس های مدارک"
               name_en="Documents Photos"
               :images="form.certificates"
@@ -376,7 +363,7 @@ const submitForm = async () => {
             @click="$emit('toggleModal')"
             class="ma-1"
           >
-          <v-tooltip activator="parent" location="bottom">بستن فرم</v-tooltip>
+            <v-tooltip activator="parent" location="bottom">بستن فرم</v-tooltip>
             <v-icon color="white">mdi-close</v-icon>
           </v-btn>
         </router-link>
@@ -387,7 +374,9 @@ const submitForm = async () => {
           class="ma-1"
           @click="submitForm"
         >
-          <v-tooltip activator="parent" location="bottom">ثبت تغییرات</v-tooltip>
+          <v-tooltip activator="parent" location="bottom"
+            >ثبت تغییرات</v-tooltip
+          >
           <v-icon color="white">mdi-check</v-icon>
         </v-btn>
       </v-card-actions>

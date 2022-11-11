@@ -1,5 +1,7 @@
 import type { Relative } from "./relative";
 import type { Bank } from "./bank";
+import type { Comment } from "./comment";
+import type { Media as Certificate } from "./Media";
 export declare interface User {
   id: number;
   name: string;
@@ -29,6 +31,8 @@ export declare interface User {
   work_phone: string;
   relatives: Relative[];
   bank: Bank;
+  comments: Comment[];
+  certificates: Certificate[];
   birthday: string;
   description: string;
   transactions_sum: number;

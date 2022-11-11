@@ -22,14 +22,14 @@ const urls = {
   showClientCar: "admin/client-cars/:car",
   storeClientCar: "admin/client-cars",
   updateClientCar: "admin/client-cars/:car",
-  destroyClientCar: "admin/client-cars/:car",
-  restoreClientCar:"admin/client-cars/:car/restore",
+  archiveClientCar: "admin/client-cars/:car",
+  restoreClientCar: "admin/client-cars/:car/restore",
   indexStatus: "client-car-status",
-  changeStatus:"admin/client-cars/:car/change-status",
+  changeStatus: "admin/client-cars/:car/change-status",
   indexColor: "colors",
   indexProvince: "provinces",
   showCity: "cities/:id",
-  storeEvaluation:"client-cars/:clientCar/evaluations",
+  storeEvaluation: "client-cars/:clientCar/evaluations",
   showEvaluation: "evaluations/:evaluation",
 
   // save files
@@ -37,7 +37,15 @@ const urls = {
 
   // user
   indexUser: "admin/users",
+  indexArchivedUser: "admin/users/archive",
   showUser: "admin/users/:user",
+  storeUser:"admin/users",
+  updateUser:"admin/users/:user",
+  sms:"admin/sms/:user",
+  archiveUser:"admin/users/:user",
+  restoreUser:"admin/users/:user/restore",
+  verifyUser:"admin/users/:user/verify",
+  unverifyUser:"admin/users/:user/unverify",
   // auth
   sendCode: "login",
   logout: "logout",

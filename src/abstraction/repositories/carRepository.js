@@ -22,7 +22,6 @@ export default class CarRepository {
       url("updateCar", { car: carId }),
       formData
     );
-    console.log(response)
     return getJson(response.data.data);
   }
 

@@ -8,36 +8,11 @@ import api from "@/services/api.services.ts";
 useModal();
 
 const currentPath = computed(() => route().path);
-const links = ref([
-  "Home",
-  "About Us",
-  "Team",
-  "Services",
-  "Blog",
-  "Contact Us",
-]);
 </script>
 <template>
   <v-app>
     <TheToolbar :currentPath="currentPath" v-if="currentPath != '/login'" />
     <RouterView :style="{marginTop:$vuetify.display.width<1080?'60px':0}"/>
-    <v-footer class="bg-grey-lighten-1" v-if="currentPath != '/login'">
-      <v-row justify="center" no-gutters>
-        <v-btn
-          v-for="link in links"
-          :key="link"
-          color="white"
-          variant="text"
-          class="mx-2"
-          rounded="xl"
-        >
-          {{ link }}
-        </v-btn>
-        <v-col class="text-center text-white mt-4" cols="12">
-          {{ new Date().getFullYear() }} — <strong>BEFARMAN</strong>
-        </v-col>
-      </v-row>
-    </v-footer>
   </v-app>
 </template>
 <style>

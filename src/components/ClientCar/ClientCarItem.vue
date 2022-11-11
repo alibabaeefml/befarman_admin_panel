@@ -1,13 +1,13 @@
 <script setup>
 import defaultThumb from "@/assets/Images/avatars/car-avatar.jpg";
 import { ref, watchEffect } from "vue";
-import {useClientCar} from "@/composables/clientCar/clientCar";
+import { useClientCar } from "@/composables/clientCar/clientCar";
 import { useClientCarStatus } from "@/composables/clientCarStatus/clientCarStatus";
-const props = defineProps(["clientCar", "archived"]);
+const props = defineProps(["clientCar", "archived", "banner"]);
 const { loadStatuses, getClientCarStatuses } = useClientCarStatus();
 
 loadStatuses();
-const status = ref({});
+const status = ref({ color: "", id: "", name_fa: "", icon: "" });
 
 watchEffect(() => {
   status.value = getClientCarStatuses.value.find(
@@ -16,15 +16,17 @@ watchEffect(() => {
 });
 
 const restoreCar = async () => {
-  await useClientCar().restoreClientCar(props.clientCar.id)
-}
-
+  try {
+  await useClientCar().restoreClientCar(props.clientCar.id);
+  } catch {
+  }
+};
 const rentCarActions = ref(false);
 </script>
 
 <template>
   <div>
-    <v-card class="border mt-3 text-center" min-height="200" v-if="status">
+    <v-card class="border mt-3 text-center" min-height="200">
       <v-card-text class="ym">
         <v-row class="align-center">
           <v-col cols="12" md="3" xs="12" class="justify-center">
@@ -121,7 +123,7 @@ const rentCarActions = ref(false);
             icon
             color="primary"
             variant="elevated"
-            @click="$_openModal('clientCarAcceptanceAcceptance',clientCar.id)"
+            @click="$_openModal('clientCarArchiveAcceptance', clientCar.id)"
           >
             <v-icon>mdi-delete</v-icon>
             <v-tooltip activator="parent" location="right">حذف خودرو</v-tooltip>
@@ -141,17 +143,12 @@ const rentCarActions = ref(false);
             icon
             color="secondary"
             variant="elevated"
-            @click="$_openModal('clientCarComments',clientCar)"
+            @click="$_openModal('clientCarComments', clientCar.comments)"
           >
             <v-icon color="white">mdi-comment</v-icon>
             <v-tooltip activator="parent" location="right">نظرات</v-tooltip>
           </v-btn>
-          <v-btn
-            icon
-            color="orange"
-            variant="elevated"
-            @click="$emit('showDateChangeModal')"
-          >
+          <v-btn icon color="orange" variant="elevated" v-if="status.id == 3">
             <v-icon color="white">mdi-calendar</v-icon>
             <v-tooltip activator="parent" location="right"
               >تاریخ رزرو</v-tooltip

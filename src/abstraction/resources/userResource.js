@@ -1,4 +1,12 @@
-import { getJsonRelatives } from "./relativeResource";
+import { getArrayRelatives } from "./relativeResource";
+import { getArrayComment } from "./commentResource";
+import { setPagination } from "@/utils/createQueriesObject";
+import { getArrayMedia } from "./mediaResource";
+export function getArrayUsers({ data, meta }) {
+  const pagination = setPagination(meta);
+  data.map((user) => getJsonUser(user));
+  return { data, pagination };
+}
 
 export const getJsonUser = (data) => ({
   id: data.id,
@@ -26,12 +34,14 @@ export const getJsonUser = (data) => ({
   license_number: data.license_number,
   location_type: data.location_type,
   work_phone: data.work_phone,
-  relatives: getJsonRelatives(data.relatives ?? []),
-  bank: data.bank,
+  relatives: getArrayRelatives(data.relatives ?? []),
+  bank: data.bank ?? {},
   birthday: data.birthday,
   description: data.description,
   transactions_sum: data.transactions_sum,
   thumbnail: data.thumbnail,
   is_admin: data.is_admin,
   avg_vote: data.avg_vote,
+  certificates: getArrayMedia(data.certificates ?? []),
+  comments: getArrayComment(data.comments ?? []),
 });
