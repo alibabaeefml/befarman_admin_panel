@@ -18,7 +18,17 @@ watchEffect(() => {
 const restoreCar = async () => {
   try {
   await useClientCar().restoreClientCar(props.clientCar.id);
+  useNotification({
+  icon: "check",
+  content: "بازگردانی خودرو موفقیت آمیز بود",
+  theme: "lightgreen",
+});
   } catch {
+    useNotification({
+  icon: "information",
+  content: "بازگردانی خودرو با خطا مواجه شد",
+  theme: "#ff8a80",
+});
   }
 };
 const rentCarActions = ref(false);

@@ -4,7 +4,6 @@ import { computed, ref } from "vue";
 import { useRoute as route } from "vue-router";
 import { useModal } from "@/composables/modal/modal.js";
 import api from "@/services/api.services.ts";
-
 useModal();
 
 const currentPath = computed(() => route().path);
@@ -12,7 +11,9 @@ const currentPath = computed(() => route().path);
 <template>
   <v-app>
     <TheToolbar :currentPath="currentPath" v-if="currentPath != '/login'" />
-    <RouterView :style="{marginTop:$vuetify.display.width<1080?'60px':0}"/>
+    <RouterView
+      :style="{ marginTop: $vuetify.display.width < 1080 ? '60px' : 0 }"
+    />
   </v-app>
 </template>
 <style>
@@ -48,6 +49,24 @@ const currentPath = computed(() => route().path);
 }
 
 /* animations */
+@keyframes Notification {
+  0% {
+    bottom: -100px;
+    opacity: 0;
+  }
+  15% {
+    bottom: 100px;
+    opacity: 1;
+  }
+  70% {
+    bottom: 100px;
+    opacity: 1;
+  }
+  100% {
+    bottom: -100px;
+    opacity: 0;
+  }
+}
 @keyframes slide-x {
   from {
     opacity: 0;
@@ -102,8 +121,10 @@ hr {
   opacity: 0.8;
 }
 
-input,span,textarea{
-  font-size:18px!important
+input,
+span,
+textarea {
+  font-size: 18px !important;
 }
 
 ::-webkit-scrollbar {
@@ -157,7 +178,7 @@ input,span,textarea{
 }
 
 .add-btn {
-  position: fixed!important;
+  position: fixed !important;
   bottom: 20px;
   left: 20px;
   z-index: 3;
@@ -199,6 +220,18 @@ input,span,textarea{
 .mdi-chevron-up {
   animation: rotateX 0.2s;
 }
+
+.notification {
+  position: fixed;
+  direction:rtl;
+  opacity: 0;
+  width: fit-content;
+  border-radius: 10px;
+  box-shadow: lightgrey -1px 7px 11px;
+  z-index: 999999;
+  animation: Notification 3s ;
+}
+
 /* vuetify classes */
 
 .v-list {
@@ -225,17 +258,17 @@ input,span,textarea{
 
 .v-card-title {
   font-size: 20px;
-  font-family:ym!important;
+  font-family: ym !important;
 }
 
 .v-card-subtitle {
-  font-size:13px!important;
-  font-family: mm!important;
-  letter-spacing: 5px!important;
+  font-size: 13px !important;
+  font-family: mm !important;
+  letter-spacing: 5px !important;
 }
 
 .v-tooltip {
-  text-align:center;
+  text-align: center;
   font-family: ym;
 }
 .v-overlay__content {

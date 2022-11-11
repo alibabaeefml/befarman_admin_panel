@@ -1,7 +1,6 @@
 <script setup>
 import ClientCarItem from "@components/ClientCar/ClientCarItem.vue";
 import AcceptCarArchive from "@components/ClientCar/AcceptCarArchive.vue";
-import Banner from "@/components/Global/Notification/Banner.vue";
 import { ref } from "vue";
 import ClientCarFilter from "@components/ClientCar/ClientCarFilter.vue";
 import ClientCarComments from "@components/ClientCar/ClientCarComments.vue";
@@ -10,7 +9,6 @@ import ClientCarStatus from "@/components/ClientCar/ClientCarStatus.vue";
 import { useClientCar } from "@/composables/clientCar/clientCar";
 import { storeToRefs } from "pinia/dist/pinia";
 import InfiniteScroll from "infinite-loading-vue3";
-
 const {
   indexClientCar,
   indexArchivedClientCar,
@@ -19,12 +17,10 @@ const {
   paginate,
 } = useClientCar();
 
-
 const tab = ref("active");
 
 indexClientCar();
 indexArchivedClientCar();
-
 // infinite loading
 const noResult = ref(false);
 let loadingData = false;
@@ -54,20 +50,6 @@ const infiniteClientCar = async () => {
 </script>
 
 <template>
-  <!-- <Banner
-      v-if="banner == 'success'"
-      content="بازگردانی خودرو با موفقیت انحام شد."
-      icon="mdi-remove"
-      color="lightgreen"
-      @hide="banner = null"
-    />
-    <Banner
-      v-if="banner == 'fail'"
-      content="بازگردانی خودرو با خطا مواجه شد."
-      icon="mdi-alert-circle"
-      color="#f79898"
-      @hide="banner = null"
-    /> -->
   <div>
     <ClientCarFilter :archived="tab" />
     <v-card
@@ -92,17 +74,18 @@ const infiniteClientCar = async () => {
                 :key="archivedClientCar.id"
                 :client-car="archivedClientCar"
                 :archived="true"
-                :banner="banner"
               />
             </infinite-scroll>
           </v-window-item>
           <v-window-item value="active">
-            <infinite-scroll @infinite-scroll="infiniteClientCar" :noResult="noResult">
+            <infinite-scroll
+              @infinite-scroll="infiniteClientCar"
+              :noResult="noResult"
+            >
               <ClientCarItem
                 v-for="clientCar of getClientCars"
                 :key="clientCar.id"
                 :client-car="clientCar"
-                :banner="banner"
               />
             </infinite-scroll>
           </v-window-item>

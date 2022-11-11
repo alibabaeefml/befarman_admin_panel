@@ -1,6 +1,5 @@
 <script setup>
 import BaseModal from "@/components/Global/Dialog/BaseModal.vue";
-import Banner from "@/components/Global/Notification/Banner.vue";
 import { useClientCar } from "@/composables/clientCar/clientCar";
 const { archiveClientCar, getClientCars, getArchivedClientCars } =
   useClientCar();
@@ -9,35 +8,25 @@ const clientCarId = ref();
 const openModal = async (id) => {
   clientCarId.value = id;
 };
-const banner = ref(null);
 const archive = async () => {
   try {
     const response = await archiveClientCar(clientCarId.value);
-    banner.value = 'success';
+    useNotification({
+      icon: "check",
+      content: "حذف خودرو موفقیت آمیز بود",
+      theme: "lightgreen",
+    });
   } catch {
-    banner.value = 'failed';
-    setTimeout(() => {
-      banner.value = null;
-    }, 3000);
+    useNotification({
+  icon: "information",
+  content: "حذف خودرو با خطا مواجه شد",
+  theme: "#ff8a80",
+});
   }
 };
 </script>
 
 <template>
-  <Banner
-    v-if="banner == 'success'"
-    content="حذف خودرو با موفقیت انجام شد."
-    icon="mdi-remove"
-    color="lightgreen"
-    @hide="banner = null"
-  />
-  <Banner
-    v-if="banner == 'failed'"
-    content="حذف خودرو با خطا مواجه شد."
-    icon="mdi-alert-circle"
-    color="#f79898"
-    @hide="banner = null"
-  />
   <base-modal
     name="clientCarArchiveAcceptance"
     title="تأیید حذف خودرو"
