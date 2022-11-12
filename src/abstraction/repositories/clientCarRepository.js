@@ -40,4 +40,9 @@ export default class ClientCarRepository {
     const response = await axios.post(url("restoreClientCar", { car: carId }));
     return response.data.data;
   }
+  async total() {
+    const response = await axios.get(url("indexClientCar"), {  })
+
+    return response.data.meta.total;
+  }
 }

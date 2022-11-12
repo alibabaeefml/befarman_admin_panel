@@ -158,23 +158,23 @@ textarea {
 }
 
 .xlg-txt {
-  font-size: 80px;
+  font-size: 80px!important;
 }
 
 .lg-txt {
-  font-size: 50px;
+  font-size: 50px!important;
 }
 
 .md-txt {
-  font-size: 30px;
+  font-size: 30px!important;
 }
 
 .sm-txt {
-  font-size: 20px;
+  font-size: 20px!important;
 }
 
 .xs-txt {
-  font-size: 10px;
+  font-size: 10px!important;
 }
 
 .add-btn {

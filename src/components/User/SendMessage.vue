@@ -1,6 +1,5 @@
 <script setup>
 import BaseModal from "@/components/Global/dialog/BaseModal.vue";
-import Banner from "@/components/Global/Notification/Banner.vue";
 import { useUser } from "@/composables/user/user";
 
 import { ref } from "vue";
@@ -14,32 +13,22 @@ const openModal = async (data) => {
 const sendMessage = async () => {
   try {
     const response = await useUser().sms(form.value);
-    smsSent.value = true;
+    useNotification({
+      icon: "check",
+      content: "ارسال پیام موفقیت آمیز بود",
+      theme: "lightgreen",
+    });
   } catch {
-    smsFailed.value = true;
+    useNotification({
+      icon: "information",
+      content: "ارسال پیام با خطا مواجه شد",
+      theme: "#ff8a80",
+    });
   }
-  setTimeout(() => {
-    smsFailed.value = false;
-    smsSent.value = false;
-  }, 3000);
 };
 </script>
 
 <template>
-  <Banner
-    v-if="smsSent"
-    color="lightgreen"
-    content="پیام به کاربر ارسال شد."
-    icon="mdi-check"
-    @hide="smsSent = false"
-  />
-  <Banner
-    v-if="smsFailed"
-    color="#f79898"
-    content="ارسال پیام ناموفق بود."
-    icon="mdi-alert"
-    @hide="smsFailed = false"
-  />
   <BaseModal
     title="ارسال پیام"
     subtitle="SEND MESSAGE"

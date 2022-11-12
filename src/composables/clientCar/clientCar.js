@@ -57,12 +57,15 @@ export function useClientCar() {
   const restoreClientCar = async (clientCarId) => {
     await repository.restore(clientCarId);
     store.archivedClientCars.map((e) => {
-      if (e.id == clientCarId ) {
+      if (e.id == clientCarId) {
         store.archivedClientCars.splice(store.archivedClientCars.indexOf(e), 1);
         store.clientCars.splice(0, 0, e);
-        return
+        return;
       }
     });
+  };
+  const total = async () => {
+    return await repository.total()
   };
   return {
     updateClientCar,
@@ -75,5 +78,6 @@ export function useClientCar() {
     paginate,
     archiveClientCar,
     restoreClientCar,
+    total
   };
 }
