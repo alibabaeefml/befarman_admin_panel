@@ -1,9 +1,8 @@
 <script setup>
 import TheToolbar from "@/components/Global/Toolbar/TheToolbar.vue";
-import { computed, ref } from "vue";
+import { computed } from "vue";
 import { useRoute as route } from "vue-router";
 import { useModal } from "@/composables/modal/modal.js";
-import api from "@/services/api.services.ts";
 useModal();
 
 const currentPath = computed(() => route().path);

@@ -33,7 +33,11 @@ const infiniteCar = async () => {
 <template>
   <div dir="rtl">
     <CarsFilter :filters="filters" />
-    <infinite-scroll @infinite-scroll="infiniteCar" :noResult="noResult" class="v-row ma-4">
+    <infinite-scroll
+      @infinite-scroll="infiniteCar"
+      :noResult="noResult"
+      class="v-row ma-4"
+    >
       <CarItem v-for="car in getCars" :key="car.id" :car="car" />
     </infinite-scroll>
     <v-btn

@@ -1,5 +1,15 @@
-const createFilterObject = (filters) => {
-  const filterObject = {};
+import type { dynamicObject } from "@/types/common";
+declare global {
+  interface Window {
+    greater: any;
+    less: any;
+    between: any;
+    like: any;
+    in: any;
+  }
+}
+const createFilterObject = (filters: dynamicObject) => {
+  const filterObject: dynamicObject = {};
   for (const key in filters) {
     if (Object.prototype.hasOwnProperty.call(filters, key)) {
       if (filters[key] && typeof filters[key]["type"] !== "undefined") {
@@ -12,7 +22,7 @@ const createFilterObject = (filters) => {
       }
     }
   }
-  const filtersData = {};
+  const filtersData: dynamicObject = {};
   for (var filter in filterObject) {
     if (Object.prototype.hasOwnProperty.call(filterObject, filter)) {
       filtersData[`filters[${filter}]`] = filterObject[filter];
@@ -20,21 +30,21 @@ const createFilterObject = (filters) => {
   }
   return filtersData;
 };
-window["greater"] = function (filter) {
+window["greater"] = function (filter: dynamicObject) {
   let value = null;
   if (filter.val) {
     value = `(ge)${filter.val}`;
   }
   return value;
 };
-window["less"] = function (filter) {
+window["less"] = function (filter: dynamicObject) {
   let value = null;
   if (filter.val) {
     value = `(le)${filter.val}`;
   }
   return value;
 };
-window["between"] = function (filter) {
+window["between"] = function (filter: dynamicObject) {
   let value = null;
   if (filter.val1 && filter.val2) {
     value = `<${filter.val1},${filter.val2}>`;
@@ -47,14 +57,14 @@ window["between"] = function (filter) {
   }
   return value;
 };
-window["like"] = function (filter) {
+window["like"] = function (filter: dynamicObject) {
   let value = null;
   if (filter.val !== null) {
     value = `%${filter.val}%`;
   }
   return value;
 };
-window["in"] = function (filter) {
+window["in"] = function (filter: dynamicObject) {
   let value = null;
   if (filter.val) {
     if (Array.isArray(filter.val)) {

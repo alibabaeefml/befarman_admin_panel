@@ -18,18 +18,22 @@ defineProps([
       border: 'solid 1px' + color,
     }"
   >
-    <v-col cols="8" class="d-flex">
+    <v-col cols="8" class="d-flex align-center">
       <v-icon size="60">mdi-{{ icon }}</v-icon>
       <div class="d-flex flex-column">
-        <span class="md-txt">{{ txt }}</span>
-        <span class="sub mm">
+        <span :class="$vuetify.display.xs ? 'sm-txt' : 'md-txt'">{{
+          txt
+        }}</span>
+        <span :class="{ sub: true, 'xs-txt': $vuetify.display.xs, mm: true }">
           {{ sub }}
         </span>
       </div>
     </v-col>
     <v-col cols="4" class="d-flex text-center align-center">
       <span class="mxb lg-txt">{{ badgeNo }}</span>
-      <span class="sm-txt">{{ badgeTxt }}</span>
+      <span :class="'mr-1 ' + ($vuetify.display.xs ? 'xs-txt' : 'sm-txt')">{{
+        badgeTxt
+      }}</span>
     </v-col>
   </v-row>
 </template>
@@ -40,7 +44,6 @@ defineProps([
   border-radius: 5px;
 }
 .sub {
-  font-size: 15px !important;
   letter-spacing: 10px;
 }
 </style>
