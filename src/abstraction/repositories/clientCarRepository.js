@@ -17,14 +17,14 @@ export default class ClientCarRepository {
     const response = await axios.get(url("showClientCar", { clientCar }));
     return getJson(response.data.data);
   }
-  async store(carData) {
-    const formData = setData(carData);
+  async store(clientCarData) {
+    const formData = setData(clientCarData);
     const response = await axios.post(url("storeClientCar"), formData);
     return getJson(response.data.data);
   }
 
-  async update(carId, carData) {
-    const formData = setData(carData);
+  async update(carId, clientCarData) {
+    const formData = setData(clientCarData);
     const response = await axios.put(
       url("updateClientCar", { car: carId }),
       formData

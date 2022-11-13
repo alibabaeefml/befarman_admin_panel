@@ -13,11 +13,8 @@ indexCar();
 const noResult = ref(false);
 let loadingData = false;
 const infiniteCar = async () => {
-  console.log("working");
   if (loadingData || paginate.value.page >= paginate.value.pageCount) {
-    if (paginate.value.page >= paginate.value.pageCount) {
-      noResult.value = true;
-    }
+    noResult.value = true;
     return true;
   }
   const data = { pagination: {} };
@@ -25,9 +22,7 @@ const infiniteCar = async () => {
   data.pagination.page++;
   loadingData = true;
   try {
-    if (paginate.value.page < paginate.value.pageCount) {
-      await indexCar(data);
-    }
+    await indexCar(data);
   } catch (e) {
     console.log(e);
   } finally {
@@ -38,12 +33,7 @@ const infiniteCar = async () => {
 <template>
   <div dir="rtl">
     <CarsFilter :filters="filters" />
-    <infinite-scroll
-      class="v-row"
-      style="padding: 20px"
-      :noResult="noResult"
-      @infinite-scroll="infiniteCar"
-    >
+    <infinite-scroll @infinite-scroll="infiniteCar" :noResult="noResult" class="v-row ma-4">
       <CarItem v-for="car in getCars" :key="car.id" :car="car" />
     </infinite-scroll>
     <v-btn

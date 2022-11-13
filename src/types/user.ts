@@ -1,7 +1,7 @@
 import type { Relative } from "./relative";
 import type { Bank } from "./bank";
 import type { Comment } from "./comment";
-import type { Media as Certificate } from "./Media";
+import type { Media as Certificate } from "./media";
 export declare interface User {
   id: number;
   name: string;

@@ -23,7 +23,6 @@ const fileForm = ref({});
 const cities = ref([]);
 
 const indexClientCar = async () => {
-  console.log(route().params.id);
   if (route().params.id) {
     form.value = await showClientCar(route().params.id);
   }

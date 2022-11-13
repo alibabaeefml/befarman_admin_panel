@@ -17,7 +17,7 @@ const city = ref({});
 loadProvinces();
 
 const indexClientCar = async () => {
-  clientCar.value = await useClientCar().showClientCar(route().params);
+  clientCar.value = await useClientCar().showClientCar(route().params.id);
 
   // show province and city
   province.value = getProvinces.value.find(
