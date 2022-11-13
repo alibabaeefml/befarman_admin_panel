@@ -1,18 +1,24 @@
 <script setup>
 import BaseModal from "@/components/Global/Dialog/BaseModal.vue";
 import { ref } from "vue";
+import { useEvaluationStore } from "@/store/evaluation";
+import { useModalStore } from "@/store/modal";
+
+const { closeModal } = useModalStore();
+
+const clientCar = ref({});
 const form = ref({});
 
-const openModal = async (data) => {
-  if (data.id) {
+const openModal = ({ data, clientCarId }) => {
+  if (data && clientCarId) {
+    clientCar.value["id"] = clientCarId;
     form.value = data;
   }
 };
 
 const submitForm = async () => {
-  if (form.value.id) {
-  } else {
-  }
+  await useEvaluationStore().storeEvaluation(clientCar.value.id, form.value);
+
   closeModal();
 };
 </script>
@@ -55,7 +61,7 @@ const submitForm = async () => {
           variant="underlined"
           type="text"
           label="شاسی"
-          v-model="form.chasis"
+          v-model="form.chassis"
           prepend-icon="mdi-text"
         >
         </v-text-field>
@@ -145,10 +151,16 @@ const submitForm = async () => {
           color="green"
           style="font-weight: bold"
           label="تایید ادمین"
-          v-model="verified"
+          v-model="form.verified"
         />
 
-        <v-btn class="mt-10" variant="elevated" color="primary" block>
+        <v-btn
+          class="mt-10"
+          type="submit"
+          variant="elevated"
+          color="primary"
+          block
+        >
           ذخیره تغییرات
           <v-icon color="white">mdi-check</v-icon>
         </v-btn>

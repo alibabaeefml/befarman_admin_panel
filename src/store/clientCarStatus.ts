@@ -16,7 +16,7 @@ export const useClientCarStatusStore = defineStore("clientCarstatus", () => {
   };
   const changeStatus = async (carId, statusId) => {
     await repository.change(carId, statusId);
-    return
+    return;
   };
   return { statuses, getClientCarStatuses, loadStatuses, changeStatus };
 });

@@ -23,10 +23,9 @@ const openModal = async (data) => {
           prepend-icon="mdi-comment"
           style="border-bottom: solid lightengray 1px"
         >
-
           <v-card-text>
-            {{'امتیاز نظر: ' + comment.vote}}
-            <br>
+            {{ "امتیاز نظر: " + comment.vote }}
+            <br />
             {{ comment.author_name }}
             :
             {{ comment.content }}

@@ -17,18 +17,18 @@ watchEffect(() => {
 
 const restoreCar = async () => {
   try {
-  await useClientCar().restoreClientCar(props.clientCar.id);
-  useNotification({
-  icon: "check",
-  content: "بازگردانی خودرو موفقیت آمیز بود",
-  theme: "lightgreen",
-});
+    await useClientCar().restoreClientCar(props.clientCar.id);
+    useNotification({
+      icon: "check",
+      content: "بازگردانی خودرو موفقیت آمیز بود",
+      theme: "lightgreen",
+    });
   } catch {
     useNotification({
-  icon: "information",
-  content: "بازگردانی خودرو با خطا مواجه شد",
-  theme: "#ff8a80",
-});
+      icon: "information",
+      content: "بازگردانی خودرو با خطا مواجه شد",
+      theme: "#ff8a80",
+    });
   }
 };
 const rentCarActions = ref(false);
@@ -168,7 +168,7 @@ const rentCarActions = ref(false);
             icon
             color="green"
             variant="elevated"
-            @click="$_openModal('EvaluationInfo', clientCar)"
+            @click="$_openModal('evaluationInfo', clientCar.id)"
           >
             <v-icon color="white">mdi-magnify-scan</v-icon>
             <v-tooltip activator="parent" location="right"

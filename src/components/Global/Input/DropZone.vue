@@ -16,7 +16,7 @@ onMounted(() => {
     acceptedFiles: ".jpg,.jpeg",
     autoProcessQueue: false,
     addRemoveLinks: true,
-    withCredentials: true
+    withCredentials: true,
   });
 });
 
@@ -24,7 +24,11 @@ watchEffect(() => {
   if (props.images) {
     props.images.map((e) => {
       myDropzone.displayExistingFile(
-        { name: e.file_name, size: parseFloat(e.size) * 1000, crossOrigin:"Anonymous" },
+        {
+          name: e.file_name,
+          size: parseFloat(e.size) * 1000,
+          crossOrigin: "Anonymous",
+        },
         e.image
       );
     });
@@ -37,7 +41,6 @@ watchEffect(() => {
 
 <template>
   <v-card :title="name_fa" :subtitle="name_en">
-    <div ref="drop" class="dropzone">
-    </div>
+    <div ref="drop" class="dropzone"></div>
   </v-card>
 </template>

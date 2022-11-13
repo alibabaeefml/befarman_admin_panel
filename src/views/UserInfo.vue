@@ -6,7 +6,9 @@ import { useRoute as route } from "vue-router";
 const user = ref({ bank: {}, city: {} });
 const showUser = async () => {
   user.value = await useUser().showUser(route().params);
-  !user.value.certificates.length ? user.value.certificates = [{ id: 1, image: defaultImg }] : null;
+  !user.value.certificates.length
+    ? (user.value.certificates = [{ id: 1, image: defaultImg }])
+    : null;
 };
 showUser();
 </script>

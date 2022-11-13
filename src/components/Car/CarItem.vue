@@ -18,9 +18,12 @@ defineProps({
           >
             {{ car.name_en }}
           </h3>
-          <span v-if="car.brand" class="ym" style="position: absolute; left: 5px; bottom: 5px">{{
-            car.brand.name_fa
-          }}</span>
+          <span
+            v-if="car.brand"
+            class="ym"
+            style="position: absolute; left: 5px; bottom: 5px"
+            >{{ car.brand.name_fa }}</span
+          >
         </div>
       </v-card-text>
       <v-card-actions

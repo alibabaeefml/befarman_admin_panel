@@ -1,14 +1,12 @@
 <script setup>
 import BaseModal from "@/components/Global/dialog/BaseModal.vue";
-import {useUser} from "@/composables/user/user";
+import { useUser } from "@/composables/user/user";
 
 import { ref } from "vue";
 const userId = ref();
 const openModal = async (id) => {
   userId.value = id;
 };
-
-
 </script>
 
 <template>

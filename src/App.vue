@@ -158,23 +158,23 @@ textarea {
 }
 
 .xlg-txt {
-  font-size: 80px!important;
+  font-size: 80px !important;
 }
 
 .lg-txt {
-  font-size: 50px!important;
+  font-size: 50px !important;
 }
 
 .md-txt {
-  font-size: 30px!important;
+  font-size: 30px !important;
 }
 
 .sm-txt {
-  font-size: 20px!important;
+  font-size: 20px !important;
 }
 
 .xs-txt {
-  font-size: 10px!important;
+  font-size: 10px !important;
 }
 
 .add-btn {
@@ -223,13 +223,13 @@ textarea {
 
 .notification {
   position: fixed;
-  direction:rtl;
+  direction: rtl;
   opacity: 0;
   width: fit-content;
   border-radius: 10px;
   box-shadow: lightgrey -1px 7px 11px;
   z-index: 999999;
-  animation: Notification 3s ;
+  animation: Notification 3s;
 }
 
 /* vuetify classes */

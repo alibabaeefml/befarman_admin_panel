@@ -1,12 +1,11 @@
 <script setup>
 import BaseModal from "@components/Global/Dialog/BaseModal.vue";
 import { useDisplay } from "vuetify";
-import { computed, ref } from "vue";
+import { ref } from "vue";
 const certificates = ref([]);
 const openModal = (data) => {
-    certificates.value = data;
+  certificates.value = data;
 };
-
 </script>
 
 <template>
@@ -31,7 +30,7 @@ const openModal = (data) => {
         :src="item.image"
         cover
       >
-    </v-carousel-item>
+      </v-carousel-item>
     </v-carousel>
   </base-modal>
 </template>

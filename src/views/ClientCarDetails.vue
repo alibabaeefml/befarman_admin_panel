@@ -5,14 +5,14 @@ import MoreDetails from "@components/ClientCar/MoreDetails.vue";
 import { useRoute as route } from "vue-router";
 import { useClientCar } from "@/composables/clientCar/clientCar";
 import { useProvinceStore } from "@/store/province";
-import {storeToRefs} from 'pinia/dist/pinia';
+import { storeToRefs } from "pinia/dist/pinia";
 
 const { getProvinces } = storeToRefs(useProvinceStore());
 const { loadProvinces, showCity } = useProvinceStore();
 
 const clientCar = ref({});
 const province = ref({});
-const city = ref({}); 
+const city = ref({});
 
 loadProvinces();
 
@@ -20,7 +20,9 @@ const indexClientCar = async () => {
   clientCar.value = await useClientCar().showClientCar(route().params);
 
   // show province and city
-  province.value = getProvinces.value.find(p => p.id == clientCar.value.province_id);
+  province.value = getProvinces.value.find(
+    (p) => p.id == clientCar.value.province_id
+  );
   city.value = await showCity(clientCar.value.city_id);
 };
 indexClientCar();
@@ -206,7 +208,12 @@ const more = ref(false);
               color="black"
               variant="outlined"
               >مدارک
-              <v-tooltip activator="parent" v-if="!clientCar.certificates.length" location="bottom">مدرکی موجود نیست</v-tooltip>
+              <v-tooltip
+                activator="parent"
+                v-if="!clientCar.certificates.length"
+                location="bottom"
+                >مدرکی موجود نیست</v-tooltip
+              >
             </v-btn>
           </v-col>
         </v-row>

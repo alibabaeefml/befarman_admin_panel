@@ -1,19 +1,20 @@
 <script setup>
+import { computed, ref } from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
-import { useBrandStore } from "@/store/brand";
-import { computed } from "vue";
+import { useTrimStore } from "@/store/trim";
 
 const props = defineProps({
   value: {
     default: null,
   },
   label: {
-    default: "برند خودرو",
+    default: "نوع خودرو",
   },
 });
+
 const emit = defineEmits(["input"]);
 
-const brandId = computed({
+const trimId = computed({
   get() {
     return props.value;
   },
@@ -22,18 +23,18 @@ const brandId = computed({
   },
 });
 
-const { getBrands } = storeToRefs(useBrandStore());
-// fetch all brands
-useBrandStore().loadBrands();
+const { getAllTrims } = storeToRefs(useTrimStore());
+useTrimStore().loadAllTrims();
 </script>
 <template>
   <v-autocomplete
     :label="label"
-    :items="getBrands"
+    :items="getAllTrims"
     item-title="name_fa"
     item-value="id"
-    v-model="brandId"
-    prepend-icon="mdi-alpha-b-circle"
+    v-model="trimId"
+    prepend-icon="mdi-car-info"
     variant="underlined"
+    :menu-props="{ maxHeight: 400 }"
   ></v-autocomplete>
 </template>

@@ -39,8 +39,8 @@ defineProps([
   margin: 5px !important;
   border-radius: 5px;
 }
-.sub{
-  font-size:15px!important;
-  letter-spacing:10px
+.sub {
+  font-size: 15px !important;
+  letter-spacing: 10px;
 }
 </style>

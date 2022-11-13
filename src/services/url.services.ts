@@ -7,7 +7,7 @@ declare interface Parameter {
 }
 
 export const urlGenerator = (urls: Url) => {
-  return function (routeAddress: string, parameters: Parameter) {
+  return function (routeAddress: string, parameters: Parameter = {}) {
     const urlPath = urls[routeAddress].split("/");
     const newPath = [];
     for (const iterator of urlPath) {

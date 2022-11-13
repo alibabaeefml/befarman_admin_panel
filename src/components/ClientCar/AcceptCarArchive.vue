@@ -18,10 +18,10 @@ const archive = async () => {
     });
   } catch {
     useNotification({
-  icon: "information",
-  content: "حذف خودرو با خطا مواجه شد",
-  theme: "#ff8a80",
-});
+      icon: "information",
+      content: "حذف خودرو با خطا مواجه شد",
+      theme: "#ff8a80",
+    });
   }
 };
 </script>

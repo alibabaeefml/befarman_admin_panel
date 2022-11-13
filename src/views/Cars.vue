@@ -13,7 +13,7 @@ indexCar();
 const noResult = ref(false);
 let loadingData = false;
 const infiniteCar = async () => {
-  console.log('working')
+  console.log("working");
   if (loadingData || paginate.value.page >= paginate.value.pageCount) {
     if (paginate.value.page >= paginate.value.pageCount) {
       noResult.value = true;
@@ -34,11 +34,10 @@ const infiniteCar = async () => {
     loadingData = false;
   }
 };
-
 </script>
 <template>
   <div dir="rtl">
-    <CarsFilter :filters=filters />
+    <CarsFilter :filters="filters" />
     <infinite-scroll
       class="v-row"
       style="padding: 20px"

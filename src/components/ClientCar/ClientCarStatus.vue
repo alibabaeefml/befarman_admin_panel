@@ -1,8 +1,7 @@
 <script setup>
 import BaseModal from "@/components/Global/Dialog/BaseModal.vue";
 import { useClientCarStatusStore as store } from "@/store/clientCarStatus";
-import {useClientCarStore} from "@/store/clientCar"
-
+import { useClientCarStore } from "@/store/clientCar";
 
 import { ref } from "vue";
 
@@ -12,7 +11,7 @@ const statuses = ref([]);
 const openModal = (data) => {
   currentStatus.value = data.status;
   statuses.value = data.getClientCarStatuses;
-  clientCar.value = data.clientCar 
+  clientCar.value = data.clientCar;
 };
 
 const changeStatus = async (id) => {
@@ -40,7 +39,7 @@ const changeStatus = async (id) => {
       }"
       v-for="status in statuses"
       :key="status.id"
-      @click="changeStatus(status.id),$_closeModal()"
+      @click="changeStatus(status.id), $_closeModal()"
     >
       <div class="d-flex justify-center align-center">
         <i :class="status.icon" style="font-size: 30px" />

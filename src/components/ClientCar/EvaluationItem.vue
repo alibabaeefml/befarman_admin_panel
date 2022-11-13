@@ -1,7 +1,8 @@
 <script setup>
-defineProps({
+import Loader from "@/components/Global/Misc/Loader.vue";
+const props = defineProps({
   name_fa: { type: String },
-  value: { type: String },
+  value: {},
 });
 </script>
 <template>
@@ -12,7 +13,10 @@ defineProps({
     <div>
       <h3>{{ name_fa }}</h3>
     </div>
-    <div class="d-flex align-center">
+    <div v-if="typeof value === 'undefined'">
+      <Loader />
+    </div>
+    <div class="d-flex align-center" v-else>
       <h2>{{ value ?? "-" }}</h2>
       <h5 class="text-center mr-3" v-if="typeof value === 'number'">
         کیلومتر<br />

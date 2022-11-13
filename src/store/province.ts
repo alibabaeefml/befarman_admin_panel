@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
-import type {Province} from "@/types/Province";
+import type { Province } from "@/types/province";
 import ProvinceRepository from "@/abstraction/repositories/provinceRepository";
 
 export const useProvinceStore = defineStore("province", () => {
@@ -14,9 +14,9 @@ export const useProvinceStore = defineStore("province", () => {
     provinces.value = await repository.index();
     return provinces.value;
   };
-  
-  const showCity = async (provinceId) => {
-    return await repository.show(provinceId)
+
+  const showCity = async (provinceId: number) => {
+    return await repository.show(provinceId);
   };
 
   return { provinces, getProvinces, loadProvinces, showCity };

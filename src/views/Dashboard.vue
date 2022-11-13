@@ -1,12 +1,12 @@
 <script setup>
 import BaseTileItem from "@/components/Global/Tiles/BaseTileItem.vue";
 import { useClientCar } from "@/composables/clientCar/clientCar";
-import {ref} from "vue"
-const clientCarTotal = ref()
+import { ref } from "vue";
+const clientCarTotal = ref();
 async function getClientCarTotal() {
   clientCarTotal.value = await useClientCar().total();
 }
-getClientCarTotal()
+getClientCarTotal();
 </script>
 
 <template>

@@ -1,6 +1,7 @@
 import { urlGenerator } from "@/services/url.services";
+import type { dynamicObject } from "@/types/common";
 
-const urls = {
+const urls: dynamicObject = {
   // abstract car
   indexCar: "abstract-car",
   storeCar: "abstract-car",
@@ -12,6 +13,7 @@ const urls = {
 
   //trims
   indexTrim: "trims",
+  indexAllTrim: "full-name-trims",
   indexTrimWithCar: "trims/:car",
   //bodyType
   indexBodyType: "body-types",
@@ -19,7 +21,7 @@ const urls = {
   // client car
   indexClientCar: "admin/client-cars",
   indexArchivedClientCar: "admin/client-cars/archive",
-  showClientCar: "admin/client-cars/:car",
+  showClientCar: "admin/client-cars/:clientCar",
   storeClientCar: "admin/client-cars",
   updateClientCar: "admin/client-cars/:car",
   archiveClientCar: "admin/client-cars/:car",
@@ -30,7 +32,7 @@ const urls = {
   indexProvince: "provinces",
   showCity: "cities/:id",
   storeEvaluation: "client-cars/:clientCar/evaluations",
-  showEvaluation: "evaluations/:evaluation",
+  showEvaluation: "client-cars/:clientCar/evaluations",
 
   // save files
   storeFiles: "media",
@@ -39,17 +41,21 @@ const urls = {
   indexUser: "admin/users",
   indexArchivedUser: "admin/users/archive",
   showUser: "admin/users/:user",
-  storeUser:"admin/users",
-  updateUser:"admin/users/:user",
-  sms:"admin/sms/:user",
-  archiveUser:"admin/users/:user",
-  restoreUser:"admin/users/:user/restore",
-  verifyUser:"admin/users/:user/verify",
-  unverifyUser:"admin/users/:user/unverify",
+  storeUser: "admin/users",
+  updateUser: "admin/users/:user",
+  sms: "admin/sms/:user",
+  archiveUser: "admin/users/:user",
+  restoreUser: "admin/users/:user/restore",
+  verifyUser: "admin/users/:user/verify",
+  unverifyUser: "admin/users/:user/unverify",
   // auth
   sendCode: "login",
   logout: "logout",
   login: "login/code",
 };
 
-export default urlGenerator(urls);
+type URLGenerator = (url: string, params?: dynamicObject) => string;
+
+const urlGenerators: URLGenerator = urlGenerator(urls);
+
+export default urlGenerators;

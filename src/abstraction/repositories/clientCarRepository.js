@@ -13,8 +13,8 @@ export default class ClientCarRepository {
     const response = await axios.get(url("indexArchivedClientCar"), { params });
     return getArray(response.data);
   }
-  async show(data = {}) {
-    const response = await axios.get(url("showClientCar", { car: data.id }));
+  async show(clientCar) {
+    const response = await axios.get(url("showClientCar", { clientCar }));
     return getJson(response.data.data);
   }
   async store(carData) {
@@ -41,7 +41,7 @@ export default class ClientCarRepository {
     return response.data.data;
   }
   async total() {
-    const response = await axios.get(url("indexClientCar"), {  })
+    const response = await axios.get(url("indexClientCar"), {});
 
     return response.data.meta.total;
   }

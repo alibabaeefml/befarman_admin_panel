@@ -6,7 +6,6 @@ import { ref, reactive } from "vue";
 import { useRoute as route } from "vue-router";
 import { useUser } from "@/composables/user/user";
 
-
 const form = ref({
   bank: {},
   relatives: 2,

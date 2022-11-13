@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
-import {ClientCarStatus} from "../types/status";
+import type { ClientCarStatus } from "../types/status";
 import StatusRepository from "@/abstraction/repositories/statusRepository";
 
 export const useStatusStore = defineStore("status", () => {

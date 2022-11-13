@@ -88,7 +88,7 @@ const userVerification = async () => {
             icon
             color="primary"
             variant="elevated"
-            @click="$_openModal('userArchiveAcceptance',user.id)"
+            @click="$_openModal('userArchiveAcceptance', user.id)"
           >
             <v-icon>mdi-delete</v-icon>
             <v-tooltip activator="parent" location="bottom"

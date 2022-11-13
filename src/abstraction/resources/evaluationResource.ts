@@ -1,10 +1,11 @@
+import type { dynamicObject } from "@/types/common";
 import { getJsonUser } from "./userResource";
 
-export function getArrayEvaluation(data) {
+export function getArrayEvaluation(data: dynamicObject[]) {
   return data.map((evaluation) => getJsonEvaluation(evaluation));
 }
 
-export const getJsonEvaluation = (data) => ({
+export const getJsonEvaluation = (data: dynamicObject) => ({
   id: data.id,
   name: data.name,
   name_en: data.name_en,
@@ -27,5 +28,5 @@ export const getJsonEvaluation = (data) => ({
   client_car_id: data.client_car_id,
   verified: data.verified,
   created_at: data.created_at,
-  user: getJsonUser(data.user ?? {}),
+  user: getJsonUser(data.user ? data.user : {}),
 });

@@ -20,7 +20,12 @@ const filter = ref(true);
             >بستن پنل فیلترها</v-tooltip
           >
         </v-btn>
-        <v-btn color="primary" variant="elevated" icon @click="$emit('cancleFilters')">
+        <v-btn
+          color="primary"
+          variant="elevated"
+          icon
+          @click="$emit('cancleFilters')"
+        >
           <v-icon>mdi-close</v-icon>
           <v-tooltip activator="parent" location="bottom"
             >لغو فیلترها</v-tooltip

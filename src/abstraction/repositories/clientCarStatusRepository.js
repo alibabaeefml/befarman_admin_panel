@@ -8,10 +8,10 @@ export default class ClientCarStatusRepository {
     return getArrayClientCarStatus(response.data);
   }
   async change(carId, status_id) {
-    const response = await axios.put(
-      url("changeStatus", { car: carId }),{status_id:status_id}
-    );
+    const response = await axios.put(url("changeStatus", { car: carId }), {
+      status_id: status_id,
+    });
     console.log(response);
-    return
+    return;
   }
 }

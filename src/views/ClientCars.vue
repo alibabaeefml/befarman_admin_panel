@@ -9,6 +9,11 @@ import ClientCarStatus from "@/components/ClientCar/ClientCarStatus.vue";
 import { useClientCar } from "@/composables/clientCar/clientCar";
 import { storeToRefs } from "pinia/dist/pinia";
 import InfiniteScroll from "infinite-loading-vue3";
+import { useModalStore } from "@/store/modal";
+
+const modalStore = useModalStore();
+const { isModal } = modalStore;
+
 const {
   indexClientCar,
   indexArchivedClientCar,
@@ -100,6 +105,6 @@ const infiniteClientCar = async () => {
     <clientCarStatus />
     <AcceptCarArchive />
     <ClientCarComments />
-    <EvaluationInfo />
+    <EvaluationInfo v-if="isModal('evaluationInfo')" />
   </div>
 </template>

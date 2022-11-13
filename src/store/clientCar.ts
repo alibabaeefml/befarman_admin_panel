@@ -16,6 +16,6 @@ export const useClientCarStore = defineStore("clientCar", () => {
     archivedClientCars,
     getArchivedClientCars,
     getClientCars,
-    paginate
+    paginate,
   };
 });

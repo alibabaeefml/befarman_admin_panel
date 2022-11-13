@@ -13,9 +13,9 @@ const props = defineProps({
   width: { default: null },
   maxWidth: { default: null },
   name: { default: null },
-  title: {default: 'بفرمان'},
-  subtitle: {default: 'befarman'},
-  icon: {default: 'mdi-car'},
+  title: { default: "بفرمان" },
+  subtitle: { default: "befarman" },
+  icon: { default: "mdi-car" },
   transition: { default: "slide-x-transition" },
 });
 const isOpenModal = ref(false);
@@ -76,4 +76,3 @@ onBeforeUnmount(() => emitModal(false));
   font-family: yl;
 }
 </style>
-

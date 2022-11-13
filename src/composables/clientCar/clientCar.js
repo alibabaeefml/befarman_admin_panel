@@ -41,8 +41,8 @@ export function useClientCar() {
     return clientCar;
   };
 
-  const showClientCar = async (data) => {
-    return await repository.show(data);
+  const showClientCar = async (clientCarId) => {
+    return await repository.show(clientCarId);
   };
 
   const archiveClientCar = async (clientCarId) => {
@@ -65,7 +65,7 @@ export function useClientCar() {
     });
   };
   const total = async () => {
-    return await repository.total()
+    return await repository.total();
   };
   return {
     updateClientCar,
@@ -78,6 +78,6 @@ export function useClientCar() {
     paginate,
     archiveClientCar,
     restoreClientCar,
-    total
+    total,
   };
 }

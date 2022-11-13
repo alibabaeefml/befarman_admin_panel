@@ -15,7 +15,9 @@ export const useNotificationStore = defineStore("Notification", () => {
   const getNotification = (name: string) =>
     notifications.value.find((x: Notification) => x.name == name);
 
-  const getActiveNotification = computed(() => notifications.value[notifications.value.length]);
+  const getActiveNotification = computed(
+    () => notifications.value[notifications.value.length]
+  );
 
   const openNotification = (name: string, data: any = {}) => {
     if (notifications.value.findIndex((x) => x.name === name) === -1) {
@@ -29,5 +31,12 @@ export const useNotificationStore = defineStore("Notification", () => {
     }
   };
 
-  return { isNotification, getNotification, getActiveNotification, openNotification, closeNotification, notifications };
+  return {
+    isNotification,
+    getNotification,
+    getActiveNotification,
+    openNotification,
+    closeNotification,
+    notifications,
+  };
 });

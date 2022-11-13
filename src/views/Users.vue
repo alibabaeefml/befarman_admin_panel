@@ -9,7 +9,6 @@ import AcceptUserArchive from "@components/User/AcceptUserArchive.vue";
 import SendMessage from "@components/User/SendMessage.vue";
 import InfiniteScroll from "infinite-loading-vue3";
 
-
 // modules
 import { ref } from "vue";
 import { useUser } from "@/composables/user/user";
@@ -57,7 +56,6 @@ const infiniteUser = async () => {
     loadingData = false;
   }
 };
-
 </script>
 
 <template>
@@ -78,7 +76,7 @@ const infiniteUser = async () => {
         </v-window-item>
         <v-window-item value="active">
           <infinite-scroll @infinite-scroll="infiniteUser" :noResult="noResult">
-            <UserItem v-for="user of getUsers" :key="user.id" :user="user"/>
+            <UserItem v-for="user of getUsers" :key="user.id" :user="user" />
           </infinite-scroll>
         </v-window-item>
       </v-window>

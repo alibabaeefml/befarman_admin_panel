@@ -39,7 +39,7 @@ export default class UserRepository {
     const response = await axios.post(url("sms", { user: form.id }), {
       message: form.message,
     });
-    return response
+    return response;
   }
   async delete(userId) {
     const response = await axios.delete(url("archiveUser", { user: userId }));

@@ -1,14 +1,10 @@
 <script setup>
 import { useRoute as route } from "vue-router";
 import UserSearch from "@/components/User/UserSearch.vue";
-import BrandSelected from "@/components/Brand/BrandSelected.vue";
-import TrimSelected from "@/components/Trim/TrimSelected.vue";
-import CarSelected from "@/components/Car/CarSelected.vue";
+import FullNameTrimSelected from "@/components/Trim/FullNameTrimSelected.vue";
 import CropperImage from "@/components/Global/Input/CropperImage.vue";
 import Dropzone from "@/components/Global/Input/Dropzone.vue";
 import { useClientCar } from "@/composables/clientCar/clientCar";
-import { useTrimStore } from "@/store/trim";
-import { useUserStore } from "@/store/user";
 import { useColorStore } from "@/store/color";
 import { useProvinceStore } from "@/store/province";
 import { storeToRefs } from "pinia/dist/pinia";
@@ -27,14 +23,12 @@ const fileForm = ref({});
 const cities = ref([]);
 
 const indexClientCar = async () => {
-  if (route().name == "editClientCar") {
-    form.value = await showClientCar(route().params);
+  console.log(route().params.id);
+  if (route().params.id) {
+    form.value = await showClientCar(route().params.id);
   }
 };
 indexClientCar();
-// fetch all trims
-useTrimStore().loadTrims();
-const { getTrims } = storeToRefs(useTrimStore());
 
 // filter users
 const userFilters = ref({ first_name: "مهمان" });
@@ -100,18 +94,7 @@ const submitForm = async () => {
       <v-card-text class="pa-2">
         <v-row>
           <v-col cols="12" lg="3" md="4">
-            <BrandSelected v-model="form.brand_id" />
-          </v-col>
-
-          <v-col cols="12" lg="3" md="4">
-            <CarSelected
-              :brand-id="form.brand_id"
-              v-model="form.car_id"
-              :disabled="!form.brand_id"
-            />
-          </v-col>
-          <v-col cols="12" lg="3" md="4">
-            <TrimSelected :car-id="form.car_id" v-model="form.trim_id" />
+            <FullNameTrimSelected v-model="form.trim_id" />
           </v-col>
 
           <v-col cols="12" lg="3" md="4">
@@ -119,12 +102,15 @@ const submitForm = async () => {
               label="مالک خودرو"
               no-data-text=".مالک خودرو را جستجو کنید"
               v-model="form.user_id"
+              :phone="form.user ? form.user.phone : null"
+              v-if="
+                route().params.id ? (form.user ? form.user.phone : false) : true
+              "
             />
           </v-col>
           <v-col cols="12" lg="3" md="4">
             <v-text-field
               variant="underlined"
-              type="number"
               label="خودرو از کدام اپلیکیشن است (جز بفرمان)"
               prepend-icon="mdi-speedometer"
             >
@@ -272,7 +258,10 @@ const submitForm = async () => {
             </v-checkbox>
           </v-col>
           <v-col cols="12" md="2">
-            <v-checkbox label="بیمه شخص ثالث" v-model="form.third_party_insurance">
+            <v-checkbox
+              label="بیمه شخص ثالث"
+              v-model="form.third_party_insurance"
+            >
             </v-checkbox>
           </v-col>
           <v-col cols="12" md="2">
