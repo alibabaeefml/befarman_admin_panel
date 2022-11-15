@@ -1,5 +1,5 @@
 <script setup>
-import BaseModal from "@/components/Global/dialog/BaseModal.vue";
+import BaseModal from "@/components/Global/Dialog/BaseModal.vue";
 import { useUser } from "@/composables/user/user";
 
 import { ref } from "vue";
