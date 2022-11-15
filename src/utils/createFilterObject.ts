@@ -1,19 +1,25 @@
 import type { dynamicObject } from "@/types/common";
-declare global {
-  interface Window {
-    greater: any;
-    less: any;
-    between: any;
-    like: any;
-    in: any;
-  }
+export declare enum FilterType {
+    Greater = 'greater',
+    Less = 'less',
+    Between = 'between',
+    Like = 'like',
+    In = 'in'
 }
-const createFilterObject = (filters: dynamicObject) => {
+export declare interface FilterObject {
+  type: FilterType,
+  val?: any,
+  val1?: any,
+  val2?: any,
+}
+
+const createFilterObject = (filters: FilterObject[]) : dynamicObject => {
   const filterObject: dynamicObject = {};
   for (const key in filters) {
     if (Object.prototype.hasOwnProperty.call(filters, key)) {
       if (filters[key] && typeof filters[key]["type"] !== "undefined") {
-        let filterValue = window[filters[key]["type"]](filters[key]);
+        const filterService = new FilterService(filters[key]);
+        const filterValue = filterService[filters[key]["type"]]();
         if (filterValue) {
           filterObject[key] = filterValue;
         }
@@ -30,50 +36,63 @@ const createFilterObject = (filters: dynamicObject) => {
   }
   return filtersData;
 };
-window["greater"] = function (filter: dynamicObject) {
-  let value = null;
-  if (filter.val) {
-    value = `(ge)${filter.val}`;
+
+class FilterService {
+  filter;
+
+  constructor (filter: FilterObject) {
+    this.filter = filter;
   }
-  return value;
-};
-window["less"] = function (filter: dynamicObject) {
-  let value = null;
-  if (filter.val) {
-    value = `(le)${filter.val}`;
-  }
-  return value;
-};
-window["between"] = function (filter: dynamicObject) {
-  let value = null;
-  if (filter.val1 && filter.val2) {
-    value = `<${filter.val1},${filter.val2}>`;
-  } else if (filter.val1) {
-    filter.val = filter.val1;
-    value = window.greater(filter);
-  } else if (filter.val2) {
-    filter.val = filter.val2;
-    value = window.less(filter);
-  }
-  return value;
-};
-window["like"] = function (filter: dynamicObject) {
-  let value = null;
-  if (filter.val !== null) {
-    value = `%${filter.val}%`;
-  }
-  return value;
-};
-window["in"] = function (filter: dynamicObject) {
-  let value = null;
-  if (filter.val) {
-    if (Array.isArray(filter.val)) {
-      value = filter.val.join(",");
-    } else {
-      value = `${filter.val}`;
+
+  greater(): string | null {
+    let value = null;
+    if (this.filter.val) {
+      value = `(ge)${this.filter.val}`;
     }
+    return value;
   }
-  return value;
-};
+
+  less(): string | null {
+    let value = null;
+    if (this.filter.val) {
+      value = `(le)${this.filter.val}`;
+    }
+    return value;
+  }
+
+  between(): string | null {
+    let value = null;
+    if (this.filter.val1 && this.filter.val2) {
+      value = `<${this.filter.val1},${this.filter.val2}>`;
+    } else if (this.filter.val1) {
+      this.filter.val = this.filter.val1;
+      value = this.greater();
+    } else if (this.filter.val2) {
+      this.filter.val = this.filter.val2;
+      value = this.less();
+    }
+    return value;
+  }
+
+  like(): string | null {
+    let value = null;
+    if (this.filter.val !== null) {
+      value = `%${this.filter.val}%`;
+    }
+    return value;
+  }
+
+  in(): string | null {
+    let value = null;
+    if (this.filter.val) {
+      if (Array.isArray(this.filter.val)) {
+        value = this.filter.val.join(",");
+      } else {
+        value = `${this.filter.val}`;
+      }
+    }
+    return value;
+  }
+}
 
 export default createFilterObject;

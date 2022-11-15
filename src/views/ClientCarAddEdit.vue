@@ -3,11 +3,12 @@ import { useRoute as route } from "vue-router";
 import UserSearch from "@/components/User/UserSearch.vue";
 import FullNameTrimSelected from "@/components/Trim/FullNameTrimSelected.vue";
 import CropperImage from "@/components/Global/Input/CropperImage.vue";
-import Dropzone from "@/components/Global/Input/Dropzone.vue";
+import Dropzone from "@/components/Global/Input/DropZone.vue";
 import { useClientCar } from "@/composables/clientCar/clientCar";
 import { useColorStore } from "@/store/color";
 import { useProvinceStore } from "@/store/province";
 import { storeToRefs } from "pinia/dist/pinia";
+import { makeid } from "@/utils/common/math";
 import { ref, computed } from "vue";
 import createFilrterObject from "@/utils/createFilterObject";
 const { storeClientCar, updateClientCar, showClientCar } = useClientCar();
@@ -19,13 +20,13 @@ useColorStore().loadColors();
 const form = ref({});
 const color = ref();
 const user = ref({});
-const fileForm = ref({});
 const cities = ref([]);
 
 const indexClientCar = async () => {
   if (route().params.id) {
     form.value = await showClientCar(route().params.id);
-  }
+  } 
+  form.value.file_batch_id = makeid(50);
 };
 indexClientCar();
 
@@ -315,20 +316,29 @@ const submitForm = async () => {
             >
             </v-textarea>
           </v-col>
-          <v-col cols="12">
+          <v-row>
+            <v-col cols="6">
             <Dropzone
-              name_fa="عکس های خودرو"
-              name_en="Client Car Photos"
+              title="عکس های خودرو"
+              title-en="Client Car Photos"
+              model-name="client_car"
+              collection-name="car_images"
+              :batch-id="form.file_batch_id"
               :images="form.images"
             />
           </v-col>
-          <v-col cols="12">
+          <v-col cols="6">
             <Dropzone
-              name_fa="عکس های مدارک"
-              name_en="Documents Photos"
+              title="عکس های مدارک"
+              title-en="Documents Photos"
+              model-name="client_car"
+              :batch-id="form.file_batch_id"
+              collection-name="car_certificates"
               :images="form.certificates"
             />
           </v-col>
+          </v-row>
+          
           <v-col cols="12">
             <v-textarea
               name="input-5-1"

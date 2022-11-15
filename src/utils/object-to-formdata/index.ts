@@ -1,28 +1,30 @@
-const isUndefined = (value) => value === undefined;
+import type { dynamicObject } from "@/types/common";
 
-const isNull = (value) => value === null;
+const isUndefined = (value: any) => value === undefined;
 
-const isBoolean = (value) => typeof value === "boolean";
+const isNull = (value: any) => value === null;
 
-const isObject = (value) => value === Object(value);
+const isBoolean = (value: any) => typeof value === "boolean";
 
-const isArray = (value) => Array.isArray(value);
+const isObject = (value: any) => value === Object(value);
 
-const isDate = (value) => value instanceof Date;
+const isArray = (value: any) => Array.isArray(value);
 
-const isBlob = (value) =>
+const isDate = (value: any) => value instanceof Date;
+
+const isBlob = (value: any) =>
   value &&
   typeof value.size === "number" &&
   typeof value.type === "string" &&
   typeof value.slice === "function";
 
-const isFile = (value) =>
+const isFile = (value: any) =>
   isBlob(value) &&
   typeof value.name === "string" &&
   (typeof value.lastModifiedDate === "object" ||
     typeof value.lastModified === "number");
 
-const objectToFormData = (obj, cfg, fd, pre) => {
+const objectToFormData = (obj: any, cfg?: dynamicObject, fd?: FormData, pre: string = '') => {
   cfg = cfg || {};
 
   cfg.indices = isUndefined(cfg.indices) ? true : cfg.indices;
@@ -49,19 +51,19 @@ const objectToFormData = (obj, cfg, fd, pre) => {
     }
   } else if (isBoolean(obj)) {
     if (cfg.booleansAsIntegers) {
-      fd.append(pre, obj ? 1 : 0);
+      fd.append(pre, obj ? '1' : '0');
     } else {
       fd.append(pre, obj);
     }
   } else if (isArray(obj)) {
     if (obj.length) {
-      obj.forEach((value, index) => {
-        const key = pre + "[" + (cfg.indices ? index : "") + "]";
+      obj.forEach((value: any, index: any) => {
+        const key = pre + "[" + (cfg && cfg.indices ? index : "") + "]";
 
         objectToFormData(value, cfg, fd, key);
       });
     } else if (cfg.allowEmptyArrays) {
-      fd.append(pre, []);
+      fd.append(pre, '[]');
     }
   } else if (isDate(obj)) {
     fd.append(pre, obj.toISOString());
@@ -75,7 +77,7 @@ const objectToFormData = (obj, cfg, fd, pre) => {
         }
       }
 
-      const key = pre ? pre + "[" + prop + "]" : prop;
+      const key = pre !== '' ? pre + "[" + prop + "]" : prop;
 
       objectToFormData(value, cfg, fd, key);
     });

@@ -25,11 +25,16 @@ const trimId = computed({
 
 const { getAllTrims } = storeToRefs(useTrimStore());
 useTrimStore().loadAllTrims();
+
+const customFilter =  (item, queryText, itemText) => {
+    return item.indexOf(queryText) > -1 
+};
 </script>
 <template>
   <v-autocomplete
     :label="label"
     :items="getAllTrims"
+    :custom-filter="customFilter"
     item-title="name_fa"
     item-value="id"
     v-model="trimId"
