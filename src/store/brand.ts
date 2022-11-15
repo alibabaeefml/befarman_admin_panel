@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 import type { Brand } from "@/types/brand";
-import BrandRepository from "@/abstraction/repositories/BrandRepository";
+import BrandRepository from "@/abstraction/repositories/brandRepository";
 export const useBrandStore = defineStore("brand", () => {
   const brands = ref<Brand[]>([]);
   const getBrands = computed(() => brands.value);
