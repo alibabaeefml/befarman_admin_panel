@@ -1,6 +1,6 @@
 <script setup>
 import defaultThumb from "@/assets/Images/avatars/car-avatar.jpg";
-import BaseModal from "../Global/BaseModal/BaseModal.vue";
+import BaseModal from "../Global/Dialog/BaseModal.vue";
 defineEmits(["toggleModal"]);
 defineProps(["dialog", "add"]);
 </script>
