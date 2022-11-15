@@ -1,6 +1,6 @@
 <script setup>
 import RelativeItem from "@/components/User/RelativeItem.vue";
-import Dropzone from "@/components/Global/Input/Dropzone.vue";
+import Dropzone from "@/components/Global/Input/DropZone.vue";
 
 import { ref, reactive } from "vue";
 import { useRoute as route } from "vue-router";
