@@ -1,6 +1,11 @@
 import type { dynamicObject } from "@/types/common";
 import createFilterObject from "@/utils/createFilterObject";
-export const setQueries = ({ filters, sorts, pagination, relation }:dynamicObject) => {
+export const setQueries = ({
+  filters,
+  sorts,
+  pagination,
+  relation,
+}: dynamicObject) => {
   let Query = {};
   if (typeof filters === "object") {
     filters = createFilterObject(filters);
@@ -30,7 +35,7 @@ export const setQueries = ({ filters, sorts, pagination, relation }:dynamicObjec
   return Query;
 };
 
-export const setPagination = (paginate:dynamicObject) => ({
+export const setPagination = (paginate: dynamicObject) => ({
   page: paginate.current_page,
   pageStop: paginate.to,
   pageStart: paginate.from,

@@ -26,8 +26,8 @@ const trimId = computed({
 const { getAllTrims } = storeToRefs(useTrimStore());
 useTrimStore().loadAllTrims();
 
-const customFilter =  (item, queryText, itemText) => {
-    return item.indexOf(queryText) > -1 
+const customFilter = (item, queryText, itemText) => {
+  return item.indexOf(queryText) > -1;
 };
 </script>
 <template>

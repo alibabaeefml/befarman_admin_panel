@@ -10,7 +10,7 @@ export function getArrayUsers({ data, meta }: dynamicObject) {
   return { data, pagination };
 }
 
-export const getJsonUser = (data:dynamicObject) => ({
+export const getJsonUser = (data: dynamicObject) => ({
   id: data.id,
   name: data.name,
   first_name: data.first_name,

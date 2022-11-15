@@ -24,7 +24,12 @@ const isFile = (value: any) =>
   (typeof value.lastModifiedDate === "object" ||
     typeof value.lastModified === "number");
 
-const objectToFormData = (obj: any, cfg?: dynamicObject, fd?: FormData, pre: string = '') => {
+const objectToFormData = (
+  obj: any,
+  cfg?: dynamicObject,
+  fd?: FormData,
+  pre: string = ""
+) => {
   cfg = cfg || {};
 
   cfg.indices = isUndefined(cfg.indices) ? true : cfg.indices;
@@ -51,7 +56,7 @@ const objectToFormData = (obj: any, cfg?: dynamicObject, fd?: FormData, pre: str
     }
   } else if (isBoolean(obj)) {
     if (cfg.booleansAsIntegers) {
-      fd.append(pre, obj ? '1' : '0');
+      fd.append(pre, obj ? "1" : "0");
     } else {
       fd.append(pre, obj);
     }
@@ -63,7 +68,7 @@ const objectToFormData = (obj: any, cfg?: dynamicObject, fd?: FormData, pre: str
         objectToFormData(value, cfg, fd, key);
       });
     } else if (cfg.allowEmptyArrays) {
-      fd.append(pre, '[]');
+      fd.append(pre, "[]");
     }
   } else if (isDate(obj)) {
     fd.append(pre, obj.toISOString());
@@ -77,7 +82,7 @@ const objectToFormData = (obj: any, cfg?: dynamicObject, fd?: FormData, pre: str
         }
       }
 
-      const key = pre !== '' ? pre + "[" + prop + "]" : prop;
+      const key = pre !== "" ? pre + "[" + prop + "]" : prop;
 
       objectToFormData(value, cfg, fd, key);
     });

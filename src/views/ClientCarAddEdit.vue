@@ -25,7 +25,7 @@ const cities = ref([]);
 const indexClientCar = async () => {
   if (route().params.id) {
     form.value = await showClientCar(route().params.id);
-  } 
+  }
   form.value.file_batch_id = makeid(50);
 };
 indexClientCar();
@@ -318,27 +318,27 @@ const submitForm = async () => {
           </v-col>
           <v-row>
             <v-col cols="6">
-            <Dropzone
-              title="عکس های خودرو"
-              title-en="Client Car Photos"
-              model-name="client_car"
-              collection-name="car_images"
-              :batch-id="form.file_batch_id"
-              :images="form.images"
-            />
-          </v-col>
-          <v-col cols="6">
-            <Dropzone
-              title="عکس های مدارک"
-              title-en="Documents Photos"
-              model-name="client_car"
-              :batch-id="form.file_batch_id"
-              collection-name="car_certificates"
-              :images="form.certificates"
-            />
-          </v-col>
+              <Dropzone
+                title="عکس های خودرو"
+                title-en="Client Car Photos"
+                model-name="client_car"
+                collection-name="car_images"
+                :batch-id="form.file_batch_id"
+                :images="form.images"
+              />
+            </v-col>
+            <v-col cols="6">
+              <Dropzone
+                title="عکس های مدارک"
+                title-en="Documents Photos"
+                model-name="client_car"
+                :batch-id="form.file_batch_id"
+                collection-name="car_certificates"
+                :images="form.certificates"
+              />
+            </v-col>
           </v-row>
-          
+
           <v-col cols="12">
             <v-textarea
               name="input-5-1"

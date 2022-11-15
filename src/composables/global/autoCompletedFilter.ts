@@ -1,7 +1,7 @@
 import { debounce } from "lodash";
 
 const debouncedFunction = debounce((e, callback) => {
-  if(e && e.code) {
+  if (e && e.code) {
     switch (e.code) {
       case "ArrayDown":
       case "ArrayUp":
@@ -19,4 +19,4 @@ export default (e: Event, callback: Callback) => {
   debouncedFunction(e, callback);
 };
 
-type Callback = () => any
+type Callback = () => any;

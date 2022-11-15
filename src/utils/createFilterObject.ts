@@ -1,19 +1,19 @@
 import type { dynamicObject } from "@/types/common";
 export declare enum FilterType {
-    Greater = 'greater',
-    Less = 'less',
-    Between = 'between',
-    Like = 'like',
-    In = 'in'
+  Greater = "greater",
+  Less = "less",
+  Between = "between",
+  Like = "like",
+  In = "in",
 }
 export declare interface FilterObject {
-  type: FilterType,
-  val?: any,
-  val1?: any,
-  val2?: any,
+  type: FilterType;
+  val?: any;
+  val1?: any;
+  val2?: any;
 }
 
-const createFilterObject = (filters: FilterObject[]) : dynamicObject => {
+const createFilterObject = (filters: FilterObject[]): dynamicObject => {
   const filterObject: dynamicObject = {};
   for (const key in filters) {
     if (Object.prototype.hasOwnProperty.call(filters, key)) {
@@ -29,7 +29,7 @@ const createFilterObject = (filters: FilterObject[]) : dynamicObject => {
     }
   }
   const filtersData: dynamicObject = {};
-  for (var filter in filterObject) {
+  for (const filter in filterObject) {
     if (Object.prototype.hasOwnProperty.call(filterObject, filter)) {
       filtersData[`filters[${filter}]`] = filterObject[filter];
     }
@@ -40,7 +40,7 @@ const createFilterObject = (filters: FilterObject[]) : dynamicObject => {
 class FilterService {
   filter;
 
-  constructor (filter: FilterObject) {
+  constructor(filter: FilterObject) {
     this.filter = filter;
   }
 

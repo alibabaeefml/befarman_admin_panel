@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { reactive, watch } from 'vue';
-import { useDropzone, type FileRejectReason } from 'vue3-dropzone';
+import { reactive, watch } from "vue";
+import { useDropzone, type FileRejectReason } from "vue3-dropzone";
 
-import FileRepository from '@/abstraction/repositories/fileRepository';
-const fileRepository = new FileRepository()
+import FileRepository from "@/abstraction/repositories/fileRepository";
+const fileRepository = new FileRepository();
 
-
-const state: {files: Array<File>, images: Array<any>} = reactive({
+const state: { files: Array<File>; images: Array<any> } = reactive({
   files: [],
   images: [],
 });
@@ -15,28 +14,52 @@ const props = defineProps({
   modelName: { type: String, required: true },
   collectionName: { type: String, required: true },
   batchId: { type: String, required: true },
-  title: { type: String, default: 'Drag and drop files here, or Click to select files' },
-  images: { type: Array, default: () => ([])}
-})
-
-watch(() => props.images, (first, second) => {
-  state.images = [...props.images, ...state.images]; 
+  title: {
+    type: String,
+    default: "Drag and drop files here, or Click to select files",
+  },
+  images: { type: Array, default: () => [] },
 });
 
-const onDrop =  async (acceptFiles:any[], rejectReasons: FileRejectReason[], event: Event) => {
+watch(
+  () => props.images,
+  (first, second) => {
+    state.images = [...props.images, ...state.images];
+  }
+);
+
+const onDrop = async (
+  acceptFiles: any[],
+  rejectReasons: FileRejectReason[],
+  event: Event
+) => {
   state.files = [...state.files, ...acceptFiles];
 
-  for(const acceptFile of acceptFiles) {
-    const id = Math.random()
-    state.images.push({id ,file_name: acceptFile.name, size: acceptFile.size, status: 'waiting'})
-    const image = await fileRepository.store({file: acceptFile, model_name: props.modelName, collection_name: props.collectionName, batch_id: props.batchId});
-    const index = state.images.findIndex(x => x.id == id)
-    state.images[index] = {...state.images[index], ...image, ...{status: 'success'}}
+  for (const acceptFile of acceptFiles) {
+    const id = Math.random();
+    state.images.push({
+      id,
+      file_name: acceptFile.name,
+      size: acceptFile.size,
+      status: "waiting",
+    });
+    const image = await fileRepository.store({
+      file: acceptFile,
+      model_name: props.modelName,
+      collection_name: props.collectionName,
+      batch_id: props.batchId,
+    });
+    const index = state.images.findIndex((x) => x.id == id);
+    state.images[index] = {
+      ...state.images[index],
+      ...image,
+      ...{ status: "success" },
+    };
   }
-}
+};
 
 const { getRootProps, getInputProps, isDragActive, ...rest } = useDropzone({
-  onDrop
+  onDrop,
 });
 
 function handleClickDeleteFile(index: number) {
@@ -46,24 +69,32 @@ function handleClickDeleteFile(index: number) {
 
 <template>
   <div>
-    <div class="dropzone" >
+    <div class="dropzone">
       <div v-if="state.images.length > 0" class="files">
-      <div :class="{'file-item': true, 'waitng': image.status == 'waiting', 'success': image.status == 'success'}" v-for="(image, index) in state.images" :key="index">
-        <span>{{ image.file_name }}</span>
-        <span class="delete-file" @click="handleClickDeleteFile(index)"
-          >Delete</span
+        <div
+          :class="{
+            'file-item': true,
+            waitng: image.status == 'waiting',
+            success: image.status == 'success',
+          }"
+          v-for="(image, index) in state.images"
+          :key="index"
         >
+          <span>{{ image.file_name }}</span>
+          <span class="delete-file" @click="handleClickDeleteFile(index)"
+            >Delete</span
+          >
+        </div>
       </div>
-    </div>
       <div
-      v-bind="getRootProps()"
+        v-bind="getRootProps()"
         class="border"
         :class="{
           isDragActive,
         }"
       >
         <input v-bind="getInputProps()" />
-        <p>{{title}}</p>
+        <p>{{ title }}</p>
       </div>
     </div>
   </div>
