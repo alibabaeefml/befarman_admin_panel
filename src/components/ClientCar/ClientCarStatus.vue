@@ -1,7 +1,6 @@
 <script setup>
 import BaseModal from "@/components/Global/Dialog/BaseModal.vue";
 import { useClientCarStatusStore as store } from "@/store/clientCarStatus";
-import { useClientCarStore } from "@/store/clientCar";
 
 import { ref } from "vue";
 

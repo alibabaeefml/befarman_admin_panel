@@ -5,14 +5,13 @@ import { useUser } from "@/composables/user/user";
 import { ref } from "vue";
 
 const form = ref({ id: null, message: null });
-const smsSent = ref(false);
-const smsFailed = ref(false);
-const openModal = async (data) => {
+
+const openModal = async () => {
   form.value.id = 2130;
 };
 const sendMessage = async () => {
   try {
-    const response = await useUser().sms(form.value);
+    await useUser().sms(form.value);
     useNotification({
       icon: "check",
       content: "ارسال پیام موفقیت آمیز بود",

@@ -1,6 +1,6 @@
 <script setup>
 import Loader from "@/components/Global/Misc/Loader.vue";
-const props = defineProps({
+defineProps({
   name_fa: { type: String },
   value: {},
 });

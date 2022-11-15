@@ -12,19 +12,8 @@ import InfiniteScroll from "infinite-loading-vue3";
 // modules
 import { ref } from "vue";
 import { useUser } from "@/composables/user/user";
-const {
-  indexUser,
-  indexArchivedUser,
-  updateUser,
-  storeUser,
-  showUser,
-  deleteUser,
-  restoreUser,
-  searchUser,
-  getUsers,
-  getArchivedUsers,
-  paginate,
-} = useUser();
+const { indexUser, indexArchivedUser, getUsers, getArchivedUsers, paginate } =
+  useUser();
 
 // ---------------
 

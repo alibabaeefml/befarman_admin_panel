@@ -1,6 +1,5 @@
 <script setup>
 import BaseModal from "@components/Global/Dialog/BaseModal.vue";
-import { useDisplay } from "vuetify";
 import { ref } from "vue";
 const certificates = ref([]);
 const openModal = (data) => {

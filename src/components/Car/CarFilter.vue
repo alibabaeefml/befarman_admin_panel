@@ -1,9 +1,9 @@
 <script setup>
 import Filters from "@components/Global/Filters/Filters.vue";
-import { useCar } from "@/composables/car/car";
+
 import CarSelected from "@/components/Car/CarSelected.vue";
 import BrandSelected from "@/components/Brand/BrandSelected.vue";
-import { ref, watchEffect } from "vue";
+
 defineProps(["filters"]);
 </script>
 <template>

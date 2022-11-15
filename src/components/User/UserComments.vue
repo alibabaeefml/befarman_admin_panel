@@ -16,8 +16,10 @@ const openModal = async (data) => {
       icon="mdi-comment"
       @open="openModal"
     >
-      <div v-for="comment in comments" :key="comment.id" v-if="comments.length">
+      <div v-if="comments.length">
         <v-card
+          v-for="comment in comments"
+          :key="comment.id"
           :title="comment.title"
           class="ma-4"
           prepend-icon="mdi-comment"

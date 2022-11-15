@@ -1,8 +1,7 @@
 <script setup>
 import BaseModal from "@/components/Global/Dialog/BaseModal.vue";
 import { useClientCar } from "@/composables/clientCar/clientCar";
-const { archiveClientCar, getClientCars, getArchivedClientCars } =
-  useClientCar();
+const { archiveClientCar } = useClientCar();
 import { ref } from "vue";
 const clientCarId = ref();
 const openModal = async (id) => {
@@ -10,7 +9,7 @@ const openModal = async (id) => {
 };
 const archive = async () => {
   try {
-    const response = await archiveClientCar(clientCarId.value);
+    await archiveClientCar(clientCarId.value);
     useNotification({
       icon: "check",
       content: "حذف خودرو موفقیت آمیز بود",

@@ -7,7 +7,6 @@ import ClientCarComments from "@components/ClientCar/ClientCarComments.vue";
 import EvaluationInfo from "@/components/ClientCar/EvaluationInfo.vue";
 import ClientCarStatus from "@/components/ClientCar/ClientCarStatus.vue";
 import { useClientCar } from "@/composables/clientCar/clientCar";
-import { storeToRefs } from "pinia/dist/pinia";
 import InfiniteScroll from "infinite-loading-vue3";
 import { useModalStore } from "@/store/modal";
 
