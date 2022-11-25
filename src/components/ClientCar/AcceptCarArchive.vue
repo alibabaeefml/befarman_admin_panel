@@ -1,7 +1,7 @@
 <script setup>
 import BaseModal from "@/components/Global/Dialog/BaseModal.vue";
 import { useClientCar } from "@/composables/clientCar/clientCar";
-import {notify} from '@kyvg/vue3-notification';
+import { notify } from "@kyvg/vue3-notification";
 const { archiveClientCar } = useClientCar();
 import { ref } from "vue";
 const clientCarId = ref();
@@ -12,11 +12,14 @@ const archive = async () => {
   try {
     await archiveClientCar(clientCarId.value);
     notify({
-      title:'موفق',
+      type: "success",
+      title: "موفق",
       text: "حذف خودرو موفقیت آمیز بود",
     });
   } catch {
     notify({
+      type: "error",
+      title: "ناموفق",
       text: "حذف خودرو با خطا مواجه شد",
     });
   }

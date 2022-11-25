@@ -14,7 +14,7 @@ const currentPath = computed(() => route().path);
       :style="{ marginTop: $vuetify.display.width < 1080 ? '60px' : 0 }"
     />
   </v-app>
-  <notifications position="bottom center"/>
+  <notifications position="bottom center" />
 </template>
 <style>
 /* fonts */
@@ -276,4 +276,29 @@ textarea {
 }
 
 /* vue notification */
+.vue-notification-template {
+  margin: 0 5px 5px;
+  padding: 10px;
+  font-size: 12px;
+  color: #ffffff;
+  font-family: ym;
+  border-left:unset!important;
+  border-right: 5px solid;
+  text-align: right!important;
+}
+
+.success {
+  background: #68cd86;
+  border-right-color: #42a85f;
+}
+
+.warn {
+  background: #ffb648;
+  border-right-color: #f48a06;
+}
+
+.error {
+  background: #e54d42;
+  border-right-color: #b82e24;
+}
 </style>

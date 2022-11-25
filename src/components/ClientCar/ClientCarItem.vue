@@ -3,6 +3,7 @@ import defaultThumb from "@/assets/Images/avatars/car-avatar.jpg";
 import { ref, watchEffect } from "vue";
 import { useClientCar } from "@/composables/clientCar/clientCar";
 import { useClientCarStatus } from "@/composables/clientCarStatus/clientCarStatus";
+import { notify } from "@kyvg/vue3-notification";
 const props = defineProps(["clientCar", "archived", "banner"]);
 const { loadStatuses, getClientCarStatuses } = useClientCarStatus();
 
@@ -18,16 +19,16 @@ watchEffect(() => {
 const restoreCar = async () => {
   try {
     await useClientCar().restoreClientCar(props.clientCar.id);
-    useNotification({
-      icon: "check",
-      content: "بازگردانی خودرو موفقیت آمیز بود",
-      theme: "lightgreen",
+    notify({
+      type: "success",
+      title: "موفق",
+      text: "بازگردانی خودرو موفقیت آمیز بود",
     });
   } catch {
-    useNotification({
-      icon: "information",
-      content: "بازگردانی خودرو با خطا مواجه شد",
-      theme: "#ff8a80",
+    notify({
+      type: "error",
+      title: "ناموفق",
+      text: "بازگردانی خودرو با خطا مواجه شد",
     });
   }
 };
