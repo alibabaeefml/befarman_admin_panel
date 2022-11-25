@@ -1,6 +1,7 @@
 <script setup>
 import BaseModal from "@/components/Global/Dialog/BaseModal.vue";
 import { useClientCar } from "@/composables/clientCar/clientCar";
+import {notify} from '@kyvg/vue3-notification';
 const { archiveClientCar } = useClientCar();
 import { ref } from "vue";
 const clientCarId = ref();
@@ -10,16 +11,13 @@ const openModal = async (id) => {
 const archive = async () => {
   try {
     await archiveClientCar(clientCarId.value);
-    useNotification({
-      icon: "check",
-      content: "حذف خودرو موفقیت آمیز بود",
-      theme: "lightgreen",
+    notify({
+      title:'موفق',
+      text: "حذف خودرو موفقیت آمیز بود",
     });
   } catch {
-    useNotification({
-      icon: "information",
-      content: "حذف خودرو با خطا مواجه شد",
-      theme: "#ff8a80",
+    notify({
+      text: "حذف خودرو با خطا مواجه شد",
     });
   }
 };

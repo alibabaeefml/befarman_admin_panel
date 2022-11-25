@@ -14,6 +14,7 @@ const currentPath = computed(() => route().path);
       :style="{ marginTop: $vuetify.display.width < 1080 ? '60px' : 0 }"
     />
   </v-app>
+  <notifications position="bottom center"/>
 </template>
 <style>
 /* fonts */
@@ -273,4 +274,6 @@ textarea {
 .v-overlay__content {
   min-width: 200px !important;
 }
+
+/* vue notification */
 </style>

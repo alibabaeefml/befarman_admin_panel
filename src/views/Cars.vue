@@ -5,7 +5,6 @@ import CarsFilter from "@components/Car/CarFilter.vue";
 import { useCar } from "@/composables/car/car";
 import { ref } from "vue";
 import InfiniteScroll from "infinite-loading-vue3";
-
 const { indexCar, getCars, paginate } = useCar();
 const filters = ref({});
 indexCar();
