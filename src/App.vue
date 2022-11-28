@@ -282,9 +282,9 @@ textarea {
   font-size: 12px;
   color: #ffffff;
   font-family: ym;
-  border-left:unset!important;
+  border-left: unset !important;
   border-right: 5px solid;
-  text-align: right!important;
+  text-align: right !important;
 }
 
 .success {

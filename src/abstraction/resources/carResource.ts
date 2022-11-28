@@ -1,14 +1,15 @@
 import { setPagination } from "@/utils/createQueriesObject";
 import { getJson as getJsonBrand } from "./brandResource";
 import { getJson as getJsonBodyType } from "./bodyTypeResource";
+import type { dynamicObject } from "@/types/common";
 
-export function getArray({ data, meta }) {
+export function getArray({ data, meta }: dynamicObject) {
   const pagination = setPagination(meta);
-  data = data.map((car) => getJson(car));
+  data = data.map((car: dynamicObject) => getJson(car));
   return { data, pagination };
 }
 
-export const getJson = (data) => ({
+export const getJson = (data: dynamicObject) => ({
   id: data.id,
   name_fa: data.name_fa,
   name_en: data.name_en,
@@ -20,7 +21,7 @@ export const getJson = (data) => ({
   brand: getJsonBrand(data.brand ? data.brand : {}),
 });
 
-export const setData = (data) => ({
+export const setData = (data: dynamicObject) => ({
   name_fa: data.name_fa,
   name_en: data.name_en,
   brand_id: data.brand_id,

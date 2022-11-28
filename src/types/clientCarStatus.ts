@@ -1,6 +1,6 @@
 export declare interface ClientCarStatus {
   id: number;
-  name: string;
+  name_fa: string;
   name_en: string;
   color: string;
   icon: string;

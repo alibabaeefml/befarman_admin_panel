@@ -2,6 +2,8 @@ import axios from "axios";
 import url from "../url";
 import { getArray, getJson, setData } from "../resources/clientCarResource";
 import { setQueries } from "@/utils/createQueriesObject";
+import type { dynamicObject } from "@/types/common";
+import type { ClientCar } from "@/types/clientCar";
 export default class ClientCarRepository {
   async index(data = {}) {
     const params = setQueries(data);
@@ -13,17 +15,17 @@ export default class ClientCarRepository {
     const response = await axios.get(url("indexArchivedClientCar"), { params });
     return getArray(response.data);
   }
-  async show(clientCar) {
+  async show(clientCar: number) {
     const response = await axios.get(url("showClientCar", { clientCar }));
     return getJson(response.data.data);
   }
-  async store(clientCarData) {
+  async store(clientCarData: ClientCar) {
     const formData = setData(clientCarData);
     const response = await axios.post(url("storeClientCar"), formData);
     return getJson(response.data.data);
   }
 
-  async update(carId, clientCarData) {
+  async update(carId: number, clientCarData: dynamicObject) {
     const formData = setData(clientCarData);
     const response = await axios.put(
       url("updateClientCar", { car: carId }),
@@ -32,11 +34,11 @@ export default class ClientCarRepository {
     return getJson(response.data.data);
   }
 
-  async delete(carId) {
+  async delete(carId: number) {
     await axios.delete(url("archiveClientCar", { car: carId }));
   }
 
-  async restore(carId) {
+  async restore(carId: number) {
     const response = await axios.post(url("restoreClientCar", { car: carId }));
     return response.data.data;
   }

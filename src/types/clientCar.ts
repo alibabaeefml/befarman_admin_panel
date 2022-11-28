@@ -7,7 +7,7 @@ import type { User } from "./user";
 import type { ClientCarStatus } from "./clientCarStatus";
 import type { Evaluation } from "./evaluation";
 import type { Comment } from "./comment";
-
+import type { Media } from "./media";
 export declare interface ClientCar {
   id: number;
   user_id: number;
@@ -19,16 +19,14 @@ export declare interface ClientCar {
   details: string;
   car_usage: string;
   status_id: number;
-  contract: string;
   fuel: string;
   changed_parts: string;
   last_oil_change: number;
   insurance_discount: number;
   gps: string;
-  befarman_gps: number;
-  insurance: number;
-  body_insurance: number;
-  third_party_insurance: number;
+  befarman_gps: boolean;
+  body_insurance: boolean;
+  third_party_insurance: boolean;
   original_price: number;
   price: number;
   features: string;
@@ -57,9 +55,9 @@ export declare interface ClientCar {
   city: City;
   color: Color;
   user: User;
-  images: [];
+  images: Media[];
   evaluation?: Evaluation | null;
   comments?: Comment[];
   requests?: [];
-  certificates?: [];
+  certificates?: Media[];
 }

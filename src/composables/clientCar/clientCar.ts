@@ -1,13 +1,16 @@
 import { storeToRefs } from "pinia";
 import { useClientCarStore } from "@/store/clientCar";
 import ClientCarRepository from "@/abstraction/repositories/clientCarRepository";
+import type { dynamicObject } from "@/types/common";
+import type { ClientCar } from "@/types/clientCar";
+import type { Paginate } from "@/types/paginate";
 
 export function useClientCar() {
   const store = useClientCarStore();
   const repository = new ClientCarRepository();
 
   const { getClientCars, getArchivedClientCars, paginate } = storeToRefs(store);
-  const indexClientCar = async (paginate) => {
+  const indexClientCar = async (paginate: Paginate) => {
     const { data, pagination } = await repository.index(paginate);
     store.$patch((state) => {
       state.paginate = pagination;
@@ -16,7 +19,7 @@ export function useClientCar() {
 
     return data;
   };
-  const indexArchivedClientCar = async (paginate) => {
+  const indexArchivedClientCar = async (paginate: Paginate) => {
     const { data, pagination } = await repository.indexArchived(paginate);
     store.$patch((state) => {
       state.paginate = pagination;
@@ -24,7 +27,10 @@ export function useClientCar() {
     });
     return data;
   };
-  const updateClientCar = async (clientCarId, clientCarData) => {
+  const updateClientCar = async (
+    clientCarId: number,
+    clientCarData: ClientCar
+  ) => {
     const clientCar = await repository.update(clientCarId, clientCarData);
 
     const index = store.clientCars.findIndex(
@@ -35,17 +41,17 @@ export function useClientCar() {
     return clientCar;
   };
 
-  const storeClientCar = async (clientCarData) => {
+  const storeClientCar = async (clientCarData: ClientCar) => {
     const clientCar = await repository.store(clientCarData);
     store.clientCars.push(clientCar);
     return clientCar;
   };
 
-  const showClientCar = async (clientCarId) => {
+  const showClientCar = async (clientCarId: number) => {
     return await repository.show(clientCarId);
   };
 
-  const archiveClientCar = async (clientCarId) => {
+  const archiveClientCar = async (clientCarId: number) => {
     await repository.delete(clientCarId);
     store.clientCars.map((e) => {
       if (e.id == clientCarId) {
@@ -54,7 +60,7 @@ export function useClientCar() {
       }
     });
   };
-  const restoreClientCar = async (clientCarId) => {
+  const restoreClientCar = async (clientCarId: number) => {
     await repository.restore(clientCarId);
     store.archivedClientCars.map((e) => {
       if (e.id == clientCarId) {

@@ -34,7 +34,6 @@ export declare interface User {
   comments: Comment[];
   certificates: Certificate[];
   birthday: string;
-  description: string;
   transactions_sum: number;
   avg_vote: number;
 }

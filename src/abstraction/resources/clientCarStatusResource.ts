@@ -1,8 +1,9 @@
-export function getArrayClientCarStatus(data) {
-  return data.map((status) => getJsonClientCarStatus(status));
+import type { dynamicObject } from "@/types/common";
+export function getArrayClientCarStatus(data: dynamicObject) {
+  return data.map((status: dynamicObject) => getJsonClientCarStatus(status));
 }
 
-export const getJsonClientCarStatus = (data) => ({
+export const getJsonClientCarStatus = (data: dynamicObject) => ({
   id: data.id,
   name_fa: data.name_fa,
   name_en: data.name_en,

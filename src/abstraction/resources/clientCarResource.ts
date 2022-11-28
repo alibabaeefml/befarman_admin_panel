@@ -13,14 +13,15 @@ import { getJsonEvaluation } from "./evaluationResource";
 import { getArrayComment } from "./commentResource";
 import { getArrayClientCarRequest } from "./clientCarRequestResource";
 import { getArrayMedia } from "./mediaResource";
+import type { dynamicObject } from "@/types/common";
 
-export function getArray({ data, meta }) {
+export function getArray({ data, meta }: dynamicObject) {
   const pagination = setPagination(meta);
-  data = data.map((car) => getJson(car));
+  data = data.map((car: dynamicObject) => getJson(car));
   return { data, pagination };
 }
 
-export const getJson = (data) => ({
+export const getJson = (data: dynamicObject) => ({
   id: data.id,
   user_id: data.user_id,
   name: data.name,
@@ -80,7 +81,7 @@ export const getJson = (data) => ({
   ),
 });
 
-export const setData = (data) => ({
+export const setData = (data: dynamicObject) => ({
   painted: data.painted,
   car_number: data.car_number,
   color_status: data.color_status,
