@@ -6,7 +6,10 @@ export function useModal() {
   const modalStore = useModalStore();
   const { openModal, closeModal } = modalStore;
 
-  app.appContext.config.globalProperties.$_openModal = (name, data = {}) => {
+  app.appContext.config.globalProperties.$_openModal = (
+    name: string,
+    data = {}
+  ) => {
     openModal(name, data);
   };
   app.appContext.config.globalProperties.$_closeModal = () => {

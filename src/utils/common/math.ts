@@ -1,4 +1,4 @@
-const makeid = function makeid(length) {
+const makeid = function makeid(length: number) {
   var text = "";
   var possible =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
