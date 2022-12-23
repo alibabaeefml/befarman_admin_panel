@@ -1,12 +1,15 @@
 import UserRepository from "@/abstraction/repositories/userRepository.js";
 import { useUserStore } from "@/store/user";
+import type { dynamicObject } from "@/types/common";
+import type { Paginate } from "@/types/paginate";
+import type { User } from "@/types/user";
 import { storeToRefs } from "pinia";
 export function useUser() {
   const store = useUserStore();
   const { getUsers, getArchivedUsers, paginate } = storeToRefs(store);
   const repository = new UserRepository();
 
-  const indexUser = async (paginate) => {
+  const indexUser = async (paginate: Paginate) => {
     const { data, pagination } = await repository.index(paginate);
     store.$patch((state) => {
       state.paginate = pagination;
@@ -15,7 +18,7 @@ export function useUser() {
     return data;
   };
 
-  const indexArchivedUser = async (paginate) => {
+  const indexArchivedUser = async (paginate: Paginate) => {
     const { data, pagination } = await repository.indexArchived(paginate);
     store.$patch((state) => {
       state.paginate = pagination;
@@ -23,7 +26,7 @@ export function useUser() {
     });
     return data;
   };
-  const updateUser = async (userId, userData) => {
+  const updateUser = async (userId: number, userData: dynamicObject) => {
     const user = await repository.update(userId, userData);
 
     const index = store.users.findIndex((user) => user.id === userId);
@@ -32,26 +35,26 @@ export function useUser() {
     return user;
   };
 
-  const storeUser = async (userData) => {
+  const storeUser = async (userData: dynamicObject) => {
     const user = await repository.store(userData);
     store.users.push(user);
     return user;
   };
 
-  const showUser = async (data) => {
+  const showUser = async (data: dynamicObject) => {
     return await repository.show(data);
   };
-  const sms = async (form) => {
+  const sms = async (form: dynamicObject) => {
     return await repository.sms(form);
   };
 
-  const verifyUser = async (userId) => {
+  const verifyUser = async (userId: number) => {
     return await repository.verify(userId);
   };
-  const unverifyUser = async (userId) => {
+  const unverifyUser = async (userId: number) => {
     return await repository.unverify(userId);
   };
-  const deleteUser = async (userId) => {
+  const deleteUser = async (userId: number) => {
     await repository.delete(userId);
     store.users.map((e, i) => {
       if (e.id == userId) {
@@ -60,7 +63,7 @@ export function useUser() {
       }
     });
   };
-  const restoreUser = async (userId) => {
+  const restoreUser = async (userId: number) => {
     await repository.restore(userId);
     store.archivedUsers.map((e, i) => {
       if (e.id == userId) {
@@ -70,7 +73,7 @@ export function useUser() {
     });
   };
 
-  const searchUser = async (userData) => {
+  const searchUser = async (userData: dynamicObject) => {
     const { data } = await repository.index(userData);
     return data;
   };

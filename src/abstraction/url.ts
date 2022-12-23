@@ -26,8 +26,8 @@ const urls: dynamicObject = {
   updateClientCar: "admin/client-cars/:car",
   archiveClientCar: "admin/client-cars/:car",
   restoreClientCar: "admin/client-cars/:car/restore",
-  indexStatus: "client-car-status",
-  changeStatus: "admin/client-cars/:car/change-status",
+  indexClientCarStatus: "client-car-status",
+  changeClientCarStatus: "admin/client-cars/:car/change-status",
   indexColor: "colors",
   indexProvince: "provinces",
   showCity: "cities/:id",
@@ -48,6 +48,17 @@ const urls: dynamicObject = {
   restoreUser: "admin/users/:user/restore",
   verifyUser: "admin/users/:user/verify",
   unverifyUser: "admin/users/:user/unverify",
+
+  // request
+  indexClientCarRequest: "admin/car-request",
+  indexArchivedClientCarRequest: "admin/car-request/archive",
+  showClientCarRequest: "admin/car-request/:clientCarRequest",
+  storeClientCarRequest: "admin/car-request",
+  updateClientCarRequest: "admin/car-request/:clientCarRequest",
+  archiveClientCarRequest: "admin/car-request/:clientCarRequest",
+  ownerAcceptClientCarRequest: "admin/car-request/:clientCarRequest/accept",
+  ownerRejectClientCarRequest: "admin/car-request/:clientCarRequest/reject",
+  indexClientCarRequestStatus:"car-request-status",
   // auth
   sendCode: "login",
   logout: "logout",
