@@ -3,9 +3,9 @@ import { computed, ref } from "vue";
 import { useDisplay } from "vuetify/lib/framework.mjs";
 defineProps(["request", "archived"]);
 defineEmits(["editModal", "deleteModal"]);
-const reqActions = ref(false);
-const sm = computed(() => useDisplay().width.value < 900);
-const id = ref(":id");
+const actions = ref(false);
+
+const clientCarRequest = ref({ id: 515155 });
 </script>
 <template>
   <div>
@@ -55,7 +55,13 @@ const id = ref(":id");
               >
                 <div class="d-flex align-center" style="font-size: 20px">
                   <div class="ml-2 mb">
-                    <h1 :style="{ fontSize: !sm ? '100px' : '50px' }">5</h1>
+                    <h1
+                      :style="{
+                        fontSize: !$vuetify.display.sm ? '100px' : '50px',
+                      }"
+                    >
+                      5
+                    </h1>
                   </div>
                   <div class="yl" style="width: 90px">روز زمان درخواست</div>
                 </div>
@@ -71,12 +77,12 @@ const id = ref(":id");
         </v-row>
       </v-card-text>
       <v-card-actions style="position: absolute; bottom: 0">
-        <v-btn color="primary" icon @click="reqActions = !reqActions">
+        <v-btn color="primary" icon @click="actions = !actions">
           <v-icon>{{
-            !reqActions ? "mdi-dots-vertical" : "mdi-menu-down"
+            !actions ? "mdi-dots-vertical" : "mdi-menu-down"
           }}</v-icon>
         </v-btn>
-        <div class="actionsGroup" v-if="reqActions">
+        <div class="actionsGroup" v-if="actions">
           <v-btn
             v-if="!archived"
             icon
@@ -101,7 +107,10 @@ const id = ref(":id");
             >
           </v-btn>
           <v-btn
-            :to="{ name: 'requestDetails', params: { id } }"
+            :to="{
+              name: 'requestDetails',
+              params: { id: clientCarRequest.id },
+            }"
             icon
             color="orange"
             variant="elevated"
@@ -110,6 +119,15 @@ const id = ref(":id");
             <v-tooltip activator="parent" location="right"
               >جزئیات درخواست</v-tooltip
             >
+          </v-btn>
+          <v-btn
+            @click="$_openModal('evaluationInfo', clientCarRequest.id)"
+            icon
+            color="green"
+            variant="elevated"
+          >
+            <v-icon color="white">mdi-receipt-text-check</v-icon>
+            <v-tooltip activator="parent" location="right">صورت حساب</v-tooltip>
           </v-btn>
         </div>
       </v-card-actions>
