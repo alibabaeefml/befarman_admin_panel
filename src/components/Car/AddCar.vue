@@ -60,7 +60,6 @@ const submitForm = async () => {
 <template>
   <base-modal
     name="add-car"
-    max-width="600px"
     @open="openModal"
     :title="staticNames.name"
     :subtitle="staticNames.name_en"

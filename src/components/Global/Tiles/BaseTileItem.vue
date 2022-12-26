@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
 defineProps([
   "background",
   "color",
@@ -18,22 +18,32 @@ defineProps([
       border: 'solid 1px' + color,
     }"
   >
-    <v-col cols="8" class="d-flex align-center">
+    <v-col
+      :cols="$vuetify.display.width > 280 ? 8 : 12"
+      class="d-flex align-center"
+    >
       <v-icon size="60">mdi-{{ icon }}</v-icon>
       <div class="d-flex flex-column">
         <span :class="$vuetify.display.xs ? 'sm-txt' : 'md-txt'">{{
           txt
         }}</span>
-        <span :class="{ sub: true, 'xs-txt': $vuetify.display.xs, mm: true }">
+        <span
+          :class="{ 'xs-txt': $vuetify.display.xs, mm: true }"
+          :style="{ letterSpacing: $vuetify.display.width < 280 ? '0px' : '10px' }"
+        >
           {{ sub }}
         </span>
       </div>
     </v-col>
-    <v-col cols="4" class="d-flex text-center align-center">
-      <span class="mxb lg-txt">{{ badgeNo }}</span>
-      <span :class="'mr-1 ' + ($vuetify.display.xs ? 'xs-txt' : 'sm-txt')">{{
-        badgeTxt
+    <v-col
+      v-if="$vuetify.display.width > 280"
+      cols="4"
+      class="d-flex text-center justify-end align-center"
+    >
+      <span :class="'mxb ' + ($vuetify.display.xs ? 'sm-txt' : 'lg-txt')">{{
+        badgeNo
       }}</span>
+      <span class="mr-1 xs-txt">{{ badgeTxt }}</span>
     </v-col>
   </v-row>
 </template>
