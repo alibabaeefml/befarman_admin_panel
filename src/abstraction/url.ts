@@ -50,15 +50,11 @@ const urls: dynamicObject = {
   unverifyUser: "admin/users/:user/unverify",
 
   // request
-  indexClientCarRequest: "admin/car-request",
-  indexArchivedClientCarRequest: "admin/car-request/archive",
-  showClientCarRequest: "admin/car-request/:clientCarRequest",
-  storeClientCarRequest: "admin/car-request",
-  updateClientCarRequest: "admin/car-request/:clientCarRequest",
-  archiveClientCarRequest: "admin/car-request/:clientCarRequest",
-  ownerAcceptClientCarRequest: "admin/car-request/:clientCarRequest/accept",
-  ownerRejectClientCarRequest: "admin/car-request/:clientCarRequest/reject",
-  indexClientCarRequestStatus:"car-request-status",
+  indexClientCarRequest: "admin/client-car-requests",
+  ownerDeliveryClientCarRequest: "admin/client-car-requests/:clientCarRequest/delivery-owner",
+  userDeliveryClientCarRequest: "admin/client-car-requests/:clientCarRequest/delivery-user",
+  adminVerifyClientCarRequest: "admin/client-car-requests/:clientCarRequest/check-admin",
+  ownerVerifyClientCarRequest: "admin/client-car-requests/:clientCarRequest/check-owner",
   // auth
   sendCode: "login",
   logout: "logout",

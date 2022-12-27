@@ -115,7 +115,7 @@ const paths: Path[] = [
   {
     path: "/requests",
     name: "requests",
-    view: "Requests",
+    view: "ClientCarRequests",
     meta: {
       auth: true,
       title: "لیست درخواست ها",
@@ -125,7 +125,7 @@ const paths: Path[] = [
   {
     path: "/requests/:id",
     name: "requestDetails",
-    view: "RequestDetails",
+    view: "ClientCarRequestDetails",
     meta: {
       auth: false,
       title: "جزئیات درخواست",

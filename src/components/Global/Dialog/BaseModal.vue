@@ -1,13 +1,12 @@
 <script setup>
 import { ref, onBeforeUnmount, computed, getCurrentInstance } from "vue";
+import { useDisplay } from "vuetify";
 import { useModalStore } from "@/store/modal";
 import BaseHeader from "./BaseHeader.vue";
 
 const modalStore = useModalStore();
 const { getModal, isModal, closeModal } = modalStore;
-
 const instance = getCurrentInstance();
-
 const props = defineProps({
   fullscreen: { default: undefined },
   width: { default: null },
@@ -18,6 +17,7 @@ const props = defineProps({
   icon: { default: "mdi-car" },
   transition: { default: "slide-x-transition" },
 });
+
 const isOpenModal = ref(false);
 
 const modalName = computed(() =>
@@ -67,6 +67,7 @@ onBeforeUnmount(() => emitModal(false));
         <base-header :icon="icon" :title="title" :subtitle="subtitle" />
       </v-card-title>
       <slot :modal="modal" :data="data.data"></slot>
+      {{ defaultWidth }}
     </v-card>
   </v-dialog>
 </template>

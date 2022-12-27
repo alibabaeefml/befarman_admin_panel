@@ -1,9 +1,12 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
 import RequestItem from "@components/Request/RequestItem.vue";
 import RequestFilter from "@components/Request/RequestFilter.vue";
 import RequestAdd from "@components/Request/RequestAdd.vue";
 import AcceptReqDelete from "@components/Request/AcceptReqDelete.vue";
+
+import repository from "@/abstraction/repositories/clientCarRequestRepository";
+
 const tab = ref("one");
 const addModal = ref(false);
 const deleteConfirm = ref(false);
