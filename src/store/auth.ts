@@ -17,22 +17,22 @@ export const useAuthStore = defineStore("auth", () => {
   };
 
   const login = async ({ phone, code }: { phone: string; code: string }) => {
-    const data = await repository.login({ phone, code });
-
-    if (data.user) {
+    const user: any = await repository.login({ phone, code });
+    if (user && !!user.is_admin) {
       // update pinia state
-      user.value = data.user;
-      token.value = data.token;
       // store user details and jwt in local storage to keep user logged in between page refreshes
-      StoreManagement.set("user", data.user);
-      StoreManagement.set("token", data.token);
+      StoreManagement.set("user", user);
+      StoreManagement.set("token", user.token);
 
       // token
-      ApiService.setAuthHeader(data.token);
+      ApiService.setAuthHeader(user.token);
 
       // redirect
       router.push({ name: "dashboard" });
+      return user;
     }
+    window.location.reload()
+        return null;
   };
 
   const logout = () => {

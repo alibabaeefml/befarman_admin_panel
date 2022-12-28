@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
 import { computed } from "vue";
 import { useDisplay } from "vuetify/lib/framework.mjs";
@@ -20,14 +20,14 @@ const loading = ref(false);
 // ui check
 
 const numberRules = ref([
-  (v) => !!v || "شماره همراه الزامی است",
-  (v) => !isNaN(v) || "باید شماره باشد",
-  (v) => (v[0] == 0 && v[1] == 9) || "فرمت صحیح 09000000000 می باشد",
-  (v) => v.length == 11 || "شماره همراه باید 11 رقم باشد",
+  (v: any) => !!v || "شماره همراه الزامی است",
+  (v: number) => !isNaN(v) || "باید شماره باشد",
+  (v: number[]) => (v[0] == 0 && v[1] == 9) || "فرمت صحیح 09000000000 می باشد",
+  (v: string | any[]) => v.length == 11 || "شماره همراه باید 11 رقم باشد",
 ]);
 const codeRules = ref([
-  (v) => !isNaN(v) || "باید شماره باشد",
-  (v) => v.length == 6 || "باید 6 رقمی باشد",
+  (v: number) => !isNaN(v) || "باید شماره باشد",
+  (v: string | any[]) => v.length == 6 || "باید 6 رقمی باشد",
 ]);
 
 // logic check
@@ -40,13 +40,14 @@ const phoneCheck = computed(() => {
 //-----------
 
 // form opertaions
-const sendCode = () => {
-  codeSent.value = useAuthStore().sendCode(user.value.phone);
+const sendCode = async () => {
+  codeSent.value = await useAuthStore().sendCode(user.value.phone);
 };
 
-const login = () => {
+const login = async () => {
   loading.value = true;
-  useAuthStore().login(user.value);
+  await useAuthStore().login(user.value);
+  
 };
 </script>
 <template>
@@ -146,7 +147,7 @@ const login = () => {
         v-if="width > 600"
         style="
           height: 100vh;
-          background: url('src/assets/images/loginBG.jpg');
+          background: url('@/assets/images/loginBG.jpg');
           background-position: center;
           background-size: cover;
         "

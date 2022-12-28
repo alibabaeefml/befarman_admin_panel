@@ -1,6 +1,6 @@
 import type { dynamicObject } from "@/types/common";
 export const getJson = (data: dynamicObject) => ({
-  token: data.user.token,
+  token: data.token,
   user: getUserJson(data.user),
 });
 
