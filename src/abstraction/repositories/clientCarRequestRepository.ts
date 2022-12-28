@@ -6,19 +6,23 @@ import type { dynamicObject } from "@/types/common";
 import type { ClientCarRequest } from "@/types/clientCarRequest";
 
 export default class ClientCarRequestRepository {
+  async register(data: dynamicObject) {
+    const response = await axios.post(url("registerClientCarRequest"), data);
+    if ([200, 201].includes(response.status)) {
+      return true;
+    }
+    return null;
+  }
   async index(data: dynamicObject) {
     const params: dynamicObject = setQueries(data);
-    const response:  Response = await axios.get(
-      url("indexClientCarRequest"),
-      params
-    );
+    const response = await axios.get(url("indexClientCarRequest"), params);
     if ([200, 201].includes(response.status)) {
       return getArrayClientCarRequest(response.data.data);
     }
     return null;
   }
   async ownerDelivery(id: number) {
-    const response:  Response = await axios.put(
+    const response = await axios.put(
       url("ownerDeliveryClientCarRequest", { clientCarRequest: id })
     );
     if ([200, 201].includes(response.status)) {
@@ -27,7 +31,7 @@ export default class ClientCarRequestRepository {
     return null;
   }
   async userDelivery(id: number) {
-    const response:  Response = await axios.put(
+    const response = await axios.put(
       url("userDeliveryClientCarRequest", { clientCarRequest: id })
     );
     if ([200, 201].includes(response.status)) {
@@ -36,7 +40,7 @@ export default class ClientCarRequestRepository {
     return null;
   }
   async adminVerify(id: number) {
-    const response:  Response = await axios.put(
+    const response = await axios.put(
       url("adminVerifyClientCarRequest", { clientCarRequest: id })
     );
     if ([200, 201].includes(response.status)) {
@@ -45,7 +49,7 @@ export default class ClientCarRequestRepository {
     return null;
   }
   async ownerVerify(id: number) {
-    const response:  Response = await axios.put(
+    const response = await axios.put(
       url("ownerVerifyClientCarRequest", { clientCarRequest: id })
     );
     if ([200, 201].includes(response.status)) {

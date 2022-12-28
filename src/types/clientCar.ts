@@ -11,6 +11,10 @@ import type { Media } from "./media";
 export declare interface ClientCar {
   id: number;
   user_id: number;
+  car_id:number;
+  trim_id:number;
+  file_batch_id:number;
+
   name: string;
   painted: string;
   car_number: string;

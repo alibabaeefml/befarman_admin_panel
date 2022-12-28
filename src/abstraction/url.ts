@@ -50,6 +50,7 @@ const urls: dynamicObject = {
   unverifyUser: "admin/users/:user/unverify",
 
   // request
+  registerClientCarRequest:"client-car-requests",
   indexClientCarRequest: "admin/client-car-requests",
   ownerDeliveryClientCarRequest: "admin/client-car-requests/:clientCarRequest/delivery-owner",
   userDeliveryClientCarRequest: "admin/client-car-requests/:clientCarRequest/delivery-user",

@@ -6,12 +6,27 @@ import RequestAdd from "@components/Request/RequestAdd.vue";
 import AcceptReqDelete from "@components/Request/AcceptReqDelete.vue";
 
 import repository from "@/abstraction/repositories/clientCarRequestRepository";
-
+const register = async () => {
+  await new repository().register({
+  client_car_id: 302,
+  start_delivery_place: "خیابان اقاقیا 2",
+  end_delivery_place: "خیابان اقاقیا",
+  start_at: "2023-01-25 10:10:00",
+  end_at: "2023-02-02 10:10:00",
+  insurance_type_id: 1,
+  additional_driver: 1,
+  airport_charge: 1,
+  delivery_at_location: 1,
+  delivery_at_the_place_of_return: 1,
+  one_way_road: 1,
+});
+}
 const tab = ref("one");
 const addModal = ref(false);
 const deleteConfirm = ref(false);
 </script>
 <template>
+  <v-btn @click="register">register request</v-btn>
   <RequestFilter />
   <v-card>
     <v-tabs v-model="tab" color="secondary" fixed-tabs>

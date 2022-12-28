@@ -1,10 +1,10 @@
-import type { dynamicObject } from "@/types/common";
+import type { Media } from "@/types/media";
 
-export function getArrayMedia(data:[]) {
+export function getArrayMedia(data: Media[]) {
   return data.map((media) => getJsonMedia(media));
 }
 
-export const getJsonMedia = (data:dynamicObject) => ({
+export const getJsonMedia = (data: Media) => ({
   id: data.id,
   collection_name: data.collection_name,
   image: data.image,
