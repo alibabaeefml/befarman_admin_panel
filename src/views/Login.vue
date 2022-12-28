@@ -3,7 +3,7 @@ import { ref } from "vue";
 import { computed } from "vue";
 import { useDisplay } from "vuetify/lib/framework.mjs";
 import { useAuthStore } from "@/store/auth";
-
+import bg from "@/assets/Images/loginBG.jpg";
 defineProps(["dialog"]);
 
 const width = computed(() => useDisplay().width.value);
@@ -47,7 +47,6 @@ const sendCode = async () => {
 const login = async () => {
   loading.value = true;
   await useAuthStore().login(user.value);
-  
 };
 </script>
 <template>
@@ -145,12 +144,11 @@ const login = async () => {
         cols="12"
         sm="5"
         v-if="width > 600"
-        style="
-          height: 100vh;
-          background: url('@/assets/images/loginBG.jpg');
-          background-position: center;
-          background-size: cover;
-        "
+        :style="{
+          background: `url(${bg})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }"
       >
       </v-col>
     </v-row>
