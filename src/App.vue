@@ -67,15 +67,15 @@ const currentPath = computed(() => route().path);
     opacity: 0;
   }
 }
-@keyframes slide-x {
+@keyframes loadCardActions {
   from {
     opacity: 0;
-    margin-left: -20px;
+    gap: 0;
   }
 
   to {
     opacity: 1;
-    margin-left: 8px;
+    gap: 15px;
   }
 }
 @keyframes rotate {
@@ -201,10 +201,16 @@ textarea {
 
 .actionsGroup {
   display: flex !important;
+  flex-wrap: wrap;
+  animation: loadCardActions 0.2s forwards;
 }
-
+.v-card-text{
+  transition: .2s ease-in;
+}
+.v-card-text.blured{
+filter: blur(5px);
+}
 .actionsGroup > * {
-  animation: slide-x 0.2s;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5) !important;
 }
 

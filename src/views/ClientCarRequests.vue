@@ -26,8 +26,8 @@ const addModal = ref(false);
 const deleteConfirm = ref(false);
 </script>
 <template>
-  <v-btn @click="register">register request</v-btn>
-  <RequestFilter />
+  <div>
+    <RequestFilter />
   <v-card>
     <v-tabs v-model="tab" color="secondary" fixed-tabs>
       <v-tab value="two">درخواست های حذف شده</v-tab>
@@ -69,4 +69,6 @@ const deleteConfirm = ref(false);
     :dialog="deleteConfirm"
     @toggle-modal="deleteConfirm = false"
   />
+  </div>
+  
 </template>
