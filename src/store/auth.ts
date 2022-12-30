@@ -19,7 +19,7 @@ export const useAuthStore = defineStore("auth", () => {
   const login = async ({ phone, code }: { phone: string; code: string }) => {
     const data = await repository.login({ phone, code });
 
-    if (data.user) {
+    if (data?.user && !!data?.user.is_admin) {
       // update pinia state
       user.value = data.user;
       token.value = data.token;
@@ -32,7 +32,10 @@ export const useAuthStore = defineStore("auth", () => {
 
       // redirect
       router.push({ name: "dashboard" });
+      return;
     }
+    router.go(0);
+    return 
   };
 
   const logout = () => {

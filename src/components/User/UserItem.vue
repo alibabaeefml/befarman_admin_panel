@@ -21,7 +21,7 @@ const userVerification = async () => {
       class="border mt-3 text-center d-flex align-center"
       min-height="200"
     >
-      <v-card-text dir="rtl" class="yl">
+      <v-card-text dir="rtl" :class="{yl:true,blured:actions}">
         <v-row class="align-center">
           <v-col cols="12" md="3" sm="12">
             <h1 class="md-txt">{{ user.name }}</h1>

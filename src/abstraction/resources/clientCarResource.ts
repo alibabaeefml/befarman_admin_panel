@@ -14,6 +14,7 @@ import { getArrayComment } from "./commentResource";
 import { getArrayClientCarRequest } from "./clientCarRequestResource";
 import { getArrayMedia } from "./mediaResource";
 import type { dynamicObject } from "@/types/common";
+import type { ClientCar } from "@/types/clientCar";
 
 export function getArray({ data, meta }: dynamicObject) {
   const pagination = setPagination(meta);
@@ -81,7 +82,7 @@ export const getJson = (data: dynamicObject) => ({
   ),
 });
 
-export const setData = (data: dynamicObject) => ({
+export const setData = (data: ClientCar) => ({
   painted: data.painted,
   car_number: data.car_number,
   color_status: data.color_status,
@@ -93,11 +94,9 @@ export const setData = (data: dynamicObject) => ({
   last_oil_change: data.last_oil_change,
   insurance_discount: data.insurance_discount,
   gps: data.gps,
-  befarman_gps: data.befarman_gps ? data.befarman_gps : 0,
-  body_insurance: data.body_insurance ? data.body_insurance : 0,
-  third_party_insurance: data.third_party_insurance
-    ? data.third_party_insurance
-    : 0,
+  befarman_gps: !!data.befarman_gps,
+  body_insurance: !!data.body_insurance,
+  third_party_insurance: !!data.third_party_insurance,
   original_price: data.original_price,
   price: data.price,
   features: data.features,
@@ -113,10 +112,10 @@ export const setData = (data: dynamicObject) => ({
   trim_id: data.trim_id,
   file_batch_id: data.file_batch_id,
   organization: data.organization,
-  technical_status: data.technical_status == 1,
-  brand: getJsonBrand(data.brand ? data.brand : {}),
-  user: getJsonUser(data.user ? data.user : {}),
-  car: getJsonCar(data.car ? data.car : {}),
-  images: getArrayMedia(data.images ? data.images : []),
-  certificates: getArrayMedia(data.certificates ? data.certificates : []),
+  technical_status: !!data.technical_status,
+  brand: getJsonBrand(data.brand ?? {}),
+  user: getJsonUser(data.user ?? {}),
+  car: getJsonCar(data.car ?? {}),
+  images: getArrayMedia(data.images ?? []),
+  certificates: getArrayMedia(data.certificates ?? []),
 });

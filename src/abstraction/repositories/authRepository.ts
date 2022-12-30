@@ -10,15 +10,14 @@ export default class AuthRepository {
   }
 
   async login({ phone, code }: dynamicObject) {
-    try {
-      const response = await axios.post(url("login"), {
-        phone,
-        code,
-      });
+    const response = await axios.post(url("login"), {
+      phone,
+      code,
+    });
+    if ([200, 201].includes(response.status)) {
       return getJson(response.data);
-    } catch (error) {
-      console.log(error);
     }
+    return null;
   }
 
   async logout() {

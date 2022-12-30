@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { computed, ref } from "vue";
 import { useDisplay } from "vuetify/lib/framework.mjs";
 import bg from "@/assets/Images/Header.jpg";

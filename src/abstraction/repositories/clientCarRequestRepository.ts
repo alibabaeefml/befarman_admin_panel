@@ -1,50 +1,60 @@
 import axios from "axios";
 import url from "../url";
-import { getArray, getJson, setData } from "../resources/clientCarRequestResource";
+import { getArrayClientCarRequest } from "../resources/clientCarRequestResource";
 import { setQueries } from "@/utils/createQueriesObject";
 import type { dynamicObject } from "@/types/common";
-import type { ClientCar } from "@/types/clientCar";
-export default class ClientCarRepository {
-  async index(data = {}) {
-    const params = setQueries(data);
-    const response = await axios.get(url("indexClientCar"), { params });
-    return getArray(response.data);
-  }
-  async indexArchived(data = {}) {
-    const params = setQueries(data);
-    const response = await axios.get(url("indexArchivedClientCar"), { params });
-    return getArray(response.data);
-  }
-  async show(clientCar: number) {
-    const response = await axios.get(url("showClientCar", { clientCar }));
-    return getJson(response.data.data);
-  }
-  async store(clientCarData: ClientCar) {
-    const formData = setData(clientCarData);
-    const response = await axios.post(url("storeClientCar"), formData);
-    return getJson(response.data.data);
-  }
+import type { ClientCarRequest } from "@/types/clientCarRequest";
 
-  async update(carId: number, clientCarData: dynamicObject) {
-    const formData = setData(clientCarData);
+export default class ClientCarRequestRepository {
+  async register(data: dynamicObject) {
+    const response = await axios.post(url("registerClientCarRequest"), data);
+    if ([200, 201].includes(response.status)) {
+      return true;
+    }
+    return null;
+  }
+  async index(data: dynamicObject) {
+    const params: dynamicObject = setQueries(data);
+    const response = await axios.get(url("indexClientCarRequest"), params);
+    if ([200, 201].includes(response.status)) {
+      return getArrayClientCarRequest(response.data.data);
+    }
+    return null;
+  }
+  async ownerDelivery(id: number) {
     const response = await axios.put(
-      url("updateClientCar", { car: carId }),
-      formData
+      url("ownerDeliveryClientCarRequest", { clientCarRequest: id })
     );
-    return getJson(response.data.data);
+    if ([200, 201].includes(response.status)) {
+      return true;
+    }
+    return null;
   }
-
-  async delete(carId: number) {
-    await axios.delete(url("archiveClientCar", { car: carId }));
+  async userDelivery(id: number) {
+    const response = await axios.put(
+      url("userDeliveryClientCarRequest", { clientCarRequest: id })
+    );
+    if ([200, 201].includes(response.status)) {
+      return true;
+    }
+    return null;
   }
-
-  async restore(carId: number) {
-    const response = await axios.post(url("restoreClientCar", { car: carId }));
-    return response.data.data;
+  async adminVerify(id: number) {
+    const response = await axios.put(
+      url("adminVerifyClientCarRequest", { clientCarRequest: id })
+    );
+    if ([200, 201].includes(response.status)) {
+      return true;
+    }
+    return null;
   }
-  async total() {
-    const response = await axios.get(url("indexClientCar"), {});
-
-    return response.data.meta.total;
+  async ownerVerify(id: number) {
+    const response = await axios.put(
+      url("ownerVerifyClientCarRequest", { clientCarRequest: id })
+    );
+    if ([200, 201].includes(response.status)) {
+      return true;
+    }
+    return null;
   }
 }

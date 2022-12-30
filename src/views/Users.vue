@@ -48,6 +48,8 @@ const infiniteUser = async () => {
 </script>
 
 <template>
+  <div>
+    
   <UserFilter />
   <v-card>
     <v-tabs v-model="tab" color="secondary" fixed-tabs>
@@ -83,4 +85,6 @@ const infiniteUser = async () => {
   <AcceptUserArchive />
   <UserComments />
   <SendMessage />
-</template>
+
+  </div>
+  </template>

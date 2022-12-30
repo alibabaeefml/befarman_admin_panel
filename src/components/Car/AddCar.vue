@@ -60,6 +60,7 @@ const submitForm = async () => {
 <template>
   <base-modal
     name="add-car"
+    :max-width="$vuetify.display.smAndDown ? null : 600"
     @open="openModal"
     :title="staticNames.name"
     :subtitle="staticNames.name_en"
