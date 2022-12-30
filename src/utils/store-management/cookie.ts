@@ -16,7 +16,11 @@ function isJsonString(str: string): boolean {
 export default {
   set: (key: string, value: any) => {
     value = typeof value == "object" ? JSON.stringify(value) : value;
-    document.cookie = `${key}=${value};path=/;domain=${BASE_URL_WITHOUT_PROTOCOL}`;
+
+    const now = new Date();
+    now.setDate(now.getDate() + 60);
+
+    document.cookie = `${key}=${value};path=/;domain=${BASE_URL_WITHOUT_PROTOCOL};expires=${now.toUTCString()}`;
   },
   get: (key: string) => {
     const name = key + "=";
@@ -39,8 +43,6 @@ export default {
     return null;
   },
   remove: (key: string) => {
-    document.cookie =
-      key +
-      `=;path=/;domain=${BASE_URL_WITHOUT_PROTOCOL};expires=Thu, 01 Jan 1970 00:00:01 GMT`;
+    document.cookie = `${key}=;path=/;domain=${BASE_URL_WITHOUT_PROTOCOL}`;
   },
 };
