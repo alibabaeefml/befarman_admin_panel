@@ -1,19 +1,25 @@
-<script setup>
-import { computed, ref } from "vue";
-import { useDisplay } from "vuetify/lib/framework.mjs";
-defineProps(["request", "archived"]);
-defineEmits(["editModal", "deleteModal"]);
-const actions = ref(false);
-
-const clientCarRequest = ref({ id: 515155 });
+<script setup lang="ts">
+import defaultThumb from "@/assets/Images/avatars/car-avatar.jpg";
+import { ref } from "vue";
+defineProps(["clientCarRequest", "archived"]);
+const actionsGroup = ref(false);
 </script>
 <template>
   <div>
-    <v-card class="border mt-3 text-center" min-height="200">
-      <v-card-text dir="rtl" class="ym">
+    <v-card class="border mt-3 text-center" min-height="300">
+      <v-card-text dir="rtl" :class="{ym:true,blured: actionsGroup }">
         <v-row class="align-center">
           <v-col cols="12" md="3" xs="12">
-            <v-img src="/src/assets/Images/bmw_x6.jpg" />
+            <v-img
+              style="border-radius: 10px"
+              :lazy-src="defaultThumb"
+              :src="
+                clientCarRequest.clientCar.thumbnail
+                  ? clientCarRequest.clientCar.thumbnail
+                  : defaultThumb
+              "
+              cover
+            />
             <div
               class="mt-2 pa-2 curved"
               :style="{ background: 'green', color: 'white' }"
@@ -24,24 +30,31 @@ const clientCarRequest = ref({ id: 515155 });
           </v-col>
           <v-col cols="12" md="1" sm="12">
             <div class="d-flex flex-column">
-              <div class="peTitle">پراید</div>
-              <div class="enSub">PRIDE</div>
+              <div class="peTitle">
+                {{ clientCarRequest.clientCar.car.name_fa }}
+              </div>
+              <div class="enSub">
+                {{ clientCarRequest.clientCar.car.name_en }}
+              </div>
             </div>
           </v-col>
           <v-col cols="12" md="4" sm="12">
             <v-row>
               <v-col cols="12" md="6">
                 <div class="d-flex justify-center flex-column">
-                  <div>مالک خودرو</div>
-                  <div class="peTitle">کاربر</div>
-                  <div class="enSub">09000000000</div>
+                  <div>اجاره دهنده</div>
+                  <div class="peTitle">
+                    {{ clientCarRequest.clientCar.user.name }}
+                  </div>
+                  <div class="enSub">
+                    {{ clientCarRequest.clientCar.user.phone }}
+                  </div>
                 </div>
               </v-col>
               <v-col cols="12" md="6">
                 <div class="d-flex justify-center flex-column">
-                  <div>درخواست دهنده</div>
-                  <div class="peTitle">کاربر</div>
-                  <div class="enSub">09000000000</div>
+                  <div>اجاره کننده</div>
+                  <div class="peTitle">{{ clientCarRequest.user.name }}</div>
                 </div>
               </v-col>
             </v-row>
@@ -77,30 +90,19 @@ const clientCarRequest = ref({ id: 515155 });
         </v-row>
       </v-card-text>
       <v-card-actions style="position: absolute; bottom: 0">
-        <v-btn color="primary" icon @click="actions = !actions">
+        <v-btn color="primary" icon @click="actionsGroup = !actionsGroup">
           <v-icon>{{
-            !actions ? "mdi-dots-vertical" : "mdi-menu-down"
+            !actionsGroup ? "mdi-dots-vertical" : "mdi-menu-down"
           }}</v-icon>
         </v-btn>
-        <div class="actionsGroup" v-if="actions">
-          <v-btn
-            v-if="!archived"
-            icon
-            color="primary"
-            variant="elevated"
-            @click="$emit('deleteModal')"
-          >
+        <div class="actionsGroup" v-if="actionsGroup">
+          <v-btn v-if="!archived" icon color="primary" variant="elevated">
             <v-icon>mdi-delete</v-icon>
             <v-tooltip activator="parent" location="right"
               >حذف درخواست</v-tooltip
             >
           </v-btn>
-          <v-btn
-            icon
-            color="black"
-            variant="elevated"
-            @click="$emit('editModal')"
-          >
+          <v-btn icon color="black" variant="elevated">
             <v-icon>mdi-pencil</v-icon>
             <v-tooltip activator="parent" location="left"
               >ویرایش درخواست</v-tooltip
@@ -121,7 +123,7 @@ const clientCarRequest = ref({ id: 515155 });
             >
           </v-btn>
           <v-btn
-            @click="$_openModal('evaluationInfo', clientCarRequest.id)"
+            
             icon
             color="green"
             variant="elevated"

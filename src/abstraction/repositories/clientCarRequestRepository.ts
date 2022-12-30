@@ -13,44 +13,45 @@ export default class ClientCarRequestRepository {
     }
     return null;
   }
-  async index(data: dynamicObject) {
-    const params: dynamicObject = setQueries(data);
-    const response = await axios.get(url("indexClientCarRequest"), params);
+  async index(data: {}) {
+    const params = setQueries(data);
+    const response = await axios.get(url("indexClientCarRequest", { params }));
     if ([200, 201].includes(response.status)) {
-      return getArrayClientCarRequest(response.data.data);
+      return getArrayClientCarRequest(response.data);
     }
     return null;
   }
-  async ownerDelivery(id: number) {
+  async ownerDelivery(clientCarRequestId: number, formData: dynamicObject) {
     const response = await axios.put(
-      url("ownerDeliveryClientCarRequest", { clientCarRequest: id })
+      url("ownerDeliveryClientCarRequest", { clientCarRequestId }),
+      formData
     );
     if ([200, 201].includes(response.status)) {
       return true;
     }
     return null;
   }
-  async userDelivery(id: number) {
+  async userDelivery(clientCarRequestId: number, formData: dynamicObject) {
     const response = await axios.put(
-      url("userDeliveryClientCarRequest", { clientCarRequest: id })
+      url("userDeliveryClientCarRequest", { clientCarRequestId }),
+      formData
     );
     if ([200, 201].includes(response.status)) {
       return true;
     }
     return null;
   }
-  async adminVerify(id: number) {
-    const response = await axios.put(
-      url("adminVerifyClientCarRequest", { clientCarRequest: id })
+  async adminVerify(clientCarRequestId: number, formData: dynamicObject) {
+    return await axios.put(
+      url("adminVerifyClientCarRequest", { clientCarRequestId }),
+      formData
     );
-    if ([200, 201].includes(response.status)) {
-      return true;
-    }
-    return null;
   }
-  async ownerVerify(id: number) {
+
+  async ownerVerify(clientCarRequestId: number, formData: dynamicObject) {
     const response = await axios.put(
-      url("ownerVerifyClientCarRequest", { clientCarRequest: id })
+      url("ownerVerifyClientCarRequest", { clientCarRequestId }),
+      formData
     );
     if ([200, 201].includes(response.status)) {
       return true;

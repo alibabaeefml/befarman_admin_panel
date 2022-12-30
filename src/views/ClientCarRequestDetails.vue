@@ -32,14 +32,14 @@ const md = computed(() => useDisplay().smAndUp.value);
             <v-row>
               <v-col cols="12" md="4">
                 <div class="d-flex justify-center flex-column">
-                  <div>مالک خودرو</div>
+                  <div>اجاره دهنده</div>
                   <div class="peTitle mt-1">کاربر</div>
                   <div class="enSub mt-1">09000000000</div>
                 </div>
               </v-col>
               <v-col cols="12" md="4">
                 <div class="d-flex justify-center flex-column">
-                  <div>درخواست دهنده</div>
+                  <div>اجاره کننده</div>
                   <div class="peTitle mt-1">کاربر</div>
                   <div class="enSub mt-1">09000000000</div>
                 </div>

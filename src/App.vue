@@ -2,7 +2,7 @@
 import TheToolbar from "@/components/Global/Toolbar/TheToolbar.vue";
 import { computed } from "vue";
 import { useRoute as route } from "vue-router";
-import {useModal} from "@/composables/modal/modal.ts";
+import { useModal } from "@/composables/modal/modal.ts";
 useModal();
 
 const currentPath = computed(() => route().path);
@@ -204,11 +204,11 @@ textarea {
   flex-wrap: wrap;
   animation: loadCardActions 0.2s forwards;
 }
-.v-card-text{
-  transition: .2s ease-in;
+.v-card-text {
+  transition: 0.2s;
 }
-.v-card-text.blured{
-filter: blur(5px);
+.v-card-text.blured {
+  filter: blur(5px);
 }
 .actionsGroup > * {
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5) !important;

@@ -1,8 +1,8 @@
 import { useModalStore } from "@/store/modal";
+import type { dynamicObject } from "@/types/common";
 import { getCurrentInstance } from "vue";
-
 export function useModal() {
-  const app = getCurrentInstance();
+  const app: any = getCurrentInstance() ;
   const modalStore = useModalStore();
   const { openModal, closeModal } = modalStore;
 
@@ -16,3 +16,5 @@ export function useModal() {
     closeModal();
   };
 }
+
+  

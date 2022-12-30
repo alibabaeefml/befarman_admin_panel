@@ -1,10 +1,13 @@
 import type { ClientCar } from "./clientCar";
 import type { ClientCarRequestStatus } from "./clientCarRequestStatus";
+import type { User } from "./user";
 export declare interface ClientCarRequest {
+  id: number;
   client_car_id: number;
   user_id: number;
   insurance_type_id: number;
   clientCar: ClientCar;
+  user: User;
   start_delivery_place: string;
   end_delivery_place: string;
   start_at: string;

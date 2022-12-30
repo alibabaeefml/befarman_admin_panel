@@ -32,13 +32,13 @@ const restoreCar = async () => {
     });
   }
 };
-const rentCarActions = ref(false);
+const actionsGroup = ref(false);
 </script>
 
 <template>
   <div>
     <v-card class="border mt-3 text-center" min-height="200">
-      <v-card-text class="ym">
+      <v-card-text :class="{ ym: true, blured: actionsGroup }">
         <v-row class="align-center">
           <v-col cols="12" md="3" xs="12" class="justify-center">
             <v-img
@@ -106,10 +106,10 @@ const rentCarActions = ref(false);
           v-if="!archived"
           color="primary"
           icon
-          @click="rentCarActions = !rentCarActions"
+          @click="actionsGroup = !actionsGroup"
         >
           <v-icon>{{
-            !rentCarActions ? "mdi-dots-vertical" : "mdi-menu-left"
+            !actionsGroup ? "mdi-dots-vertical" : "mdi-menu-left"
           }}</v-icon>
         </v-btn>
         <v-btn v-else color="orange" icon @click="restoreCar">
@@ -118,7 +118,7 @@ const rentCarActions = ref(false);
             >بازگشت خودرو</v-tooltip
           >
         </v-btn>
-        <div class="actionsGroup" v-if="rentCarActions">
+        <div class="actionsGroup" v-if="actionsGroup">
           <v-btn
             :to="{ name: 'clientCarDetails', params: { id: clientCar.id } }"
             color="secondary"
