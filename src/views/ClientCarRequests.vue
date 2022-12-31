@@ -3,7 +3,21 @@ import { ref } from "vue";
 import ClientCarRequestItem from "@components/ClientCarRequest/ClientCarRequestItem.vue";
 import ClientCarRequestFilter from "@components/ClientCarRequest/ClientCarRequestFilter.vue";
 import { useClientCarRequest } from "@/composables/clientCarRequest";
-
+import { notify } from "@kyvg/vue3-notification";
+notify({
+  group: "confirmation",
+  title: "تایید ادمین",
+  text: "این درخواست را تایید می نمایید؟",
+  data: {
+    clientCarRequestId: 651561,
+    colors: { 1: "#f3faf2", 2: "#3e8635" },
+    icon: "mdi-account-check",
+    callback: () => {
+      alert("وضعیت درخواست با موفقیت تایید ادمین گردید. ");
+    },
+  },
+  duration: -1,
+});
 const {
   indexClientCarRequest,
   // indexArchivedClientCarRequest,

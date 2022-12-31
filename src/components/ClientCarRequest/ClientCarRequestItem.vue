@@ -3,12 +3,13 @@ import defaultThumb from "@/assets/Images/avatars/car-avatar.jpg";
 import { ref } from "vue";
 defineProps(["clientCarRequest", "archived"]);
 const actionsGroup = ref(false);
+
 </script>
 <template>
   <div>
-    <v-card class="border mt-3 text-center" min-height="300">
-      <v-card-text dir="rtl" :class="{ym:true,blured: actionsGroup }">
-        <v-row class="align-center">
+    <v-card class="border mt-3 text-center" height="300">
+      <v-card-text dir="rtl" :class="{ ym: true, blured: actionsGroup }">
+        <v-row class="align-center d-flex">
           <v-col cols="12" md="3" xs="12">
             <v-img
               style="border-radius: 10px"
@@ -18,14 +19,19 @@ const actionsGroup = ref(false);
                   ? clientCarRequest.clientCar.thumbnail
                   : defaultThumb
               "
+              height="200"
               cover
             />
             <div
               class="mt-2 pa-2 curved"
-              :style="{ background: 'green', color: 'white' }"
+
+              :style="{
+                background: clientCarRequest.latestClientCarRequestStatus.color,
+                color: 'white',
+              }"
             >
-              <v-icon size="large">mdi-account-check</v-icon>
-              تایید توسط ادمین
+              <i :class="clientCarRequest.latestClientCarRequestStatus.icon" />
+              {{clientCarRequest.latestClientCarRequestStatus.name}}
             </div>
           </v-col>
           <v-col cols="12" md="1" sm="12">
@@ -122,12 +128,7 @@ const actionsGroup = ref(false);
               >جزئیات درخواست</v-tooltip
             >
           </v-btn>
-          <v-btn
-            
-            icon
-            color="green"
-            variant="elevated"
-          >
+          <v-btn icon color="green" variant="elevated">
             <v-icon color="white">mdi-receipt-text-check</v-icon>
             <v-tooltip activator="parent" location="right">صورت حساب</v-tooltip>
           </v-btn>

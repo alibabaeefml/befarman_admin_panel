@@ -1,8 +1,12 @@
-<script setup>
+<script setup lang="ts">
 import TheToolbar from "@/components/Global/Toolbar/TheToolbar.vue";
 import { computed } from "vue";
 import { useRoute as route } from "vue-router";
-import { useModal } from "@/composables/modal/modal.ts";
+import { useModal } from "@/composables/modal/modal";
+import { notify } from "@kyvg/vue3-notification";
+const closeNotification = (id: number) => {
+  notify.close(id);
+};
 useModal();
 
 const currentPath = computed(() => route().path);
@@ -14,7 +18,45 @@ const currentPath = computed(() => route().path);
       :style="{ marginTop: $vuetify.display.width < 1080 ? '60px' : 0 }"
     />
   </v-app>
-  <notifications position="bottom center" />
+  <notifications group="notification" position="bottom center" />
+  <notifications
+    class="confirmation"
+    group="confirmation"
+    position="bottom center"
+  >
+    <template #body="props">
+      <v-card
+        dir="rtl"
+        :style="{
+          backgroundColor: props.item.data.colors[1],
+          borderTop: 'solid 4px' + props.item.data.colors[2],
+        }"
+      >
+
+        <v-card-title>
+          <v-icon  :color="props.item.data.colors[2]">{{
+          props.item.data.icon
+        }}</v-icon>
+          {{ props.item.title }}
+        </v-card-title>
+        <v-card-text class="ym">
+          <p>{{ props.item.text }}</p>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn
+            class="xs-txt"
+            color="red"
+            @click="closeNotification(props.item.id)"
+          >
+            لغو
+          </v-btn>
+          <v-btn color="green" @click="props.item.data.callback()">
+            تایید
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </template> </notifications
+  >>
 </template>
 <style>
 /* fonts */
@@ -122,7 +164,7 @@ hr {
 input,
 span,
 textarea {
-  font-size: 18px !important;
+  font-size: 18px;
 }
 
 ::-webkit-scrollbar {
@@ -289,6 +331,9 @@ textarea {
   border-left: unset !important;
   border-right: 5px solid;
   text-align: right !important;
+}
+.confirmation span {
+  font-size: 15px;
 }
 
 .success {
