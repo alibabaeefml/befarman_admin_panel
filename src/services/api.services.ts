@@ -17,7 +17,7 @@ const ApiService = {
 
   setAuthHeader(token: string | null = null) {
     if (!token) {
-      token = StoreManagement.get("token");
+      token = StoreManagement.get("token", "cookie");
     }
     token === null ? localStorage.clear() : null;
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;

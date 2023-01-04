@@ -1,4 +1,4 @@
-import localStorage from "@/utils/store-management/localStorage";
+import storeManagement from "@/utils/store-management";
 import {
   createRouter,
   createWebHistory,
@@ -72,9 +72,9 @@ export default class RouteHandler {
 
   beforeLoad(router: Router): void {
     router.beforeEach((to: any, from: any, next: () => void) => {
-      if (!localStorage.get("user") && to.path !== "/login") {
+      if (!storeManagement.get("token", "cookie") && to.path !== "/login") {
         window.location.href = "/login";
-      } else if (localStorage.get("user") && to.path === "/login") {
+      } else if (storeManagement.get("user", "cookie") && to.path === "/login") {
         window.location.href = from.path;
       }
       this.setTitle(to);
