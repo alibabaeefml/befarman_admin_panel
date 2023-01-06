@@ -5,7 +5,7 @@ import ClientCarRequestFilter from "@components/ClientCarRequest/ClientCarReques
 import { useClientCarRequest } from "@/composables/clientCarRequest";
 import InfiniteScroll from "infinite-loading-vue3";
 import AdminVerification from "@/components/ClientCarRequest/ClientCarRequestAlert/AdminVerification.vue";
-import { notify } from "@kyvg/vue3-notification";
+import InvoiceInfo from "@/components/ClientCarRequest/ClientCarRequestInvoice/InvoiceInfo.vue";
 
 const {
   indexClientCarRequest,
@@ -81,5 +81,6 @@ const infiniteClientCarRequest = async () => {
       <v-icon color="white">mdi-plus</v-icon>
     </v-btn>
     <admin-verification />
+    <InvoiceInfo />
   </div>
 </template>

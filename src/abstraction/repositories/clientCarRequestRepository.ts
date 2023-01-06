@@ -1,6 +1,10 @@
 import axios from "axios";
 import url from "../url";
-import { getArrayClientCarRequest } from "../resources/clientCarRequestResource";
+
+import {
+  getArrayClientCarRequest,
+  getJsonClientCarRequest,
+} from "../resources/clientCarRequestResource";
 import { setQueries } from "@/utils/createQueriesObject";
 import type { dynamicObject } from "@/types/common";
 import type { ClientCarRequest } from "@/types/clientCarRequest";
@@ -42,6 +46,7 @@ export default class ClientCarRequestRepository {
     return null;
   }
   async adminVerify(clientCarRequestId: number, formData: dynamicObject) {
+    // not checking for response status => because error message from backend needed to be shown in notification
     return await axios.put(
       url("adminVerifyClientCarRequest", { clientCarRequestId }),
       formData
@@ -58,4 +63,5 @@ export default class ClientCarRequestRepository {
     }
     return null;
   }
+  
 }

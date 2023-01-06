@@ -145,7 +145,7 @@ const actionsGroup = ref(false);
               >جزئیات درخواست</v-tooltip
             >
           </v-btn>
-          <v-btn icon color="green" variant="elevated">
+          <v-btn icon color="green" variant="elevated" @click="$_openModal('invoiceInfo',clientCarRequest.id)">
             <v-icon color="white">mdi-receipt-text-check</v-icon>
             <v-tooltip activator="parent" location="right">صورت حساب</v-tooltip>
           </v-btn>

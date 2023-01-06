@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { notify } from "@kyvg/vue3-notification";
 import { useClientCarRequest } from "@/composables/clientCarRequest";
-import type { dynamicObject } from "@/types/common";
 const closeNotification = (id: number) => {
   notify.close(id);
 };
