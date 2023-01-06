@@ -1,9 +1,25 @@
 <script setup lang="ts">
 import defaultThumb from "@/assets/Images/avatars/car-avatar.jpg";
-import { ref } from "vue";
-defineProps(["clientCarRequest", "archived"]);
-const actionsGroup = ref(false);
 
+import type { dynamicObject } from "@/types/common";
+import { notify } from "@kyvg/vue3-notification";
+import { ref } from "vue";
+const props = defineProps(["clientCarRequest", "archived"]);
+const requestChange = async (request: dynamicObject) => {
+  if (request.latestClientCarRequestStatus.id === 1) {
+    notify({
+      group: "verification",
+      title: "تایید ادمین",
+      text: "این درخواست را تایید می نمایید؟",
+      data: {
+        requestStatus: request.latestClientCarRequestStatus,
+        request: request,
+      },
+      duration: -1,
+    });
+  }
+};
+const actionsGroup = ref(false);
 </script>
 <template>
   <div>
@@ -24,14 +40,15 @@ const actionsGroup = ref(false);
             />
             <div
               class="mt-2 pa-2 curved"
-
+              @click="requestChange(clientCarRequest)"
               :style="{
                 background: clientCarRequest.latestClientCarRequestStatus.color,
                 color: 'white',
+                cursor: 'pointer',
               }"
             >
               <i :class="clientCarRequest.latestClientCarRequestStatus.icon" />
-              {{clientCarRequest.latestClientCarRequestStatus.name}}
+              {{ clientCarRequest.latestClientCarRequestStatus.name }}
             </div>
           </v-col>
           <v-col cols="12" md="1" sm="12">

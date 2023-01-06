@@ -19,44 +19,6 @@ const currentPath = computed(() => route().path);
     />
   </v-app>
   <notifications group="notification" position="bottom center" />
-  <notifications
-    class="confirmation"
-    group="confirmation"
-    position="bottom center"
-  >
-    <template #body="props">
-      <v-card
-        dir="rtl"
-        :style="{
-          backgroundColor: props.item.data.colors[1],
-          borderTop: 'solid 4px' + props.item.data.colors[2],
-        }"
-      >
-
-        <v-card-title>
-          <v-icon  :color="props.item.data.colors[2]">{{
-          props.item.data.icon
-        }}</v-icon>
-          {{ props.item.title }}
-        </v-card-title>
-        <v-card-text class="ym">
-          <p>{{ props.item.text }}</p>
-        </v-card-text>
-        <v-card-actions>
-          <v-btn
-            class="xs-txt"
-            color="red"
-            @click="closeNotification(props.item.id)"
-          >
-            لغو
-          </v-btn>
-          <v-btn color="green" @click="props.item.data.callback()">
-            تایید
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </template> </notifications
-  >>
 </template>
 <style>
 /* fonts */
@@ -162,7 +124,6 @@ hr {
 }
 
 input,
-span,
 textarea {
   font-size: 18px;
 }
@@ -323,7 +284,6 @@ textarea {
 
 /* vue notification */
 .vue-notification-template {
-  margin: 0 5px 5px;
   padding: 10px;
   font-size: 12px;
   color: #ffffff;
@@ -331,9 +291,10 @@ textarea {
   border-left: unset !important;
   border-right: 5px solid;
   text-align: right !important;
+  direction: rtl;
 }
-.confirmation span {
-  font-size: 15px;
+.vue-notification-group{
+  bottom: 30px!important;
 }
 
 .success {

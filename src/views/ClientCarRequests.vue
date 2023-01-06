@@ -3,21 +3,10 @@ import { ref } from "vue";
 import ClientCarRequestItem from "@components/ClientCarRequest/ClientCarRequestItem.vue";
 import ClientCarRequestFilter from "@components/ClientCarRequest/ClientCarRequestFilter.vue";
 import { useClientCarRequest } from "@/composables/clientCarRequest";
+import InfiniteScroll from "infinite-loading-vue3";
+import AdminVerification from "@/components/ClientCarRequest/ClientCarRequestAlert/AdminVerification.vue";
 import { notify } from "@kyvg/vue3-notification";
-notify({
-  group: "confirmation",
-  title: "تایید ادمین",
-  text: "این درخواست را تایید می نمایید؟",
-  data: {
-    clientCarRequestId: 651561,
-    colors: { 1: "#f3faf2", 2: "#3e8635" },
-    icon: "mdi-account-check",
-    callback: () => {
-      alert("وضعیت درخواست با موفقیت تایید ادمین گردید. ");
-    },
-  },
-  duration: -1,
-});
+
 const {
   indexClientCarRequest,
   // indexArchivedClientCarRequest,
@@ -88,15 +77,9 @@ const infiniteClientCarRequest = async () => {
         </v-window>
       </v-card-text>
     </v-card>
-    <v-btn
-      size="x-large"
-      class="add-btn position-fixed"
-      @click="$_openModal('add-car')"
-      icon
-      color="secondary"
-    >
+    <v-btn size="x-large" class="add-btn position-fixed" icon color="secondary">
       <v-icon color="white">mdi-plus</v-icon>
     </v-btn>
-    <AddCar />
+    <admin-verification />
   </div>
 </template>
