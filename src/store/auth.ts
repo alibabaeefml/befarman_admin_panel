@@ -35,7 +35,7 @@ export const useAuthStore = defineStore("auth", () => {
       return;
     }
     router.go(0);
-    return 
+    return;
   };
 
   const logout = () => {

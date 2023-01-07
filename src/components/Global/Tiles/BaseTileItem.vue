@@ -29,7 +29,9 @@ defineProps([
         }}</span>
         <span
           :class="{ 'xs-txt': $vuetify.display.xs, mm: true }"
-          :style="{ letterSpacing: $vuetify.display.width < 280 ? '0px' : '10px' }"
+          :style="{
+            letterSpacing: $vuetify.display.width < 280 ? '0px' : '10px',
+          }"
         >
           {{ sub }}
         </span>

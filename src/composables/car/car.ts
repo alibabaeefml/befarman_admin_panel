@@ -38,7 +38,7 @@ export function useCar() {
   };
 
   const deleteCar = async (carId: number) => {
-    let response = await repository.delete(carId);
+    const response = await repository.delete(carId);
     alert(response.status);
   };
 

@@ -50,14 +50,19 @@ const urls: dynamicObject = {
   unverifyUser: "admin/users/:user/unverify",
 
   // request
-  registerClientCarRequest:"client-car-requests",
+  registerClientCarRequest: "client-car-requests",
   indexClientCarRequest: "admin/client-car-requests",
-  ownerDeliveryClientCarRequest: "admin/client-car-requests/:clientCarRequestId/delivery-owner",
-  userDeliveryClientCarRequest: "admin/client-car-requests/:clientCarRequestId/delivery-user",
-  adminVerifyClientCarRequest: "admin/client-car-requests/:clientCarRequestId/check-admin",
-  ownerVerifyClientCarRequest: "admin/client-car-requests/:clientCarRequestId/check-owner",
-  showClientCarRequestInvoice:"admin/client-car-requests/:clientCarRequestId/invoice",
-  updateClientCarRequestInvoice:"admin/invoices/:invoiceId",
+  ownerDeliveryClientCarRequest:
+    "admin/client-car-requests/:clientCarRequestId/delivery-owner",
+  userDeliveryClientCarRequest:
+    "admin/client-car-requests/:clientCarRequestId/delivery-user",
+  adminVerifyClientCarRequest:
+    "admin/client-car-requests/:clientCarRequestId/check-admin",
+  ownerVerifyClientCarRequest:
+    "admin/client-car-requests/:clientCarRequestId/check-owner",
+  showClientCarRequestInvoice:
+    "admin/client-car-requests/:clientCarRequestId/invoice",
+  updateClientCarRequestInvoice: "admin/invoices/:invoiceId",
   // auth
   sendCode: "login",
   logout: "logout",

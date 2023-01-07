@@ -4,7 +4,7 @@ import type { dynamicObject } from "@/types/common";
 import { getJsonUser, getArrayUsers, setData } from "../resources/userResource";
 import { setQueries } from "@/utils/createQueriesObject";
 export default class UserRepository {
-  async index(data: dynamicObject) {    
+  async index(data: dynamicObject) {
     const params = setQueries(data);
     const response = await axios.get(url("indexUser"), { params });
     return getArrayUsers(response.data);

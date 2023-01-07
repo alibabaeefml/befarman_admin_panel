@@ -25,4 +25,4 @@ export declare interface Invoice {
   car_request_id: number;
   user_id: number;
   closed: boolean;
-};
+}

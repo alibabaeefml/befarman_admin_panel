@@ -47,7 +47,7 @@ export const getJsonUser = (data: dynamicObject) => ({
   comments: getArrayComment(data.comments ?? []),
 });
 
-export const setData = (data:dynamicObject) => ({
+export const setData = (data: dynamicObject) => ({
   first_name: data.first_name,
   last_name: data.last_name,
   phone: data.phone,

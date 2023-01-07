@@ -18,9 +18,8 @@ const currentPath = computed(() => route().path);
       :style="{ marginTop: $vuetify.display.width < 1080 ? '60px' : 0 }"
     />
     <notifications group="notification" position="bottom center" />
-    <div style="width:100%;height:200px"></div>
+    <div style="width: 100%; height: 200px"></div>
   </v-app>
-  
 </template>
 <style>
 /* fonts */
@@ -295,8 +294,8 @@ textarea {
   text-align: right !important;
   direction: rtl;
 }
-.vue-notification-group{
-  bottom: 30px!important;
+.vue-notification-group {
+  bottom: 30px !important;
 }
 
 .success {

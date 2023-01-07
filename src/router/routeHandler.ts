@@ -74,7 +74,10 @@ export default class RouteHandler {
     router.beforeEach((to: any, from: any, next: () => void) => {
       if (!storeManagement.get("token", "cookie") && to.path !== "/login") {
         window.location.href = "/login";
-      } else if (storeManagement.get("user", "cookie") && to.path === "/login") {
+      } else if (
+        storeManagement.get("user", "cookie") &&
+        to.path === "/login"
+      ) {
         window.location.href = from.path;
       }
       this.setTitle(to);

@@ -49,42 +49,43 @@ const infiniteUser = async () => {
 
 <template>
   <div>
-    
-  <UserFilter />
-  <v-card>
-    <v-tabs v-model="tab" color="secondary" fixed-tabs>
-      <v-tab value="archived">کاربران حذف شده</v-tab>
-      <v-tab value="active">کاربران فعال</v-tab>
-    </v-tabs>
-    <v-card-text>
-      <v-window v-model="tab">
-        <v-window-item value="archived">
-          <UserItem
-            v-for="user of getArchivedUsers"
-            :key="user.id"
-            :user="user"
-          />
-        </v-window-item>
-        <v-window-item value="active">
-          <infinite-scroll @infinite-scroll="infiniteUser" :noResult="noResult">
-            <UserItem v-for="user of getUsers" :key="user.id" :user="user" />
-          </infinite-scroll>
-        </v-window-item>
-      </v-window>
-    </v-card-text>
-  </v-card>
-  <v-btn
-    size="x-large"
-    class="add-btn"
-    icon
-    color="secondary"
-    :to="{ name: 'addUser' }"
-  >
-    <v-icon color="white">mdi-plus</v-icon>
-  </v-btn>
-  <AcceptUserArchive />
-  <UserComments />
-  <SendMessage />
-
+    <UserFilter />
+    <v-card>
+      <v-tabs v-model="tab" color="secondary" fixed-tabs>
+        <v-tab value="archived">کاربران حذف شده</v-tab>
+        <v-tab value="active">کاربران فعال</v-tab>
+      </v-tabs>
+      <v-card-text>
+        <v-window v-model="tab">
+          <v-window-item value="archived">
+            <UserItem
+              v-for="user of getArchivedUsers"
+              :key="user.id"
+              :user="user"
+            />
+          </v-window-item>
+          <v-window-item value="active">
+            <infinite-scroll
+              @infinite-scroll="infiniteUser"
+              :noResult="noResult"
+            >
+              <UserItem v-for="user of getUsers" :key="user.id" :user="user" />
+            </infinite-scroll>
+          </v-window-item>
+        </v-window>
+      </v-card-text>
+    </v-card>
+    <v-btn
+      size="x-large"
+      class="add-btn"
+      icon
+      color="secondary"
+      :to="{ name: 'addUser' }"
+    >
+      <v-icon color="white">mdi-plus</v-icon>
+    </v-btn>
+    <AcceptUserArchive />
+    <UserComments />
+    <SendMessage />
   </div>
-  </template>
+</template>

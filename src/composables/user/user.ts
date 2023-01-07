@@ -10,7 +10,7 @@ export function useUser() {
   const repository = new UserRepository();
 
   const indexUser = async (paginate: Paginate) => {
-    const { data, pagination } = await repository.index({paginate});
+    const { data, pagination } = await repository.index({ paginate });
     store.$patch((state) => {
       state.paginate = pagination;
       state.users = getUsers.value.concat(data);
@@ -19,7 +19,7 @@ export function useUser() {
   };
 
   const indexArchivedUser = async (paginate: Paginate) => {
-    const { data, pagination } = await repository.indexArchived({paginate});
+    const { data, pagination } = await repository.indexArchived({ paginate });
     store.$patch((state) => {
       state.paginate = pagination;
       state.archivedUsers = getArchivedUsers.value.concat(data);
