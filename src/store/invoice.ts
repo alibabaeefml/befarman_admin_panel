@@ -8,8 +8,8 @@ export const useInvoiceStore = defineStore("invoice", () => {
   const showInvoice = async (clientCarRequestId: number) => {
     return await repository.show(clientCarRequestId);
   };
-  const updateInvoice = async (clientCarRequestId: number, data: dynamicObject) => {
-    return await repository.update(clientCarRequestId, data);
+  const updateInvoice = async (invoiceId: number, data: dynamicObject) => {
+    return await repository.update(invoiceId, data);
   };
 
   return { showInvoice, updateInvoice };

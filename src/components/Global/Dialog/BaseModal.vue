@@ -67,7 +67,6 @@ onBeforeUnmount(() => emitModal(false));
         <base-header :icon="icon" :title="title" :subtitle="subtitle" />
       </v-card-title>
       <slot :modal="modal" :data="data.data"></slot>
-      {{ defaultWidth }}
     </v-card>
   </v-dialog>
 </template>

@@ -1,23 +1,23 @@
 <script setup lang="ts">
 import BaseModal from "@/components/Global/Dialog/BaseModal.vue";
 import InvoiceItem from "./InvoiceItem.vue";
-// import EvaluationEdit from "@/components/ClientCar/EvaluationEdit.vue";
 import { ref } from "vue";
 import { useModalStore } from "@/store/modal";
 import type { dynamicObject } from "@/types/common";
 import { useInvoiceStore } from "@/store/invoice";
+import InvoiceEdit from "./InvoiceEdit.vue";
 
 const modalStore = useModalStore();
 const { isModal } = modalStore;
 
 const invoice: dynamicObject = ref({});
 const clientCarRequest: dynamicObject = ref({});
-const verified: any = ref(null);
+// const verified: any = ref(null);
 const openModal = async (clientCarRequestId: number) => {
   if (clientCarRequestId) {
     clientCarRequest.value["id"] = clientCarRequestId;
     invoice.value = await useInvoiceStore().showInvoice(clientCarRequestId);
-    verified.value = invoice.value.verified == 1;
+    // verified.value = invoice.value.verified == 1;
   }
 };
 </script>
@@ -73,15 +73,10 @@ const openModal = async (clientCarRequestId: number) => {
         class="mt-8"
         block
         prepend-icon="mdi-pencil"
-        @click="
-          $_openModal('InvoiceEdit', {
-            data: invoice,
-            clientCarId: clientCarRequest.id,
-          })
-        "
+        @click="$_openModal('invoiceEdit', invoice)"
         >ویرایش</v-btn
       >
-      <!-- <EvaluationEdit v-if="isModal('clientCarEvaluationEdit')" /> -->
+      <InvoiceEdit v-if="isModal('invoiceEdit')" />
     </v-card-actions>
   </base-modal>
 </template>

@@ -17,8 +17,10 @@ const currentPath = computed(() => route().path);
     <RouterView
       :style="{ marginTop: $vuetify.display.width < 1080 ? '60px' : 0 }"
     />
+    <notifications group="notification" position="bottom center" />
+    <div style="width:100%;height:200px"></div>
   </v-app>
-  <notifications group="notification" position="bottom center" />
+  
 </template>
 <style>
 /* fonts */

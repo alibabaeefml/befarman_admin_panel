@@ -17,11 +17,14 @@ export default class InvoiceRepository {
       return getJsonInvoice(response.data.data);
     }
   }
-  async update(clientCarRequestId: number, formData: dynamicObject) {
+  async update(invoiceId: number, formData: dynamicObject) {
     const response = await axios.put(
-      url("updateClientCarRequestInvoice", { clientCarRequestId }),
+      url("updateClientCarRequestInvoice", { invoiceId }),
       setInvoiceData(formData)
     );
-    console.log(response);
+    if ([200, 201].includes(response.status)) {
+      return getJsonInvoice(response.data.data);
+    }
+    return null;
   }
 }
