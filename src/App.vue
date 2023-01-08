@@ -53,25 +53,7 @@ const currentPath = computed(() => route().path);
   src: url(./assets/Fonts/Montserrat-Bold.ttf);
 }
 
-/* animations */
-@keyframes Notification {
-  0% {
-    bottom: -100px;
-    opacity: 0;
-  }
-  15% {
-    bottom: 100px;
-    opacity: 1;
-  }
-  70% {
-    bottom: 100px;
-    opacity: 1;
-  }
-  100% {
-    bottom: -100px;
-    opacity: 0;
-  }
-}
+
 @keyframes loadCardActions {
   from {
     opacity: 0;
@@ -229,17 +211,6 @@ textarea {
   animation: rotateX 0.2s;
 }
 
-.notification {
-  position: fixed;
-  direction: rtl;
-  opacity: 0;
-  width: fit-content;
-  border-radius: 10px;
-  box-shadow: lightgrey -1px 7px 11px;
-  z-index: 999999;
-  animation: Notification 3s;
-}
-
 /* vuetify classes */
 
 .v-list {
@@ -294,8 +265,10 @@ textarea {
   text-align: right !important;
   direction: rtl;
 }
+
 .vue-notification-group {
   bottom: 30px !important;
+  box-shadow: #bebebe4a 0px 0px 10px!important;
 }
 
 .success {

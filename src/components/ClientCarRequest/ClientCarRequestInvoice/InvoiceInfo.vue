@@ -51,6 +51,7 @@ const openModal = async (clientCarRequestId: number) => {
         :value="invoice.delivery_at_the_place_of_return"
       />
       <InvoiceItem name_fa="تخفیف" :value="invoice.discount" />
+      <InvoiceItem name_fa="کارت اعتباری" :value="invoice.credit_card" />
       <InvoiceItem name_fa="روز اضافی" :value="invoice.extra_day" />
       <InvoiceItem name_fa="ساعت اضافی" :value="invoice.extra_hours" />
       <InvoiceItem name_fa="کیلومتر اضافی" :value="invoice.extra_kilometers" />

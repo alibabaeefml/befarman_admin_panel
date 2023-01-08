@@ -20,9 +20,10 @@ export declare interface Invoice {
   delivery_at_the_place_of_return: number;
   tax: number;
   discount: number;
-  discount_id: null;
+  discount_id: null | number;
+  credit_card: number;
   total_amount: number;
   car_request_id: number;
   user_id: number;
-  closed: boolean;
+  closed: boolean | null;
 }
