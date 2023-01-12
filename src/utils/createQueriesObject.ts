@@ -36,10 +36,10 @@ export const setQueries = ({
 };
 
 export const setPagination = (paginate: dynamicObject) => ({
-  page: paginate.current_page,
-  pageStop: paginate.to,
-  pageStart: paginate.from,
-  pageCount: paginate.last_page,
-  itemsLength: paginate.total,
-  itemsPerPage: paginate.per_page,
+  page: paginate?.current_page,
+  pageStop: paginate?.to,
+  pageStart: paginate?.from,
+  pageCount: paginate?.last_page,
+  itemsLength: paginate?.total,
+  itemsPerPage: paginate?.per_page,
 });

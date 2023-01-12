@@ -22,6 +22,7 @@ const changeStatus = async (id) => {
 <template>
   <base-modal
     name="clientCarStatus"
+    :max-width="$vuetify.display.smAndDown ? null : 600"
     title="تغییر وضعیت خودرو"
     subtitle="CLIENT CAR STATUS CHANGE"
     @open="openModal"

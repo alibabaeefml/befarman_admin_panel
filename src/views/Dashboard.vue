@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import BaseTileItem from "@/components/Global/Tiles/BaseTileItem.vue";
 import { useClientCar } from "@/composables/clientCar/clientCar";
 import { ref } from "vue";

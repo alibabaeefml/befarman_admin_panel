@@ -10,7 +10,7 @@ export function useClientCar() {
   const repository = new ClientCarRepository();
 
   const { getClientCars, getArchivedClientCars, paginate } = storeToRefs(store);
-  const indexClientCar = async (paginate: Paginate) => {
+  const indexClientCar = async (paginate: {}) => {
     const { data, pagination } = await repository.index(paginate);
     store.$patch((state) => {
       state.paginate = pagination;
@@ -19,7 +19,7 @@ export function useClientCar() {
 
     return data;
   };
-  const indexArchivedClientCar = async (paginate: Paginate) => {
+  const indexArchivedClientCar = async (paginate: {}) => {
     const { data, pagination } = await repository.indexArchived(paginate);
     store.$patch((state) => {
       state.paginate = pagination;

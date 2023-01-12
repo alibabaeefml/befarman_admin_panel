@@ -5,13 +5,13 @@ import { getJsonClientCarRequestStatus } from "./clientCarRequestStatusResource"
 
 export function getArrayClientCarRequest({ data, meta }: dynamicObject) {
   const pagination = setPagination(meta);
-  data = data.map((clientCarRequest: ClientCarRequest) =>
+  data = data.map((clientCarRequest: dynamicObject) =>
     getJsonClientCarRequest(clientCarRequest)
   );
   return { data, pagination };
 }
 
-export const getJsonClientCarRequest = (data: ClientCarRequest) => ({
+export const getJsonClientCarRequest = (data: dynamicObject) => ({
   id: data.id,
   client_car_id: data.client_car_id,
   user_id: data.user_id,

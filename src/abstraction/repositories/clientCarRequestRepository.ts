@@ -3,11 +3,10 @@ import url from "../url";
 
 import {
   getArrayClientCarRequest,
-  getJsonClientCarRequest,
 } from "../resources/clientCarRequestResource";
 import { setQueries } from "@/utils/createQueriesObject";
 import type { dynamicObject } from "@/types/common";
-import type { ClientCarRequest } from "@/types/clientCarRequest";
+
 
 export default class ClientCarRequestRepository {
   async register(data: dynamicObject) {

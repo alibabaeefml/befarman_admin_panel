@@ -109,8 +109,8 @@ hr {
 input,
 textarea {
   font-size: 18px;
+  width: max-content;
 }
-
 ::-webkit-scrollbar {
   width: 10px;
 }

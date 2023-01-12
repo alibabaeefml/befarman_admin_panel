@@ -27,6 +27,7 @@ const submitForm = async () => {
   <base-modal
     name="clientCarEvaluationEdit"
     @open="openModal"
+    :max-width="$vuetify.display.smAndDown ? null : 600"
     title="ویرایش ارزیابی خودرو"
     subtitle="Edit Car Evaluation"
     icon="mdi-magnify-scan"
@@ -146,21 +147,15 @@ const submitForm = async () => {
         >
         </v-text-field>
       </v-card-text>
-      <v-card-actions style="background-color: #ededed" class="justify-center">
+      <v-card-actions style="background-color: #ededed" class="flex-column justify-start">
         <v-checkbox
           color="green"
           style="font-weight: bold"
           label="تایید ادمین"
           v-model="form.verified"
-        />
-
-        <v-btn
-          class="mt-10"
-          type="submit"
-          variant="elevated"
-          color="primary"
           block
-        >
+        ></v-checkbox>
+        <v-btn type="submit" variant="elevated" color="primary" block>
           ذخیره تغییرات
           <v-icon color="white">mdi-check</v-icon>
         </v-btn>

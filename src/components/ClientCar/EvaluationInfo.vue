@@ -24,7 +24,7 @@ const openModal = async (clientCarId) => {
 <template>
   <base-modal
     name="evaluationInfo"
-    :width="$vuetify.display.xs ? $vuetify.display.width - 20 : 500"
+    :max-width="$vuetify.display.smAndDown ? null : 600"
     @open="openModal"
     title="ارزیابی خودرو"
     subtitle="Car Evaluation"

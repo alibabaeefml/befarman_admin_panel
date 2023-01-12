@@ -4,11 +4,17 @@ import { ref, watchEffect } from "vue";
 import { useClientCar } from "@/composables/clientCar/clientCar";
 import { useClientCarStatus } from "@/composables/clientCarStatus/clientCarStatus";
 import { notify } from "@kyvg/vue3-notification";
+// import type { ClientCarStatus } from "@/types/status";
 const props = defineProps(["clientCar", "archived", "banner"]);
 const { loadStatuses, getClientCarStatuses } = useClientCarStatus();
 
 loadStatuses();
-const status = ref({ color: "", id: "", name_fa: "", icon: "" });
+const status = ref({
+  color: "",
+  id: "",
+  name_fa: "",
+  icon: "",
+});
 
 watchEffect(() => {
   status.value = getClientCarStatuses.value.find(

@@ -11,7 +11,6 @@ import {
 import { getJson as getJsonBrand } from "./brandResource";
 import { getJsonEvaluation } from "./evaluationResource";
 import { getArrayComment } from "./commentResource";
-import { getArrayClientCarRequest } from "./clientCarRequestResource";
 import { getArrayMedia } from "./mediaResource";
 import type { dynamicObject } from "@/types/common";
 import type { ClientCar } from "@/types/clientCar";
@@ -71,7 +70,7 @@ export const getJson = (data: dynamicObject) => ({
   color: getJsonColor(data.color ? data.color : {}),
   evaluation: getJsonEvaluation(data.evaluation ? data.evaluation : {}),
   comments: getArrayComment(data.comments ? data.comments : []),
-  requests: getArrayClientCarRequest(data.requests ? data.requests : []),
+  requests: data.requests ? data.requests : [],
   images: getArrayMedia(data.images ? data.images : []),
   certificates: getArrayMedia(data.certificates ? data.certificates : []),
   clientCarStatus: getJsonClientCarStatus(

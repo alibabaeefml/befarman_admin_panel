@@ -23,8 +23,8 @@ const {
 
 const tab = ref("active");
 
-indexClientCar();
-indexArchivedClientCar();
+indexClientCar({});
+indexArchivedClientCar({});
 // infinite loading
 const noResult = ref(false);
 let loadingData = false;
@@ -58,8 +58,8 @@ const infiniteClientCar = async () => {
     <ClientCarFilter :archived="tab" />
     <v-card
       dir="rtl"
-      :title="$route.meta.title"
-      :subtitle="$route.name"
+      :title:any="$route.meta.title"
+      :subtitle:any="$route.name"
       prepend-icon="mdi-car"
     >
       <v-tabs v-model="tab" color="secondary" fixed-tabs>
@@ -101,7 +101,7 @@ const infiniteClientCar = async () => {
         <v-icon color="white">mdi-plus</v-icon>
       </v-btn>
     </router-link>
-    <clientCarStatus />
+    <ClientCarStatus />
     <AcceptCarArchive />
     <ClientCarComments />
     <EvaluationInfo v-if="isModal('evaluationInfo')" />
