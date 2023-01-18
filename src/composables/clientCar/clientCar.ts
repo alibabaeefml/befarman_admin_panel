@@ -3,7 +3,7 @@ import { useClientCarStore } from "@/store/clientCar";
 import ClientCarRepository from "@/abstraction/repositories/clientCarRepository";
 import type { dynamicObject } from "@/types/common";
 import type { ClientCar } from "@/types/clientCar";
-import type { Paginate } from "@/types/paginate";
+
 
 export function useClientCar() {
   const store = useClientCarStore();

@@ -95,5 +95,20 @@ getClientCarTotal();
         </router-link>
       </v-col>
     </v-row>
+    <v-row no-gutters>
+      <v-col class="" cols="12" lg="12" xl="12">
+        <router-link class="link" :to="{ name: 'discounts' }">
+          <BaseTileItem
+            background="#fff9f8"
+            color="red"
+            icon="brightness-percent"
+            txt="تخفیف ها"
+            sub="Discounts"
+            :badgeNo="'120'"
+            :badge-txt="'تخفیف'"
+          />
+        </router-link>
+      </v-col>
+    </v-row>
   </v-container>
 </template>

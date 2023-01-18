@@ -63,6 +63,13 @@ const urls: dynamicObject = {
   showClientCarRequestInvoice:
     "admin/client-car-requests/:clientCarRequestId/invoice",
   updateClientCarRequestInvoice: "admin/invoices/:invoiceId",
+  // Discounts
+  indexDiscount:"admin/discounts",
+  storeDiscount:"admin/discounts",
+  updateDiscount:"admin/discounts/:discountId",
+  deleteDiscount:"admin/discounts/:discountId",
+  indexCreditCard:"admin/discounts/credit-card",
+  storeCreditCard:"admin/discounts/credit",
   // auth
   sendCode: "login",
   logout: "logout",

@@ -174,6 +174,16 @@ const paths: Path[] = [
       title_en: "Sms Management",
     },
   },
+  {
+    path: "/discounts",
+    name: "discounts",
+    view: "Discounts",
+    meta: {
+      auth: true,
+      title: "تخفیف ها",
+      title_en: "Discounts",
+    },
+  },
 ];
 
 export default paths;

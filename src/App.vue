@@ -3,10 +3,6 @@ import TheToolbar from "@/components/Global/Toolbar/TheToolbar.vue";
 import { computed } from "vue";
 import { useRoute as route } from "vue-router";
 import { useModal } from "@/composables/modal/modal";
-import { notify } from "@kyvg/vue3-notification";
-const closeNotification = (id: number) => {
-  notify.close(id);
-};
 useModal();
 
 const currentPath = computed(() => route().path);
