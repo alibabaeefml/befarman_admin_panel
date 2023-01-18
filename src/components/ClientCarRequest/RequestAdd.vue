@@ -6,9 +6,6 @@ defineProps(["dialog", "add"]);
 </script>
 <template>
   <BaseModal
-    :dialog="dialog"
-    :title="add ? 'اضافه کردن درخواست' : 'ویرایش درخواست'"
-    :subtitle="add ? 'ADD NEW REQUEST' : 'EDIT REQUEST'"
     icon="mdi-car-side"
     @toggleModal="$emit('toggleModal')"
   >

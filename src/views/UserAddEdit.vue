@@ -52,7 +52,8 @@ const banks = ref([
 </script>
 
 <template>
-  <v-card
+  <div>
+    <v-card
     dir="rtl"
     class="ym"
     :title="$route.meta.title"
@@ -321,4 +322,6 @@ const banks = ref([
     <v-icon>mdi-arrow-left</v-icon>
     <v-tooltip activator="parent">بازگشت</v-tooltip>
   </v-btn>
+  </div>
+  
 </template>

@@ -1,6 +1,7 @@
 <script setup></script>
 
 <template>
+<div>
   <v-card dir="rtl" class="ma-4 yl" color="secondary">
     <v-card-text>
       <v-row class="align-center text-center">
@@ -17,4 +18,5 @@
       </v-row>
     </v-card-text>
   </v-card>
+</div>
 </template>

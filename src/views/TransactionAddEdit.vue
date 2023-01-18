@@ -1,7 +1,8 @@
 <script setup></script>
 
 <template>
-  <v-card
+  <div>
+    <v-card
     dir="rtl"
     class="ma-4 ym"
     :title="$route.meta.title"
@@ -94,4 +95,6 @@
     <v-icon>mdi-arrow-left</v-icon>
     <v-tooltip activator="parent">بازگشت</v-tooltip>
   </v-btn>
+  </div>
+
 </template>

@@ -4,6 +4,8 @@ import SmsItem from "@components/Sms/SmsItem.vue";
 </script>
 
 <template>
-  <SmsFilter />
-  <SmsItem v-for="sms of 5" :key="sms.id" :sms="sms" />
+  <div>
+    <SmsFilter />
+    <SmsItem v-for="sms of 5" :key="sms.id" :sms="sms" />
+  </div>
 </template>
