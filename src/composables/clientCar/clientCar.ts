@@ -1,24 +1,30 @@
 import { storeToRefs } from "pinia";
 import { useClientCarStore } from "@/store/clientCar";
 import ClientCarRepository from "@/abstraction/repositories/clientCarRepository";
-import type { dynamicObject } from "@/types/common";
 import type { ClientCar } from "@/types/clientCar";
-import type { Paginate } from "@/types/paginate";
 
 export function useClientCar() {
   const store = useClientCarStore();
   const repository = new ClientCarRepository();
 
   const { getClientCars, getArchivedClientCars, paginate } = storeToRefs(store);
-  const indexClientCar = async (paginate: {}) => {
-    const { data, pagination } = await repository.index(paginate);
+
+  const indexClientCar = async (dataQuery: {}) => {
+    
+    const filters = store.clientCarFilters;
+
+    dataQuery = {...dataQuery, ...{filters}};
+    
+    const { data, pagination } = await repository.index(dataQuery);
+
     store.$patch((state) => {
       state.paginate = pagination;
-      state.clientCars = getClientCars.value.concat(data);
+      state.clientCars = pagination.page == 1 ? data : getClientCars.value.concat(data);
     });
 
     return data;
   };
+
   const indexArchivedClientCar = async (paginate: {}) => {
     const { data, pagination } = await repository.indexArchived(paginate);
     store.$patch((state) => {
@@ -27,6 +33,7 @@ export function useClientCar() {
     });
     return data;
   };
+
   const updateClientCar = async (
     clientCarId: number,
     clientCarData: ClientCar
@@ -60,6 +67,7 @@ export function useClientCar() {
       }
     });
   };
+
   const restoreClientCar = async (clientCarId: number) => {
     await repository.restore(clientCarId);
     store.archivedClientCars.map((e) => {
@@ -70,9 +78,11 @@ export function useClientCar() {
       }
     });
   };
+  
   const total = async () => {
     return await repository.total();
   };
+  
   return {
     updateClientCar,
     storeClientCar,
