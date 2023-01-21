@@ -1,6 +1,7 @@
 <script setup>
-import { ref } from "vue";
-const filter = ref(true);
+  import { ref } from "vue";
+  const filter = ref(true);
+  const emit = defineEmits(['reset']);
 </script>
 <template>
   <div class="container ma-4">
@@ -24,7 +25,7 @@ const filter = ref(true);
           color="primary"
           variant="elevated"
           icon
-          @click="$emit('cancleFilters')"
+          @click="emit('reset')"
         >
           <v-icon>mdi-close</v-icon>
           <v-tooltip activator="parent" location="bottom"
