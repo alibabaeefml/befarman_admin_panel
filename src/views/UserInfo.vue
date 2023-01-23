@@ -1,9 +1,11 @@
-<script setup>
+<script setup lang="ts">
 import defaultImg from "@/assets/Images/avatars/certificate-avatar.jpg";
 import { useUser } from "@/composables/user/user";
+import type { dynamicObject } from "@/types/common";
 import { ref } from "vue";
 import { useRoute as route } from "vue-router";
-const user = ref({ bank: {}, city: {} });
+import { useRouter } from "vue-router";
+const user:dynamicObject = ref({ bank: {}, city: {} });
 const showUser = async () => {
   user.value = await useUser().showUser(route().params);
   !user.value.certificates.length
@@ -170,7 +172,7 @@ showUser();
   </v-row>
 
   <v-btn
-    :to="{ name: 'users' }"
+    @click="useRouter().back()"
     class="add-btn"
     icon
     color="primary"

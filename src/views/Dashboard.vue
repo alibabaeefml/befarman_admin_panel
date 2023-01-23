@@ -100,7 +100,7 @@ getClientCarTotal();
         <router-link class="link" :to="{ name: 'discounts' }">
           <BaseTileItem
             background="#fff9f8"
-            color="red"
+            color="#ee3552"
             icon="brightness-percent"
             txt="تخفیف ها"
             sub="Discounts"

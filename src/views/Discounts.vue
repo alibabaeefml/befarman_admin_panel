@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onUnmounted } from "vue";
 import { useRoute } from "vue-router";
 import { useDiscount } from "@/composables/discount";
+
 import DiscountItem from "@/components/Discount/DiscountItem.vue";
 import CreditItem from "@/components/Discount/CreditItem.vue";
 import InfiniteScroll from "infinite-loading-vue3";
 import DiscountInfo from "@/components/Discount/DiscountInfo.vue";
 import DiscountEdit from "@/components/Discount/DiscountEdit.vue";
+import { useDiscountStore } from "@/store/discount";
 const { indexCreditCard, indexDiscount, getCredits, getDiscounts, paginate } =
   useDiscount();
 
@@ -47,6 +49,9 @@ const infiniteDiscount = async () => {
     loadingData = false;
   }
 };
+onUnmounted(() => {
+  useDiscountStore().discounts = [];
+});
 </script>
 
 <template>
@@ -56,7 +61,6 @@ const infiniteDiscount = async () => {
       :title="title"
       :subtitle="titleEn"
       prepend-icon="mdi-brightness-percent"
-      class="ma-5"
     >
       <v-card-text>
         <v-tabs v-model="tab" color="secondary" class="lg-txt" fixed-tabs>
@@ -70,7 +74,7 @@ const infiniteDiscount = async () => {
               :noResult="noResult"
             >
               <CreditItem
-              class="m-3"
+                class="m-3"
                 v-for="credit in getCredits"
                 :key="credit.id"
                 :credit="credit"
@@ -94,6 +98,10 @@ const infiniteDiscount = async () => {
     </v-card>
     <DiscountInfo />
     <DiscountEdit />
+
+    <v-btn size="x-large" class="add-btn" icon color="secondary">
+      <v-icon color="white">mdi-plus</v-icon>
+    </v-btn>
   </div>
 </template>
 

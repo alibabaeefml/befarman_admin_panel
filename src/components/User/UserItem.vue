@@ -77,7 +77,7 @@ const userVerification = async () => {
             icon
             color="secondary"
             variant="elevated"
-            :to="{ name: 'userDetail', params: { id: user.id } }"
+            :to="{ name: 'userDetails', params: { id: user.id } }"
           >
             <v-icon color="white">mdi-information</v-icon>
             <v-tooltip activator="parent" location="bottom"

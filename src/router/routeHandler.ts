@@ -28,7 +28,7 @@ export default class RouteHandler {
     this.module = module;
     const router: Router = this.create(paths, callbackDynamicImport, redirect);
     this.beforeLoad(router);
-    // this.afterLoad(router);
+    this.afterLoad(router);
     return router;
   }
 
@@ -94,7 +94,9 @@ export default class RouteHandler {
     document.title = to.meta.title || this.defaultTitle;
   }
 
-  // afterLoad(router: Router): void {
-  //   router.afterEach((to: any, from: any) => {});
-  // }
+  afterLoad(router: Router): void {
+    router.afterEach((to: any, from: any) => {
+      
+    });
+  }
 }

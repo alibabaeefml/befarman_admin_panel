@@ -16,7 +16,7 @@ export default class ClientCarRepository {
     return getArray(response.data);
   }
   async show(clientCarId: number) {
-    const response = await axios.get(url("showClientCar", { clientCarId }));
+    const response = await axios.get(url("showClientCar", { clientCar:clientCarId }));
     return getJson(response.data.data);
   }
   async store(clientCarData: ClientCar) {

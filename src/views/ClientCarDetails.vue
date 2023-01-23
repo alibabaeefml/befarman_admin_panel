@@ -2,7 +2,8 @@
 import { ref } from "vue";
 import Certificates from "@components/ClientCar/Certificates.vue";
 import MoreDetails from "@components/ClientCar/MoreDetails.vue";
-import { useRoute as route } from "vue-router";
+import { useRoute as route, useRouter } from "vue-router";
+
 import { useClientCar } from "@/composables/clientCar/clientCar";
 import { useProvinceStore } from "@/store/province";
 import { storeToRefs } from "pinia/dist/pinia";
@@ -224,11 +225,11 @@ const more = ref(false);
   </v-card>
 
   <v-btn
-    :to="{ name: 'clientCars' }"
+    @click="useRouter().back()"
     class="add-btn"
     icon
-    size="large"
     color="primary"
+    size="large"
   >
     <v-icon>mdi-arrow-left</v-icon>
     <v-tooltip activator="parent">بازگشت</v-tooltip>

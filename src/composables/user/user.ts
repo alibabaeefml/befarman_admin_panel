@@ -42,6 +42,7 @@ export function useUser() {
   };
 
   const showUser = async (data: dynamicObject) => {
+    console.log(data)
     return await repository.show(data);
   };
   const sms = async (form: dynamicObject) => {
