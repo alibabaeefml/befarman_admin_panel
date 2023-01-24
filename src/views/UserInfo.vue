@@ -16,7 +16,8 @@ showUser();
 </script>
 
 <template>
-  <v-row dir="rtl" class="align-center ma-4 ym">
+  <div>
+    <v-row dir="rtl" class="align-center ma-4 ym">
     <v-col cols="12" md="3" sm="12" class="">
       <v-card title="مدارک کاربر" subtitle="USER DOCS">
         <v-carousel
@@ -181,4 +182,6 @@ showUser();
     <v-icon>mdi-arrow-left</v-icon>
     <v-tooltip activator="parent">بازگشت</v-tooltip>
   </v-btn>
+  </div>
+
 </template>

@@ -22,16 +22,16 @@ const props = defineProps({
                     params: { id: discount.client_car_id },
                   }"
                 >
-                <v-img
-                  :src="discount.clientCar.thumbnail"
-                  cover
-                  height="200"
-                  class="rounded-lg"
-                >
-                </v-img>
-                <h2 class="mt-2">{{ discount.clientCar.name }}</h2>
-              </router-link>
-                
+                  <v-img
+                    :src="discount.clientCar.thumbnail"
+                    cover
+                    height="200"
+                    class="rounded-lg"
+                  >
+                  </v-img>
+                  <h2 class="mt-2">{{ discount.clientCar.name }}</h2>
+                </router-link>
+
                 <v-tooltip activator="parent" location="bottom">
                   تخفیف تنها به این خودرو اختصاص دارد
                 </v-tooltip>
@@ -69,7 +69,7 @@ const props = defineProps({
               <h2>{{ discount.expiry_date }}</h2>
             </v-col>
             <v-col cols="12" md="2" sm="12">
-              <h3>مقدار تخفیف:</h3>
+              <h3>مبلغ تخفیف:</h3>
               <h2>{{ discount.credit }} تومان</h2>
             </v-col>
             <v-col cols="12" md="2" sm="12">
@@ -84,7 +84,7 @@ const props = defineProps({
             icon
             variant="elevated"
             size="35"
-            @click="$_openModal('discountInfo')"
+            @click="$_openModal('discountInfo', discount)"
           >
             <v-icon color="white">mdi-information</v-icon>
             <v-tooltip activator="parent" location="right"
@@ -101,7 +101,7 @@ const props = defineProps({
             color="black"
             variant="elevated"
             size="35"
-            @click="$_openModal('discountEdit')"
+            @click="$_openModal('discountEdit',discount)"
           >
             <v-icon>mdi-pencil</v-icon>
             <v-tooltip activator="parent" location="left"

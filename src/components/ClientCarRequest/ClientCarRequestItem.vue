@@ -19,7 +19,7 @@ const requestChange = async (request: dynamicObject) => {
     });
   }
 };
-const actionsGroup = ref(false);
+const actionsGroup = ref(true);
 </script>
 <template>
   <div>

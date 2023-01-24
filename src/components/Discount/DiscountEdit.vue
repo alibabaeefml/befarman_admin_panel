@@ -1,8 +1,13 @@
 <script setup lang="ts">
 import BaseModal from "@components/Global/Dialog/BaseModal.vue";
-const openModal = async () => {
-
-}
+import UserSearch from "@components/User/UserSearch.vue";
+import FullNameTrimSelected from "@/components/Trim/FullNameTrimSelected.vue";
+import type { dynamicObject } from "@/types/common";
+import { ref } from "vue";
+const form: dynamicObject = ref({});
+const openModal = async (data: dynamicObject) => {
+  form.value = data;
+};
 </script>
 
 <template>
@@ -15,7 +20,18 @@ const openModal = async () => {
       @open="openModal"
       icon="mdi-brightness-percent"
     >
-    This is Discount Edit
+      <UserSearch
+        label="مشتری"
+        v-model="form.customer"
+        noDataText="تخفیف عمومی"
+        :phone="form.customer.phone"
+      />
+      <CarSelected
+        label="خودرو"
+        v-model="form.client_car_id"
+        noDataText="خودرویی برای این تخفیف در نظر گرفته نشده است."
+      />
+      <FullNameTrimSelected v-model="form.client_car.trim_id" />
     </BaseModal>
   </div>
 </template>

@@ -1,24 +1,26 @@
-<script setup>
-import { ref } from "vue";
+<script setup lang="ts">
+import { ref, computed } from "vue";
 import Certificates from "@components/ClientCar/Certificates.vue";
 import MoreDetails from "@components/ClientCar/MoreDetails.vue";
-import { useRoute as route, useRouter } from "vue-router";
+import { useRoute as route } from "vue-router";
 
 import { useClientCar } from "@/composables/clientCar/clientCar";
 import { useProvinceStore } from "@/store/province";
 import { storeToRefs } from "pinia/dist/pinia";
-
+import { useRouter } from "vue-router";
+import type { dynamicObject } from "@/types/common";
 const { getProvinces } = storeToRefs(useProvinceStore());
 const { loadProvinces, showCity } = useProvinceStore();
 
-const clientCar = ref({});
-const province = ref({});
+const clientCar:dynamicObject = ref({});
+const province:dynamicObject = ref({});
 const city = ref({});
 
 loadProvinces();
 
 const indexClientCar = async () => {
-  clientCar.value = await useClientCar().showClientCar(route().params.id);
+  const { id } = route().params;
+  clientCar.value = await useClientCar().showClientCar(Number(id));
 
   // show province and city
   province.value = getProvinces.value.find(
@@ -28,7 +30,7 @@ const indexClientCar = async () => {
 };
 indexClientCar();
 
-const openImg = (url) => {
+const openImg = (url: string) => {
   window.open(url);
 };
 

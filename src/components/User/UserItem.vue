@@ -2,7 +2,7 @@
 import { useUser } from "@/composables/user/user";
 import { ref } from "vue";
 const props = defineProps(["user", "archived"]);
-const actions = ref(false);
+const actions = ref(true);
 
 const userVerification = async () => {
   if (props.user.verified == 0) {

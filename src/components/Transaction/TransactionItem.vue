@@ -2,7 +2,7 @@
 import { ref } from "vue";
 defineProps(["request", "archived"]);
 defineEmits(["editModal", "deleteModal"]);
-const actions = ref(false);
+const actions = ref(true);
 const outgoing = ref(true);
 </script>
 <template>

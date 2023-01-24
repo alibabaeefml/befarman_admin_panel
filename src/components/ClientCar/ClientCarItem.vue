@@ -1,9 +1,10 @@
 <script setup>
 import defaultThumb from "@/assets/Images/avatars/car-avatar.jpg";
-import { ref, watchEffect } from "vue";
+import { ref, watchEffect, computed } from "vue";
 import { useClientCar } from "@/composables/clientCar/clientCar";
 import { useClientCarStatus } from "@/composables/clientCarStatus/clientCarStatus";
 import { notify } from "@kyvg/vue3-notification";
+import { useDisplay } from "vuetify";
 // import type { ClientCarStatus } from "@/types/status";
 const props = defineProps(["clientCar", "archived", "banner"]);
 const { loadStatuses, getClientCarStatuses } = useClientCarStatus();
@@ -38,13 +39,14 @@ const restoreCar = async () => {
     });
   }
 };
-const actionsGroup = ref(false);
+const actions = ref(false);
+
 </script>
 
 <template>
   <div>
     <v-card class="border mt-3 text-center" min-height="200">
-      <v-card-text :class="{ ym: true, blured: actionsGroup }">
+      <v-card-text :class="{ ym: true, blured: actions }">
         <v-row class="align-center">
           <v-col cols="12" md="3" xs="12" class="justify-center">
             <v-img
@@ -112,10 +114,10 @@ const actionsGroup = ref(false);
           v-if="!archived"
           color="primary"
           icon
-          @click="actionsGroup = !actionsGroup"
+          @click="actions = !actions"
         >
           <v-icon>{{
-            !actionsGroup ? "mdi-dots-vertical" : "mdi-menu-left"
+            !actions ? "mdi-dots-vertical" : "mdi-menu-left"
           }}</v-icon>
         </v-btn>
         <v-btn v-else color="orange" icon @click="restoreCar">
@@ -124,7 +126,7 @@ const actionsGroup = ref(false);
             >بازگشت خودرو</v-tooltip
           >
         </v-btn>
-        <div class="actionsGroup" v-if="actionsGroup">
+        <div class="actions" v-if="actions">
           <v-btn
             :to="{ name: 'clientCarDetails', params: { id: clientCar.id } }"
             color="secondary"

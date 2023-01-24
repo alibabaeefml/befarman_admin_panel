@@ -186,8 +186,10 @@ textarea {
 .v-card-text {
   transition: 0.2s;
 }
-.v-card-text.blured {
+@media screen and (max-width:640px) {
+  .v-card-text.blured {
   filter: blur(5px);
+}
 }
 .actionsGroup > * {
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5) !important;
