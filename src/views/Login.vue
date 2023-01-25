@@ -132,7 +132,7 @@ const login = async () => {
                     append-icon="mdi-account-check"
                     @click="codeSent = false"
                   >
-                    تغییر شماره</v-btn
+                    تغییر شماره ({{ user.phone }})</v-btn
                   >
                 </v-col>
               </v-row>

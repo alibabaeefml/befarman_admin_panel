@@ -1,9 +1,11 @@
-<script setup>
+<script setup lang="ts">
 import defaultImg from "@/assets/Images/avatars/certificate-avatar.jpg";
 import { useUser } from "@/composables/user/user";
+import type { dynamicObject } from "@/types/common";
 import { ref } from "vue";
 import { useRoute as route } from "vue-router";
-const user = ref({ bank: {}, city: {} });
+import { useRouter } from "vue-router";
+const user:dynamicObject = ref({ bank: {}, city: {} });
 const showUser = async () => {
   user.value = await useUser().showUser(route().params);
   !user.value.certificates.length
@@ -14,7 +16,8 @@ showUser();
 </script>
 
 <template>
-  <v-row dir="rtl" class="align-center ma-4 ym">
+  <div>
+    <v-row dir="rtl" class="align-center ma-4 ym">
     <v-col cols="12" md="3" sm="12" class="">
       <v-card title="مدارک کاربر" subtitle="USER DOCS">
         <v-carousel
@@ -170,7 +173,7 @@ showUser();
   </v-row>
 
   <v-btn
-    :to="{ name: 'users' }"
+    @click="useRouter().back()"
     class="add-btn"
     icon
     color="primary"
@@ -179,4 +182,6 @@ showUser();
     <v-icon>mdi-arrow-left</v-icon>
     <v-tooltip activator="parent">بازگشت</v-tooltip>
   </v-btn>
+  </div>
+
 </template>

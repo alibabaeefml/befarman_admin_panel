@@ -72,7 +72,7 @@ const paths: Path[] = [
   },
   {
     path: "/users/:id",
-    name: "userDetail",
+    name: "userDetails",
     view: "UserInfo",
     meta: {
       auth: true,

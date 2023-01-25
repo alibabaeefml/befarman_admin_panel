@@ -2,7 +2,7 @@
 import { useUser } from "@/composables/user/user";
 import { ref } from "vue";
 const props = defineProps(["user", "archived"]);
-const actions = ref(false);
+const actions = ref(true);
 
 const userVerification = async () => {
   if (props.user.verified == 0) {
@@ -77,7 +77,7 @@ const userVerification = async () => {
             icon
             color="secondary"
             variant="elevated"
-            :to="{ name: 'userDetail', params: { id: user.id } }"
+            :to="{ name: 'userDetails', params: { id: user.id } }"
           >
             <v-icon color="white">mdi-information</v-icon>
             <v-tooltip activator="parent" location="bottom"

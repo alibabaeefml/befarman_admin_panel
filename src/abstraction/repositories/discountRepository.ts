@@ -4,6 +4,7 @@ import { getArrayCredit, getJsonCredit } from "../resources/creditResource";
 import {
   getArrayDiscount,
   getJsonDiscount,
+  setDiscountData,
 } from "../resources/discountResource";
 import url from "../url";
 
@@ -14,21 +15,21 @@ export default class DiscountRepository {
     return getArrayDiscount(response.data);
   }
   async storeDiscount(discountData: Discount) {
-    const formData = setData(discountData);
+    const formData = setDiscountData(discountData);
     const response = await axios.post(url("storeDiscount"), formData);
     return getJsonDiscount(response.data.data);
   }
   async updateDiscount(discountId: number, discountData = {}) {
-    const formData = setData(discountData);
+    const formData = setDiscountData(discountData);
     const response = await axios.put(
-      url("updateDiscount", { car: discountId }),
+      url("updateDiscount", { discountId }),
       formData
     );
     return getJsonDiscount(response.data.data);
   }
 
   async deleteDiscount(discountId: number) {
-    await axios.delete(url("deleteDiscount", { car: discountId }));
+    await axios.delete(url("deleteDiscount", { discountId }));
   }
   async indexCredit(data = {}) {
     const params = setQueries(data);
@@ -36,7 +37,7 @@ export default class DiscountRepository {
     return getArrayCredit(response.data);
   }
   async storeCredit(creditData: Credit) {
-    const formData = setData(creditData);
+    const formData = setDiscountData(creditData);
     const response = await axios.post(url("storeCreditCard"), formData);
     return getJsonCredit(response.data.data);
   }
