@@ -101,7 +101,9 @@ const props = defineProps({
             color="black"
             variant="elevated"
             size="35"
-            @click="$_openModal('discountEdit',discount)"
+            @click="
+              $_openModal('discountAddEdit', { discount, pageType: 'edit' })
+            "
           >
             <v-icon>mdi-pencil</v-icon>
             <v-tooltip activator="parent" location="left"

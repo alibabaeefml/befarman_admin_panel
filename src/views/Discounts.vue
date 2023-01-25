@@ -7,7 +7,7 @@ import DiscountItem from "@/components/Discount/DiscountItem.vue";
 import CreditItem from "@/components/Discount/CreditItem.vue";
 import InfiniteScroll from "infinite-loading-vue3";
 import DiscountInfo from "@/components/Discount/DiscountInfo.vue";
-import DiscountEdit from "@/components/Discount/DiscountEdit.vue";
+import DiscountAddEdit from "@/components/Discount/DiscountAddEdit.vue";
 import { useDiscountStore } from "@/store/discount";
 const { indexCreditCard, indexDiscount, getCredits, getDiscounts, paginate } =
   useDiscount();
@@ -97,9 +97,15 @@ onUnmounted(() => {
       </v-card-text>
     </v-card>
     <DiscountInfo />
-    <DiscountEdit />
+    <DiscountAddEdit />
 
-    <v-btn size="x-large" class="add-btn" icon color="secondary">
+    <v-btn
+      @click="$_openModal('discountAddEdit', { pageType: 'add' })"
+      size="x-large"
+      class="add-btn"
+      icon
+      color="secondary"
+    >
       <v-icon color="white">mdi-plus</v-icon>
     </v-btn>
   </div>
