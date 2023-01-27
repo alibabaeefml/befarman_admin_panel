@@ -2,7 +2,6 @@ import type { ClientCar } from "./clientCar";
 import type { User } from "./user";
 
 export declare interface Discount {
-  applied_to?: string;
   code: string;
   credit: number;
   customer_id?: number;

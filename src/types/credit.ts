@@ -1,14 +1,12 @@
+import type { User } from "./user";
 export declare interface Credit {
-  applied_to: string;
-  client_car_id?: number;
   code: string;
   credit: number;
-  customer_id?: number;
-  expiry_date?: string;
+  customer_id: number;
+  customer: User;
+  expiry_date: string;
   id: number;
-  min_purchase?: number;
-  number_uses: number;
-  organization?: string;
-  started_at?: string;
+  organization: string;
+  user: User;
   user_id: number;
 }

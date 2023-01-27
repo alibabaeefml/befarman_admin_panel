@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useDiscount } from "@/composables/discount";
 import { notify } from "@kyvg/vue3-notification";
-
+import DatePicker from "../Global/Input/DatePicker.vue";
 const props = defineProps({
   discount: { type: Object, default: {} },
 });
@@ -9,6 +9,7 @@ const deleteDiscount = async () => {
   try {
     await useDiscount().deleteDiscount(props.discount.id);
     notify({
+      type:'success',
       group: "notification",
       title: "حذف تخفیف",
       text: "حذف تخفیف با موفقیت انجام شد.",
@@ -16,6 +17,7 @@ const deleteDiscount = async () => {
   } catch (e: any) {
     const error: any = Object.values(e.response.data.errors)[0];
     notify({
+      type:'error',
       group: "notification",
       title: "حذف تخفیف",
       text: error,
@@ -72,8 +74,8 @@ const deleteDiscount = async () => {
                   }"
                 >
                   <h2>مشتری</h2>
-                  <h3>{{ discount.user.name }}</h3>
-                  <h3>{{ discount.user.phone }}</h3>
+                  <h3>{{ discount.customer?.name }}</h3>
+                  <h3>{{ discount.customer?.phone }}</h3>
                 </router-link>
               </div>
               <div v-else>
@@ -82,12 +84,18 @@ const deleteDiscount = async () => {
             </v-col>
             <!-- date -->
             <v-col cols="12" md="2" sm="12">
-              <h3>تاریخ شروع:</h3>
-              <h2>{{ discount.started_at }}</h2>
+              <DatePicker
+                label="تاریخ شروع:"
+                :value="discount.started_at"
+                disabled
+              />
             </v-col>
             <v-col cols="12" md="2" sm="12">
-              <h3>تاریخ پایان:</h3>
-              <h2>{{ discount.expiry_date }}</h2>
+              <DatePicker
+                label="تاریخ پایان:"
+                :value="discount.expiry_date"
+                disabled
+              />
             </v-col>
             <v-col cols="12" md="2" sm="12">
               <h3>مبلغ تخفیف:</h3>

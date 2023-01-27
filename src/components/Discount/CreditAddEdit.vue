@@ -1,34 +1,42 @@
 <script setup lang="ts">
 import BaseModal from "@components/Global/Dialog/BaseModal.vue";
 import UserSearch from "@components/User/UserSearch.vue";
-import FullNameTrimSelected from "@/components/Trim/FullNameTrimSelected.vue";
 import type { dynamicObject } from "@/types/common";
 import DatePicker from "../Global/Input/DatePicker.vue";
 import { ref, computed } from "vue";
 import { useDiscount } from "@/composables/discount";
 import { useModalStore } from "@/store/modal";
+import { notify } from "@kyvg/vue3-notification";
 
 const form: dynamicObject = ref({});
 
 const pageType: dynamicObject = ref("add");
 const staticNames = computed(() => {
   return {
-    name: pageType.value == "add" ? "افزودن تخفیف" : "ویرایش تخفیف",
-    name_en: pageType.value == "add" ? "DISCOUNT ADD" : "DISCOUNT EDIT",
+    name: pageType.value == "add" ? "افزودن اعتباری" : "ویرایش کارت اعتباری",
+    name_en: pageType.value == "add" ? "CREDIT CARD ADD" : "CREDIT CARD EDIT",
   };
 });
 
 const openModal = async (data: dynamicObject) => {
-  form.value = data.discount ?? {};
   pageType.value = data.pageType;
 };
-const { storeDiscount, updateDiscount } = useDiscount();
 
 const submitForm = async () => {
-  if (form.value.id) {
-    await updateDiscount(form.value.id, form.value);
-  } else {
-    await storeDiscount(form.value);
+  try {
+    await useDiscount().storeCreditCard(form.value);
+    notify({
+      type: "success",
+      title: "ثبت کارت اعتباری",
+      text: "با موفقیت ثبت گردید.",
+    });
+  } catch (e: any) {
+    const error: any = Object.values(e.response.data.errors)[0];
+    notify({
+      type: "error",
+      title: "ثبت کارت اعتباری",
+      text: error,
+    });
   }
   useModalStore().closeModal();
 };
@@ -39,34 +47,25 @@ const submitForm = async () => {
     <BaseModal
       :title="staticNames.name"
       :subtitle="staticNames.name_en"
-      name="discountAddEdit"
+      name="creditAddEdit"
       :max-width="$vuetify.display.smAndDown ? null : 600"
       @open="openModal"
-      icon="mdi-brightness-percent"
+      icon="mdi-credit-card"
     >
       <v-form @submit.prevent="submitForm">
         <v-card-text class="pa-3">
           <UserSearch
             label="مشتری"
             v-model="form.customer_id"
-            noDataText="تخفیف عمومی"
+            noDataText="مشتری مورد نظر را برای شارژ اعتباری انتخاب نمایید"
             :phone="form.customer?.phone"
           />
-          <FullNameTrimSelected  v-model="form.client_car_id" />
-          <p color="red">ماشین اشتباه است</p>
-          <div class="my-2">
-            <DatePicker
-                label="تاریخ شروع:"
-                :value="form.started_at"
-              />
-          </div>
-          <div class="my-2">
-            <DatePicker
-                label="تاریخ پایان:"
-                :value="form.expiry_date"
-              />
-              {{ form.expiry_date ?? 'dssv' }}
-          </div>
+
+          <v-text-field
+            variant="underlined"
+            label="شرکت"
+            v-model="form.organization"
+          ></v-text-field>
 
           <v-text-field
             variant="underlined"
@@ -79,18 +78,12 @@ const submitForm = async () => {
             label="کد"
             v-model="form.code"
           ></v-text-field>
-          <v-text-field
-            variant="underlined"
-            label="حداقل خرید"
-            type="number"
-            v-model="form.min_purchase"
-          ></v-text-field>
-          <v-text-field
-            variant="underlined"
-            label="تعداد استفاده"
-            type="number"
-            v-model="form.number_uses"
-          ></v-text-field>
+          <div class="my-2">
+            <DatePicker
+                label="تاریخ پایان:"
+                :value="form.expiry_date"
+              />
+          </div>
         </v-card-text>
         <v-card-actions class="pa-4">
           <v-btn variant="elevated" type="submit" block color="primary"
@@ -101,4 +94,3 @@ const submitForm = async () => {
     </BaseModal>
   </div>
 </template>
-<!-- خودرویی برای این تخفیف در نظر گرفته نشده است. -->

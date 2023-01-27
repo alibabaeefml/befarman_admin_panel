@@ -20,7 +20,9 @@ createApp(App)
   .use(Vue3PersianDatetimePicker, {
     props: {
       color: "black",
-      format: 'jYYYY-jMM-jDD',
+      placeholder: 'انتخاب کنید',
+      format: 'YYYY-MM-DD HH:mm',
+      displayFormat: 'jYYYY-jMM-jDD',
     },
   })
   .mount("#app");

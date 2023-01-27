@@ -70,6 +70,8 @@ const urls: dynamicObject = {
   deleteDiscount:"admin/discounts/:discountId",
   indexCreditCard:"admin/discounts/credit-card",
   storeCreditCard:"admin/discounts/credit",
+  updateCredit:"admin/discounts/:creditId",
+  deleteCredit:"admin/discounts/:creditId",
   // auth
   sendCode: "login",
   logout: "logout",
