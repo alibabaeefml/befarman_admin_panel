@@ -1,7 +1,27 @@
 <script setup lang="ts">
+import { useDiscount } from "@/composables/discount";
+import { notify } from "@kyvg/vue3-notification";
+
 const props = defineProps({
   discount: { type: Object, default: {} },
 });
+const deleteDiscount = async () => {
+  try {
+    await useDiscount().deleteDiscount(props.discount.id);
+    notify({
+      group: "notification",
+      title: "حذف تخفیف",
+      text: "حذف تخفیف با موفقیت انجام شد.",
+    });
+  } catch (e: any) {
+    const error: any = Object.values(e.response.data.errors)[0];
+    notify({
+      group: "notification",
+      title: "حذف تخفیف",
+      text: error,
+    });
+  }
+};
 </script>
 
 <template>
@@ -33,7 +53,7 @@ const props = defineProps({
                 </router-link>
 
                 <v-tooltip activator="parent" location="bottom">
-                  تخفیف تنها به این خودرو اختصاص دارد
+                  تخفیف تنها به خرید این خودرو اختصاص دارد
                 </v-tooltip>
               </div>
               <div v-else>
@@ -51,7 +71,8 @@ const props = defineProps({
                     params: { id: discount.customer_id },
                   }"
                 >
-                  <h2>{{ discount.user.name }}</h2>
+                  <h2>مشتری</h2>
+                  <h3>{{ discount.user.name }}</h3>
                   <h3>{{ discount.user.phone }}</h3>
                 </router-link>
               </div>
@@ -91,7 +112,13 @@ const props = defineProps({
               >جزئیات تخفیف</v-tooltip
             >
           </v-btn>
-          <v-btn icon color="primary" variant="elevated" size="35">
+          <v-btn
+            @click="deleteDiscount"
+            icon
+            color="primary"
+            variant="elevated"
+            size="35"
+          >
             <v-icon>mdi-delete</v-icon>
             <v-tooltip activator="parent" location="right">حذف تخفیف</v-tooltip>
           </v-btn>

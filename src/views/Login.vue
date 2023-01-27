@@ -4,6 +4,7 @@ import { computed } from "vue";
 import { useDisplay } from "vuetify/lib/framework.mjs";
 import { useAuthStore } from "@/store/auth";
 import bg from "@/assets/Images/loginBG.jpg";
+import { notify } from "@kyvg/vue3-notification";
 defineProps(["dialog"]);
 
 const width = computed(() => useDisplay().width.value);
@@ -46,7 +47,27 @@ const sendCode = async () => {
 
 const login = async () => {
   loading.value = true;
-  await useAuthStore().login(user.value);
+  try {
+    await useAuthStore().login(user.value);
+    loading.value = false
+    notify({
+      group:"notification",
+      type: "success",
+      title: "موفق",
+      text: "ورود موفقیت آمیز بود",
+      duration:-1
+    });
+  } catch (e: any) {
+    const error: string | any = Object.values(e.response.data.errors)[0];
+    loading.value = false
+    notify({
+      group:"notification",
+      type: "error",
+      title: "ناموفق",
+      text: error,
+      duration:-1
+    });
+  }
 };
 </script>
 <template>
