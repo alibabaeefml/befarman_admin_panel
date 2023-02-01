@@ -13,7 +13,7 @@ const form: dynamicObject = ref({});
 const pageType: dynamicObject = ref("add");
 const staticNames = computed(() => {
   return {
-    name: pageType.value == "add" ? "افزودن اعتباری" : "ویرایش کارت اعتباری",
+    name: pageType.value == "add" ? "افزودن کارت اعتباری" : "ویرایش کارت اعتباری",
     name_en: pageType.value == "add" ? "CREDIT CARD ADD" : "CREDIT CARD EDIT",
   };
 });
@@ -82,6 +82,7 @@ const submitForm = async () => {
             <DatePicker
                 label="تاریخ پایان:"
                 :value="form.expiry_date"
+                @changeDate="(date) => (form.expiry_date = date)"
               />
           </div>
         </v-card-text>

@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import BaseModal from "@components/Global/Dialog/BaseModal.vue";
 import UserSearch from "@components/User/UserSearch.vue";
-import FullNameTrimSelected from "@/components/Trim/FullNameTrimSelected.vue";
 import type { dynamicObject } from "@/types/common";
 import DatePicker from "../Global/Input/DatePicker.vue";
 import { ref, computed } from "vue";
 import { useDiscount } from "@/composables/discount";
 import { useModalStore } from "@/store/modal";
+import { notify } from "@kyvg/vue3-notification";
+import ClientCarSearch from "../ClientCar/ClientCarSearch.vue";
 
 const form: dynamicObject = ref({});
 
@@ -26,9 +27,41 @@ const { storeDiscount, updateDiscount } = useDiscount();
 
 const submitForm = async () => {
   if (form.value.id) {
-    await updateDiscount(form.value.id, form.value);
+    try {
+      await updateDiscount(form.value.id, form.value);
+      notify({
+        group: "notification",
+        type: "success",
+        title: "ویرایش تخفیف",
+        text: "ویرایش با موفقیت انجام شد.",
+      });
+    } catch (e: any) {
+      const error: any = Object.values(e.response.data.errors)[0];
+      notify({
+        group: "notification",
+        type: "error",
+        title: "ویرایش تخفیف",
+        text: error,
+      });
+    }
   } else {
-    await storeDiscount(form.value);
+    try {
+      await storeDiscount(form.value);
+      notify({
+        group: "notification",
+        type: "success",
+        title: "افزودن تخفیف",
+        text: "تخفیف با موفقیت ثبت شد.",
+      });
+    } catch (e: any) {
+      const error: any = Object.values(e.response.data.errors)[0];
+      notify({
+        group: "notification",
+        type: "error",
+        title: "افزودن تخفیف",
+        text: error,
+      });
+    }
   }
   useModalStore().closeModal();
 };
@@ -52,22 +85,25 @@ const submitForm = async () => {
             noDataText="تخفیف عمومی"
             :phone="form.customer?.phone"
           />
-          <FullNameTrimSelected  v-model="form.client_car_id" />
-          <p color="red">ماشین اشتباه است</p>
-          <div class="my-2">
-            <DatePicker
-                label="تاریخ شروع:"
-                :value="form.started_at"
-              />
-          </div>
-          <div class="my-2">
-            <DatePicker
-                label="تاریخ پایان:"
-                :value="form.expiry_date"
-              />
-              {{ form.expiry_date ?? 'dssv' }}
-          </div>
 
+          <div class="my-2">
+            <DatePicker
+              label="تاریخ شروع:"
+              :value="form.started_at"
+              @changeDate="(date) => (form.started_at = date)"
+            />
+          </div>
+          <div class="my-2">
+            <DatePicker
+              label="تاریخ پایان:"
+              :value="form.expiry_date"
+              @changeDate="(date) => (form.expiry_date = date)"
+            />
+          </div>
+          <ClientCarSearch
+            :number="form.clientCar?.car_number"
+            v-model="form.client_car_id"
+          />
           <v-text-field
             variant="underlined"
             label="مبلغ"

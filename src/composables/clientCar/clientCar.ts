@@ -4,12 +4,12 @@ import ClientCarRepository from "@/abstraction/repositories/clientCarRepository"
 import type { dynamicObject } from "@/types/common";
 import type { ClientCar } from "@/types/clientCar";
 
-
 export function useClientCar() {
   const store = useClientCarStore();
   const repository = new ClientCarRepository();
 
-  const { getClientCars, getArchivedClientCars, paginate } = storeToRefs(store);
+  const { getClientCars, getArchivedClientCars, paginate, clientCars } =
+    storeToRefs(store);
   const indexClientCar = async (paginate: {}) => {
     const { data, pagination } = await repository.index(paginate);
     store.$patch((state) => {
@@ -42,7 +42,7 @@ export function useClientCar() {
   };
 
   const storeClientCar = async (clientCarData: ClientCar) => {
-    const clientCar = await repository.store(clientCarData);
+    const clientCar: any = await repository.store(clientCarData);
     store.clientCars.push(clientCar);
     return clientCar;
   };
@@ -73,6 +73,11 @@ export function useClientCar() {
   const total = async () => {
     return await repository.total();
   };
+  const searchClientCar = async (clientCarData: dynamicObject) => {
+    const { data } = await repository.index(clientCarData);
+    return data;
+  };
+
   return {
     updateClientCar,
     storeClientCar,
@@ -80,10 +85,12 @@ export function useClientCar() {
     indexArchivedClientCar,
     showClientCar,
     getClientCars,
+    clientCars,
     getArchivedClientCars,
     paginate,
     archiveClientCar,
     restoreClientCar,
     total,
+    searchClientCar,
   };
 }

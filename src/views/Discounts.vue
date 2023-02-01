@@ -94,11 +94,13 @@ onUnmounted(() => {
               @infinite-scroll="infiniteDiscount"
               :noResult="noResult"
             >
+            <Suspense>
               <DiscountItem
                 v-for="discount in getDiscounts"
                 :key="discount.id"
                 :discount="discount"
               />
+            </Suspense>
             </infinite-scroll>
           </v-window-item>
         </v-window>

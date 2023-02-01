@@ -19,6 +19,7 @@ const openModal = async (data: dynamicObject) => {
       @open="openModal"
       icon="mdi-brightness-percent"
     >
+    
       <v-card-text>
         <DiscountInfoItem name_fa="مشتری" :value="discount.customer.name" />
         <DiscountInfoItem name_fa="خودرو" :value="discount.clientCar.name" />

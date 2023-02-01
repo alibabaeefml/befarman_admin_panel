@@ -21,8 +21,8 @@ createApp(App)
     props: {
       color: "black",
       placeholder: 'انتخاب کنید',
-      format: 'YYYY-MM-DD HH:mm',
-      displayFormat: 'jYYYY-jMM-jDD',
+      format: 'YYYY-MM-DD HH:mm:ss',
+      displayFormat: 'jYYYY-jMM-jDD HH:mm',
     },
   })
   .mount("#app");

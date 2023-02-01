@@ -26,13 +26,11 @@ export const setDiscountData = (data: dynamicObject) => ({
   code: data.code,
   credit: data.credit,
   customer_id: data.customer_id,
-  customer: data.customer,
   expiry_date: data.expiry_date,
   min_purchase: data.min_purchase,
   number_uses: data.number_uses,
   started_at: data.started_at,
   client_car_id: data.client_car_id,
-  clientCar: data.clientCar,
   user_id: data.user_id,
   user: data.user,
 });

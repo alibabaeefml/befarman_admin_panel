@@ -1,15 +1,36 @@
 <script setup lang="ts">
+import { ref, onUpdated } from "vue";
 import { useDiscount } from "@/composables/discount";
 import { notify } from "@kyvg/vue3-notification";
 import DatePicker from "../Global/Input/DatePicker.vue";
+import { useClientCar } from "@/composables/clientCar/clientCar";
+import { useUser } from "@/composables/user/user";
 const props = defineProps({
   discount: { type: Object, default: {} },
 });
+const clientCar: any = ref({});
+const loadClientCar = async () => {
+  clientCar.value = await useClientCar().showClientCar(
+    props.discount.client_car_id
+  );
+};
+loadClientCar();
+
+const customer: any = ref({});
+const loadCustomer = async () => {
+  customer.value = await useUser().showUser({id:props.discount.customer_id});
+};
+loadCustomer();
+onUpdated(() => {
+  loadClientCar();
+  loadCustomer();
+});
+
 const deleteDiscount = async () => {
   try {
     await useDiscount().deleteDiscount(props.discount.id);
     notify({
-      type:'success',
+      type: "success",
       group: "notification",
       title: "حذف تخفیف",
       text: "حذف تخفیف با موفقیت انجام شد.",
@@ -17,7 +38,7 @@ const deleteDiscount = async () => {
   } catch (e: any) {
     const error: any = Object.values(e.response.data.errors)[0];
     notify({
-      type:'error',
+      type: "error",
       group: "notification",
       title: "حذف تخفیف",
       text: error,
@@ -37,21 +58,21 @@ const deleteDiscount = async () => {
         <v-card-text>
           <v-row class="yl d-flex text-center align-center">
             <v-col cols="12" md="2" sm="12">
-              <div v-if="discount.client_car_id">
+              <div v-if="clientCar.id">
                 <router-link
                   :to="{
                     name: 'clientCarDetails',
-                    params: { id: discount.client_car_id },
+                    params: { id: clientCar.id },
                   }"
                 >
                   <v-img
-                    :src="discount.clientCar.thumbnail"
+                    :src="clientCar.thumbnail"
                     cover
                     height="200"
                     class="rounded-lg"
                   >
                   </v-img>
-                  <h2 class="mt-2">{{ discount.clientCar.name }}</h2>
+                  <h2 class="mt-2">{{ clientCar.name }}</h2>
                 </router-link>
 
                 <v-tooltip activator="parent" location="bottom">
@@ -66,16 +87,16 @@ const deleteDiscount = async () => {
             </v-col>
             <!-- user info -->
             <v-col cols="12" md="2" sm="12">
-              <div v-if="discount.user">
+              <div v-if="customer.id">
                 <router-link
                   :to="{
                     name: 'userDetails',
-                    params: { id: discount.customer_id },
+                    params: { id: customer.id },
                   }"
                 >
                   <h2>مشتری</h2>
-                  <h3>{{ discount.customer?.name }}</h3>
-                  <h3>{{ discount.customer?.phone }}</h3>
+                  <h3>{{ customer.name }}</h3>
+                  <h3>{{ customer.phone }}</h3>
                 </router-link>
               </div>
               <div v-else>
