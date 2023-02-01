@@ -40,7 +40,6 @@ const restoreCar = async () => {
   }
 };
 const actions = ref(false);
-
 </script>
 
 <template>
@@ -55,7 +54,6 @@ const actions = ref(false);
               style="border-radius: 10px"
             />
           </v-col>
-
           <v-col cols="12" md="3" sm="12">
             <div class="d-flex flex-column">
               <div class="md-txt">
@@ -64,7 +62,7 @@ const actions = ref(false);
               <div class="enSub">
                 {{ clientCar.car.name_en }}
               </div>
-              <div class="mt-4">
+              <div class="mt-4" v-if="status.id">
                 <div
                   class="status pa-2 sm-txt"
                   :style="{ background: status.color }"
@@ -83,6 +81,7 @@ const actions = ref(false);
                   >
                 </div>
               </div>
+              <div v-else>در حال بارگیری وضعیت</div>
             </div>
           </v-col>
           <v-col cols="12" md="3" sm="12">

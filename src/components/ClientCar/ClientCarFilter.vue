@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import Filters from "@components/Global/Filters/Filters.vue";
 import { useClientCarStore } from "@/store/clientCar";
 import { storeToRefs } from "pinia/dist/pinia";
@@ -67,7 +67,9 @@ defineProps(["tab", "statuses"]);
         ></v-select>
       </v-col>
       <v-col cols="12" md="1" @click="indexClientCar({pagination: {page: 1}})">
-        <v-btn color="secondary" icon size="x-large"><v-icon color="white">mdi-filter</v-icon></v-btn>
+        <v-btn color="secondary" icon size="x-large"><v-icon color="white">mdi-filter</v-icon>
+        <v-tooltip activator="parent" location="bottom">اعمال فیلترها</v-tooltip>
+        </v-btn>
       </v-col>
     </v-row>
   </Filters>
