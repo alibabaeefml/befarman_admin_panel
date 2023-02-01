@@ -51,6 +51,14 @@ export function useDiscount() {
     store.credits.push(credit);
     return credit;
   };
+  const deleteCredit = async (creditId: number) => {
+    await repository.deleteCredit(creditId);
+    store.discounts.map((e) => {
+      if (e.id == creditId) {
+        store.discounts.splice(store.discounts.indexOf(e), 1);
+      }
+    });
+  };
   return {
     indexDiscount,
     indexCreditCard,
@@ -58,6 +66,7 @@ export function useDiscount() {
     updateDiscount,
     deleteDiscount,
     storeCreditCard,
+    deleteCredit,
     getDiscounts,
     getCredits,
     paginate,

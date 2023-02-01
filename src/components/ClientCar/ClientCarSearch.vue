@@ -1,29 +1,21 @@
-<script setup>
+<script setup lang="ts">
+import { useClientCar } from "@/composables/clientCar/clientCar";
 import { ref, computed } from "vue";
-import { useUser } from "@/composables/user/user";
 import debouncedFunction from "@/composables/global/autoCompletedFilter";
-
+const { indexClientCar, getClientCars, paginate } = useClientCar();
 const props = defineProps({
-  value: {
-    default: null,
-  },
-  label: {
-    default: "",
-  },
-  noDataText: {
-    default: "",
-  },
-  phone: {
-    default: null,
-  },
+  value: { type: Number, default: null },
+  car_number: { type: String, default: null },
 });
-const emit = defineEmits(["input"]);
 
-const userMethod = useUser();
-const users = ref([]);
+indexClientCar({});
+
+const clientCarMethod = useClientCar();
+const clientCars = ref([]);
 const isLoading = ref(false);
 
-const selectedUserId = computed({
+const emit = defineEmits(["input"]);
+const selectedClientCarId = computed({
   get() {
     return props.value;
   },
@@ -34,27 +26,27 @@ const selectedUserId = computed({
 const created = async () => {
   isLoading.value = true;
   const filters = {
-    phone: {
+    car_number: {
       type: "like",
-      val: props.phone,
+      val: props.car_number,
     },
   };
   const params = {
     filters,
     pagination: { page: 1 },
   };
-  users.value = await userMethod.searchUser(params);
+  clientCars.value = await clientCarMethod.searchClientCar(params);
   isLoading.value = false;
 };
 created();
-const filterUser = async (event) => {
+const filterClientCar = async (event: any) => {
   debouncedFunction(event, async () => {
     const filters = {
       name: {
         type: "like",
         val: event.target.value,
       },
-      phone: {
+      car_number: {
         type: "like",
         val: event.target.value,
       },
@@ -66,33 +58,34 @@ const filterUser = async (event) => {
     };
     try {
       isLoading.value = true;
-      users.value = await userMethod.searchUser(params);
+      clientCars.value = await clientCarMethod.searchClientCar(params);
       isLoading.value = false;
     } catch (err) {
       console.log(err);
     }
   });
 };
-filterUser(props.value);
+filterClientCar(props.value);
 </script>
+
 <template>
   <v-autocomplete
-  clearable
-    :label="label"
-    :items="users"
-    @keydown="filterUser"
-    item-value="id"
+    label="خودرو"
+    clearable
+    :items="clientCars"
     item-title="name"
-    prepend-icon="mdi-account"
-    v-model="selectedUserId"
+    item-value="id"
+    @keydown="filterClientCar"
+    prepend-icon="mdi-car"
+    v-model="selectedClientCarId"
     variant="underlined"
     :loading="isLoading"
-    :no-data-text="noDataText"
+    no-data-text="خودرویی یافت نشد"
   >
     <template #selection="{ item }">
-      <div>
+      <div class="d-flex align-items-center" style="gap:5px">
         <span>{{ item.raw.name }}</span>
-        <span style="font-size: small">({{ item.raw.phone }})</span>
+        <span style="font-size: small">({{ item.raw.car_number }})</span>
       </div>
     </template>
   </v-autocomplete>

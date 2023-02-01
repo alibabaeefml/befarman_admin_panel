@@ -9,6 +9,7 @@ import ApiService from "@/services/api.services";
 import Notifications from "@kyvg/vue3-notification";
 loadFonts();
 
+
 ApiService.init("https://app.befarman.com");
 
 createApp(App)
@@ -19,6 +20,9 @@ createApp(App)
   .use(Vue3PersianDatetimePicker, {
     props: {
       color: "black",
+      placeholder: 'انتخاب کنید',
+      format: 'YYYY-MM-DD HH:mm:ss',
+      displayFormat: 'jYYYY-jMM-jDD HH:mm',
     },
   })
   .mount("#app");

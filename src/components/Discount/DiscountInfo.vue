@@ -19,14 +19,15 @@ const openModal = async (data: dynamicObject) => {
       @open="openModal"
       icon="mdi-brightness-percent"
     >
+    
       <v-card-text>
         <DiscountInfoItem name_fa="مشتری" :value="discount.customer.name" />
         <DiscountInfoItem name_fa="خودرو" :value="discount.clientCar.name" />
+        
         <DiscountInfoItem name_fa="تاریخ شروع" :value="discount.started_at" />
         <DiscountInfoItem name_fa="تاریخ پایان" :value="discount.expiry_date" />
         <DiscountInfoItem name_fa="مبلغ" :value="discount.credit + ' تومان'" />
         <DiscountInfoItem name_fa="کد" :value="discount.code" />
-        <DiscountInfoItem name_fa="ارگان" :value="discount.organization" />
         <DiscountInfoItem name_fa="قابل استفاده" :value="discount.number_uses + ' بار'" />
         <DiscountInfoItem name_fa="حداقل مبلغ خرید" :value="discount.min_purchase + ' تومان'" />
         <router-link :to="{ name: 'userDetails', params: { id: discount.user_id } }">

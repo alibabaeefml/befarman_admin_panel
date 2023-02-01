@@ -8,6 +8,7 @@ import CreditItem from "@/components/Discount/CreditItem.vue";
 import InfiniteScroll from "infinite-loading-vue3";
 import DiscountInfo from "@/components/Discount/DiscountInfo.vue";
 import DiscountAddEdit from "@/components/Discount/DiscountAddEdit.vue";
+import CreditAddEdit from "@/components/Discount/CreditAddEdit.vue";
 import { useDiscountStore } from "@/store/discount";
 const { indexCreditCard, indexDiscount, getCredits, getDiscounts, paginate } =
   useDiscount();
@@ -49,7 +50,9 @@ const infiniteDiscount = async () => {
     loadingData = false;
   }
 };
+// reset store state
 onUnmounted(() => {
+  useDiscountStore().credits = [];
   useDiscountStore().discounts = [];
 });
 </script>
@@ -63,9 +66,14 @@ onUnmounted(() => {
       prepend-icon="mdi-brightness-percent"
     >
       <v-card-text>
-        <v-tabs v-model="tab" color="secondary" class="lg-txt" fixed-tabs>
+        <v-tabs
+          v-model="tab"
+          :color="tab == 'credits' ? 'secondary' : 'primary'"
+          class="lg-txt"
+          fixed-tabs
+        >
           <v-tab value="discounts">تخفیف ها</v-tab>
-          <v-tab value="credits">اعتبار ها</v-tab>
+          <v-tab value="credits">کارت های اعتباری</v-tab>
         </v-tabs>
         <v-window class="mt-5" v-model="tab">
           <v-window-item value="credits">
@@ -86,28 +94,44 @@ onUnmounted(() => {
               @infinite-scroll="infiniteDiscount"
               :noResult="noResult"
             >
+            <Suspense>
               <DiscountItem
                 v-for="discount in getDiscounts"
                 :key="discount.id"
                 :discount="discount"
               />
+            </Suspense>
             </infinite-scroll>
           </v-window-item>
         </v-window>
       </v-card-text>
     </v-card>
-    <DiscountInfo />
-    <DiscountAddEdit />
-
     <v-btn
-      @click="$_openModal('discountAddEdit', { pageType: 'add' })"
+      @click="
+        $_openModal(tab == 'discounts' ? 'discountAddEdit' : 'creditAddEdit', {
+          pageType: 'add',
+        })
+      "
       size="x-large"
       class="add-btn"
       icon
-      color="secondary"
+      :color="tab == 'discounts' ? 'primary' : 'secondary'"
     >
-      <v-icon color="white">mdi-plus</v-icon>
+      <v-icon
+        v-if="tab == 'discounts'"
+        class="scale-in"
+        size="large"
+        color="white"
+        >mdi-brightness-percent</v-icon
+      >
+      <v-icon v-else class="scale-in" size="large" color="white"
+        >mdi-credit-card</v-icon
+      >
+      <v-icon color="white" size="small">mdi-plus</v-icon>
     </v-btn>
+    <DiscountInfo />
+    <DiscountAddEdit />
+    <CreditAddEdit />
   </div>
 </template>
 
