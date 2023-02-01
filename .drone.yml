@@ -29,5 +29,6 @@ steps:
     when:
       branch:
         - staging
+
 node:
-  server: runner01
+  server: notban
