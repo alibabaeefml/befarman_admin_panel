@@ -37,15 +37,14 @@ const submitForm = async () => {
       });
     } catch (e: any) {
       const errors: any = Object.values(e.response.data.errors);
-      errors.map((e:any)=>{
+      errors.map((e: any) => {
         notify({
-        group: "notification",
-        type: "error",
-        title: "ویرایش تخفیف",
-        text: e,
+          group: "notification",
+          type: "error",
+          title: "ویرایش تخفیف",
+          text: e,
+        });
       });
-      })
-
     }
   } else {
     try {

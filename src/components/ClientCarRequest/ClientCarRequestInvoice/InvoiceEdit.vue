@@ -43,7 +43,6 @@ const formCalc = () => {
   for (let item in form.value) {
     !form.value[item] ? (form.value[item] = 0) : null;
     if (toSum.includes(item)) {
-      
       grossPrice.value += form.value[item];
     }
   }

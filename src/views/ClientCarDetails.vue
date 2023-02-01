@@ -12,8 +12,8 @@ import type { dynamicObject } from "@/types/common";
 const { getProvinces } = storeToRefs(useProvinceStore());
 const { loadProvinces, showCity } = useProvinceStore();
 
-const clientCar:dynamicObject = ref({});
-const province:dynamicObject = ref({});
+const clientCar: dynamicObject = ref({});
+const province: dynamicObject = ref({});
 const city = ref({});
 
 loadProvinces();

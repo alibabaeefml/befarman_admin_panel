@@ -1,7 +1,7 @@
 <script setup>
-  import { ref } from "vue";
-  const filter = ref(true);
-  const emit = defineEmits(['reset']);
+import { ref } from "vue";
+const filter = ref(true);
+const emit = defineEmits(["reset"]);
 </script>
 <template>
   <div class="container ma-4">
@@ -21,12 +21,7 @@
             >بستن پنل فیلترها</v-tooltip
           >
         </v-btn>
-        <v-btn
-          color="primary"
-          variant="elevated"
-          icon
-          @click="emit('reset')"
-        >
+        <v-btn color="primary" variant="elevated" icon @click="emit('reset')">
           <v-icon>mdi-close</v-icon>
           <v-tooltip activator="parent" location="bottom"
             >لغو فیلترها</v-tooltip

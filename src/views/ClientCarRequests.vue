@@ -77,7 +77,13 @@ const infiniteClientCarRequest = async () => {
         </v-window>
       </v-card-text>
     </v-card>
-    <v-btn size="x-large" class="add-btn position-fixed" icon color="secondary" @click="">
+    <v-btn
+      size="x-large"
+      class="add-btn position-fixed"
+      icon
+      color="secondary"
+      @click=""
+    >
       <v-icon color="white">mdi-plus</v-icon>
     </v-btn>
     <admin-verification />

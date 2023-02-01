@@ -94,7 +94,6 @@ const currentPath = computed(() => route().path);
   line-height: normal;
 }
 
-
 a {
   color: inherit;
   text-decoration: none !important;

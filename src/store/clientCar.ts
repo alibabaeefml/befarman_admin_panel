@@ -2,19 +2,18 @@ import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 import type { ClientCar } from "@/types/clientCar";
 import { defaultPaginate, type Paginate } from "@/types/paginate";
-import {cloneDeep} from 'lodash'
+import { cloneDeep } from "lodash";
 
 export const useClientCarStore = defineStore("clientCar", () => {
-
   const defaultClientCarFilters = {
     name: {
-      type: 'like',
-      val: null
+      type: "like",
+      val: null,
     },
     user_name: {
-      type: 'like',
-      val: null
-    }
+      type: "like",
+      val: null,
+    },
   };
 
   const clientCarFilters = ref<{}>(cloneDeep(defaultClientCarFilters));
@@ -27,7 +26,7 @@ export const useClientCarStore = defineStore("clientCar", () => {
 
   const resetFilter = () => {
     clientCarFilters.value = cloneDeep(defaultClientCarFilters);
-  }
+  };
 
   return {
     clientCars,
@@ -36,6 +35,6 @@ export const useClientCarStore = defineStore("clientCar", () => {
     getArchivedClientCars,
     getClientCars,
     paginate,
-    resetFilter
+    resetFilter,
   };
 });

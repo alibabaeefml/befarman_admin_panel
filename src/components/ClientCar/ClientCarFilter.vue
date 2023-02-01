@@ -28,7 +28,12 @@ defineProps(["tab", "statuses"]);
 </script>
 
 <template>
-  <Filters @reset="resetFilter(); indexClientCar({pagination: {page: 1}})">
+  <Filters
+    @reset="
+      resetFilter();
+      indexClientCar({ pagination: { page: 1 } });
+    "
+  >
     <v-row class="pa-4">
       <v-col cols="12" md="3">
         <v-text-field

@@ -83,7 +83,7 @@ filterClientCar(props.value);
     no-data-text="خودرویی یافت نشد"
   >
     <template #selection="{ item }">
-      <div class="d-flex align-items-center" style="gap:5px">
+      <div class="d-flex align-items-center" style="gap: 5px">
         <span>{{ item.raw.name }}</span>
         <span style="font-size: small">({{ item.raw.car_number }})</span>
       </div>
