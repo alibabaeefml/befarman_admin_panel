@@ -147,7 +147,10 @@ const submitForm = async () => {
         >
         </v-text-field>
       </v-card-text>
-      <v-card-actions style="background-color: #ededed" class="flex-column justify-start">
+      <v-card-actions
+        style="background-color: #ededed"
+        class="flex-column justify-start"
+      >
         <v-checkbox
           color="green"
           style="font-weight: bold"

@@ -35,7 +35,7 @@ const requestVerification = async (
         <v-card
           dir="rtl"
           :style="{
-            borderBottom: 'solid 4px' + props.item.data.requestStatus.color
+            borderBottom: 'solid 4px' + props.item.data.requestStatus.color,
           }"
         >
           <v-card-title>

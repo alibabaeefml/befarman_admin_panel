@@ -77,7 +77,7 @@ filterUser(props.value);
 </script>
 <template>
   <v-autocomplete
-  clearable
+    clearable
     :label="label"
     :items="users"
     @keydown="filterUser"

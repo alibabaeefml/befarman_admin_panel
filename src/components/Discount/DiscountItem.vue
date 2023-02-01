@@ -18,7 +18,7 @@ loadClientCar();
 
 const customer: any = ref({});
 const loadCustomer = async () => {
-  customer.value = await useUser().showUser({id:props.discount.customer_id});
+  customer.value = await useUser().showUser({ id: props.discount.customer_id });
 };
 loadCustomer();
 onUpdated(() => {

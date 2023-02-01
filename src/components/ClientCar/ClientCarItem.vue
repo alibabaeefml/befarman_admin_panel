@@ -40,7 +40,6 @@ const restoreCar = async () => {
   }
 };
 const actions = ref(false);
-
 </script>
 
 <template>

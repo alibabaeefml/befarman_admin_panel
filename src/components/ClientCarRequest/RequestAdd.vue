@@ -5,10 +5,7 @@ defineEmits(["toggleModal"]);
 defineProps(["dialog", "add"]);
 </script>
 <template>
-  <BaseModal
-    icon="mdi-car-side"
-    @toggleModal="$emit('toggleModal')"
-  >
+  <BaseModal icon="mdi-car-side" @toggleModal="$emit('toggleModal')">
     <v-card-text>
       <v-row>
         <v-col cols="12">

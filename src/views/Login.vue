@@ -49,23 +49,23 @@ const login = async () => {
   loading.value = true;
   try {
     await useAuthStore().login(user.value);
-    loading.value = false
+    loading.value = false;
     notify({
-      group:"notification",
+      group: "notification",
       type: "success",
       title: "موفق",
       text: "ورود موفقیت آمیز بود",
-      duration:-1
+      duration: -1,
     });
   } catch (e: any) {
     const error: string | any = Object.values(e.response.data.errors)[0];
-    loading.value = false
+    loading.value = false;
     notify({
-      group:"notification",
+      group: "notification",
       type: "error",
       title: "ناموفق",
       text: error,
-      duration:-1
+      duration: -1,
     });
   }
 };

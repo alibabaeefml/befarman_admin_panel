@@ -10,9 +10,9 @@ import SendMessage from "@components/User/SendMessage.vue";
 import InfiniteScroll from "infinite-loading-vue3";
 
 // modules
-import { ref,onUnmounted } from "vue";
+import { ref, onUnmounted } from "vue";
 import { useUser } from "@/composables/user/user";
-import {useUserStore} from "@/store/user.ts"
+import { useUserStore } from "@/store/user.ts";
 const { indexUser, indexArchivedUser, getUsers, getArchivedUsers, paginate } =
   useUser();
 
@@ -47,9 +47,9 @@ const infiniteUser = async () => {
   }
 };
 
-onUnmounted(()=>{
-  useUserStore().users = []
-})
+onUnmounted(() => {
+  useUserStore().users = [];
+});
 </script>
 
 <template>

@@ -95,8 +95,6 @@ export default class RouteHandler {
   }
 
   afterLoad(router: Router): void {
-    router.afterEach((to: any, from: any) => {
-      
-    });
+    router.afterEach((to: any, from: any) => {});
   }
 }

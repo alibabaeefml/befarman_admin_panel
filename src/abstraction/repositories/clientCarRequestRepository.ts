@@ -1,12 +1,9 @@
 import axios from "axios";
 import url from "../url";
 
-import {
-  getArrayClientCarRequest,
-} from "../resources/clientCarRequestResource";
+import { getArrayClientCarRequest } from "../resources/clientCarRequestResource";
 import { setQueries } from "@/utils/createQueriesObject";
 import type { dynamicObject } from "@/types/common";
-
 
 export default class ClientCarRequestRepository {
   async register(data: dynamicObject) {

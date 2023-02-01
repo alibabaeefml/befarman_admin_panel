@@ -27,7 +27,7 @@ const submitForm = async () => {
   try {
     await useDiscount().storeCreditCard(form.value);
     notify({
-      group:"notification",
+      group: "notification",
       type: "success",
       title: "ثبت کارت اعتباری",
       text: "با موفقیت ثبت گردید.",
@@ -36,7 +36,7 @@ const submitForm = async () => {
     const errors: any = Object.values(e.response.data.errors);
     errors.map((e: any) => {
       notify({
-        group:"notification",
+        group: "notification",
         type: "error",
         title: "ثبت کارت اعتباری",
         text: e,

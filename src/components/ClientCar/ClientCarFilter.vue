@@ -28,7 +28,12 @@ defineProps(["tab", "statuses"]);
 </script>
 
 <template>
-  <Filters @reset="resetFilter(); indexClientCar({pagination: {page: 1}})">
+  <Filters
+    @reset="
+      resetFilter();
+      indexClientCar({ pagination: { page: 1 } });
+    "
+  >
     <v-row class="pa-4">
       <v-col cols="12" md="3">
         <v-text-field
@@ -66,8 +71,14 @@ defineProps(["tab", "statuses"]);
           variant="underlined"
         ></v-select>
       </v-col>
-      <v-col cols="12" md="1" @click="indexClientCar({pagination: {page: 1}})">
-        <v-btn color="secondary" icon size="x-large"><v-icon color="white">mdi-filter</v-icon></v-btn>
+      <v-col
+        cols="12"
+        md="1"
+        @click="indexClientCar({ pagination: { page: 1 } })"
+      >
+        <v-btn color="secondary" icon size="x-large"
+          ><v-icon color="white">mdi-filter</v-icon></v-btn
+        >
       </v-col>
     </v-row>
   </Filters>
