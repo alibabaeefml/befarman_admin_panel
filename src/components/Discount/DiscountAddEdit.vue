@@ -36,13 +36,16 @@ const submitForm = async () => {
         text: "ویرایش با موفقیت انجام شد.",
       });
     } catch (e: any) {
-      const error: any = Object.values(e.response.data.errors)[0];
-      notify({
+      const errors: any = Object.values(e.response.data.errors);
+      errors.map((e:any)=>{
+        notify({
         group: "notification",
         type: "error",
         title: "ویرایش تخفیف",
-        text: error,
+        text: e,
       });
+      })
+
     }
   } else {
     try {

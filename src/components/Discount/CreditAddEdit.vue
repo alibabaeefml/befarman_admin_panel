@@ -13,7 +13,8 @@ const form: dynamicObject = ref({});
 const pageType: dynamicObject = ref("add");
 const staticNames = computed(() => {
   return {
-    name: pageType.value == "add" ? "افزودن کارت اعتباری" : "ویرایش کارت اعتباری",
+    name:
+      pageType.value == "add" ? "افزودن کارت اعتباری" : "ویرایش کارت اعتباری",
     name_en: pageType.value == "add" ? "CREDIT CARD ADD" : "CREDIT CARD EDIT",
   };
 });
@@ -26,16 +27,20 @@ const submitForm = async () => {
   try {
     await useDiscount().storeCreditCard(form.value);
     notify({
+      group:"notification",
       type: "success",
       title: "ثبت کارت اعتباری",
       text: "با موفقیت ثبت گردید.",
     });
   } catch (e: any) {
-    const error: any = Object.values(e.response.data.errors)[0];
-    notify({
-      type: "error",
-      title: "ثبت کارت اعتباری",
-      text: error,
+    const errors: any = Object.values(e.response.data.errors);
+    errors.map((e: any) => {
+      notify({
+        group:"notification",
+        type: "error",
+        title: "ثبت کارت اعتباری",
+        text: e,
+      });
     });
   }
   useModalStore().closeModal();
@@ -80,10 +85,10 @@ const submitForm = async () => {
           ></v-text-field>
           <div class="my-2">
             <DatePicker
-                label="تاریخ پایان:"
-                :value="form.expiry_date"
-                @changeDate="(date) => (form.expiry_date = date)"
-              />
+              label="تاریخ پایان:"
+              :value="form.expiry_date"
+              @changeDate="(date) => (form.expiry_date = date)"
+            />
           </div>
         </v-card-text>
         <v-card-actions class="pa-4">

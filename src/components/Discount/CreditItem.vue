@@ -62,8 +62,8 @@ const deleteCredit = async () => {
                 }"
               >
                 <h2>مشتری</h2>
-                <h3>{{ credit.user.name }}</h3>
-                <h3>{{ credit.user.phone }}</h3>
+                <h3>{{ credit.customer?.name }}</h3>
+                <h3>{{ credit.customer?.phone }}</h3>
               </router-link>
             </v-col>
             <!-- date -->
