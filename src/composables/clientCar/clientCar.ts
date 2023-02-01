@@ -7,7 +7,6 @@ export function useClientCar() {
   const store = useClientCarStore();
   const repository = new ClientCarRepository();
 
-<<<<<<< HEAD
   const { getClientCars, getArchivedClientCars, paginate } = storeToRefs(store);
 
   const indexClientCar = async (dataQuery: {}) => {
@@ -18,12 +17,6 @@ export function useClientCar() {
     
     const { data, pagination } = await repository.index(dataQuery);
 
-=======
-  const { getClientCars, getArchivedClientCars, paginate, clientCars } =
-    storeToRefs(store);
-  const indexClientCar = async (paginate: {}) => {
-    const { data, pagination } = await repository.index(paginate);
->>>>>>> discount
     store.$patch((state) => {
       state.paginate = pagination;
       state.clientCars = pagination.page == 1 ? data : getClientCars.value.concat(data);
@@ -89,15 +82,7 @@ export function useClientCar() {
   const total = async () => {
     return await repository.total();
   };
-<<<<<<< HEAD
   
-=======
-  const searchClientCar = async (clientCarData: dynamicObject) => {
-    const { data } = await repository.index(clientCarData);
-    return data;
-  };
-
->>>>>>> discount
   return {
     updateClientCar,
     storeClientCar,
