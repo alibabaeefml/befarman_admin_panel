@@ -7,8 +7,7 @@ export function useClientCar() {
   const store = useClientCarStore();
   const repository = new ClientCarRepository();
 
-  const { getClientCars, getArchivedClientCars, clientCars, paginate } =
-    storeToRefs(store);
+  const { getClientCars, getArchivedClientCars, clientCars, paginate } = storeToRefs(store);
 
   const indexClientCar = async (dataQuery: {}) => {
     const filters = store.clientCarFilters;
