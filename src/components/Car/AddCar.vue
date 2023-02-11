@@ -21,7 +21,8 @@ const { storeCar, updateCar } = useCar();
 loadBrands();
 loadBodyTypes();
 
-const form = ref({});
+const batchId = makeid(50);
+const form = ref({file_batch_id: batchId});
 
 const pageType = ref("add");
 const staticNames = computed(() => {
@@ -34,12 +35,12 @@ const staticNames = computed(() => {
 const fileForm = ref({
   model_name: "car",
   collection_name: "main_image",
-  batch_id: makeid(50),
+  batch_id: batchId,
 });
 
 const openModal = (data) => {
   if (data.id) {
-    form.value = data;
+    form.value = {...data, ...{file_batch_id: batchId}};
     pageType.value = "edit";
   }
 };

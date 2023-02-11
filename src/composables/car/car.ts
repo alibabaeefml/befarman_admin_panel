@@ -39,7 +39,8 @@ export function useCar() {
 
   const deleteCar = async (carId: number) => {
     const response = await repository.delete(carId);
-    alert(response.status);
+    const index = store.cars.findIndex((car) => car.id === carId);
+    store.cars.splice(index, 1)
   };
 
   return {
