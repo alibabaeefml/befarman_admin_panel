@@ -8,11 +8,18 @@ export function useClientCarRequest() {
   const { getClientCarRequests, getArchivedClientCarRequests, paginate } =
     storeToRefs(store);
   // methods
-  const indexClientCarRequest = async (paginate: {}) => {
-    const { data, pagination }: any = await repository.index(paginate);
+  const indexClientCarRequest = async (dataQuery: {}) => {
+    
+    const filters = store.clientCarRequestFilters;
+
+    dataQuery = { ...dataQuery, ...{ filters } };
+    
+    const { data, pagination }: any = await repository.index(dataQuery);
+
     store.$patch((state) => {
       state.paginate = pagination;
-      state.clientCarRequests = getClientCarRequests.value.concat(data);
+      state.clientCarRequests =
+        pagination.page == 1 ? data : getClientCarRequests.value.concat(data);
     });
 
     return data;

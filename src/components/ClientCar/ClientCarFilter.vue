@@ -58,6 +58,7 @@ defineProps(["tab", "statuses"]);
           prepend-icon="mdi-calendar"
           label="سال تولید"
           variant="underlined"
+          v-model="clientCarFilters.made_at.val"
         >
         </v-select>
       </v-col>
@@ -71,9 +72,16 @@ defineProps(["tab", "statuses"]);
           variant="underlined"
         ></v-select>
       </v-col>
-      <v-col cols="12" md="1" @click="indexClientCar({pagination: {page: 1}})">
-        <v-btn color="secondary" icon size="x-large"><v-icon color="white">mdi-filter</v-icon>
-        <v-tooltip activator="parent" location="bottom">اعمال فیلترها</v-tooltip>
+      <v-col
+        cols="12"
+        md="1"
+        @click="indexClientCar({ pagination: { page: 1 } })"
+      >
+        <v-btn color="secondary" icon size="x-large"
+          ><v-icon color="white">mdi-filter</v-icon>
+          <v-tooltip activator="parent" location="bottom"
+            >اعمال فیلترها</v-tooltip
+          >
         </v-btn>
       </v-col>
     </v-row>

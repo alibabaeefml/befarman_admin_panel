@@ -22,11 +22,16 @@ export function useCar() {
     return car;
   };
 
-  const indexCar = async (paginate: dynamicObject) => {
-    const { data, pagination } = await repository.index(paginate);
+  const indexCar = async (dataQuery: {}) => {
+    const filters = store.carFilters;
+
+    dataQuery = { ...dataQuery, ...{ filters } };
+
+    const { data, pagination } = await repository.index(dataQuery);
+
     store.$patch((state) => {
       state.paginate = pagination;
-      state.cars = getCars.value.concat(data);
+      state.cars = pagination.page == 1 ? data : getCars.value.concat(data);
     });
     return data;
   };

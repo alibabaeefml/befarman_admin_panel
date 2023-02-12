@@ -6,7 +6,7 @@ import { useCar } from "@/composables/car/car";
 import { ref } from "vue";
 import InfiniteScroll from "infinite-loading-vue3";
 const { indexCar, getCars, paginate } = useCar();
-const filters = ref({});
+
 indexCar();
 
 const noResult = ref(false);
@@ -31,7 +31,7 @@ const infiniteCar = async () => {
 </script>
 <template>
   <div dir="rtl">
-    <CarsFilter :filters="filters" />
+    <CarsFilter />
     <infinite-scroll
       @infinite-scroll="infiniteCar"
       :noResult="noResult"

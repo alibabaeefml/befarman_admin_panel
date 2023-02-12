@@ -7,7 +7,6 @@ import { useRoute as route } from "vue-router";
 import { useClientCar } from "@/composables/clientCar/clientCar";
 import { useProvinceStore } from "@/store/province";
 import { storeToRefs } from "pinia/dist/pinia";
-import { useRouter } from "vue-router";
 import type { dynamicObject } from "@/types/common";
 const { getProvinces } = storeToRefs(useProvinceStore());
 const { loadProvinces, showCity } = useProvinceStore();
@@ -40,8 +39,8 @@ const more = ref(false);
   <v-card
     dir="rtl"
     class="ma-4 ym"
-    :title="$route.meta.title"
-    :subtitle="$route.meta.title_en"
+    :title="clientCar.name"
+    :subtitle="clientCar.car.name_en"
     prepend-icon="mdi-car-side"
   >
     <v-row dir="rtl" class="pa-5" v-if="clientCar.id">
@@ -227,7 +226,7 @@ const more = ref(false);
   </v-card>
 
   <v-btn
-    @click="useRouter().back()"
+    @click="$router.back()"
     class="add-btn"
     icon
     color="primary"

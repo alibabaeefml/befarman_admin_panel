@@ -14,9 +14,13 @@ export const useClientCarStore = defineStore("clientCar", () => {
       type: "like",
       val: null,
     },
+    made_at: {
+      type: "like",
+      val: null,
+    },
   };
 
-  const clientCarFilters = ref<{}>(cloneDeep(defaultClientCarFilters));
+  const clientCarFilters:any = ref<{}>(cloneDeep(defaultClientCarFilters));
   const clientCars = ref<ClientCar[]>([]);
   const archivedClientCars = ref<ClientCar[]>([]);
   const getClientCars = computed(() => clientCars.value);

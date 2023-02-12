@@ -55,7 +55,7 @@ const infiniteClientCar = async () => {
 
 <template>
   <div>
-    <ClientCarFilter :archived="tab" />
+    <ClientCarFilter />
     <v-card
       dir="rtl"
       :title:any="$route.meta.title"

@@ -103,6 +103,7 @@ const deleteCredit = async () => {
           </v-btn>
 
           <v-btn
+            :disabled="true"
             icon
             color="black"
             variant="elevated"

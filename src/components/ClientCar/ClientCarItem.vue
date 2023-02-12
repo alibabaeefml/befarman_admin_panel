@@ -39,7 +39,7 @@ const restoreCar = async () => {
     });
   }
 };
-const actions = ref(false);
+const actions = ref(true);
 </script>
 
 <template>
@@ -51,7 +51,9 @@ const actions = ref(false);
             <v-img
               :lazy-src="defaultThumb"
               :src="clientCar.thumbnail ? clientCar.thumbnail : defaultThumb"
-              style="border-radius: 10px"
+              class="rounded-lg"
+              cover
+              height="200"
             />
           </v-col>
           <v-col cols="12" md="3" sm="12">
@@ -62,7 +64,7 @@ const actions = ref(false);
               <div class="enSub">
                 {{ clientCar.car.name_en }}
               </div>
-              <div class="mt-4" v-if="status.id">
+              <div class="mt-4" v-if="status">
                 <div
                   class="status pa-2 sm-txt"
                   :style="{ background: status.color }"

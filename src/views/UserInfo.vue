@@ -4,7 +4,6 @@ import { useUser } from "@/composables/user/user";
 import type { dynamicObject } from "@/types/common";
 import { ref } from "vue";
 import { useRoute as route } from "vue-router";
-import { useRouter } from "vue-router";
 const user: dynamicObject = ref({ bank: {}, city: {} });
 const showUser = async () => {
   user.value = await useUser().showUser(route().params);
@@ -173,7 +172,7 @@ showUser();
     </v-row>
 
     <v-btn
-      @click="useRouter().back()"
+      @click="$router.back()"
       class="add-btn"
       icon
       color="primary"

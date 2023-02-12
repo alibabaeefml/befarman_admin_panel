@@ -81,7 +81,7 @@ export const getJson = (data: dynamicObject) => ({
   ),
 });
 
-export const setData = (data: ClientCar) => ({
+export const setData = (data: dynamicObject) => ({
   painted: data.painted,
   car_number: data.car_number,
   color_status: data.color_status,
@@ -114,6 +114,7 @@ export const setData = (data: ClientCar) => ({
   technical_status: !!data.technical_status,
   brand: getJsonBrand(data.brand ?? {}),
   user: getJsonUser(data.user ?? {}),
+  user_id: data.user_id,
   car: getJsonCar(data.car ?? {}),
   images: getArrayMedia(data.images ?? []),
   certificates: getArrayMedia(data.certificates ?? []),
