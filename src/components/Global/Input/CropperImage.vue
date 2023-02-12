@@ -95,9 +95,6 @@ export default defineComponent({
     stencilProps: {
       default: () => ({ aspectRatio: 1, checkImageOrigin: false }),
     },
-    crop: {
-      default: () => [],
-    },
     value: {
       default: "",
     },
@@ -127,6 +124,8 @@ export default defineComponent({
       isAddMode: this.addMode,
       editImage: false,
       changedImage: false,
+      crop: {},
+      file: null
     };
   },
   computed: {
@@ -145,14 +144,6 @@ export default defineComponent({
         return this.mainImage;
       }
       return this.thumbnail;
-    },
-    file: {
-      get() {
-        return this.value;
-      },
-      set(value) {
-        this.$emit("input", value);
-      },
     },
     theme() {
       return this.dark ? "theme--dark" : "theme--light";
@@ -180,7 +171,7 @@ export default defineComponent({
       }
     },
     onChangeCropper({ coordinates }) {
-      this.$emit("update:crop", coordinates);
+      this.crop = coordinates;
     },
     checkDisable() {
       if (this.url) {
@@ -193,6 +184,7 @@ export default defineComponent({
           const newFileForm = {
             ...this.fileForm,
             file: this.file,
+            crop: this.crop,
           };
           return await repository.store(newFileForm);
         }
@@ -201,12 +193,14 @@ export default defineComponent({
           const newFileForm = {
             ...this.fileForm,
             file: this.file,
+            crop: this.crop,
           };
           return await repository.store(newFileForm);
         } else {
           const newFileForm = {
             ...this.fileForm,
             url: this.mainImage,
+            crop: this.crop,
           };
           return await repository.store(newFileForm);
         }
