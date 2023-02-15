@@ -10,11 +10,19 @@ export const useClientCarStore = defineStore("clientCar", () => {
       type: "like",
       val: null,
     },
-    user_name: {
+    user_phone: {
       type: "like",
       val: null,
     },
     made_at: {
+      type: "like",
+      val: null,
+    },
+    status_id: {
+      type: "like",
+      val: null,
+    },
+    car_number: {
       type: "like",
       val: null,
     },

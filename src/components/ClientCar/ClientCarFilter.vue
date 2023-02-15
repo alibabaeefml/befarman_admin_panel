@@ -35,7 +35,7 @@ defineProps(["tab", "statuses"]);
     "
   >
     <v-row class="pa-4">
-      <v-col cols="12" md="3">
+      <v-col >
         <v-text-field
           prepend-icon="mdi-car"
           label="نام خوردرو"
@@ -44,12 +44,12 @@ defineProps(["tab", "statuses"]);
         >
         </v-text-field>
       </v-col>
-      <v-col cols="12" md="3">
+      <v-col >
         <v-text-field
           prepend-icon="mdi-account"
-          label="نام مالک"
+          label="شماره همراه مالک"
           variant="underlined"
-          v-model="clientCarFilters.user_name.val"
+          v-model="clientCarFilters.user_phone.val"
         ></v-text-field>
       </v-col>
       <v-col cols="12" md="2">
@@ -62,15 +62,24 @@ defineProps(["tab", "statuses"]);
         >
         </v-select>
       </v-col>
-      <v-col cols="12" md="3">
+      <v-col >
         <v-select
-          :disabled="tab !== 'one'"
           :items="getClientCarStatuses"
           item-title="name_fa"
+          item-value="id"
           prepend-icon="mdi-check"
           label="وضعیت"
           variant="underlined"
+          v-model="clientCarFilters.status_id.val"
         ></v-select>
+      </v-col>
+      <v-col >
+        <v-text-field
+          prepend-icon="mdi-car"
+          label="پلاک خودرو"
+          variant="underlined"
+          v-model="clientCarFilters.car_number.val"
+        ></v-text-field>
       </v-col>
       <v-col
         cols="12"

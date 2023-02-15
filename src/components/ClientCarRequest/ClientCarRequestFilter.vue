@@ -5,6 +5,7 @@ import { storeToRefs } from "pinia/dist/pinia";
 import { ref } from "vue";
 import { useClientCarRequestStore } from "@/store/clientCarRequest";
 import { useClientCarRequest } from "@/composables/clientCarRequest";
+import DatePicker from "../Global/Input/DatePicker.vue";
 
 const years = ref([]);
 
@@ -19,7 +20,6 @@ const { indexClientCarRequest } = useClientCarRequest();
 const { clientCarRequestFilters } = storeToRefs(useClientCarRequestStore());
 
 const { resetFilter } = useClientCarStore();
-
 </script>
 
 <template>
@@ -29,33 +29,41 @@ const { resetFilter } = useClientCarStore();
       indexClientCarRequest({ pagination: { page: 1 } });
     "
   >
-    <v-row class="pa-4">
-      <v-col cols="12" md="3">
+    <v-row class="pa-4 align-center">
+      <v-col >
         <v-text-field
           prepend-icon="mdi-car"
           label="نام خوردرو"
           variant="underlined"
-          v-model="clientCarRequestFilters.name.val"
+          v-model="clientCarRequestFilters.clientCar_car_name.val"
         >
         </v-text-field>
       </v-col>
-      <v-col cols="12" md="3">
+      <v-col >
         <v-text-field
-          prepend-icon="mdi-account"
-          label="نام مالک"
+          prepend-icon="mdi-phone"
+          label="شماره همراه مالک"
           variant="underlined"
-          v-model="clientCarRequestFilters.user_name.val"
+          v-model="clientCarRequestFilters.user_phone.val"
         ></v-text-field>
       </v-col>
       <v-col cols="12" md="2">
-        <v-select
-          :items="years"
-          prepend-icon="mdi-calendar"
-          label="سال تولید"
-          variant="underlined"
-          v-model="clientCarRequestFilters.made_at.val"
-        >
-        </v-select>
+        <DatePicker
+          label="شروع درخواست"
+          :value="clientCarRequestFilters.created_at.val1"
+        />
+      </v-col>
+      <v-col>
+        <DatePicker
+          label="پایان درخواست"
+          :value="clientCarRequestFilters.created_at.val2"
+        />
+      </v-col>
+      <v-col>
+        <v-select variant="underlined" prepend-icon="mdi-list-status" :items="[]"
+        label="وضعیت درخواست"
+        v-model="clientCarRequestFilters.clientCar_request_status_id.val"
+        />
       </v-col>
       <v-col
         cols="12"

@@ -194,6 +194,9 @@ textarea {
   flex-wrap: wrap;
   animation: loadCardActions 0.2s forwards;
 }
+.v-card {
+  z-index: unset!important;
+}
 .v-card-text {
   transition: 0.2s;
 }

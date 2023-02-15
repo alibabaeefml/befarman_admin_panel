@@ -5,6 +5,7 @@ import { defaultPaginate, type Paginate } from "@/types/paginate";
 import { cloneDeep } from "lodash";
 
 export const useClientCarRequestStore = defineStore("clientCarRequest", () => {
+
   const clientCarRequests = ref<ClientCarRequest[]>([]);
   const archivedClientCarRequests = ref<ClientCarRequest[]>([]);
   const getClientCarRequests = computed(() => clientCarRequests.value);
@@ -13,15 +14,28 @@ export const useClientCarRequestStore = defineStore("clientCarRequest", () => {
   );
 
   const defaultClientCarRequestFilters = {
-    name: {
+    clientCar_car_name: {
       type: "like",
       val: null,
     },
-    user_name: {
+    clientCar_car_number: {
       type: "like",
       val: null,
     },
-    made_at: {
+    clientCar_user_name: {
+      type: "like",
+      val: null,
+    },
+    user_phone: {
+      type: "like",
+      val: null,
+    },
+    created_at: {
+      type: "between",
+      val1: null,
+      val2:null
+    },
+    clientCar_request_status_id: {
       type: "like",
       val: null,
     },

@@ -9,12 +9,16 @@ export function useUser() {
   const { getUsers, getArchivedUsers, paginate } = storeToRefs(store);
   const repository = new UserRepository();
 
-  const indexUser = async (paginate: Paginate) => {
-    const { data, pagination } = await repository.index({ paginate });
+  const indexUser = async (dataQuery: {}) => {
+    const filters = store.userFilters;
+    dataQuery = { ...dataQuery, ...{ filters } };
+    const { data, pagination } = await repository.index(dataQuery);
     store.$patch((state) => {
       state.paginate = pagination;
-      state.users = getUsers.value.concat(data);
+      state.users =
+        pagination.page == 1 ? data : getUsers.value.concat(data);
     });
+    
     return data;
   };
 

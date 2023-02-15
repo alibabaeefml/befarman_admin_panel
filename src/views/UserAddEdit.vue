@@ -1,12 +1,12 @@
-<script setup>
+<script setup lang="ts">
 import RelativeItem from "@/components/User/RelativeItem.vue";
 import Dropzone from "@/components/Global/Input/DropZone.vue";
 
-import { ref, reactive } from "vue";
+import { ref } from "vue";
 import { useRoute as route } from "vue-router";
 import { useUser } from "@/composables/user/user";
-
-const form = ref({
+const {updateUser, storeUser} = useUser()
+const form:any = ref({
   bank: {},
   relatives: 2,
 });
@@ -19,6 +19,14 @@ const show = async () => {
   }
 };
 show();
+
+const submitForm = async () => {
+  if (form.value.id) {
+    await updateUser(form.value.id, form.value);
+  } else {
+    await storeUser(form.value);
+  }
+};
 
 const educationRates = [
   "پایین تر از دیپلم",
@@ -307,7 +315,7 @@ const banks = ref([
         >
           <v-icon color="white">mdi-close</v-icon>
         </v-btn>
-        <v-btn variant="elevated" color="cyan" icon class="ma-1">
+        <v-btn variant="elevated" color="cyan" icon class="ma-1" @click="submitForm">
           <v-icon color="white">mdi-check</v-icon>
         </v-btn>
       </v-card-actions>

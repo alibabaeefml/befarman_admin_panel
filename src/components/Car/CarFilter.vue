@@ -4,6 +4,10 @@ import BrandSelected from "@components/Brand/BrandSelected.vue";
 import { useCarStore } from "@/store/car";
 import { storeToRefs } from "pinia";
 import { useCar } from "@/composables/car/car";
+import { useBodyTypeStore } from "@/store/bodyType";
+const bodyTypeStore = useBodyTypeStore();
+const { getBodyTypes } = storeToRefs(bodyTypeStore);
+const { loadBodyTypes } = bodyTypeStore;
 const { carFilters } = storeToRefs(useCarStore());
 const { indexCar } = useCar();
 const { resetFilter } = useCarStore();
@@ -30,6 +34,25 @@ const { resetFilter } = useCarStore();
             label="نام خودرو"
             variant="underlined"
             v-model="carFilters.name_fa.val"
+          />
+        </v-col>
+        <v-col>
+          <v-select
+            prepend-icon="mdi-car"
+            label="نوع بدنه"
+            variant="underlined"
+            v-model="carFilters.body_type_id.val"
+            :items="getBodyTypes"
+            item-value="id"
+              item-title="name"
+          />
+        </v-col>
+        <v-col>
+          <v-text-field
+            prepend-icon="mdi-car"
+            label="ظرفیت خودرو"
+            variant="underlined"
+            v-model="carFilters.capacity.val"
           />
         </v-col>
         <v-col cols="2">

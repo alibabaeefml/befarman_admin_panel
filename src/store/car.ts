@@ -14,6 +14,14 @@ export const useCarStore = defineStore("car", () => {
       type: "like",
       val: null,
     },
+    capacity: {
+      type: "like",
+      val: null,
+    },
+    body_type_id: {
+      type: "like",
+      val: null,
+    },
   };
 
   const carFilters:any = ref<{}>(cloneDeep(defaultCarFilters));
