@@ -21,8 +21,8 @@ const openModal = async (data: dynamicObject) => {
     >
       <v-card-text>
       
-        <DiscountInfoItem name_fa="مشتری" :value="discount.customer.name" />
-        <DiscountInfoItem name_fa="خودرو" :value="discount.clientCar?.name" />
+        <DiscountInfoItem v-if="discount.customer" name_fa="مشتری" :value="discount.customer.name" />
+        <DiscountInfoItem v-if="discount.clientCar" name_fa="خودرو" :value="discount.clientCar.name" />
 
         <DiscountInfoItem name_fa="تاریخ شروع" :value="discount.started_at" />
         <DiscountInfoItem name_fa="تاریخ پایان" :value="discount.expiry_date" />

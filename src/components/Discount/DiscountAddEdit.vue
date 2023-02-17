@@ -79,6 +79,7 @@ const submitForm = async () => {
       @open="openModal"
       icon="mdi-brightness-percent"
     >
+    {{ form.expiry_date||'543' }}
       <v-form @submit.prevent="submitForm">
         <v-card-text class="pa-3">
           <UserSearch
@@ -91,15 +92,13 @@ const submitForm = async () => {
           <div class="my-2">
             <DatePicker
               label="تاریخ شروع:"
-              :value="form.started_at"
-              @changeDate="(date) => (form.started_at = date)"
+              v-model="form.started_at"
             />
           </div>
           <div class="my-2">
             <DatePicker
               label="تاریخ پایان:"
-              :value="form.expiry_date"
-              @changeDate="(date) => (form.expiry_date = date)"
+              v-model="form.expiry_date"
             />
           </div>
           <ClientCarSearch

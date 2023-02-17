@@ -86,8 +86,7 @@ const submitForm = async () => {
           <div class="my-2">
             <DatePicker
               label="تاریخ پایان:"
-              :value="form.expiry_date"
-              @changeDate="(date) => (form.expiry_date = date)"
+              v-model="form.expiry_date"
             />
           </div>
         </v-card-text>
