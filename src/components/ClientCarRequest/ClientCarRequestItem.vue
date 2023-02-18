@@ -4,7 +4,7 @@ import defaultThumb from "@/assets/Images/avatars/car-avatar.jpg";
 import type { dynamicObject } from "@/types/common";
 import { notify } from "@kyvg/vue3-notification";
 import { ref } from "vue";
-const props = defineProps(["clientCarRequest", "archived"]);
+const props = defineProps(["clientCarRequest", "tab"]);
 const requestChange = async (request: dynamicObject) => {
   if (request.latestClientCarRequestStatus.id === 1) {
     notify({
@@ -23,7 +23,11 @@ const actionsGroup = ref(true);
 </script>
 <template>
   <div>
-    <v-card class="border mt-3 text-center" height="300">
+    <v-card
+      class="border mt-3 text-center"
+      height="300"
+      dir="ltr"
+    >
       <v-card-text dir="rtl" :class="{ ym: true, blured: actionsGroup }">
         <v-row class="align-center d-flex">
           <v-col cols="12" md="3" xs="12">
@@ -112,14 +116,19 @@ const actionsGroup = ref(true);
           </v-col>
         </v-row>
       </v-card-text>
-      <v-card-actions style="position: absolute; bottom: 0">
+      <v-card-actions style="position: absolute; bottom: 0" dir="ltr">
         <v-btn color="primary" icon @click="actionsGroup = !actionsGroup">
           <v-icon>{{
             !actionsGroup ? "mdi-dots-vertical" : "mdi-menu-down"
           }}</v-icon>
         </v-btn>
         <div class="actionsGroup" v-if="actionsGroup">
-          <v-btn v-if="!archived" icon color="primary" variant="elevated">
+          <v-btn
+            v-if="tab == 'canceled'"
+            icon
+            color="primary"
+            variant="elevated"
+          >
             <v-icon>mdi-delete</v-icon>
             <v-tooltip activator="parent" location="right"
               >حذف درخواست</v-tooltip

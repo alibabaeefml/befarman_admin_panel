@@ -55,7 +55,7 @@ const login = async () => {
       type: "success",
       title: "موفق",
       text: "ورود موفقیت آمیز بود",
-      duration: -1,
+      
     });
   } catch (e: any) {
     const error: string | any = Object.values(e.response.data.errors)[0];
@@ -65,7 +65,6 @@ const login = async () => {
       type: "error",
       title: "ناموفق",
       text: error,
-      duration: -1,
     });
   }
 };

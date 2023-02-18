@@ -18,7 +18,7 @@ export const useClientCarStore = defineStore("clientCar", () => {
       type: "like",
       val: null,
     },
-    status_id: {
+    latestClientCarRequestStatus: {
       type: "like",
       val: null,
     },

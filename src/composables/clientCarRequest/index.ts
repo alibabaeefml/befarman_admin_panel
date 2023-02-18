@@ -11,7 +11,6 @@ export function useClientCarRequest() {
   const indexClientCarRequest = async (dataQuery: {}) => {
     
     const filters = store.clientCarRequestFilters;
-
     dataQuery = { ...dataQuery, ...{ filters } };
     
     const { data, pagination }: any = await repository.index(dataQuery);

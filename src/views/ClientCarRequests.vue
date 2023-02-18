@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, watchEffect } from "vue";
 import ClientCarRequestItem from "@components/ClientCarRequest/ClientCarRequestItem.vue";
 import ClientCarRequestFilter from "@components/ClientCarRequest/ClientCarRequestFilter.vue";
 import { useClientCarRequest } from "@/composables/clientCarRequest";
 import InfiniteScroll from "infinite-loading-vue3";
 import AdminVerification from "@/components/ClientCarRequest/ClientCarRequestAlert/AdminVerification.vue";
 import InvoiceInfo from "@/components/ClientCarRequest/ClientCarRequestInvoice/InvoiceInfo.vue";
+import { useClientCarRequestStore as requestStore } from "@/store/clientCarRequest";
 
+const { clientCarRequestFilters } = requestStore();
 const {
   indexClientCarRequest,
   // indexArchivedClientCarRequest,
@@ -15,7 +17,8 @@ const {
   paginate,
 } = useClientCarRequest();
 indexClientCarRequest({});
-const tab = ref("one");
+
+const tab = ref("adminCheck");
 
 // infinite loading
 const noResult = ref(false);
@@ -32,48 +35,60 @@ const infiniteClientCarRequest = async () => {
   data.pagination.page++;
   loadingData = true;
   try {
-    if (tab.value == "active") {
-      await indexClientCarRequest(data);
-    } else {
-      // await indexArchivedClientCar(data);
-    }
+    await indexClientCarRequest(data);
   } catch (e) {
     console.log(e);
   } finally {
     loadingData = false;
   }
 };
+
+watchEffect(() => {
+  switch (tab.value) {
+    case "adminCheck":
+      clientCarRequestFilters.clientCar_request_status_id.val = 1;
+      indexClientCarRequest({});
+      break;
+
+    case "active":
+      break;
+
+    case "canceled":
+      break;
+
+    case "archived":
+      break;
+  }
+});
 </script>
 <template>
   <div>
     <ClientCarRequestFilter />
-    <v-card>
+    <v-card dir="rtl">
       <v-tabs v-model="tab" color="secondary" fixed-tabs>
-        <v-tab value="two">درخواست های حذف شده</v-tab>
-        <v-tab value="one">درخواست های فعال</v-tab>
+        <v-tab value="adminCheck">منتظر تایید ادمین</v-tab>
+        <v-tab value="active">فعال</v-tab>
+        <v-tab value="canceled">منقضی/لغو شده</v-tab>
+        <v-tab value="archived">حذف شده</v-tab>
       </v-tabs>
       <v-card-text>
         <v-window v-model="tab">
-          <v-window-item value="two">
-            <ClientCarRequestItem
-              v-for="clientCarRequest in getClientCarRequests"
-              :key="clientCarRequest.id"
-              :clientCarRequest="clientCarRequest"
-              :archived="true"
-            />
-          </v-window-item>
-          <v-window-item value="one">
-            <infinite-scroll
-              @infinite-scroll="infiniteClientCarRequest"
+          <v-window-item value="adminCheck">
+            <InfiniteScroll
               :noResult="noResult"
+              @infinite-scroll="infiniteClientCarRequest"
             >
               <ClientCarRequestItem
-                v-for="clientCarRequest of getClientCarRequests"
+                v-for="clientCarRequest in getClientCarRequests"
                 :key="clientCarRequest.id"
                 :clientCarRequest="clientCarRequest"
+                :tab="tab"
               />
-            </infinite-scroll>
+            </InfiniteScroll>
           </v-window-item>
+          <v-window-item value="active"> </v-window-item>
+          <v-window-item value="canceled"> </v-window-item>
+          <v-window-item value="archived"> </v-window-item>
         </v-window>
       </v-card-text>
     </v-card>
